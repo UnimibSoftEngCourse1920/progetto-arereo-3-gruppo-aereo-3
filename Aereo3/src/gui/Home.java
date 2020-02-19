@@ -1,28 +1,37 @@
 package gui;
 
-
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.Component;
+import javax.swing.Box;
 import javax.swing.JLabel;
+import java.awt.Dimension;
 import javax.swing.JComboBox;
-import com.toedter.calendar.*;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+import net.miginfocom.swing.MigLayout;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JCalendar;
+import com.toedter.components.JLocaleChooser;
+import com.toedter.components.JSpinField;
+import java.awt.GridLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Toolkit;
 
 public class Home extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panel_1;
-	private JLabel lblNewLabel;
-	private JTextField textField;
-	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -32,11 +41,8 @@ public class Home extends JFrame {
 			public void run() {
 				try {
 					Home frame = new Home();
-					frame.pack();
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					frame.setResizable(true);
 					frame.setVisible(true);
-					frame.setResizable(false);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,112 +55,69 @@ public class Home extends JFrame {
 	 */
 	public Home() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 718, 595);
 		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, "name_351026657567500");
-		panel.setLayout(null);
+		contentPane.add(panel, "name_358108283923800");
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.NORTH);
+		panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		JButton btnLogIn = new JButton("LOG IN");
-		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 38));
-		btnLogIn.setBounds(1356, 10, 170, 70);
-		panel.add(btnLogIn);
+		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(btnLogIn);
+		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new MigLayout("", "[1px][305px][][27px,grow][1px]", "[][37px][][grow][grow][][][][grow][][]"));
+		
+		Component verticalGlue_1 = Box.createVerticalGlue();
+		panel_2.add(verticalGlue_1, "cell 3 0");
 		
 		JLabel lblAeroportoDiPartenza = new JLabel("Aeroporto di Partenza:");
-		lblAeroportoDiPartenza.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblAeroportoDiPartenza.setBounds(501, 153, 398, 48);
-		panel.add(lblAeroportoDiPartenza);
+		lblAeroportoDiPartenza.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_2.add(lblAeroportoDiPartenza, "cell 1 1,growx,aligny top");
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(860, 211, 304, 48);
-		panel.add(comboBox);
+		panel_2.add(comboBox, "cell 3 1,growx");
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(826, 269, 304, 45);
-		panel.add(dateChooser);
+		JLabel lblAeroportoDiArrivo = new JLabel("Aeroporto di Arrivo:    ");
+		lblAeroportoDiArrivo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_2.add(lblAeroportoDiArrivo, "cell 1 2,growx,aligny top");
 		
-		JButton btnCercaIlTuo = new JButton("Cerca il tuo volo!");
-		btnLogIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.removeAll();
-				contentPane.add(panel_1);
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
-		btnCercaIlTuo.setFont(new Font("Tahoma", Font.PLAIN, 60));
-		btnCercaIlTuo.setBounds(504, 478, 640, 139);
-		panel.add(btnCercaIlTuo);
+		JComboBox comboBox_1 = new JComboBox();
+		panel_2.add(comboBox_1, "cell 3 2,growx");
 		
-		JLabel lblAeroportoDiArrivo_1 = new JLabel("Aeroporto di Arrivo:");
-		lblAeroportoDiArrivo_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblAeroportoDiArrivo_1.setBounds(501, 211, 349, 48);
-		panel.add(lblAeroportoDiArrivo_1);
+		JLabel lblDataDiPartenza = new JLabel("Data di Partenza:        ");
+		lblDataDiPartenza.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_2.add(lblDataDiPartenza, "cell 1 3,alignx trailing,aligny top");
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(909, 152, 304, 49);
-		panel.add(comboBox_2);
+		JCalendar calendar = new JCalendar();
+		panel_2.add(calendar, "cell 3 3,grow");
 		
-		JLabel lblAeroportoDiArrivo_1_1 = new JLabel("Data di Partenza:");
-		lblAeroportoDiArrivo_1_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblAeroportoDiArrivo_1_1.setBounds(501, 266, 315, 48);
-		panel.add(lblAeroportoDiArrivo_1_1);
+		JLabel lblDataDiArrivo = new JLabel("Data di Ritorno:");
+		lblDataDiArrivo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_2.add(lblDataDiArrivo, "cell 1 4,growx,aligny top");
 		
-		JLabel lblAeroportoDiArrivo_1_1_1 = new JLabel("Data di Arrivo:");
-		lblAeroportoDiArrivo_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblAeroportoDiArrivo_1_1_1.setBounds(501, 324, 257, 48);
-		panel.add(lblAeroportoDiArrivo_1_1_1);
+		JCalendar calendar_1 = new JCalendar();
+		panel_2.add(calendar_1, "cell 3 4,grow");
 		
-		JDateChooser dateChooser_2 = new JDateChooser();
-		dateChooser_2.setBounds(766, 324, 304, 45);
-		panel.add(dateChooser_2);
+		Component verticalGlue = Box.createVerticalGlue();
+		panel_2.add(verticalGlue, "cell 3 5");
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(511, 402, 496, 48);
-		panel.add(lblNewLabel);
+		JPanel panel_3 = new JPanel();
+		panel.add(panel_3, BorderLayout.SOUTH);
 		
-		panel_1 = new JPanel();
-		contentPane.add(panel_1, "name_353805033515200");
-		panel_1.setLayout(null);
+		JButton btnCercaIlTuo = new JButton("Cerca il tuo Volo!");
+		btnCercaIlTuo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_3.add(btnCercaIlTuo);
 		
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		lblEmail.setBounds(556, 265, 137, 65);
-		panel_1.add(lblEmail);
-		
-		textField = new JTextField();
-		textField.setBounds(556, 340, 389, 43);
-		panel_1.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		lblPassword.setBounds(556, 393, 228, 65);
-		panel_1.add(lblPassword);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(556, 468, 389, 43);
-		panel_1.add(textField_1);
-		
-		JButton btnLogIn_1 = new JButton("LOG IN");
-		btnLogIn_1.setFont(new Font("Tahoma", Font.PLAIN, 42));
-		btnLogIn_1.setBounds(556, 521, 389, 79);
-		panel_1.add(btnLogIn_1);
-		
-		JButton btnBack = new JButton("BACK");
-		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 42));
-		btnBack.setBounds(10, 10, 210, 88);
-		panel_1.add(btnBack);
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.removeAll();
-				contentPane.add(panel);
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
 	}
+
 }
