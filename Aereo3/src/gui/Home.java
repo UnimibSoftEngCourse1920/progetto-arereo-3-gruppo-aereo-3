@@ -288,6 +288,8 @@ public class Home extends JFrame {
 					gbc_lblNewLabel_1.gridx = 3;
 					gbc_lblNewLabel_1.gridy = 12;
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+					panel_2.revalidate();
+					panel_2.repaint();
 				}
 			}
 		});
