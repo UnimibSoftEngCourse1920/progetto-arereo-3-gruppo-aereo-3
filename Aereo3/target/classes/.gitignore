@@ -1,7 +1,2 @@
-/ui/
-/controller/
-/dataManagment/
-/model/
-/dominio/
-/META-INF/
 /gui/
+/dominio/
