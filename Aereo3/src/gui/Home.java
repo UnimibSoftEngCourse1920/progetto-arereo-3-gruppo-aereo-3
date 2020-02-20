@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import javax.swing.JComboBox;
@@ -60,6 +61,9 @@ public class Home extends JFrame {
 	private Component verticalStrut_7;
 	private Component verticalStrut_8;
 	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblDataDiRitorno;
+	private JDateChooser dateChooser_1;
 
 	/**
 	 * Launch the application.
@@ -158,6 +162,15 @@ public class Home extends JFrame {
 		gbc_rdbtnSoloAndata.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnSoloAndata.gridx = 1;
 		gbc_rdbtnSoloAndata.gridy = 1;
+		rdbtnSoloAndata.setSelected(true);
+		rdbtnSoloAndata.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblDataDiRitorno.setVisible(false);
+				dateChooser_1.setVisible(false);
+				panel_2.revalidate();
+				panel_2.repaint();
+				}
+		});
 		panel_2.add(rdbtnSoloAndata, gbc_rdbtnSoloAndata);
 		
 		rdbtnAndataERitorno = new JRadioButton("Andata e Ritorno");
@@ -169,7 +182,19 @@ public class Home extends JFrame {
 		gbc_rdbtnAndataERitorno.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnAndataERitorno.gridx = 3;
 		gbc_rdbtnAndataERitorno.gridy = 1;
+		rdbtnAndataERitorno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblDataDiRitorno.setVisible(true);
+				dateChooser_1.setVisible(true);
+				panel_2.revalidate();
+				panel_2.repaint();
+				}
+		});
 		panel_2.add(rdbtnAndataERitorno, gbc_rdbtnAndataERitorno);
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(rdbtnSoloAndata);
+		bg.add(rdbtnAndataERitorno);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_2 = new GridBagConstraints();
@@ -257,7 +282,7 @@ public class Home extends JFrame {
 		gbc_dateChooser.gridy = 10;
 		panel_2.add(dateChooser, gbc_dateChooser);
 		
-		JLabel lblDataDiRitorno = new JLabel("Data di Ritorno:");
+		lblDataDiRitorno = new JLabel("Data di Ritorno:");
 		lblDataDiRitorno.setForeground(Color.WHITE);
 		lblDataDiRitorno.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblDataDiRitorno = new GridBagConstraints();
@@ -267,7 +292,7 @@ public class Home extends JFrame {
 		gbc_lblDataDiRitorno.gridy = 11;
 		panel_2.add(lblDataDiRitorno, gbc_lblDataDiRitorno);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1 = new JDateChooser();
 		GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
 		gbc_dateChooser_1.insets = new Insets(0, 0, 5, 5);
 		gbc_dateChooser_1.fill = GridBagConstraints.HORIZONTAL;
@@ -275,11 +300,14 @@ public class Home extends JFrame {
 		gbc_dateChooser_1.gridy = 11;
 		panel_2.add(dateChooser_1, gbc_dateChooser_1);
 		
+		lblDataDiRitorno.setVisible(false);
+		dateChooser_1.setVisible(false);
+		
 		JButton btnCercaIlTuo_1 = new JButton("Cerca il tuo volo !");
 		btnCercaIlTuo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedItem().equals(comboBox_1.getSelectedItem())) {
-					JLabel lblNewLabel_1 = new JLabel("Attenzione, gli aeroporti coincidono !");
+					lblNewLabel_1 = new JLabel("Attenzione, gli aeroporti coincidono !");
 					lblNewLabel_1.setForeground(Color.RED);
 					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 					GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -288,9 +316,13 @@ public class Home extends JFrame {
 					gbc_lblNewLabel_1.gridx = 3;
 					gbc_lblNewLabel_1.gridy = 12;
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-					panel_2.revalidate();
-					panel_2.repaint();
 				}
+				else {
+					if(lblNewLabel_1 != null)
+						panel_2.remove(lblNewLabel_1);
+				}
+				panel_2.revalidate();
+				panel_2.repaint();
 			}
 		});
 		btnCercaIlTuo_1.setFont(new Font("Tahoma", Font.PLAIN, 50));
