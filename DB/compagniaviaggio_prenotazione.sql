@@ -23,13 +23,22 @@ DROP TABLE IF EXISTS `prenotazione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `prenotazione` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id_prenotazione` int NOT NULL AUTO_INCREMENT,
   `pagato` tinyint(1) NOT NULL,
-  `prezzo_totale` int NOT NULL,
-  `punti_totali` int NOT NULL,
-  `cod_cliente` int NOT NULL,
+  `prezzo_totale` double NOT NULL,
+  `cod_cliente` char(7) NOT NULL,
   `id_volo` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_prenotazione`),
+  CONSTRAINT `fk_cliente`
+	FOREIGN KEY (`cod_cliente`)
+    REFERENCES `cliente` (`cod_cliente`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_volo`
+	FOREIGN KEY (`id_volo`)
+    REFERENCES `volo` (`id_volo`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='		';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

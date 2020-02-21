@@ -16,35 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cliente_fedele`
+-- Table structure for table `cliente`
 --
 
-DROP TABLE IF EXISTS `cliente_fedele`;
+DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cliente_fedele` (
-  `cod_cliente` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cliente` (
+  `cod_cliente` char(7) NOT NULL,
+  `fedele` tinyint(1) NOT NULL, 
   `nome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `cognome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `data_di_nascita` date NOT NULL,
   `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `indirizzo` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `punti` int NOT NULL,
-  `data_iscrizione` date NOT NULL,
-  `data_ultimo_biglietto` date NOT NULL,
-  `fedele` tinyint(1) NOT NULL,
+  `punti` int,
+  `data_iscrizione` date,
+  `data_ultimo_biglietto` date,
+  `infedele` tinyint(1),
   PRIMARY KEY (`cod_cliente`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cliente_fedele`
+-- Dumping data for table `cliente`
 --
 
-LOCK TABLES `cliente_fedele` WRITE;
-/*!40000 ALTER TABLE `cliente_fedele` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cliente_fedele` ENABLE KEYS */;
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

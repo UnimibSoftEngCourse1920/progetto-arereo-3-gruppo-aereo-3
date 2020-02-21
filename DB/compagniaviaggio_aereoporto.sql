@@ -16,31 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cliente`
+-- Table structure for table `aereoporto`
 --
 
-DROP TABLE IF EXISTS `cliente`;
+DROP TABLE IF EXISTS `aereoporto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cliente` (
-  `cod_cliente` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `cognome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `data_di_nascita` date NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `indirizzo` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`cod_cliente`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
+CREATE TABLE `aereoporto` (
+  `id_aereoporto` char(4) NOT NULL,
+  `denominazione` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `paese` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_aereoporto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cliente`
+-- Dumping data for table `aereoporto`
 --
 
-LOCK TABLES `cliente` WRITE;
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+LOCK TABLES `aereoporto` WRITE;
+/*!40000 ALTER TABLE `aereoporto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aereoporto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-15 14:05:53
+-- Dump completed on 2020-02-15 14:05:52

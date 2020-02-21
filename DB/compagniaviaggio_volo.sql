@@ -23,16 +23,24 @@ DROP TABLE IF EXISTS `volo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `volo` (
-  `id_volo` int NOT NULL,
-  `destinazione` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `partenza` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `orario_partenza` date NOT NULL,
-  `orario_arrivo` date NOT NULL,
-  `data_partenza` date NOT NULL,
-  `data_arrivo` date NOT NULL,
-  `numero_posti` int NOT NULL,
-  `gate` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_volo`)
+  `id_volo` char(4) NOT NULL,
+  `partenza` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  `destinazione` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  `data_partenza` datetime NOT NULL,
+  `data_arrivo` datetime NOT NULL,
+  `n_posti` int NOT NULL,
+  `gate` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_volo`),
+  CONSTRAINT `fk_partenza`
+	FOREIGN KEY (`partenza`)
+    REFERENCES `aereoporto` (`id_aereoporto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_destinazione`
+	FOREIGN KEY (`destinazione`)
+    REFERENCES `aereoporto` (`id_aereoporto`)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
