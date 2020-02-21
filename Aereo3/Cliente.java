@@ -1,9 +1,8 @@
-package dominio;
 
 
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.LocalTimo;
 
 public class Cliente {
 
