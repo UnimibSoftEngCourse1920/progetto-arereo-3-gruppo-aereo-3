@@ -63,6 +63,7 @@ public class Home extends JFrame {
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblDataDiRitorno;
+	private JDateChooser dateChooser;
 	private JDateChooser dateChooser_1;
 
 	/**
@@ -274,7 +275,7 @@ public class Home extends JFrame {
 		gbc_lblDataDiPartenza.gridy = 10;
 		panel_2.add(lblDataDiPartenza, gbc_lblDataDiPartenza);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
 		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
 		gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
@@ -306,7 +307,11 @@ public class Home extends JFrame {
 		JButton btnCercaIlTuo_1 = new JButton("Cerca il tuo volo !");
 		btnCercaIlTuo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//lblNewLabel_1.setVisible(false);
 				if(comboBox.getSelectedItem().equals(comboBox_1.getSelectedItem())) {
+					if (lblNewLabel_1 != null)
+						panel_2.remove(lblNewLabel_1);
+					
 					lblNewLabel_1 = new JLabel("Attenzione, gli aeroporti coincidono !");
 					lblNewLabel_1.setForeground(Color.RED);
 					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -317,9 +322,25 @@ public class Home extends JFrame {
 					gbc_lblNewLabel_1.gridy = 12;
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				}
-				else {
-					if(lblNewLabel_1 != null)
+				
+				else if(dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
+					
+					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
+					
+					lblNewLabel_1 = new JLabel("Attenzione, le date sono errate !");
+					lblNewLabel_1.setForeground(Color.RED);
+					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+					GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+					gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+					gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+					gbc_lblNewLabel_1.gridx = 3;
+					gbc_lblNewLabel_1.gridy = 12;
+					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+				}
+				
+				else if (lblNewLabel_1 != null) {
+					panel_2.remove(lblNewLabel_1);
 				}
 				panel_2.revalidate();
 				panel_2.repaint();
