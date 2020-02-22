@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -19,6 +20,14 @@ import javax.swing.JTextField;
 public class Registrazione {
 	
 	static JPanel esegui(JPanel contentPane, JPanel logInPanel) {
+		JLabel label_3 = new JLabel("");
+		label_3.setForeground(Color.RED);
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		GridBagConstraints gbc_label_3 = new GridBagConstraints();
+		gbc_label_3.insets = new Insets(0, 0, 0, 5);
+		gbc_label_3.gridx = 1;
+		gbc_label_3.gridy = 18;
+		//registrationPanel.add(label_3, gbc_label_3);
 		JPanel registrationPanel = new JPanel();
 		registrationPanel.setBackground(Color.BLUE);
 		contentPane.add(registrationPanel, "name_523737106974600");
@@ -39,9 +48,6 @@ public class Registrazione {
 		JButton btnBack_1 = new JButton("BACK");
 		btnBack_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*if (label_3 != null) {
-					registrationPanel.remove(label_3);
-				}*/
 				contentPane.remove(registrationPanel);
 				contentPane.add(logInPanel);
 				contentPane.repaint();
@@ -234,14 +240,16 @@ public class Registrazione {
 		JButton btnConferma = new JButton("Registrati !");
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (label_3 != null)
+					registrationPanel.remove(label_3);
+				
 				if(!(passwordField.getText().equals(passwordField_1.getText()))) {
-					JLabel label_3 = new JLabel("Password Errate!");
-					label_3.setForeground(Color.RED);
-					label_3.setFont(new Font("Tahoma", Font.PLAIN, 25));
-					GridBagConstraints gbc_label_3 = new GridBagConstraints();
-					gbc_label_3.insets = new Insets(0, 0, 0, 5);
-					gbc_label_3.gridx = 1;
-					gbc_label_3.gridy = 18;
+					label_3.setText("Password Errate !");
+					registrationPanel.add(label_3, gbc_label_3);
+				}
+				
+				else if(isValid(textField_5.getText()) == false) {
+					label_3.setText("Email errate");
 					registrationPanel.add(label_3, gbc_label_3);
 				}
 				registrationPanel.repaint();
@@ -258,6 +266,19 @@ public class Registrazione {
 		registrationPanel.add(btnConferma, gbc_btnConferma);
 		
 		return registrationPanel;
+	}
+	
+	public static boolean isValid(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                "[a-zA-Z0-9_+&*-]+)*@" + 
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                "A-Z]{2,7}$"; 
+                  
+		Pattern pat = Pattern.compile(emailRegex); 
+		if (email == null) 
+			return false; 
+		
+		return pat.matcher(email).matches();
 	}
 
 }
