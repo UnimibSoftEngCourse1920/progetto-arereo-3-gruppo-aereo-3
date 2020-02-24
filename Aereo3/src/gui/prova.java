@@ -17,9 +17,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-public class AreaUtente {
-	static JPanel esegui(JPanel contentPane, JPanel homePanel) {
+public class prova extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public prova() {
 		JPanel areaUtente = new JPanel ();
+		areaUtente.setBounds(100, 100, 894, 717);
 		areaUtente.setBackground(Color.BLUE);
 		contentPane.add(areaUtente, "name_864878817126900");
 		areaUtente.setLayout(new BorderLayout(0, 0));
@@ -345,7 +350,6 @@ public class AreaUtente {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblNewLabel.setForeground(Color.WHITE);
 		areaUtente.add(lblNewLabel, BorderLayout.NORTH);
-		
-		return areaUtente;
 	}
+
 }

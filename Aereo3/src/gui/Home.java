@@ -49,6 +49,21 @@ public class Home extends JFrame {
 	private JDateChooser dateChooser_1;
 	private Date now = new Date(); 
 	private JPanel registrationPanel;
+	private JPanel panel;
+	private JLabel lblNewLabel;
+	private JPanel menuAdmin;
+	private JButton btnAggiungiVolo;
+	private JButton btnEliminaVolo;
+	private Component verticalStrut_7;
+	private JButton btnModificaVolo;
+	private Component verticalStrut_6;
+	private Component verticalStrut_8;
+	private Component verticalStrut_9;
+	private JButton btnCreaPromozione;
+	private Component verticalStrut_10;
+	private JButton btnEliminaPromozione;
+	private Component verticalStrut_11;
+	private JButton btnLog;
 	/**
 	 * Launch the application.
 	 */
@@ -340,5 +355,120 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridx = 1;
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
+		
+		panel = new JPanel();
+		panel.setBackground(Color.BLUE);
+		contentPane.add(panel, "name_881526299580700");
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		lblNewLabel = new JLabel("Benvenuto nell'area Admin");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		panel.add(lblNewLabel, BorderLayout.NORTH);
+		
+		menuAdmin = new JPanel();
+		menuAdmin.setBackground(Color.BLUE);
+		panel.add(menuAdmin, BorderLayout.WEST);
+		GridBagLayout gbl_menuAdmin = new GridBagLayout();
+		gbl_menuAdmin.columnWidths = new int[]{0, 101, 0};
+		gbl_menuAdmin.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_menuAdmin.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_menuAdmin.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		menuAdmin.setLayout(gbl_menuAdmin);
+		
+		verticalStrut_6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
+		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_6.gridx = 0;
+		gbc_verticalStrut_6.gridy = 0;
+		menuAdmin.add(verticalStrut_6, gbc_verticalStrut_6);
+		
+		btnAggiungiVolo = new JButton("Aggiungi Volo");
+		btnAggiungiVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		GridBagConstraints gbc_btnAggiungiVolo = new GridBagConstraints();
+		gbc_btnAggiungiVolo.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAggiungiVolo.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnAggiungiVolo.gridx = 0;
+		gbc_btnAggiungiVolo.gridy = 1;
+		menuAdmin.add(btnAggiungiVolo, gbc_btnAggiungiVolo);
+		
+		verticalStrut_8 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
+		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_8.gridx = 0;
+		gbc_verticalStrut_8.gridy = 2;
+		menuAdmin.add(verticalStrut_8, gbc_verticalStrut_8);
+		
+		btnEliminaVolo = new JButton("Elimina Volo");
+		btnEliminaVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		GridBagConstraints gbc_btnEliminaVolo = new GridBagConstraints();
+		gbc_btnEliminaVolo.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnEliminaVolo.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEliminaVolo.gridx = 0;
+		gbc_btnEliminaVolo.gridy = 3;
+		menuAdmin.add(btnEliminaVolo, gbc_btnEliminaVolo);
+		
+		verticalStrut_7 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
+		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_7.gridx = 0;
+		gbc_verticalStrut_7.gridy = 4;
+		menuAdmin.add(verticalStrut_7, gbc_verticalStrut_7);
+		
+		btnModificaVolo = new JButton("Modifica Volo");
+		btnModificaVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		GridBagConstraints gbc_btnModificaVolo = new GridBagConstraints();
+		gbc_btnModificaVolo.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnModificaVolo.insets = new Insets(0, 0, 5, 5);
+		gbc_btnModificaVolo.gridx = 0;
+		gbc_btnModificaVolo.gridy = 5;
+		menuAdmin.add(btnModificaVolo, gbc_btnModificaVolo);
+		
+		verticalStrut_9 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
+		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_9.gridx = 0;
+		gbc_verticalStrut_9.gridy = 6;
+		menuAdmin.add(verticalStrut_9, gbc_verticalStrut_9);
+		
+		btnCreaPromozione = new JButton("Crea Promozione");
+		btnCreaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		GridBagConstraints gbc_btnCreaPromozione = new GridBagConstraints();
+		gbc_btnCreaPromozione.anchor = GridBagConstraints.WEST;
+		gbc_btnCreaPromozione.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCreaPromozione.gridx = 0;
+		gbc_btnCreaPromozione.gridy = 7;
+		menuAdmin.add(btnCreaPromozione, gbc_btnCreaPromozione);
+		
+		verticalStrut_10 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_10 = new GridBagConstraints();
+		gbc_verticalStrut_10.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_10.gridx = 0;
+		gbc_verticalStrut_10.gridy = 8;
+		menuAdmin.add(verticalStrut_10, gbc_verticalStrut_10);
+		
+		btnEliminaPromozione = new JButton("Elimina Promozione");
+		btnEliminaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		GridBagConstraints gbc_btnEliminaPromozione = new GridBagConstraints();
+		gbc_btnEliminaPromozione.anchor = GridBagConstraints.WEST;
+		gbc_btnEliminaPromozione.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEliminaPromozione.gridx = 0;
+		gbc_btnEliminaPromozione.gridy = 9;
+		menuAdmin.add(btnEliminaPromozione, gbc_btnEliminaPromozione);
+		
+		verticalStrut_11 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_11 = new GridBagConstraints();
+		gbc_verticalStrut_11.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_11.gridx = 0;
+		gbc_verticalStrut_11.gridy = 10;
+		menuAdmin.add(verticalStrut_11, gbc_verticalStrut_11);
+		
+		btnLog = new JButton("Log Out");
+		GridBagConstraints gbc_btnLog = new GridBagConstraints();
+		gbc_btnLog.anchor = GridBagConstraints.WEST;
+		gbc_btnLog.insets = new Insets(0, 0, 0, 5);
+		gbc_btnLog.gridx = 0;
+		gbc_btnLog.gridy = 11;
+		menuAdmin.add(btnLog, gbc_btnLog);
 		}
 }
