@@ -39,18 +39,128 @@ public class prova extends JPanel {
 		menu.setBackground(Color.BLUE);
 		areaUtente.add(menu, BorderLayout.WEST);
 		GridBagLayout gbl_menu = new GridBagLayout();
-		gbl_menu.columnWidths = new int[]{0, 0};
-		gbl_menu.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_menu.columnWidths = new int[]{201, 0};
+		gbl_menu.rowHeights = new int[]{1, 54, 43, 30, 43, 30, 43, 30, 43, 0, 0, 0};
 		gbl_menu.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_menu.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_menu.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		menu.setLayout(gbl_menu);
+		
+		JButton btnSaldoPunti = new JButton("Saldo Punti");
+		btnSaldoPunti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				JPanel punti = new JPanel();
+				punti.setBackground(Color.BLUE);
+				panel.add(punti, "name_866024865084500");
+				GridBagLayout gbl_punti = new GridBagLayout();
+				gbl_punti.columnWidths = new int[]{0, 0, 0};
+				gbl_punti.rowHeights = new int[]{0, 0, 0};
+				gbl_punti.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				gbl_punti.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				punti.setLayout(gbl_punti);
+				
+				Component verticalStrut_15 = Box.createVerticalStrut(20);
+				GridBagConstraints gbc_verticalStrut_15 = new GridBagConstraints();
+				gbc_verticalStrut_15.insets = new Insets(0, 0, 5, 0);
+				gbc_verticalStrut_15.gridx = 1;
+				gbc_verticalStrut_15.gridy = 0;
+				punti.add(verticalStrut_15, gbc_verticalStrut_15);
+				
+				Component horizontalStrut_5 = Box.createHorizontalStrut(20);
+				GridBagConstraints gbc_horizontalStrut_5 = new GridBagConstraints();
+				gbc_horizontalStrut_5.insets = new Insets(0, 0, 0, 5);
+				gbc_horizontalStrut_5.gridx = 0;
+				gbc_horizontalStrut_5.gridy = 1;
+				punti.add(horizontalStrut_5, gbc_horizontalStrut_5);
+				
+				JLabel lblLeTuePrenotazioni = new JLabel("Il tuo saldo punti:");
+				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				lblLeTuePrenotazioni.setForeground(Color.WHITE);
+				GridBagConstraints gbc_lblLeTuePrenotazioni = new GridBagConstraints();
+				gbc_lblLeTuePrenotazioni.anchor = GridBagConstraints.WEST;
+				gbc_lblLeTuePrenotazioni.gridx = 1;
+				gbc_lblLeTuePrenotazioni.gridy = 1;
+				punti.add(lblLeTuePrenotazioni, gbc_lblLeTuePrenotazioni);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		
+		Component verticalStrut_6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
+		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_6.gridx = 0;
+		gbc_verticalStrut_6.gridy = 0;
+		menu.add(verticalStrut_6, gbc_verticalStrut_6);
+		
+		Component verticalStrut_9 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
+		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_9.gridx = 0;
+		gbc_verticalStrut_9.gridy = 0;
+		menu.add(verticalStrut_9, gbc_verticalStrut_9);
 		
 		Component verticalStrut_7 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
 		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 0);
 		gbc_verticalStrut_7.gridx = 0;
-		gbc_verticalStrut_7.gridy = 1;
+		gbc_verticalStrut_7.gridy = 0;
 		menu.add(verticalStrut_7, gbc_verticalStrut_7);
+		
+		Component verticalStrut_8 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
+		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_8.gridx = 0;
+		gbc_verticalStrut_8.gridy = 0;
+		menu.add(verticalStrut_8, gbc_verticalStrut_8);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
+		gbc_verticalStrut.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut.gridx = 0;
+		gbc_verticalStrut.gridy = 0;
+		menu.add(verticalStrut, gbc_verticalStrut);
+		
+		JButton btnPrenotazioni = new JButton("Prenotazioni");
+		btnPrenotazioni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				JPanel prenotazioni = new JPanel();
+				prenotazioni.setBackground(Color.BLUE);
+				panel.add(prenotazioni, "name_866024865084500");
+				GridBagLayout gbl_prenotazioni = new GridBagLayout();
+				gbl_prenotazioni.columnWidths = new int[]{0, 0, 0};
+				gbl_prenotazioni.rowHeights = new int[]{0, 0, 0};
+				gbl_prenotazioni.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				gbl_prenotazioni.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				prenotazioni.setLayout(gbl_prenotazioni);
+				
+				Component verticalStrut_15 = Box.createVerticalStrut(20);
+				GridBagConstraints gbc_verticalStrut_15 = new GridBagConstraints();
+				gbc_verticalStrut_15.insets = new Insets(0, 0, 5, 0);
+				gbc_verticalStrut_15.gridx = 1;
+				gbc_verticalStrut_15.gridy = 0;
+				prenotazioni.add(verticalStrut_15, gbc_verticalStrut_15);
+				
+				Component horizontalStrut_5 = Box.createHorizontalStrut(20);
+				GridBagConstraints gbc_horizontalStrut_5 = new GridBagConstraints();
+				gbc_horizontalStrut_5.insets = new Insets(0, 0, 0, 5);
+				gbc_horizontalStrut_5.gridx = 0;
+				gbc_horizontalStrut_5.gridy = 1;
+				prenotazioni.add(horizontalStrut_5, gbc_horizontalStrut_5);
+				
+				JLabel lblLeTuePrenotazioni = new JLabel("Le tue Prenotazioni:");
+				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				lblLeTuePrenotazioni.setForeground(Color.WHITE);
+				GridBagConstraints gbc_lblLeTuePrenotazioni = new GridBagConstraints();
+				gbc_lblLeTuePrenotazioni.anchor = GridBagConstraints.WEST;
+				gbc_lblLeTuePrenotazioni.gridx = 1;
+				gbc_lblLeTuePrenotazioni.gridy = 1;
+				prenotazioni.add(lblLeTuePrenotazioni, gbc_lblLeTuePrenotazioni);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		
 		JButton btnDatiPersonali = new JButton("Dati Personali");
 		btnDatiPersonali.addActionListener(new ActionListener() {
@@ -190,128 +300,25 @@ public class prova extends JPanel {
 		});
 		btnDatiPersonali.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbc_btnDatiPersonali = new GridBagConstraints();
-		gbc_btnDatiPersonali.insets = new Insets(0, 0, 5, 0);
 		gbc_btnDatiPersonali.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnDatiPersonali.insets = new Insets(0, 0, 5, 0);
 		gbc_btnDatiPersonali.gridx = 0;
-		gbc_btnDatiPersonali.gridy = 2;
+		gbc_btnDatiPersonali.gridy = 1;
 		menu.add(btnDatiPersonali, gbc_btnDatiPersonali);
-		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_6.gridx = 0;
-		gbc_verticalStrut_6.gridy = 3;
-		menu.add(verticalStrut_6, gbc_verticalStrut_6);
-		
-		JButton btnPrenotazioni = new JButton("Prenotazioni");
-		btnPrenotazioni.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				JPanel prenotazioni = new JPanel();
-				prenotazioni.setBackground(Color.BLUE);
-				panel.add(prenotazioni, "name_866024865084500");
-				GridBagLayout gbl_prenotazioni = new GridBagLayout();
-				gbl_prenotazioni.columnWidths = new int[]{0, 0, 0};
-				gbl_prenotazioni.rowHeights = new int[]{0, 0, 0};
-				gbl_prenotazioni.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				gbl_prenotazioni.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				prenotazioni.setLayout(gbl_prenotazioni);
-				
-				Component verticalStrut_15 = Box.createVerticalStrut(20);
-				GridBagConstraints gbc_verticalStrut_15 = new GridBagConstraints();
-				gbc_verticalStrut_15.insets = new Insets(0, 0, 5, 0);
-				gbc_verticalStrut_15.gridx = 1;
-				gbc_verticalStrut_15.gridy = 0;
-				prenotazioni.add(verticalStrut_15, gbc_verticalStrut_15);
-				
-				Component horizontalStrut_5 = Box.createHorizontalStrut(20);
-				GridBagConstraints gbc_horizontalStrut_5 = new GridBagConstraints();
-				gbc_horizontalStrut_5.insets = new Insets(0, 0, 0, 5);
-				gbc_horizontalStrut_5.gridx = 0;
-				gbc_horizontalStrut_5.gridy = 1;
-				prenotazioni.add(horizontalStrut_5, gbc_horizontalStrut_5);
-				
-				JLabel lblLeTuePrenotazioni = new JLabel("Le tue Prenotazioni:");
-				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
-				lblLeTuePrenotazioni.setForeground(Color.WHITE);
-				GridBagConstraints gbc_lblLeTuePrenotazioni = new GridBagConstraints();
-				gbc_lblLeTuePrenotazioni.anchor = GridBagConstraints.WEST;
-				gbc_lblLeTuePrenotazioni.gridx = 1;
-				gbc_lblLeTuePrenotazioni.gridy = 1;
-				prenotazioni.add(lblLeTuePrenotazioni, gbc_lblLeTuePrenotazioni);
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
 		btnPrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbc_btnPrenotazioni = new GridBagConstraints();
-		gbc_btnPrenotazioni.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPrenotazioni.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnPrenotazioni.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPrenotazioni.gridx = 0;
 		gbc_btnPrenotazioni.gridy = 4;
 		menu.add(btnPrenotazioni, gbc_btnPrenotazioni);
-		
-		Component verticalStrut_8 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
-		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_8.gridx = 0;
-		gbc_verticalStrut_8.gridy = 5;
-		menu.add(verticalStrut_8, gbc_verticalStrut_8);
-		
-		JButton btnSaldoPunti = new JButton("Saldo Punti");
-		btnSaldoPunti.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				JPanel punti = new JPanel();
-				punti.setBackground(Color.BLUE);
-				panel.add(punti, "name_866024865084500");
-				GridBagLayout gbl_punti = new GridBagLayout();
-				gbl_punti.columnWidths = new int[]{0, 0, 0};
-				gbl_punti.rowHeights = new int[]{0, 0, 0};
-				gbl_punti.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				gbl_punti.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				punti.setLayout(gbl_punti);
-				
-				Component verticalStrut_15 = Box.createVerticalStrut(20);
-				GridBagConstraints gbc_verticalStrut_15 = new GridBagConstraints();
-				gbc_verticalStrut_15.insets = new Insets(0, 0, 5, 0);
-				gbc_verticalStrut_15.gridx = 1;
-				gbc_verticalStrut_15.gridy = 0;
-				punti.add(verticalStrut_15, gbc_verticalStrut_15);
-				
-				Component horizontalStrut_5 = Box.createHorizontalStrut(20);
-				GridBagConstraints gbc_horizontalStrut_5 = new GridBagConstraints();
-				gbc_horizontalStrut_5.insets = new Insets(0, 0, 0, 5);
-				gbc_horizontalStrut_5.gridx = 0;
-				gbc_horizontalStrut_5.gridy = 1;
-				punti.add(horizontalStrut_5, gbc_horizontalStrut_5);
-				
-				JLabel lblLeTuePrenotazioni = new JLabel("Il tuo saldo punti:");
-				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
-				lblLeTuePrenotazioni.setForeground(Color.WHITE);
-				GridBagConstraints gbc_lblLeTuePrenotazioni = new GridBagConstraints();
-				gbc_lblLeTuePrenotazioni.anchor = GridBagConstraints.WEST;
-				gbc_lblLeTuePrenotazioni.gridx = 1;
-				gbc_lblLeTuePrenotazioni.gridy = 1;
-				punti.add(lblLeTuePrenotazioni, gbc_lblLeTuePrenotazioni);
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
 		btnSaldoPunti.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbc_btnSaldoPunti = new GridBagConstraints();
-		gbc_btnSaldoPunti.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSaldoPunti.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnSaldoPunti.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSaldoPunti.gridx = 0;
 		gbc_btnSaldoPunti.gridy = 6;
 		menu.add(btnSaldoPunti, gbc_btnSaldoPunti);
-		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
-		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_9.gridx = 0;
-		gbc_verticalStrut_9.gridy = 7;
-		menu.add(verticalStrut_9, gbc_verticalStrut_9);
 		
 		JButton btnAreaAdmin = new JButton("Area Admin");
 		btnAreaAdmin.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -322,29 +329,18 @@ public class prova extends JPanel {
 		gbc_btnAreaAdmin.gridy = 8;
 		menu.add(btnAreaAdmin, gbc_btnAreaAdmin);
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
-		gbc_verticalStrut.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut.gridx = 0;
-		gbc_verticalStrut.gridy = 9;
-		menu.add(verticalStrut, gbc_verticalStrut);
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
+		gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_1.gridx = 0;
+		gbc_verticalStrut_1.gridy = 9;
+		menu.add(verticalStrut_1, gbc_verticalStrut_1);
 		
-		JButton btnLogOut = new JButton("Log Out");
-		btnLogOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.removeAll();
-				contentPane.add(homePanel);
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
-		btnLogOut.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
-		gbc_btnLogOut.insets = new Insets(0, 0, 5, 0);
-		gbc_btnLogOut.anchor = GridBagConstraints.WEST;
-		gbc_btnLogOut.gridx = 0;
-		gbc_btnLogOut.gridy = 10;
-		menu.add(btnLogOut, gbc_btnLogOut);
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridy = 10;
+		menu.add(btnNewButton, gbc_btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Sei loggato come: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
