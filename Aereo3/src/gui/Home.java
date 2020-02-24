@@ -20,18 +20,15 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JRadioButton;
 import java.awt.Color;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
 
 public class Home extends JFrame {
 	
 	//Dichiarazione variabili;
 
 	private JPanel contentPane;
-	private JPanel logInPanel;
 	private JPanel homePanel;
 	private JPanel panel_1;
 	private JPanel panel_3;
@@ -344,5 +341,4 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
 		}
-
 }

@@ -107,6 +107,14 @@ public class Accesso {
 		logInPanel.add(verticalStrut_8, gbc_verticalStrut_8);
 		
 		JButton btnLogIn_1 = new JButton("LOG IN");
+		btnLogIn_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(AreaUtente.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		btnLogIn_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		GridBagConstraints gbc_btnLogIn_1 = new GridBagConstraints();
 		gbc_btnLogIn_1.insets = new Insets(0, 0, 5, 0);
