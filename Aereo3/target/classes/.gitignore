@@ -1,3 +1,5 @@
 /controller/
-/dominio/
 /gui/
+/dominio/
+/Utils.class
+/lib/
