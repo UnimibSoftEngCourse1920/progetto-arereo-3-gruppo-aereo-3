@@ -7,7 +7,7 @@ public class Volo {
 	
 	private int idVolo;
 	private String destinazione;
-//	private String partenza;
+	private String partenza;
 	private LocalTime orarioPartenza;
 	private LocalTime orarioArrivo;
 	private int numeroPosti;
