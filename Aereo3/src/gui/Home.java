@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 
 public class Home extends JFrame {
 	
@@ -49,6 +50,22 @@ public class Home extends JFrame {
 	private JDateChooser dateChooser_1;
 	private Date now = new Date(); 
 	private JPanel registrationPanel;
+	private JPanel panel;
+	private JLabel lblNewLabel;
+	private JPanel menuAdmin;
+	private JButton btnAggiungiVolo;
+	private JButton btnEliminaVolo;
+	private Component verticalStrut_7;
+	private JButton btnModificaVolo;
+	private Component verticalStrut_6;
+	private Component verticalStrut_8;
+	private Component verticalStrut_9;
+	private JButton btnCreaPromozione;
+	private Component verticalStrut_10;
+	private JButton btnEliminaPromozione;
+	private Component verticalStrut_11;
+	private JButton btnLog;
+	private JPanel panel_5;
 	/**
 	 * Launch the application.
 	 */
@@ -340,5 +357,7 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridx = 1;
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
+		
+		
 		}
 }
