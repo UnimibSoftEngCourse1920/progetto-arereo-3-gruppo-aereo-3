@@ -1,15 +1,15 @@
 package dominio;
 
 
-import java.time.LocalTime;
+import java.sql.Time;
 
 public class Volo {
 	
 	private int idVolo;
 	private String destinazione;
 	private String partenza;
-	private LocalTime orarioPartenza;
-	private LocalTime orarioArrivo;
+	private Time orarioPartenza;
+	private Time orarioArrivo;
 	private int numeroPosti;
 	private String gate;
 	
@@ -30,19 +30,19 @@ public class Volo {
 	}
 	
 	
-	public LocalTime getOrarioPartenza() {
+	public Time getOrarioPartenza() {
 		return orarioPartenza;
 	}
-	public void setOrarioPartenza(LocalTime orarioPartenza) {
-		this.orarioPartenza = orarioPartenza;
+	public void setOrarioPartenza(Time time) {
+		this.orarioPartenza = time;
 	}
 	
 	
-	public LocalTime getOrarioArrivo() {
+	public Time getOrarioArrivo() {
 		return orarioArrivo;
 	}
-	public void setOrarioArrivo(LocalTime orarioArrivo) {
-		this.orarioArrivo = orarioArrivo;
+	public void setOrarioArrivo(Time time) {
+		this.orarioArrivo = time;
 	}
 	
 	
@@ -61,7 +61,36 @@ public class Volo {
 		this.gate = gate;
 	}
 	
+	
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		Volo v=(Volo) obj;
+		
+		if(!(this.getPartenza().equalsIgnoreCase(v.getPartenza())))
+			return false;
+		
+		if(!(this.getDestinazione().equalsIgnoreCase(v.getDestinazione())))
+			return false;
+
+		if(!(this.getOrarioPartenza().toString().equalsIgnoreCase(v.getOrarioPartenza().toString())))
+			return false;
+
+		return true;
+	}
+	public String getPartenza() {
+		return partenza;
+	}
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
+	}
+	
+	
+	
 	/*****************************************/
+	
+	
 	
 
 }
