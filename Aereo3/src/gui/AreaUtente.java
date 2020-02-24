@@ -35,7 +35,7 @@ public class AreaUtente {
 		areaUtente.add(menu, BorderLayout.WEST);
 		GridBagLayout gbl_menu = new GridBagLayout();
 		gbl_menu.columnWidths = new int[]{0, 0};
-		gbl_menu.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_menu.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_menu.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gbl_menu.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		menu.setLayout(gbl_menu);
@@ -307,23 +307,7 @@ public class AreaUtente {
 		gbc_verticalStrut_9.gridx = 0;
 		gbc_verticalStrut_9.gridy = 7;
 		menu.add(verticalStrut_9, gbc_verticalStrut_9);
-		
-		JButton btnAreaAdmin = new JButton("Area Admin");
-		btnAreaAdmin.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnAreaAdmin = new GridBagConstraints();
-		gbc_btnAreaAdmin.insets = new Insets(0, 0, 5, 0);
-		gbc_btnAreaAdmin.anchor = GridBagConstraints.WEST;
-		gbc_btnAreaAdmin.gridx = 0;
-		gbc_btnAreaAdmin.gridy = 8;
-		menu.add(btnAreaAdmin, gbc_btnAreaAdmin);
-		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
-		gbc_verticalStrut.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut.gridx = 0;
-		gbc_verticalStrut.gridy = 9;
-		menu.add(verticalStrut, gbc_verticalStrut);
-		
+	
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -336,10 +320,34 @@ public class AreaUtente {
 		btnLogOut.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
 		gbc_btnLogOut.insets = new Insets(0, 0, 5, 0);
-		gbc_btnLogOut.anchor = GridBagConstraints.WEST;
+		gbc_btnLogOut.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnLogOut.gridx = 0;
 		gbc_btnLogOut.gridy = 10;
 		menu.add(btnLogOut, gbc_btnLogOut);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
+		gbc_verticalStrut.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut.gridx = 0;
+		gbc_verticalStrut.gridy = 9;
+		menu.add(verticalStrut, gbc_verticalStrut);
+		
+		JButton btnAreaAdmin = new JButton("Area Admin");
+		btnAreaAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnAreaAdmin.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		GridBagConstraints gbc_btnAreaAdmin = new GridBagConstraints();
+		gbc_btnAreaAdmin.insets = new Insets(0, 0, 5, 0);
+		gbc_btnAreaAdmin.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnAreaAdmin.gridx = 0;
+		gbc_btnAreaAdmin.gridy = 8;
+		menu.add(btnAreaAdmin, gbc_btnAreaAdmin);
 		
 		JLabel lblNewLabel = new JLabel("Sei loggato come: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
