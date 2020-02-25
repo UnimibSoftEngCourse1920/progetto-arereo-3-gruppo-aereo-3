@@ -313,6 +313,9 @@ public class Home extends JFrame {
 		gbc_dateChooser_1.gridy = 11;
 		panel_2.add(dateChooser_1, gbc_dateChooser_1);
 		
+		//Creazione volo:
+		/******************************************************/
+		
 		Volo volo = new Volo();
 		volo.setDestinazione(lblAeroportoDiArrivo.getText());
 		volo.setPartenza(lblAeroportoDiPartenza.getText());
@@ -322,6 +325,9 @@ public class Home extends JFrame {
 		volo.setOrarioArrivo((Time) dateChooser_1.getDate());
 		volo.setOrarioPartenza((Time) dateChooser.getDate());
 		Controller.controlloDisponibilità(volo);
+		
+		
+		/****************************************************/
 		
 		lblDataDiRitorno.setVisible(false);
 		dateChooser_1.setVisible(false);
