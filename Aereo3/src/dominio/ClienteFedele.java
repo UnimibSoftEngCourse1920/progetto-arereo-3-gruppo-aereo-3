@@ -8,7 +8,7 @@ public class ClienteFedele extends Cliente {
 	private int punti;
 	private LocalDateTime dataIscrizione;
 	private LocalDateTime ultimoBiglietto;
-	private boolean stato;
+	private boolean infedele;
 //    private static PagaStrategy strategy;
     
     
@@ -36,11 +36,11 @@ public class ClienteFedele extends Cliente {
 	}
 	
 	
-	public boolean isStato() {
-		return stato;
+	public boolean isInfedele() {
+		return infedele;
 	}
-	public void setStato(boolean stato) {
-		this.stato = stato;
+	public void setInfedele(boolean stato) {
+		this.infedele = stato;
 	}
 	
 	

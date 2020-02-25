@@ -3,7 +3,7 @@ package dominio;
 
 public class Posto {
 
-	private int file;
+	private int fila;
 	private boolean prenotato;
 	private char lettera;
 	private double prezzo;
@@ -11,11 +11,11 @@ public class Posto {
 	private int prezzoPunti;
 	
 	
-	public int getFile() {
-		return file;
+	public int getFila() {
+		return fila;
 	}
 	public void setFile(int file) {
-		this.file = file;
+		this.fila = file;
 	}
 	
 	

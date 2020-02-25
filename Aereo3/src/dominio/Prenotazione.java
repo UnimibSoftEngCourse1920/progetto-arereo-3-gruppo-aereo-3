@@ -14,10 +14,6 @@ public class Prenotazione {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	
 	public List<Posto> getListaBiglietti() {
 		return listaBiglietti;

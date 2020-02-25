@@ -1,69 +1,81 @@
+
 package dominio;
 
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 public class Volo {
 	
-	private int idVolo;
+	private String idVolo;
 	private String destinazione;
 	private String partenza;
-	private Time orarioPartenza;
-	private Time orarioArrivo;
+	private LocalTime orarioPartenza;
+	private LocalTime orarioArrivo;
 	private int numeroPosti;
 	private String gate;
-	
-	
-	public int getIdVolo() {
+	private Promozione promo;
+
+	public String getIdVolo() {
 		return idVolo;
 	}
-	public void setIdVolo(int idVolo) {
-		this.idVolo = idVolo;
+	
+	public String getPartenza() {
+		return partenza;
 	}
 	
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
+	}
 	
 	public String getDestinazione() {
 		return destinazione;
 	}
+	
 	public void setDestinazione(String destinazione) {
 		this.destinazione = destinazione;
 	}
 	
-	
-	public Time getOrarioPartenza() {
+	public LocalTime getOrarioPartenza() {
 		return orarioPartenza;
 	}
-	public void setOrarioPartenza(Time time) {
-		this.orarioPartenza = time;
+	
+	public void setOrarioPartenza(LocalTime orarioPartenza) {
+		this.orarioPartenza = orarioPartenza;
 	}
 	
-	
-	public Time getOrarioArrivo() {
+	public LocalTime getOrarioArrivo() {
 		return orarioArrivo;
 	}
-	public void setOrarioArrivo(Time time) {
-		this.orarioArrivo = time;
-	}
 	
+	public void setOrarioArrivo(LocalTime orarioArrivo) {
+		this.orarioArrivo = orarioArrivo;
+	}
 	
 	public int getNumeroPosti() {
 		return numeroPosti;
 	}
+	
 	public void setNumeroPosti(int numeroPosti) {
 		this.numeroPosti = numeroPosti;
 	}
 	
-	
 	public String getGate() {
 		return gate;
 	}
+	
 	public void setGate(String gate) {
 		this.gate = gate;
 	}
 	
+	public Promozione getPromo() {
+		return promo;
+	}
+
+	public void setPromo(Promozione promo) {
+		this.promo = promo;
+	}
 	
-	
-	
+	/*****************************************/
 	@Override
 	public boolean equals(Object obj) {
 		Volo v=(Volo) obj;
@@ -79,18 +91,5 @@ public class Volo {
 
 		return true;
 	}
-	public String getPartenza() {
-		return partenza;
-	}
-	public void setPartenza(String partenza) {
-		this.partenza = partenza;
-	}
-	
-	
-	
-	/*****************************************/
-	
-	
-	
 
 }
