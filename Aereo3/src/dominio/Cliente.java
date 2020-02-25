@@ -1,13 +1,11 @@
 package dominio;
 
-
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Cliente {
 
-	private int codCliente;
+	private String codCliente;
 	private String nome;
 	private String cognome;
 	private LocalDateTime dataDiNascita;
@@ -15,13 +13,9 @@ public class Cliente {
 	private String indirizzo;
 	//			private CartaDiCredito cartaDiCredito;
 
-	public int getCodCliente() {
+	public String getCodCliente() {
 		return codCliente;
 	}
-	public void setCodCliente(int codCliente) {
-		this.codCliente = codCliente;
-	}
-
 
 	public String getNome() {
 		return nome;
@@ -62,7 +56,7 @@ public class Cliente {
 		this.indirizzo = indirizzo;
 	}
 	/*****************************************/
-	public void consultaVolo (String partenza, String destinazione, LocalTime orario ) {
+	public void consultaVolo (String partenza, String destinazione, LocalTime orario) {
 
 	}
 
