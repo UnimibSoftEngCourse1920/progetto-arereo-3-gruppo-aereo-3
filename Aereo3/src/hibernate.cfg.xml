@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+  
+      <property name="hbm2ddl.auto">validate</property>
+      
+      <property name = "hibernate.dialect">
+         org.hibernate.dialect.MySQLDialect
+      </property>
+      
+      <property name = "hibernate.connection.driver_class">
+         com.mysql.cj.jdbc.Driver
+      </property>
+      
+      <!-- Assume test is the database name -->
+      
+      <property name = "hibernate.connection.url">
+      jdbc:mysql://compagniaaerea3.c6xwpw8kwlvm.us-east-2.rds.amazonaws.com:3306/compagniaaerea?user=root
+      </property>
+      
+      <property name = "hibernate.connection.username">root</property>
+      <property name = "hibernate.connection.password">progettoaereo3</property>
+      
+      <!-- List of XML mapping files -->
+		<mapping resource="Cliente.hbm.xml" />
+		<mapping resource="ClienteFedele.hbm.xml" />
+		<mapping resource="Posto.hbm.xml" />
+		<mapping resource="Prenotazione.hbm.xml" />
+		<mapping resource="Promozione.hbm.xml" />
+		<mapping resource="Volo.hbm.xml" />
+	<!-- property name="show_sql">true</property -->
+            
+   </session-factory>
+</hibernate-configuration>

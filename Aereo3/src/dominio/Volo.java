@@ -1,69 +1,105 @@
+
 package dominio;
 
 
-import java.sql.Time;
-
+import java.util.Date;
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+//import javax.persistence.Transient;
+//
+//@Entity
+//@Table(name="volo")
 public class Volo {
 	
-	private int idVolo;
+//	@Column(name="id_volo")
+	private String idVolo;
+	
+//	@Column(name="destinazione")
 	private String destinazione;
+	
+//	@Column(name="partenza")
 	private String partenza;
-	private Time orarioPartenza;
-	private Time orarioArrivo;
+	
+	//Clark: cambiati i tipi in Date
+//	@Column(name="data_partenza")
+	private Date dataPartenza;
+	
+	//Clark: cambiato in data di ritorno
+//	@Column(name="data_ritorno")
+	private Date dataArrivo;
+	
+//	@Column(name="n_posti")
 	private int numeroPosti;
+	
+//	@Column(name="gate")
 	private String gate;
 	
-	
-	public int getIdVolo() {
+//	@Transient
+	private Promozione promo;
+
+
+	public String getIdVolo() {
 		return idVolo;
 	}
-	public void setIdVolo(int idVolo) {
-		this.idVolo = idVolo;
+	
+	public String getPartenza() {
+		return partenza;
 	}
 	
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
+	}
 	
 	public String getDestinazione() {
 		return destinazione;
 	}
+	
 	public void setDestinazione(String destinazione) {
 		this.destinazione = destinazione;
 	}
 	
-	
-	public Time getOrarioPartenza() {
-		return orarioPartenza;
-	}
-	public void setOrarioPartenza(Time time) {
-		this.orarioPartenza = time;
+	public Date getDataPartenza() {
+		return dataPartenza;
 	}
 	
-	
-	public Time getOrarioArrivo() {
-		return orarioArrivo;
-	}
-	public void setOrarioArrivo(Time time) {
-		this.orarioArrivo = time;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
 	}
 	
+	public Date getOrarioArrivo() {
+		return dataArrivo;
+	}
+	
+	public void setOrarioArrivo(Date dataArrivo) {
+		this.dataArrivo = dataArrivo;
+	}
 	
 	public int getNumeroPosti() {
 		return numeroPosti;
 	}
+	
 	public void setNumeroPosti(int numeroPosti) {
 		this.numeroPosti = numeroPosti;
 	}
 	
-	
 	public String getGate() {
 		return gate;
 	}
+	
 	public void setGate(String gate) {
 		this.gate = gate;
 	}
 	
+	public Promozione getPromo() {
+		return promo;
+	}
+
+	public void setPromo(Promozione promo) {
+		this.promo = promo;
+	}
 	
-	
-	
+	/*****************************************/
 	@Override
 	public boolean equals(Object obj) {
 		Volo v=(Volo) obj;
@@ -74,23 +110,10 @@ public class Volo {
 		if(!(this.getDestinazione().equalsIgnoreCase(v.getDestinazione())))
 			return false;
 
-		if(!(this.getOrarioPartenza().toString().equalsIgnoreCase(v.getOrarioPartenza().toString())))
+		if(!(this.getDataPartenza().toString().equalsIgnoreCase(v.getDataPartenza().toString())))
 			return false;
 
 		return true;
 	}
-	public String getPartenza() {
-		return partenza;
-	}
-	public void setPartenza(String partenza) {
-		this.partenza = partenza;
-	}
-	
-	
-	
-	/*****************************************/
-	
-	
-	
 
 }

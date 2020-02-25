@@ -15,12 +15,18 @@ import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
+
+import controller.Controller;
+import dominio.Volo;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
@@ -85,8 +91,9 @@ public class Home extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws ClassNotFoundException 
 	 */
-	public Home() {
+	public Home() throws ClassNotFoundException, SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 894, 717);
 		contentPane = new JPanel();
@@ -306,6 +313,20 @@ public class Home extends JFrame {
 		gbc_dateChooser_1.gridy = 11;
 		panel_2.add(dateChooser_1, gbc_dateChooser_1);
 		
+		//Creazione volo:
+		/******************************************************/
+		
+		Volo volo = new Volo();
+		volo.setDestinazione(lblAeroportoDiArrivo.getText());
+		volo.setPartenza(lblAeroportoDiPartenza.getText());
+		
+		volo.setOrarioArrivo((Time) dateChooser_1.getDate());
+		volo.setDataPartenza((Time) dateChooser.getDate());
+		Controller.controlloDisponibilità(volo);
+		
+		
+		/****************************************************/
+		
 		lblDataDiRitorno.setVisible(false);
 		dateChooser_1.setVisible(false);
 		
@@ -326,26 +347,28 @@ public class Home extends JFrame {
 					gbc_lblNewLabel_1.gridy = 12;
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				}
-				
-				else if(dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
+				else if(dateChooser_1.isVisible() == true) {
+					if(dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
 					
-					if (lblNewLabel_1 != null)
-						panel_2.remove(lblNewLabel_1);
+						if (lblNewLabel_1 != null)
+							panel_2.remove(lblNewLabel_1);
 					
-					lblNewLabel_1 = new JLabel("Attenzione, le date sono errate !");
-					lblNewLabel_1.setForeground(Color.RED);
-					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-					GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-					gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-					gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-					gbc_lblNewLabel_1.gridx = 3;
-					gbc_lblNewLabel_1.gridy = 12;
-					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+						lblNewLabel_1 = new JLabel("Attenzione, le date sono errate !");
+						lblNewLabel_1.setForeground(Color.RED);
+						lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+						GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+						gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+						gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+						gbc_lblNewLabel_1.gridx = 3;
+						gbc_lblNewLabel_1.gridy = 12;
+						panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+				}
 				}
 				
 				else if (lblNewLabel_1 != null) {
 					panel_2.remove(lblNewLabel_1);
 				}
+		
 				panel_2.revalidate();
 				panel_2.repaint();
 			}
