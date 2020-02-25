@@ -1,13 +1,29 @@
 package dominio;
 
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+//import javax.persistence.Transient;
+//
+//@Entity
+//@Table(name="promozione")
 public class Promozione {
 
+	
+	//Da mappare anche sconto? se si da aggiungere sul database
+//	@Transient
 	private double sconto;
-	private LocalDateTime dataInizio;
-	private LocalDateTime dataFine;
+	
+//	@Column(name="data_inizio")
+	private Date dataInizio;
+	
+//	@Column(name="data_fine")
+	private Date dataFine;
+	
+//	@Column(name="messaggio")
 	private String messaggio;
 	
 
@@ -19,18 +35,18 @@ public class Promozione {
 	}
 	
 	
-	public LocalDateTime getDataInizio() {
+	public Date getDataInizio() {
 		return dataInizio;
 	}
-	public void setDataInizio(LocalDateTime dataInizio) {
+	public void setDataInizio(Date dataInizio) {
 		this.dataInizio = dataInizio;
 	}
 	
 	
-	public LocalDateTime getDataFine() {
+	public Date getDataFine() {
 		return dataFine;
 	}
-	public void setDataFine(LocalDateTime dataFine) {
+	public void setDataFine(Date dataFine) {
 		this.dataFine = dataFine;
 	}
 	

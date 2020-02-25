@@ -1,6 +1,5 @@
 package controller;
 import java.sql.SQLException;
-import java.sql.Time;
 
 import dominio.Cliente;
 import dominio.Volo;
@@ -21,20 +20,20 @@ public class Controller {
 		
 	}
 	
+	
 	public static boolean controlloDisponibilità (Volo voloDaControllare) throws SQLException, ClassNotFoundException {
 
 		return 	 Cliente.consultaVolo(voloDaControllare);
 
-
 	}
-	
-	public static void cambiaPrenotazione(int idPrenotazione, Time orario) {
-
-		try {
-			Cliente.modificaPrenotazione(idPrenotazione, orario);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	
+//	public static void cambiaPrenotazione(int idPrenotazione, Time orario) {
+//
+//		try {
+//			Cliente.modificaPrenotazione(idPrenotazione, orario);
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

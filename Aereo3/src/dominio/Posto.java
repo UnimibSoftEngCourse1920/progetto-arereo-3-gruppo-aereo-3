@@ -1,13 +1,31 @@
 package dominio;
+//
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+//import javax.persistence.Transient;
 
-
+//@Entity
+//@Table(name="posto")
 public class Posto {
 
+	
+//	@Column(name="fila")
 	private int fila;
+	
+//	@Transient
 	private boolean prenotato;
+	
+//	@Column(name="lettera")
 	private char lettera;
+	
+//	@Column(name="prezzo")
 	private double prezzo;
+	
+//	@Column(name="punti")
 	private int punti;
+	
+//	@Column(name="prezzo_punti")
 	private int prezzoPunti;
 	
 	

@@ -2,18 +2,42 @@
 package dominio;
 
 
-import java.time.LocalTime;
-
+import java.util.Date;
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+//import javax.persistence.Transient;
+//
+//@Entity
+//@Table(name="volo")
 public class Volo {
 	
+//	@Column(name="id_volo")
 	private String idVolo;
+	
+//	@Column(name="destinazione")
 	private String destinazione;
+	
+//	@Column(name="partenza")
 	private String partenza;
-	private LocalTime orarioPartenza;
-	private LocalTime orarioArrivo;
+	
+	//Clark: cambiati i tipi in Date
+//	@Column(name="data_partenza")
+	private Date dataPartenza;
+	
+	//Clark: cambiato in data di ritorno
+//	@Column(name="data_ritorno")
+	private Date dataArrivo;
+	
+//	@Column(name="n_posti")
 	private int numeroPosti;
+	
+//	@Column(name="gate")
 	private String gate;
+	
+//	@Transient
 	private Promozione promo;
+
 
 	public String getIdVolo() {
 		return idVolo;
@@ -35,20 +59,20 @@ public class Volo {
 		this.destinazione = destinazione;
 	}
 	
-	public LocalTime getOrarioPartenza() {
-		return orarioPartenza;
+	public Date getDataPartenza() {
+		return dataPartenza;
 	}
 	
-	public void setOrarioPartenza(LocalTime orarioPartenza) {
-		this.orarioPartenza = orarioPartenza;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
 	}
 	
-	public LocalTime getOrarioArrivo() {
-		return orarioArrivo;
+	public Date getOrarioArrivo() {
+		return dataArrivo;
 	}
 	
-	public void setOrarioArrivo(LocalTime orarioArrivo) {
-		this.orarioArrivo = orarioArrivo;
+	public void setOrarioArrivo(Date dataArrivo) {
+		this.dataArrivo = dataArrivo;
 	}
 	
 	public int getNumeroPosti() {
@@ -86,7 +110,7 @@ public class Volo {
 		if(!(this.getDestinazione().equalsIgnoreCase(v.getDestinazione())))
 			return false;
 
-		if(!(this.getOrarioPartenza().toString().equalsIgnoreCase(v.getOrarioPartenza().toString())))
+		if(!(this.getDataPartenza().toString().equalsIgnoreCase(v.getDataPartenza().toString())))
 			return false;
 
 		return true;

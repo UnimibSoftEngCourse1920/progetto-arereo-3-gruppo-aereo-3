@@ -4,13 +4,33 @@ package dominio;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+
+
+//@Entity
+//@Table(name="cliente")
 public class Cliente {
 
+	//TODO: sistemare il database, diversificare il cliente fedele
+	
+//	@Column(name="cod_cliente")
 	private String codCliente;
+	
+//	@Column(name="nome")
 	private String nome;
+	
+//	@Column(name="cognome")
 	private String cognome;
+	
+//	@Column(name="data_di_nascita")
 	private LocalDateTime dataDiNascita;
+	
+//	@Column(name="email")
 	private String email;
+	
+//	@Column(name="indirizzo")
 	private String indirizzo;
 	//			private CartaDiCredito cartaDiCredito;
 
@@ -76,6 +96,12 @@ public class Cliente {
 	public void modificaPrenotazione (Prenotazione prenotazione, LocalTime nuovoOrario) {
 		
 	}
+
+	public static boolean consultaVolo(Volo voloDaControllare) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 //	/****************************************/
 //	/**

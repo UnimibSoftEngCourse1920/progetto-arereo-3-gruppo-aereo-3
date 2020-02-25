@@ -3,12 +3,27 @@ package dominio;
 
 import java.time.LocalDateTime;
 
+//import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+//@Entity
+//@Table(name="cliente")
 public class ClienteFedele extends Cliente {
 
+	
+//	@Column(name="punti")
 	private int punti;
+	
+//	@Column(name="data_iscrizione")
 	private LocalDateTime dataIscrizione;
+	
+//	@Transient
 	private LocalDateTime ultimoBiglietto;
-	private boolean infedele;
+	
+//	@Column(name="fedele")
+	private boolean fedele;
 //    private static PagaStrategy strategy;
     
     
@@ -36,11 +51,11 @@ public class ClienteFedele extends Cliente {
 	}
 	
 	
-	public boolean isInfedele() {
-		return infedele;
+	public boolean isFedele() {
+		return fedele;
 	}
 	public void setInfedele(boolean stato) {
-		this.infedele = stato;
+		this.fedele = stato;
 	}
 	
 	
