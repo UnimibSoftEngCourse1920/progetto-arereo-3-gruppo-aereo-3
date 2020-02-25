@@ -1,6 +1,10 @@
-/controller/
 /gui/
 /dominio/
+<<<<<<< HEAD
 /Utils.class
 /lib/
 /META-INF/
+=======
+/META-INF/
+/controller/
+>>>>>>> refs/heads/Prova
