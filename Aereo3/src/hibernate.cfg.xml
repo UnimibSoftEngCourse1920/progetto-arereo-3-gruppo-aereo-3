@@ -23,12 +23,12 @@
       <property name = "hibernate.connection.password">progettoaereo3</property>
       
       <!-- List of XML mapping files -->
-		<mapping resource="Cliente.hbm.xml" />
+	<!--  	<mapping resource="Cliente.hbm.xml" />
 		<mapping resource="ClienteFedele.hbm.xml" />
 		<mapping resource="Posto.hbm.xml" />
 		<mapping resource="Prenotazione.hbm.xml" />
 		<mapping resource="Promozione.hbm.xml" />
-		<mapping resource="Volo.hbm.xml" />
+		<mapping resource="Volo.hbm.xml" />-->
 	<!-- property name="show_sql">true</property -->
             
    </session-factory>

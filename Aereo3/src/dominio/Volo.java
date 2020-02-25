@@ -3,39 +3,39 @@ package dominio;
 
 
 import java.util.Date;
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-//import javax.persistence.Transient;
-//
-//@Entity
-//@Table(name="volo")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="volo")
 public class Volo {
 	
-//	@Column(name="id_volo")
+	@Column(name="id_volo")
 	private String idVolo;
 	
-//	@Column(name="destinazione")
+	@Column(name="destinazione")
 	private String destinazione;
 	
-//	@Column(name="partenza")
+	@Column(name="partenza")
 	private String partenza;
 	
 	//Clark: cambiati i tipi in Date
-//	@Column(name="data_partenza")
+	@Column(name="data_partenza")
 	private Date dataPartenza;
 	
 	//Clark: cambiato in data di ritorno
-//	@Column(name="data_ritorno")
+	@Column(name="data_ritorno")
 	private Date dataArrivo;
 	
-//	@Column(name="n_posti")
+	@Column(name="n_posti")
 	private int numeroPosti;
 	
-//	@Column(name="gate")
+	@Column(name="gate")
 	private String gate;
 	
-//	@Transient
+	@Transient
 	private Promozione promo;
 
 

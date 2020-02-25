@@ -3,27 +3,27 @@ package dominio;
 
 import java.util.Date;
 
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-//import javax.persistence.Transient;
-//
-//@Entity
-//@Table(name="promozione")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="promozione")
 public class Promozione {
 
 	
 	//Da mappare anche sconto? se si da aggiungere sul database
-//	@Transient
+	@Transient
 	private double sconto;
 	
-//	@Column(name="data_inizio")
+	@Column(name="data_inizio")
 	private Date dataInizio;
 	
-//	@Column(name="data_fine")
+	@Column(name="data_fine")
 	private Date dataFine;
 	
-//	@Column(name="messaggio")
+	@Column(name="messaggio")
 	private String messaggio;
 	
 

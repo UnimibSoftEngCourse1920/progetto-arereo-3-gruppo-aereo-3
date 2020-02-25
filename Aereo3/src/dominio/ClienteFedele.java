@@ -3,26 +3,26 @@ package dominio;
 
 import java.time.LocalDateTime;
 
-//import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-//@Entity
-//@Table(name="cliente")
+@Entity
+@Table(name="cliente")
 public class ClienteFedele extends Cliente {
 
 	
-//	@Column(name="punti")
+	@Column(name="punti")
 	private int punti;
 	
-//	@Column(name="data_iscrizione")
+	@Column(name="data_iscrizione")
 	private LocalDateTime dataIscrizione;
 	
-//	@Transient
+	@Transient
 	private LocalDateTime ultimoBiglietto;
 	
-//	@Column(name="fedele")
+	@Column(name="fedele")
 	private boolean fedele;
 //    private static PagaStrategy strategy;
     
