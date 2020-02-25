@@ -6,7 +6,10 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 
 
 @Entity
@@ -14,7 +17,7 @@ import javax.persistence.Table;
 public class Cliente {
 
 	//TODO: sistemare il database, diversificare il cliente fedele
-	
+	@Id
 	@Column(name="cod_cliente")
 	private String codCliente;
 	
@@ -98,7 +101,8 @@ public class Cliente {
 	}
 
 	public static boolean consultaVolo(Volo voloDaControllare) {
-		// TODO Auto-generated method stub
+	
+		
 		return false;
 	}
 

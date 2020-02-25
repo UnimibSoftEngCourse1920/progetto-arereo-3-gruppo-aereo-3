@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -14,7 +15,7 @@ public class Prenotazione {
 
 	//TODO Controllare se è da cambiare la classe o il database, manca punti totali
 	// qui manca id della prenotazione, le classi devono essere la copia (o con elementi in più) del database
-	
+	@Id
 	@Column(name="id_prenotazione")
 	private int id;
 	

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -16,7 +17,9 @@ public class Promozione {
 	//Da mappare anche sconto? se si da aggiungere sul database
 	@Transient
 	private double sconto;
-	
+	@Id
+	@Column(name="id_promozione")
+	private int idPromozione;
 	@Column(name="data_inizio")
 	private Date dataInizio;
 	

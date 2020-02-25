@@ -2,6 +2,7 @@ package dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -9,7 +10,7 @@ import javax.persistence.Transient;
 @Table(name="posto")
 public class Posto {
 
-	
+	@Id
 	@Column(name="fila")
 	private int fila;
 	
@@ -19,6 +20,8 @@ public class Posto {
 	@Column(name="lettera")
 	private char lettera;
 	
+	@Column(name="id_volo")
+	private char idVolo;
 	@Column(name="prezzo")
 	private double prezzo;
 	

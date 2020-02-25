@@ -16,8 +16,8 @@
       <!-- Assume test is the database name -->
       
       <property name = "hibernate.connection.url">
-      jdbc:mysql://compagniaaerea3.c6xwpw8kwlvm.us-east-2.rds.amazonaws.com:3306/compagniaaerea?user=root
-      </property>
+jdbc:mysql://compagniaaerea3.c6xwpw8kwlvm.us-east-2.rds.amazonaws.com:3306/?user=root 
+</property>
       
       <property name = "hibernate.connection.username">root</property>
       <property name = "hibernate.connection.password">progettoaereo3</property>
