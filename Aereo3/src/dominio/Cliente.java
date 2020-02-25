@@ -4,33 +4,33 @@ package dominio;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
-//@Entity
-//@Table(name="cliente")
+@Entity
+@Table(name="cliente")
 public class Cliente {
 
 	//TODO: sistemare il database, diversificare il cliente fedele
 	
-//	@Column(name="cod_cliente")
+	@Column(name="cod_cliente")
 	private String codCliente;
 	
-//	@Column(name="nome")
+	@Column(name="nome")
 	private String nome;
 	
-//	@Column(name="cognome")
+	@Column(name="cognome")
 	private String cognome;
 	
-//	@Column(name="data_di_nascita")
+	@Column(name="data_di_nascita")
 	private LocalDateTime dataDiNascita;
 	
-//	@Column(name="email")
+	@Column(name="email")
 	private String email;
 	
-//	@Column(name="indirizzo")
+	@Column(name="indirizzo")
 	private String indirizzo;
 	//			private CartaDiCredito cartaDiCredito;
 
