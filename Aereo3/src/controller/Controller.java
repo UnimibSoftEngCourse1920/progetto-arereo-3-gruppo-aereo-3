@@ -1,15 +1,14 @@
 package controller;
 import java.sql.SQLException;
+import java.util.List;
 
+import  dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
 import dominio.Volo;
 import gui.Home;
 
 
 public class Controller {
-	
-
-
 	
 
 	public static void main (String... args) {
@@ -26,6 +25,12 @@ public class Controller {
 		return 	 Cliente.consultaVolo(voloDaControllare);
 
 	}
+	
+	public static List<Volo> getListaVoli(){
+		return GestioneVoloDatabase.getListaVoliDisponibili();
+		
+	}
+
 //	
 //	public static void cambiaPrenotazione(int idPrenotazione, Time orario) {
 //
