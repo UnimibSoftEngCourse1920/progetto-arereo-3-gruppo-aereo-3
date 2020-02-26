@@ -5,17 +5,14 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name = "cliente")
+@MappedSuperclass
 public class ClienteFedele extends Cliente {
-
-	@Id
-	@JoinColumn(name = "cod_cliente", referencedColumnName = "cod_cliente")
-	private Cliente cliente;
 
 	@Column(name = "punti")
 	private int punti;

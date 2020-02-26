@@ -1,6 +1,7 @@
 
 package dominio;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -37,7 +38,7 @@ public class Cliente {
 
 	//data in cui il cliente è diventato infedele (dopo due anni che non acquista biglietti)
 	@Column(name = "infedele")
-	private LocalDateTime infedele;
+	private LocalDate infedele;
 
 	public String getCodCliente() {
 		return codCliente;
@@ -51,11 +52,11 @@ public class Cliente {
 		this.fedele = fedele;
 	}
 
-	public LocalDateTime getInfedele() {
+	public LocalDate getInfedele() {
 		return infedele;
 	}
 
-	public void setInfedele(LocalDateTime infedele) {
+	public void setInfedele(LocalDate infedele) {
 		this.infedele = infedele;
 	}
 

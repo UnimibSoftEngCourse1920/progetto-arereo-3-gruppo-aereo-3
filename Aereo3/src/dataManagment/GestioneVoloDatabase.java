@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import dominio.Cliente;
 import dominio.Volo;
 
 public class GestioneVoloDatabase {
@@ -27,13 +28,17 @@ public class GestioneVoloDatabase {
 	
 	//Clark:TEST LETTURA VOLI -> FUNZIONA
 	
-//	public static void main(String [] args) {
-//		EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDB");
-//		EntityManager entityManager = factory.createEntityManager();		
-//		
-//		String jpql = "SELECT v FROM Volo as v ";
-//		Query query = entityManager.createQuery(jpql);
-//		List<Volo> voli = query.getResultList();
-//		System.out.println(voli);
-//	}
+	public static void main(String [] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDB");
+		EntityManager entityManager = factory.createEntityManager();		
+		
+		String jpql = "SELECT v FROM Cliente as v";
+		Query query = entityManager.createQuery(jpql);
+		List<Cliente> clienti = query.getResultList();
+		System.out.println("Lista Clienti :");
+		for(Cliente c : clienti)
+		{
+			System.out.println(c.getCognome()+" "+c.getNome());
+		}
+	}
 }
