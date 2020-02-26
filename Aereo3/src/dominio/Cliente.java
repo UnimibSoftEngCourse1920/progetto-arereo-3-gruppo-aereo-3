@@ -6,12 +6,24 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.DiscriminatorType;
 
 @Entity
 @Table(name = "cliente")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="fedele",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="0")
 public class Cliente {
 
 	@Id
@@ -33,8 +45,6 @@ public class Cliente {
 	@Column(name = "indirizzo")
 	private String indirizzo;
 	
-	@Column(name="fedele")
-	private boolean fedele = false;
 
 	//data in cui il cliente è diventato infedele (dopo due anni che non acquista biglietti)
 	@Column(name = "infedele")
@@ -44,13 +54,13 @@ public class Cliente {
 		return codCliente;
 	}
 
-	public boolean isFedele() {
+	/*public boolean isFedele() {
 		return fedele;
 	}
 
 	public void setFedele(boolean fedele) {
 		this.fedele = fedele;
-	}
+	}*/
 
 	public LocalDate getInfedele() {
 		return infedele;

@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dominio.Cliente;
+import dominio.ClienteFedele;
 import dominio.Volo;
 
 public class GestioneVoloDatabase {
@@ -37,6 +38,15 @@ public class GestioneVoloDatabase {
 		List<Cliente> clienti = query.getResultList();
 		System.out.println("Lista Clienti :");
 		for(Cliente c : clienti)
+		{
+			System.out.println(c.getCognome()+" "+c.getNome());
+		}
+		
+		String jpql2 = "SELECT f FROM ClienteFedele as f";
+		Query query2 = entityManager.createQuery(jpql2);
+		List<ClienteFedele> clientiFedeli = query2.getResultList();
+		System.out.println("Lista Clienti Fedeli :");
+		for(ClienteFedele c : clientiFedeli)
 		{
 			System.out.println(c.getCognome()+" "+c.getNome());
 		}

@@ -1,8 +1,10 @@
 package dominio;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -11,17 +13,19 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@MappedSuperclass
+@Entity
+@Table(name="cliente")
+@DiscriminatorValue("1")
 public class ClienteFedele extends Cliente {
 
 	@Column(name = "punti")
 	private int punti;
 
 	@Column(name = "data_iscrizione")
-	private LocalDateTime dataIscrizione;
+	private LocalDate dataIscrizione;
 
-	@Transient
-	private LocalDateTime ultimoBiglietto;
+	//@Transient
+	//private LocalDateTime ultimoBiglietto;
 
 //    private static PagaStrategy strategy;
 
@@ -33,15 +37,15 @@ public class ClienteFedele extends Cliente {
 		this.punti = punti;
 	}
 
-	public LocalDateTime getDataIscrizione() {
+	public LocalDate getDataIscrizione() {
 		return dataIscrizione;
 	}
 
-	public void setDataIscrizione(LocalDateTime dataIscrizione) {
+	public void setDataIscrizione(LocalDate dataIscrizione) {
 		this.dataIscrizione = dataIscrizione;
 	}
 
-	public LocalDateTime getUltimoBiglietto() {
+	/*public LocalDateTime getUltimoBiglietto() {
 		return ultimoBiglietto;
 	}
 
