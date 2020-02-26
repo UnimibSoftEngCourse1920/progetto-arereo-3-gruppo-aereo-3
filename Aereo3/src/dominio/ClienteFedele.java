@@ -2,6 +2,7 @@ package dominio;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +18,10 @@ public class ClienteFedele extends Cliente {
 	private int punti;
 	
 	@Column(name="data_iscrizione")
-	private LocalDateTime dataIscrizione;
+	private Date dataIscrizione;
 	
 	@Transient
-	private LocalDateTime ultimoBiglietto;
+	private Date ultimoBiglietto;
 	
 	@Column(name="fedele")
 	private boolean fedele;
@@ -35,18 +36,18 @@ public class ClienteFedele extends Cliente {
 	}
 	
 	
-	public LocalDateTime getDataIscrizione() {
+	public Date getDataIscrizione() {
 		return dataIscrizione;
 	}
-	public void setDataIscrizione(LocalDateTime dataIscrizione) {
+	public void setDataIscrizione(Date dataIscrizione) {
 		this.dataIscrizione = dataIscrizione;
 	}
 	
 	
-	public LocalDateTime getUltimoBiglietto() {
+	public Date getUltimoBiglietto() {
 		return ultimoBiglietto;
 	}
-	public void setUltimoBiglietto(LocalDateTime ultimoBiglietto) {
+	public void setUltimoBiglietto(Date ultimoBiglietto) {
 		this.ultimoBiglietto = ultimoBiglietto;
 	}
 	
