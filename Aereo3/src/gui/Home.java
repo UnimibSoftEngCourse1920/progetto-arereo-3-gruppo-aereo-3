@@ -30,6 +30,8 @@ import java.sql.Time;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextField;
+import java.awt.FlowLayout;
 
 public class Home extends JFrame {
 	
@@ -56,22 +58,6 @@ public class Home extends JFrame {
 	private JDateChooser dateChooser_1;
 	private Date now = new Date(); 
 	private JPanel registrationPanel;
-	private JPanel panel;
-	private JLabel lblNewLabel;
-	private JPanel menuAdmin;
-	private JButton btnAggiungiVolo;
-	private JButton btnEliminaVolo;
-	private Component verticalStrut_7;
-	private JButton btnModificaVolo;
-	private Component verticalStrut_6;
-	private Component verticalStrut_8;
-	private Component verticalStrut_9;
-	private JButton btnCreaPromozione;
-	private Component verticalStrut_10;
-	private JButton btnEliminaPromozione;
-	private Component verticalStrut_11;
-	private JButton btnLog;
-	private JPanel panel_5;
 	/**
 	 * Launch the application.
 	 */
@@ -348,6 +334,10 @@ public class Home extends JFrame {
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				}
 				else if(dateChooser_1.isVisible() == true) {
+					
+					if (lblNewLabel_1 != null)
+						panel_2.remove(lblNewLabel_1);
+					
 					if(dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
 					
 						if (lblNewLabel_1 != null)
@@ -362,12 +352,27 @@ public class Home extends JFrame {
 						gbc_lblNewLabel_1.gridx = 3;
 						gbc_lblNewLabel_1.gridy = 12;
 						panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-				}
+					}
+					
+					else {
+						contentPane.removeAll();
+						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel));
+						contentPane.repaint();
+						contentPane.revalidate();
+					}
 				}
 				
-				else if (lblNewLabel_1 != null) {
-					panel_2.remove(lblNewLabel_1);
+				else {
+					
+					if (lblNewLabel_1 != null)
+						panel_2.remove(lblNewLabel_1);
+					
+					contentPane.removeAll();
+					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel));
+					contentPane.repaint();
+					contentPane.revalidate();
 				}
+				
 		
 				panel_2.revalidate();
 				panel_2.repaint();
