@@ -28,6 +28,16 @@ public class Accesso {
 		gbl_logInPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		logInPanel.setLayout(gbl_logInPanel);
 		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setForeground(Color.RED);
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.gridx = 1;
+		gbc_lblNewLabel_1.gridy = 14;
+		logInPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
 		Component verticalStrut_6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
 		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
@@ -109,11 +119,28 @@ public class Accesso {
 		JButton btnLogIn_1 = new JButton("LOG IN");
 		btnLogIn_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				contentPane.removeAll();
-				contentPane.add(AreaUtente.esegui(contentPane, homePanel));
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
+				
+				if (textField.getText().equals("")) { //aggiungere errore email non trovata nel database
+					if (lblNewLabel_1.getText() != "")
+						lblNewLabel_1.setText("");
+					lblNewLabel_1.setText("Attenzione, mail errata !");
+				}
+				
+				else if (textField_1.getText().equals("")) { //aggiungere errore password non trovata nel database
+					if (lblNewLabel_1.getText() != "")
+						lblNewLabel_1.setText("");
+					lblNewLabel_1.setText("Attenzione, password errata !");
+					
+				}
+				else{
+					if (lblNewLabel_1.getText() != "")
+						lblNewLabel_1.setText("");
+					contentPane.removeAll();
+					contentPane.add(AreaUtente.esegui(contentPane, homePanel));
+					contentPane.repaint();
+					contentPane.revalidate();
+					}
+				}
 		});
 		btnLogIn_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		GridBagConstraints gbc_btnLogIn_1 = new GridBagConstraints();

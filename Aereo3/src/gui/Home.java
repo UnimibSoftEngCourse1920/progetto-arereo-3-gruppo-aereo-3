@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import javax.swing.JPasswordField;
 
 public class Home extends JFrame {
 	
@@ -385,7 +386,5 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridx = 1;
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
-		
-		
 		}
 }
