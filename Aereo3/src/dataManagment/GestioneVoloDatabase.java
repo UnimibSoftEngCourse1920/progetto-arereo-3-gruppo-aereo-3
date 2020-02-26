@@ -10,21 +10,37 @@ import javax.persistence.Query;
 import dominio.Cliente;
 import dominio.Volo;
 
-public class GestioneVoloDatabase {
+public class GestioneVoloDatabase extends GestioneDatabase {
 		
 	
 	public static List <Volo> getListaVoliDisponibili(){
 				
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("CilacapUnit");
-		EntityManager entityManager = factory.createEntityManager();		
-		
+	
 		String jpql = "SELECT v FROM Volo as v ";
 		Query query = entityManager.createQuery(jpql);
 		List<Volo> voli = query.getResultList();
 		return voli;
 	}
 	
-	//Clark:TEST LETTURA VOLI -> FUNZIONA
+	
+	public static List<String> getDestinazioniDisponibili(){
+				
+	
+		String jpql = "SELECT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
+		Query query = entityManager.createQuery(jpql);
+		List<String> destinazioni = query.getResultList();
+		return destinazioni;
+	}
+	
+	public static List<String> getPartenzeDisponibili(){
+		
+		
+		String jpql = "SELECT a.denominazione FROM Volo v, Aereoporto a WHERE v.partenza=a.idAereoporto ";
+		Query query = entityManager.createQuery(jpql);
+		List<String> partenze = query.getResultList();
+		return partenze;
+	}
+	//Clark:DA USARE PER DEBUG
 
 //	public static void main(String [] args) {
 //		EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDB");
