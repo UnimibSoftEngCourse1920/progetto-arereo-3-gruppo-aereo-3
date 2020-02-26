@@ -27,7 +27,7 @@ public class Volo {
 	private Date dataPartenza;
 	
 	//Clark: cambiato in data di ritorno
-	@Column(name="data_ritorno")
+	@Column(name="data_arrivo")
 	private Date dataArrivo;
 	
 	@Column(name="n_posti")
