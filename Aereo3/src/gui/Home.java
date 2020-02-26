@@ -28,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
@@ -219,14 +220,17 @@ public class Home extends JFrame {
 		gbc_lblAeroportoDiPartenza.gridy = 5;
 		panel_2.add(lblAeroportoDiPartenza, gbc_lblAeroportoDiPartenza);
 		
+		List <String> listaVoli = Controller.getPartenzeVoliDisponibili();
+		
 		comboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 3;
 		gbc_comboBox.gridy = 5;
-		comboBox.addItem("Milano");
-		comboBox.addItem("Napoli");
+		for(String v : listaVoli) {
+			comboBox.addItem(v);
+		}
 		panel_2.add(comboBox, gbc_comboBox);
 		
 		Component verticalStrut_3 = Box.createVerticalStrut(20);
@@ -253,13 +257,17 @@ public class Home extends JFrame {
 		gbc_lblAeroportoDiArrivo.gridy = 8;
 		panel_2.add(lblAeroportoDiArrivo, gbc_lblAeroportoDiArrivo);
 		
+		List <String> listaDestinazioni = Controller.getDestinazioniVoliDisponibili();
+		
 		comboBox_1 = new JComboBox();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.gridx = 3;
 		gbc_comboBox_1.gridy = 8;
-		comboBox_1.addItem("Milano");
+		for(String v : listaDestinazioni) {
+			comboBox_1.addItem(v);
+		}
 		panel_2.add(comboBox_1, gbc_comboBox_1);
 		
 		lblDataDiPartenza = new JLabel("Data di Partenza:");
@@ -307,7 +315,7 @@ public class Home extends JFrame {
 		volo.setDestinazione(lblAeroportoDiArrivo.getText());
 		volo.setPartenza(lblAeroportoDiPartenza.getText());
 		
-		volo.setOrarioArrivo( dateChooser_1.getDate());
+		volo.setOrarioArrivo( dateChooser_1.getDate()); //ritorno
 		volo.setDataPartenza( dateChooser.getDate());
 		Controller.controlloDisponibilità(volo);
 		
@@ -357,7 +365,7 @@ public class Home extends JFrame {
 					
 					else {
 						contentPane.removeAll();
-						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel));
+						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo));
 						contentPane.repaint();
 						contentPane.revalidate();
 					}
@@ -369,7 +377,7 @@ public class Home extends JFrame {
 						panel_2.remove(lblNewLabel_1);
 					
 					contentPane.removeAll();
-					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel));
+					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
