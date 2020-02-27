@@ -1,10 +1,8 @@
 package dominio;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -12,18 +10,16 @@ import javax.persistence.Transient;
 @Table(name="posto")
 public class Posto {
 
-	@Id
-	@Column(name="fila")
-	private int fila;
+	@EmbeddedId
+    private PostoCombinedKey chiaveComposta=new PostoCombinedKey();
+
 	
 	@Transient
 	private boolean prenotato;
+
 	
-	@Column(name="lettera")
-	private char lettera;
+
 	
-	@Column(name="id_volo")
-	private char idVolo;
 	@Column(name="prezzo")
 	private double prezzo;
 	
@@ -34,14 +30,15 @@ public class Posto {
 	private int prezzoPunti;
 	
 	
-	public int getFila() {
-		return fila;
-	}
-	public void setFile(int file) {
-		this.fila = file;
-	}
 	
 	
+	
+	public PostoCombinedKey getChiaveComposta() {
+		return chiaveComposta;
+	}
+	public void setChiaveComposta(PostoCombinedKey chiaveComposta) {
+		this.chiaveComposta = chiaveComposta;
+	}
 	public boolean isPrenotato() {
 		return prenotato;
 	}
@@ -50,12 +47,7 @@ public class Posto {
 	}
 	
 	
-	public char getLettera() {
-		return lettera;
-	}
-	public void setLettera(char lettera) {
-		this.lettera = lettera;
-	}
+	
 	
 	
 	public double getPrezzo() {

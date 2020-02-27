@@ -17,16 +17,17 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		Posto postoDaInserire =null;
 		
 		int fila = 0;
-		for (int i = 0; i < volo.getNumeroPosti() - 1; i++) {
+		for (int i = 0; i < volo.getNumeroPosti() ; i++) {
 			fila++;
 			for (int j = 0; j < 5; j++) {
 				postoDaInserire = new Posto();
-				postoDaInserire.setFile(fila);
-				postoDaInserire.setLettera((char) (65 + j));
+				postoDaInserire.getChiaveComposta().setFile(fila);
+				postoDaInserire.getChiaveComposta().setLettera((char) (65 + j));
 				postoDaInserire.setPrezzo(50.00);
 				postoDaInserire.setPrenotato(false);
 				postoDaInserire.setPrezzoPunti(500);
 				postoDaInserire.setPunti(50);
+				postoDaInserire.getChiaveComposta().setIdVolo(volo.getIdVolo());
 				listaPosti.add(postoDaInserire);
 				i++;
 				if (i >= volo.getNumeroPosti()) {
@@ -36,14 +37,14 @@ public class GestionePostoDatabase extends GestioneDatabase {
 
 		}
 			
-			
-		for(Posto posto:listaPosti) {
 		entityManager.getTransaction().begin();
+		for(Posto posto:listaPosti) {
 		entityManager.persist(posto);
-		entityManager.getTransaction().commit();
-		entityManager.getTransaction().rollback();
+//		entityManager.close();	
+//		entityManager.getTransaction().rollback();
 		}
-		entityManager.close();	
+		entityManager.getTransaction().commit();
+		entityManager.clear();
 	}
 	
 	public static List <Posto> getListaPostiDisponibili(Volo volo){
@@ -53,6 +54,11 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		List<Posto> listaPosti = query.getResultList();
 	
 		return listaPosti;
+		
+	}
+	
+	public static void  aggiornaPostiPrenotati(List <Posto> listaPostiDaAggiornare) {
+		
 		
 	}
 	

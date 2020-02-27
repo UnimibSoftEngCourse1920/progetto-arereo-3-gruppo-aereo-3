@@ -25,7 +25,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	public static List<String> getDestinazioniDisponibili(){
 				
 	
-		String jpql = "SELECT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
+		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
 		Query query = entityManager.createQuery(jpql);
 		List<String> destinazioni = query.getResultList();
 		return destinazioni;
@@ -78,8 +78,9 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		entityManager.getTransaction().begin();
 		entityManager.persist(volo);
 		entityManager.getTransaction().commit();
-		entityManager.getTransaction().rollback();
-		entityManager.close();
+		entityManager.clear();
+
+//		entityManager.getTransaction().rollback();
 	}
 	//Clark:DA USARE PER DEBUG
 

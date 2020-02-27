@@ -20,8 +20,6 @@ public class ClienteFedele extends Cliente {
 	@Transient
 	private Date ultimoBiglietto;
 	
-	@Column(name="fedele")
-	private boolean fedele;
 
 //    private static PagaStrategy strategy;
 

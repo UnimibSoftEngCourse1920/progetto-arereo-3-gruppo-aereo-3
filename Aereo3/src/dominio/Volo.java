@@ -17,7 +17,7 @@ public class Volo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_volo")
-	private String idVolo;
+	private int idVolo;
 	
 	@Column(name="destinazione")
 	private String destinazione;
@@ -43,7 +43,7 @@ public class Volo {
 	private Promozione promo;
 
 
-	public String getIdVolo() {
+	public int getIdVolo() {
 		return idVolo;
 	}
 	
