@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.hibernate.mapping.Array;
-
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
@@ -54,13 +52,13 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
 
 		String datapartenza2 = outputFormatter.format(volo.getDataPartenza());
-		String dataarrivo2 = outputFormatter.format(volo.getOrarioArrivo());
+		String dataarrivo2 = outputFormatter.format(volo.getDataArrivo());
 
 		
 		for(Volo v: listaVoli) {
 			
 			String datapartenza1 = outputFormatter.format(v.getDataPartenza());
-			String dataarrivo1= outputFormatter.format(v.getOrarioArrivo());
+			String dataarrivo1= outputFormatter.format(v.getDataArrivo());
 			if(datapartenza1.equals(datapartenza2) && dataarrivo1.equals(dataarrivo2))
 				if(v.getDestinazione().equals(volo.getDestinazione()))
 					if(v.getDestinazione().contentEquals(volo.getDestinazione()))
@@ -73,6 +71,15 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		return listaInfoVoli;
 		
+	}
+	
+	public static void insertVolo(Volo volo) {
+		
+		entityManager.getTransaction().begin();
+		entityManager.persist(volo);
+		entityManager.getTransaction().commit();
+		entityManager.getTransaction().rollback();
+		entityManager.close();
 	}
 	//Clark:DA USARE PER DEBUG
 

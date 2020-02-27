@@ -320,7 +320,7 @@ public class Home extends JFrame {
 		volo.setDestinazione(lblAeroportoDiArrivo.getText());
 		volo.setPartenza(lblAeroportoDiPartenza.getText());
 		
-		volo.setOrarioArrivo( dateChooser_1.getDate());
+		volo.setDataArrivo( dateChooser_1.getDate());
 		volo.setDataPartenza( dateChooser.getDate());
 		Controller.controlloDisponibilità(volo);
 		

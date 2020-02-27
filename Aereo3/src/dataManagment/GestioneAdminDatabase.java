@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import dominio.Admin;
 
-public class GestioneAdmin extends GestioneDatabase{
+public class GestioneAdminDatabase extends GestioneDatabase{
 
 
 	public static boolean isAmministratore(Admin probabileAdmin){

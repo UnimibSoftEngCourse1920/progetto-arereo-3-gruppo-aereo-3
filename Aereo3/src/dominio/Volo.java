@@ -5,6 +5,8 @@ package dominio;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -13,6 +15,7 @@ import javax.persistence.Transient;
 @Table(name="volo")
 public class Volo {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_volo")
 	private String idVolo;
 	
@@ -68,11 +71,11 @@ public class Volo {
 		this.dataPartenza = dataPartenza;
 	}
 	
-	public Date getOrarioArrivo() {
+	public Date getDataArrivo() {
 		return dataArrivo;
 	}
 	
-	public void setOrarioArrivo(Date dataArrivo) {
+	public void setDataArrivo(Date dataArrivo) {
 		this.dataArrivo = dataArrivo;
 	}
 	
