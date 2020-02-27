@@ -34,6 +34,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JPasswordField;
+import javax.swing.JSpinner;
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JSlider;
 
 public class Home extends JFrame {
 	
@@ -53,6 +58,7 @@ public class Home extends JFrame {
 	private JComboBox comboBox;
 	private JLabel lblAeroportoDiArrivo;
 	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
 	private JLabel lblDataDiPartenza;
 	private JLabel lblNewLabel_1;
 	private JLabel lblDataDiRitorno;
@@ -60,6 +66,10 @@ public class Home extends JFrame {
 	private JDateChooser dateChooser_1;
 	private Date now = new Date(); 
 	private JPanel registrationPanel;
+	private boolean andataRitorno;
+	private JLabel lblNewLabel;
+	private JPanel panel_8;
+	private JPanel panel_9;
 	/**
 	 * Launch the application.
 	 */
@@ -134,7 +144,7 @@ public class Home extends JFrame {
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
@@ -164,6 +174,7 @@ public class Home extends JFrame {
 		rdbtnSoloAndata.setSelected(true);
 		rdbtnSoloAndata.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				andataRitorno = false;
 				lblDataDiRitorno.setVisible(false);
 				dateChooser_1.setVisible(false);
 				panel_2.revalidate();
@@ -183,6 +194,7 @@ public class Home extends JFrame {
 		gbc_rdbtnAndataERitorno.gridy = 1;
 		rdbtnAndataERitorno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				andataRitorno=true;
 				lblDataDiRitorno.setVisible(true);
 				dateChooser_1.setVisible(true);
 				panel_2.revalidate();
@@ -208,6 +220,28 @@ public class Home extends JFrame {
 		gbc_verticalStrut_4.gridx = 3;
 		gbc_verticalStrut_4.gridy = 2;
 		panel_2.add(verticalStrut_4, gbc_verticalStrut_4);
+		
+		lblNewLabel = new JLabel("Numero Passeggeri:");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 3;
+		panel_2.add(lblNewLabel, gbc_lblNewLabel);
+		
+		comboBox_2 = new JComboBox();
+		for(int i = 1;i<4;i++) 
+			comboBox_2.addItem(i);
+		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
+		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_2.gridx = 3;
+		gbc_comboBox_2.gridy = 3;
+		panel_2.add(comboBox_2, gbc_comboBox_2);
+		
+		int value = comboBox_2.getItemCount();
 		
 		lblAeroportoDiPartenza = new JLabel("Aeroporto di Partenza:");
 		lblAeroportoDiPartenza.setForeground(Color.WHITE);
@@ -342,15 +376,10 @@ public class Home extends JFrame {
 					gbc_lblNewLabel_1.gridy = 12;
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				}
-				else if(dateChooser_1.isVisible() == true) {
+				else if(dateChooser_1.isVisible() == true && dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
 					
 					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
-					
-					if(dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
-					
-						if (lblNewLabel_1 != null)
-							panel_2.remove(lblNewLabel_1);
 					
 						lblNewLabel_1 = new JLabel("Attenzione, le date sono errate !");
 						lblNewLabel_1.setForeground(Color.RED);
@@ -362,14 +391,7 @@ public class Home extends JFrame {
 						gbc_lblNewLabel_1.gridy = 12;
 						panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 					}
-					
-					else {
-						contentPane.removeAll();
-						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo));
-						contentPane.repaint();
-						contentPane.revalidate();
-					}
-				}
+				
 				
 				else {
 					
@@ -377,7 +399,7 @@ public class Home extends JFrame {
 						panel_2.remove(lblNewLabel_1);
 					
 					contentPane.removeAll();
-					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo));
+					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, andataRitorno, value));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
@@ -394,5 +416,21 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridx = 1;
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
+		
+		panel_8 = new JPanel();
+		panel_8.setBackground(Color.BLUE);
+		contentPane.add(panel_8, "name_1158551504937600");
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		panel_9 = new JPanel();
+		panel_9.setBackground(Color.BLUE);
+		panel_8.add(panel_9, BorderLayout.WEST);
+		GridBagLayout gbl_panel_9 = new GridBagLayout();
+		gbl_panel_9.columnWidths = new int[]{0};
+		gbl_panel_9.rowHeights = new int[]{0};
+		gbl_panel_9.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_panel_9.rowWeights = new double[]{Double.MIN_VALUE};
+		panel_9.setLayout(gbl_panel_9);
 		}
 }
+

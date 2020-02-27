@@ -33,7 +33,7 @@ import dominio.Volo;
 
 public class DettaglioVolo {
 	
-	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo, boolean andataRitorno, int value) {
 		
 		//TODO: Metodo controller per prendere i voli
 		List <Volo> listaVoli = Controller.getListaVoli();
@@ -65,7 +65,7 @@ public class DettaglioVolo {
 		JPanel panel_6 = new JPanel();
 		panel_6.setBounds(100, 100, 894, 717);
 		panel_6.setBackground(Color.BLUE);
-		contentPane.add(panel_6, "name_1038618259728500");
+		contentPane.add(panel_6);
 		panel_6.setLayout(new BorderLayout(0, 0));
 	
 		
@@ -76,6 +76,14 @@ public class DettaglioVolo {
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnContinua = new JButton("Continua");
+		btnContinua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(ElencoPasseggeri.esegui(contentPane, value));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		btnContinua.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		panel_8.add(btnContinua, BorderLayout.EAST);
 		
