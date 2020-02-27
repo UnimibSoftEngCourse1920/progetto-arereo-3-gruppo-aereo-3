@@ -2,16 +2,21 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Font;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ElencoPasseggeri {
-	static JPanel esegui(JPanel contentPane, int value) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6) {
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
 		contentPane.add(panel_8, "name_1158551504937600");
@@ -26,6 +31,31 @@ public class ElencoPasseggeri {
 		gbl_panel_9.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_9.setLayout(gbl_panel_9);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.BLUE);
+		panel_8.add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnNewButton = new JButton("Continua");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel.add(btnNewButton, BorderLayout.EAST);
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(panel_6);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel.add(btnBack, BorderLayout.WEST);
 		
 		JLabel [] etichette = new JLabel[value*3];
 		JTextField [] campi = new JTextField [value*2];
