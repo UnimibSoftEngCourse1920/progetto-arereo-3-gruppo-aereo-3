@@ -1,15 +1,11 @@
 package dominio;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,11 +17,14 @@ public class ClienteFedele extends Cliente {
 	@Column(name = "punti")
 	private int punti;
 
-	@Column(name = "data_iscrizione")
-	private LocalDate dataIscrizione;
+	@Column(name="data_iscrizione")
+	private Date dataIscrizione;
 
-	//@Transient
-	//private LocalDateTime ultimoBiglietto;
+	@Transient
+	private Date ultimoBiglietto;
+	
+	@Column(name="fedele")
+	private boolean fedele;
 
 //    private static PagaStrategy strategy;
 
@@ -36,34 +35,20 @@ public class ClienteFedele extends Cliente {
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-
-	public LocalDate getDataIscrizione() {
+	
+	
+	public Date getDataIscrizione() {
 		return dataIscrizione;
 	}
+	public void setDataIscrizione(Date dataIscrizione) {
 
-	public void setDataIscrizione(LocalDate dataIscrizione) {
 		this.dataIscrizione = dataIscrizione;
 	}
+	
+	
+	public Date getUltimoBiglietto() {
+		// da sistemare
+		return null;
 
-	/*public LocalDateTime getUltimoBiglietto() {
-		return ultimoBiglietto;
-	}
-
-	public void setUltimoBiglietto(LocalDateTime ultimoBiglietto) {
-		this.ultimoBiglietto = ultimoBiglietto;
-	}
-
-//	public static PagaStrategy getStrategy() {
-//		return strategy;
-//	}
-//	public static void setStrategy(PagaStrategy strategy) {
-//		ClienteFedele.strategy = strategy;
-//	}
-//    
-
-	/*************************************/
-//	public void notify (String scadenza, List<Cliente> listaCliente) {
-//		
-//	}
-
+}
 }

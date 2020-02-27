@@ -153,6 +153,7 @@ public class Cliente {
 		return false;
 	}
 
+
 //	/****************************************/
 //	/**
 //	 * @throws ClassNotFoundException ***************************************/
@@ -246,6 +247,7 @@ public class Cliente {
 //		}
 //		return false;
 //	
+
 
 	/****************************************/
 
