@@ -1,18 +1,19 @@
 package dataManagment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import dominio.Cliente;
+import org.hibernate.mapping.Array;
+
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
 		
-	
+
 	public static List <Volo> getListaVoliDisponibili(){
 				
 	
@@ -39,6 +40,39 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		Query query = entityManager.createQuery(jpql);
 		List<String> partenze = query.getResultList();
 		return partenze;
+	}
+	
+	
+	
+	public static List<Volo> getListInfo(Volo volo){
+		
+		List<Volo> listaVoli=getListaVoliDisponibili();
+		List<String> listaPartenze=getPartenzeDisponibili();
+		List<String> listaDestinazioni=getDestinazioniDisponibili();
+		List<Volo> listaInfoVoli=new ArrayList<Volo>();
+
+		DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
+
+		String datapartenza2 = outputFormatter.format(volo.getDataPartenza());
+		String dataarrivo2 = outputFormatter.format(volo.getOrarioArrivo());
+
+		
+		for(Volo v: listaVoli) {
+			
+			String datapartenza1 = outputFormatter.format(v.getDataPartenza());
+			String dataarrivo1= outputFormatter.format(v.getOrarioArrivo());
+			if(datapartenza1.equals(datapartenza2) && dataarrivo1.equals(dataarrivo2))
+				if(v.getDestinazione().equals(volo.getDestinazione()))
+					if(v.getDestinazione().contentEquals(volo.getDestinazione()))
+						listaInfoVoli.add(v);
+//			{
+//				listaPartenze.add(v.getPartenza());
+//				listaDestinazioni.add(v.getDestinazione());
+//			}
+		}
+		
+		return listaInfoVoli;
+		
 	}
 	//Clark:DA USARE PER DEBUG
 

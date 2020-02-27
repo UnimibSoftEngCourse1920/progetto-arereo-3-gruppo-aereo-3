@@ -18,4 +18,18 @@ private String denominazione;
 @Column(name="paese")
 private String paese;
 
+public String getIdAereoporto() {
+	return idAereoporto;
+}
+
+public String getDenominazione() {
+	return denominazione;
+}
+
+public String getPaese() {
+	return paese;
+}
+
+
+
 }

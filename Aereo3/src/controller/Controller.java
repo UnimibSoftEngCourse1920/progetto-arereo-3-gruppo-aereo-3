@@ -3,7 +3,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dataManagment.GestioneAdmin;
 import  dataManagment.GestioneVoloDatabase;
+import dominio.Admin;
 import dominio.Cliente;
 import dominio.Volo;
 import gui.Home;
@@ -15,9 +17,9 @@ public class Controller {
 	public static void main (String... args) {
 
 		System.out.println("Main da chiamare all'eseguibile");
-//		Home.main(args);
-		getDestinazioniVoliDisponibili();
-		getPartenzeVoliDisponibili();
+		Home.main(args);
+//		getDestinazioniVoliDisponibili();
+//		getPartenzeVoliDisponibili();
 	}
 	
 	
@@ -32,6 +34,11 @@ public class Controller {
 		
 	}
 	
+	public static List<Object> getInfoVoli(Volo volo){
+		
+		return
+		
+	}
 	
 	//ritorna lista di destinazioni
 	public static List<String> getDestinazioniVoliDisponibili(){
@@ -47,7 +54,13 @@ public class Controller {
 		return GestioneVoloDatabase.getPartenzeDisponibili();
 	}
 	
-//	
+	//controlla se è amministratore
+	
+	public static boolean controlloLoginAmministratore(Admin presuntoAdmin) {
+		
+		return GestioneAdmin.isAmministratore(presuntoAdmin);
+	}
+	
 //	public static void cambiaPrenotazione(int idPrenotazione, Time orario) {
 //
 //		try {
