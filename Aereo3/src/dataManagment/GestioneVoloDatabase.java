@@ -27,6 +27,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	
 		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
 		Query query = entityManager.createQuery(jpql);
+
 		List<String> destinazioni = query.getResultList();
 		return destinazioni;
 	}
