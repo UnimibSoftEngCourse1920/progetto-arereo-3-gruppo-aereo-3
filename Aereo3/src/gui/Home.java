@@ -70,6 +70,11 @@ public class Home extends JFrame {
 	private JLabel lblNewLabel;
 	private JPanel panel_8;
 	private JPanel panel_9;
+	private JPanel posti;
+	private JPanel sceltaPostiPanel;
+	private JLabel lblScegliereIPosti;
+	private Component verticalStrut_6;
+	private JComboBox comboBox_3;
 	/**
 	 * Launch the application.
 	 */
@@ -174,6 +179,8 @@ public class Home extends JFrame {
 		rdbtnSoloAndata.setSelected(true);
 		rdbtnSoloAndata.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(lblNewLabel_1 != null)
+					panel_2.remove(lblNewLabel_1);;
 				andataRitorno = false;
 				lblDataDiRitorno.setVisible(false);
 				dateChooser_1.setVisible(false);
@@ -194,6 +201,8 @@ public class Home extends JFrame {
 		gbc_rdbtnAndataERitorno.gridy = 1;
 		rdbtnAndataERitorno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(lblNewLabel_1 != null)
+					panel_2.remove(lblNewLabel_1);
 				andataRitorno=true;
 				lblDataDiRitorno.setVisible(true);
 				dateChooser_1.setVisible(true);
@@ -232,16 +241,17 @@ public class Home extends JFrame {
 		panel_2.add(lblNewLabel, gbc_lblNewLabel);
 		
 		comboBox_2 = new JComboBox();
-		for(int i = 1;i<4;i++) 
-			comboBox_2.addItem(i);
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_2.gridx = 3;
 		gbc_comboBox_2.gridy = 3;
+		for(int i = 1;i<4;i++) {
+			Integer valore = i;
+			comboBox_2.addItem(valore);
+			}
+		//int value = comboBox_2.getItemCount();
 		panel_2.add(comboBox_2, gbc_comboBox_2);
-		
-		int value = comboBox_2.getItemCount();
 		
 		lblAeroportoDiPartenza = new JLabel("Aeroporto di Partenza:");
 		lblAeroportoDiPartenza.setForeground(Color.WHITE);
@@ -398,6 +408,9 @@ public class Home extends JFrame {
 					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
 					
+					System.out.println(comboBox_2.getSelectedItem());
+					Integer value_1 = (Integer)comboBox_2.getSelectedItem();
+					int value = value_1.intValue();
 					contentPane.removeAll();
 					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, andataRitorno, value));
 					contentPane.repaint();
@@ -417,6 +430,8 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
 		
+		//Nuova interfaccia
+		
 		panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
 		contentPane.add(panel_8, "name_1158551504937600");
@@ -431,6 +446,69 @@ public class Home extends JFrame {
 		gbl_panel_9.columnWeights = new double[]{Double.MIN_VALUE};
 		gbl_panel_9.rowWeights = new double[]{Double.MIN_VALUE};
 		panel_9.setLayout(gbl_panel_9);
+		
+		posti = new JPanel();
+		posti.setBackground(Color.BLUE);
+		contentPane.add(posti, "name_1170960813504800");
+		posti.setLayout(new BorderLayout(0, 0));
+		
+		sceltaPostiPanel = new JPanel();
+		sceltaPostiPanel.setBackground(Color.BLUE);
+		posti.add(sceltaPostiPanel, BorderLayout.WEST);
+		GridBagLayout gbl_sceltaPostiPanel = new GridBagLayout();
+		gbl_sceltaPostiPanel.columnWidths = new int[]{0, 0};
+		gbl_sceltaPostiPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_sceltaPostiPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_sceltaPostiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		sceltaPostiPanel.setLayout(gbl_sceltaPostiPanel);
+		
+		lblScegliereIPosti = new JLabel("Scegliere i posti:");
+		lblScegliereIPosti.setForeground(Color.WHITE);
+		lblScegliereIPosti.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblScegliereIPosti = new GridBagConstraints();
+		gbc_lblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
+		gbc_lblScegliereIPosti.gridx = 0;
+		gbc_lblScegliereIPosti.gridy = 0;
+		sceltaPostiPanel.add(lblScegliereIPosti, gbc_lblScegliereIPosti);
+		
+		verticalStrut_6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
+		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_6.gridx = 0;
+		gbc_verticalStrut_6.gridy = 1;
+		sceltaPostiPanel.add(verticalStrut_6, gbc_verticalStrut_6);
+		
+		JLabel [] etichette = new JLabel[value];
+		JComboBox [] box = new JComboBox[value*2];
+		GridBagConstraints [] format = new GridBagConstraints[etichette.length*box.length];
+		
+		int u = 0;
+		int y = 2;
+		int z = 0;
+		int k = 0;
+		int h = 0;
+		
+		for(int i = 0; i<value;i++) {
+			etichette[u] = new JLabel("Passeggero " + (i+1));
+			etichette[u].setForeground(Color.WHITE);
+			etichette[u].setFont(new Font("Tahoma", Font.PLAIN, 30));
+			format[z] = new GridBagConstraints();
+			format[z].anchor = GridBagConstraints.WEST;
+			format[z].insets = new Insets(0, 0, 5, 5);
+			format[z].gridx = k;
+			format[z].gridy = y;
+			sceltaPostiPanel.add(etichette[u], format[z]);
+			y++;
+			u++;
+			z++;
+			
+			box[h] = new JComboBox();
+			format[z] = new GridBagConstraints();
+			format[z].fill = GridBagConstraints.HORIZONTAL;
+			format[z].gridx = 0;
+			format[z].gridy = 2;
+			sceltaPostiPanel.add(comboBox_3, gbc_comboBox_3);
 		}
+	}
 }
 
