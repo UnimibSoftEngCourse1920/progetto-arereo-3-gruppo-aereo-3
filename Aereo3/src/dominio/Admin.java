@@ -20,17 +20,19 @@ public class Admin {
 	
 	@Column(name="password")
 	private String password;
+
+	public String getIdAdmin() {
+		return idAdmin;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
 	
-	
-	public void setIdAdmin(String idAdmin) {
-		this.idAdmin = idAdmin;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
 	
 	

@@ -1,25 +1,29 @@
 package dominio;
 
-
 import java.util.Date;
 
+
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@MappedSuperclass
+@Entity
+@Table(name="cliente")
+@DiscriminatorValue("1")
 public class ClienteFedele extends Cliente {
 
 	@Column(name = "punti")
 	private int punti;
-	
+
 	@Column(name="data_iscrizione")
 	private Date dataIscrizione;
-	
 
 	@Transient
 	private Date ultimoBiglietto;
 	
+
 	@Column(name="fedele")
 	private boolean fedele;
 
@@ -44,25 +48,8 @@ public class ClienteFedele extends Cliente {
 	
 	
 	public Date getUltimoBiglietto() {
+		// da sistemare
+		return null;
 
-		return ultimoBiglietto;
-	}
-	public void setUltimoBiglietto(Date ultimoBiglietto) {
-
-		this.ultimoBiglietto = ultimoBiglietto;
-	}
-
-//	public static PagaStrategy getStrategy() {
-//		return strategy;
-//	}
-//	public static void setStrategy(PagaStrategy strategy) {
-//		ClienteFedele.strategy = strategy;
-//	}
-//    
-
-	/*************************************/
-//	public void notify (String scadenza, List<Cliente> listaCliente) {
-//		
-//	}
-
+}
 }

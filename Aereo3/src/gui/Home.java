@@ -358,8 +358,7 @@ public class Home extends JFrame {
 		Volo volo = new Volo();
 		volo.setDestinazione(lblAeroportoDiArrivo.getText());
 		volo.setPartenza(lblAeroportoDiPartenza.getText());
-		
-		volo.setOrarioArrivo( dateChooser_1.getDate()); //ritorno
+		volo.setDataArrivo( dateChooser_1.getDate());
 		volo.setDataPartenza( dateChooser.getDate());
 		Controller.controlloDisponibilità(volo);
 		
@@ -478,7 +477,7 @@ public class Home extends JFrame {
 		gbc_verticalStrut_6.gridy = 1;
 		sceltaPostiPanel.add(verticalStrut_6, gbc_verticalStrut_6);
 		
-		JLabel [] etichette = new JLabel[value];
+		/*JLabel [] etichette = new JLabel[value];
 		JComboBox [] box = new JComboBox[value*2];
 		GridBagConstraints [] format = new GridBagConstraints[etichette.length*box.length];
 		
@@ -508,7 +507,7 @@ public class Home extends JFrame {
 			format[z].gridx = 0;
 			format[z].gridy = 2;
 			sceltaPostiPanel.add(comboBox_3, gbc_comboBox_3);
-		}
+		}*/
 	}
 }
 

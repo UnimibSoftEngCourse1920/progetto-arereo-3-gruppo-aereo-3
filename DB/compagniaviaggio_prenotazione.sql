@@ -26,7 +26,7 @@ CREATE TABLE `prenotazione` (
   `id_prenotazione` int NOT NULL AUTO_INCREMENT,
   `pagato` tinyint(1) NOT NULL,
   `prezzo_totale` double NOT NULL,
-  `cod_cliente` char(7) NOT NULL,
+  `cod_cliente` char(7) DEFAULT NULL,
   `id_volo` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_prenotazione`),
   CONSTRAINT `fk_cliente`

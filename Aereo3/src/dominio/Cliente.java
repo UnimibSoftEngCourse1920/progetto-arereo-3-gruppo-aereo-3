@@ -6,12 +6,24 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.DiscriminatorType;
 
 @Entity
 @Table(name = "cliente")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="fedele",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="0")
 public class Cliente {
 
 	@Id
@@ -25,7 +37,7 @@ public class Cliente {
 	private String cognome;
 
 	@Column(name = "data_di_nascita")
-	private LocalDateTime dataDiNascita;
+	private LocalDate dataDiNascita;
 
 	@Column(name = "email")
 	private String email;
@@ -33,24 +45,37 @@ public class Cliente {
 	@Column(name = "indirizzo")
 	private String indirizzo;
 	
-	@Column(name="fedele")
-	private boolean fedele = false;
-
 	//data in cui il cliente è diventato infedele (dopo due anni che non acquista biglietti)
 	@Column(name = "infedele")
 	private LocalDate infedele;
+	
+	@Column(name = "password")
+	private String password;
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setCodCliente(String codCliente)
+	{
+		this.codCliente = codCliente;
+	}
+	
 	public String getCodCliente() {
 		return codCliente;
 	}
 
-	public boolean isFedele() {
+	/*public boolean isFedele() {
 		return fedele;
 	}
 
 	public void setFedele(boolean fedele) {
 		this.fedele = fedele;
-	}
+	}*/
 
 	public LocalDate getInfedele() {
 		return infedele;
@@ -76,12 +101,12 @@ public class Cliente {
 		this.cognome = cognome;
 	}
 
-	public LocalDateTime getDataDiNascita() {
+	public LocalDate getDataDiNascita() {
 		return dataDiNascita;
 	}
 
-	public void setDataDiNascita(LocalDateTime dataDiNascita) {
-		this.dataDiNascita = dataDiNascita;
+	public void setDataDiNascita(LocalDate localDate) {
+		this.dataDiNascita = localDate;
 	}
 
 	public String getEmail() {
@@ -99,6 +124,8 @@ public class Cliente {
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
+	
+	
 
 	/*****************************************/
 	public void consultaVolo(String partenza, String destinazione, LocalTime orario) {
