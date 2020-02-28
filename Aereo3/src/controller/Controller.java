@@ -2,8 +2,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import dataManagment.GestioneAdminDatabase;
@@ -12,7 +11,6 @@ import dataManagment.GestioneClienteDatabase;
 import dataManagment.GestionePostoDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
 import dataManagment.GestioneVoloDatabase;
-import dominio.Admin;
 import dominio.Cliente;
 import dominio.Posto;
 import dominio.Prenotazione;
@@ -27,11 +25,11 @@ public class Controller {
 		System.out.println("Main da chiamare all'eseguibile");
 		Home.main(args);
 
-		//Per debug
+//		Per debug
 //		Volo volo=new Volo();
 //		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "14-09-2021 8:00";
-//		 String ritorno="3-11-2021 20:00";
+//		 String strdate2 = "14-09-2021 21:30";
+//		 String ritorno="3-11-2021 22:30";
 //		volo.setDataPartenza(dateformat2.parse(strdate2));
 //		volo.setDataArrivo(dateformat2.parse(ritorno));
 //		volo.setGate("B1");	
