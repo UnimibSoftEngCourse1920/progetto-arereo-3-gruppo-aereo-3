@@ -9,9 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-//@Entity
-//@Table(name="cliente")
-//@DiscriminatorValue("1")
+@Entity
+@Table(name="cliente")
+@DiscriminatorValue("1")
 public class ClienteFedele extends Cliente {
 
 	@Column(name = "punti")
@@ -22,10 +22,6 @@ public class ClienteFedele extends Cliente {
 
 	@Transient
 	private Date ultimoBiglietto;
-	
-
-	@Column(name="fedele")
-	private boolean fedele;
 
 //    private static PagaStrategy strategy;
 

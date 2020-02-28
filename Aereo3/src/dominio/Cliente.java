@@ -2,7 +2,6 @@
 package dominio;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -13,25 +12,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.InheritanceType;
 import javax.persistence.DiscriminatorType;
 
 @Entity
 @Table(name = "cliente")
-//@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(
-//    name="fedele",
-//    discriminatorType=DiscriminatorType.STRING
-//)
-//@DiscriminatorValue(value="0")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="fedele",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="0")
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cod_cliente")
-	private String codCliente;
+	private int codCliente;
 
 	@Column(name = "nome")
 	private String nome;
@@ -62,23 +60,10 @@ public class Cliente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public void setCodCliente(String codCliente)
-	{
-		this.codCliente = codCliente;
-	}
 	
-	public String getCodCliente() {
+	public int getCodCliente() {
 		return codCliente;
 	}
-
-	/*public boolean isFedele() {
-		return fedele;
-	}
-
-	public void setFedele(boolean fedele) {
-		this.fedele = fedele;
-	}*/
 
 	public LocalDate getInfedele() {
 		return infedele;

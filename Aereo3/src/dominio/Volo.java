@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="volo")
 public class Volo {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_volo")
