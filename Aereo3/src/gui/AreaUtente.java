@@ -336,7 +336,7 @@ public class AreaUtente {
 		btnAreaAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+				contentPane.add(AccessoAdmin.esegui(contentPane, areaUtente, homePanel));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
