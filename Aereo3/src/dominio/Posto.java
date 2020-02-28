@@ -22,6 +22,7 @@ public class Posto {
 	
 	@Column(name="id_volo")
 	private char idVolo;
+	
 	@Column(name="prezzo")
 	private double prezzo;
 	
