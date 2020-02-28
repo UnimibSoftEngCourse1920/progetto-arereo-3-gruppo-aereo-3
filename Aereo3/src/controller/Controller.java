@@ -81,9 +81,9 @@ public class Controller {
 
 	// controlla se è amministratore
 
-	public static boolean controlloLoginAmministratore(Admin presuntoAdmin) {
+	public static boolean controlloLoginAmministratore(String username, String password) {
 
-		return GestioneAdminDatabase.isAmministratore(presuntoAdmin);
+		return GestioneAdminDatabase.isAmministratore(username,password);
 	}
 
 	public static void insertVolo(Volo volo) {
