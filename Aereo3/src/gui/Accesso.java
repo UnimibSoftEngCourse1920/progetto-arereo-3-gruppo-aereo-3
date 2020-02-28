@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controller.Controller;
+
 public class Accesso {
 	
 	static JPanel esegui(JPanel contentPane, JPanel homePanel, JPanel registrationPanel) {
@@ -120,21 +122,20 @@ public class Accesso {
 		btnLogIn_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (textField.getText().equals("")) { //aggiungere errore email non trovata nel database
+				if(textField.getText().equals("") || textField_1.getText().equals("")) {
 					if (lblNewLabel_1.getText() != "")
 						lblNewLabel_1.setText("");
-					lblNewLabel_1.setText("Attenzione, mail errata !");
+					lblNewLabel_1.setText("Errore !");
 				}
 				
-				else if (textField_1.getText().equals("")) { //aggiungere errore password non trovata nel database
+				else if (Controller.login(textField.getText(), textField_1.getText()) == false) { //aggiungere errore email non trovata nel database
 					if (lblNewLabel_1.getText() != "")
 						lblNewLabel_1.setText("");
-					lblNewLabel_1.setText("Attenzione, password errata !");
-					
+					lblNewLabel_1.setText("Errore !");
 				}
+				
 				else{
-					if (lblNewLabel_1.getText() != "")
-						lblNewLabel_1.setText("");
+					Controller.login(textField.getText(), textField_1.getText());
 					contentPane.removeAll();
 					contentPane.add(AreaUtente.esegui(contentPane, homePanel));
 					contentPane.repaint();

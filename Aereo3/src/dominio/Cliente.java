@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
@@ -18,15 +20,16 @@ import javax.persistence.DiscriminatorType;
 
 @Entity
 @Table(name = "cliente")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name="fedele",
-    discriminatorType=DiscriminatorType.STRING
-)
-@DiscriminatorValue(value="0")
+//@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(
+//    name="fedele",
+//    discriminatorType=DiscriminatorType.STRING
+//)
+//@DiscriminatorValue(value="0")
 public class Cliente {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cod_cliente")
 	private String codCliente;
 

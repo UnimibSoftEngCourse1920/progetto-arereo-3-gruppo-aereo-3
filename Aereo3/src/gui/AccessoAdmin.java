@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import controller.Controller;
+import dominio.Admin;
+
 public class AccessoAdmin {
 	static JPanel esegui(JPanel contentPane, JPanel areaUtente, JPanel homePanel) {
 		JPanel adminLogIn = new JPanel();
@@ -179,23 +182,29 @@ public class AccessoAdmin {
 		gbc_btnNewButton.gridy = 11;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("")) {
+				Admin a = new Admin();
+				a.setUsername(textField.getText());
+				a.setPassword(passwordField.getText());
+				if(passwordField.getText().equals("") || textField.getText().equals("")) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
-					lblNewLabel.setText("Attenzione, email errata !");
+					lblNewLabel.setText("Errore !");
 				}
 				
-				else if(passwordField.getText().equals("")) {
+				else if(Controller.controlloLoginAmministratore(a) == false) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
-					lblNewLabel.setText("Attenzione, password errata !");
+					lblNewLabel.setText("Errore !");
+					System.out.println(Controller.controlloLoginAmministratore(a));
 				}
 				
 				else {
-				contentPane.removeAll();
-				contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
-				contentPane.repaint();
-				contentPane.revalidate();
+					Controller.controlloLoginAmministratore(a);
+					System.out.println(Controller.controlloLoginAmministratore(a));
+					contentPane.removeAll();
+					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+					contentPane.repaint();
+					contentPane.revalidate();
 				}
 			}
 		});

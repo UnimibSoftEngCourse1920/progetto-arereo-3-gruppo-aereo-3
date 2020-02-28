@@ -9,9 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name="cliente")
-@DiscriminatorValue("1")
+//@Entity
+//@Table(name="cliente")
+//@DiscriminatorValue("1")
 public class ClienteFedele extends Cliente {
 
 	@Column(name = "punti")

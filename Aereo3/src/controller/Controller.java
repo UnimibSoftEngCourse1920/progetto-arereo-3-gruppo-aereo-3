@@ -74,7 +74,7 @@ public class Controller {
 
 	// ritorna lista di partenze
 	public static List<String> getPartenzeVoliDisponibili() {
-		System.out.println(GestioneVoloDatabase.getPartenzeDisponibili());
+		//System.out.println(GestioneVoloDatabase.getPartenzeDisponibili());
 		return GestioneVoloDatabase.getPartenzeDisponibili();
 	}
 

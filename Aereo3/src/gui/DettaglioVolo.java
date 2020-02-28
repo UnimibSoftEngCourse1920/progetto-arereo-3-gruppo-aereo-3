@@ -50,7 +50,7 @@ public class DettaglioVolo {
 			rows[i][1] = v.getPartenza();
 			rows[i][2] = v.getDestinazione();
 			rows[i][3] = v.getDataPartenza();
-			rows[i][4] = v.getOrarioArrivo();
+			rows[i][4] = v.getDataArrivo();
 			i++;
 		}
 		
@@ -114,7 +114,7 @@ public class DettaglioVolo {
 			StringBuilder stringa = new StringBuilder();
 			stringa.append("ID Volo " + v.getIdVolo());
 			stringa.append(", Partenza " + v.getDataPartenza());
-			stringa.append(", Arrivo " + v.getOrarioArrivo());
+			stringa.append(", Arrivo " + v.getDataArrivo());
 			comboBox.addItem(stringa.toString());
 			System.out.println(stringa.toString());
 		}
