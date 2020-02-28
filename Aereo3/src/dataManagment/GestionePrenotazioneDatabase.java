@@ -1,5 +1,7 @@
 package dataManagment;
 
+import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -31,6 +33,17 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		entityManager.persist(p);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
+	}
+	
+	public static List<Prenotazione> getPrenotazioniInScadenza(){
+		Date currentDate = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 4);
+		Date expiry = cal.getTime();
+		String jpql = "SELECT p FROM Prenotazione as p JOIN Volo as v ON p.id_volo = v.id_volo  WHERE v.data_partenza = " + expiry.toString();
+		Query query = entityManager.createQuery(jpql);
+		List<Prenotazione> prenotazioni = query.getResultList();
+		return prenotazioni;
 	}
 	
 }
