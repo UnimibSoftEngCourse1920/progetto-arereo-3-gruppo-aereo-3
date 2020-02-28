@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 //import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -24,21 +25,21 @@ public class Controller {
 	public static void main(String... args) throws ParseException {
 
 		System.out.println("Main da chiamare all'eseguibile");
-		Home.main(args);
+		//Home.main(args);
 
-		// Per debug
-//		Volo volo=new Volo();
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "15-09-2021 8:00";
-//		 String ritorno="7-11-2021 20:00";
-//		volo.setDataPartenza(dateformat2.parse(strdate2));
-//		volo.setDataArrivo(dateformat2.parse(ritorno));
-//		volo.setGate("B1");	
-//		volo.setDestinazione("NA08");
-//		volo.setPartenza("BS75");
-//		volo.setNumeroPosti(10);
-//		volo.setPromo(null);
-//		insertVolo(volo);
+		//Per debug
+		Volo volo=new Volo();
+		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
+		 String strdate2 = "14-09-2021 8:00";
+		 String ritorno="3-11-2021 20:00";
+		volo.setDataPartenza(dateformat2.parse(strdate2));
+		volo.setDataArrivo(dateformat2.parse(ritorno));
+		volo.setGate("B1");	
+		volo.setDestinazione("NA08");
+		volo.setPartenza("BS75");
+		volo.setNumeroPosti(10);
+		volo.setPromo(null);
+		insertVolo(volo);
 	}
 
 	public static boolean controlloDisponibilità(Volo voloDaControllare) throws SQLException, ClassNotFoundException {

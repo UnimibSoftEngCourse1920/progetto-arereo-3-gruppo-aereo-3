@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.Query;
 import dominio.Cliente;
 import dominio.ClienteFedele;
-import dominio.Volo;
 
 public class GestioneClienteDatabase extends GestioneDatabase {
 	
