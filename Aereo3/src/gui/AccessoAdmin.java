@@ -20,7 +20,7 @@ import controller.Controller;
 import dominio.Admin;
 
 public class AccessoAdmin {
-	static JPanel esegui(JPanel contentPane, JPanel areaUtente, JPanel homePanel) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel) {
 		JPanel adminLogIn = new JPanel();
 		adminLogIn.setBounds(100, 100, 894, 717);
 		adminLogIn.setBackground(Color.BLUE);
@@ -227,7 +227,7 @@ public class AccessoAdmin {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(areaUtente);
+				contentPane.add(homePanel);
 				contentPane.repaint();
 				contentPane.revalidate();
 				}
