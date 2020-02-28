@@ -99,7 +99,7 @@ public class Controller {
 
 	}
 
-	public static List<Prenotazione> getPrenotazionePerCliente(String codCliente) {
+	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
 	}
@@ -121,12 +121,4 @@ public class Controller {
 		return GestioneClienteDatabase.login(email, pass);
 	}
 }
-//	public static void cambiaPrenotazione(int idPrenotazione, Time orario) {
-//
-//		try {
-//			Cliente.modificaPrenotazione(idPrenotazione, orario);
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+

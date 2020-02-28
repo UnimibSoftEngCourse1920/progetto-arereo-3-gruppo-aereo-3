@@ -182,25 +182,25 @@ public class AccessoAdmin {
 		gbc_btnNewButton.gridy = 11;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Admin a = new Admin();
-				a.setUsername(textField.getText());
-				a.setPassword(passwordField.getText());
+//				Admin a = new Admin();
+//				a.setUsername(textField.getText());
+//				a.setPassword(passwordField.getText());
 				if(passwordField.getText().equals("") || textField.getText().equals("")) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
 					lblNewLabel.setText("Errore !");
 				}
 				
-				else if(Controller.controlloLoginAmministratore(a) == false) {
+				else if(Controller.controlloLoginAmministratore(textField.getText(),passwordField.getText()) == false) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
 					lblNewLabel.setText("Errore !");
-					System.out.println(Controller.controlloLoginAmministratore(a));
+//					System.out.println(Controller.controlloLoginAmministratore(a));
 				}
 				
 				else {
-					Controller.controlloLoginAmministratore(a);
-					System.out.println(Controller.controlloLoginAmministratore(a));
+//					Controller.controlloLoginAmministratore(a);
+//					System.out.println(Controller.controlloLoginAmministratore(a));
 					contentPane.removeAll();
 					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
 					contentPane.repaint();
