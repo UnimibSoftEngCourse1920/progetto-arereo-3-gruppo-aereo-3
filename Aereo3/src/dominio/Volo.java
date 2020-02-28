@@ -16,8 +16,8 @@ import javax.persistence.Transient;
 public class Volo {
 	
 	@Id
-	@Column(name="id_volo")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_volo")
 	private int idVolo;
 	
 	@Column(name="destinazione")
@@ -72,11 +72,11 @@ public class Volo {
 		this.dataPartenza = dataPartenza;
 	}
 	
-	public Date getOrarioArrivo() {
+	public Date getDataArrivo() {
 		return dataArrivo;
 	}
 	
-	public void setOrarioArrivo(Date dataArrivo) {
+	public void setDataArrivo(Date dataArrivo) {
 		this.dataArrivo = dataArrivo;
 	}
 	

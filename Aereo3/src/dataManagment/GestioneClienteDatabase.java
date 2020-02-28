@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.transaction.Transaction;
-
 import dominio.Cliente;
 
 public class GestioneClienteDatabase extends GestioneDatabase {
-	
 	
 
 	public static void main(String [] args) {
@@ -40,6 +37,20 @@ public class GestioneClienteDatabase extends GestioneDatabase {
         //boolean login = login("test@llfefe.com", "pwd123");
 		//System.out.println("Login = "+login);
 	}
+//	public static void main(String [] args) {
+//		
+//        Cliente cliente = new Cliente();
+//        cliente.setCodCliente("cod35");
+//        cliente.setEmail("aaab@llfefe.com");
+//        cliente.setCognome("ciccio");
+//        LocalDate localDate = LocalDate.of(2016, 1, 1);
+//        cliente.setDataDiNascita(localDate);
+//        cliente.setIndirizzo("ciaociao");
+//        cliente.setNome("alex");
+//        //insertCliente(cliente);
+//        boolean login = login("ale.fiore@example.com", "pwd123");
+//		System.out.println("Login = "+login);
+//	}
 	
 	public static void insertCliente(Cliente cliente)
 	{
