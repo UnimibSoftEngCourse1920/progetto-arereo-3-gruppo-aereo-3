@@ -22,6 +22,7 @@ public class ClienteFedele extends Cliente {
 
 	@Transient
 	@Column(name="data_ultimo_biglietto")
+
 	private Date ultimoBiglietto;
 
 //    private static PagaStrategy strategy;

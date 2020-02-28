@@ -11,58 +11,34 @@ import dominio.ClienteFedele;
 public class GestioneClienteDatabase extends GestioneDatabase {
 	
 
-	public static void main(String [] args) {
-		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
-		
-        Cliente cliente = new Cliente();
-        Cliente cliente2 = new Cliente();
-        cliente.setEmail("test322@llfefe.com");
-        cliente.setCognome("ciccio");
-        LocalDate localDate = LocalDate.of(2016, 1, 1);
-        cliente.setDataDiNascita(localDate);
-        cliente.setIndirizzo("ciaociao");
-        cliente.setNome("alex");
-        cliente.setPassword("pwd123");
-        
-        cliente2.setEmail("test367@llfefe.com");
-        cliente2.setCognome("ciccio");
-        cliente2.setDataDiNascita(localDate);
-        cliente2.setIndirizzo("ciaociao");
-        cliente2.setNome("alex");
-        cliente2.setPassword("pwd123");
-        
-        clienti.add(cliente);
-        clienti.add(cliente2);
-        //insertClienti(clienti);
-        //insertCliente(cliente);
-        //boolean login = login("test@llfefe.com", "pwd123");
-		//System.out.println("Login = "+login);
-        
-        List<Cliente> listaClienti = getClienti();
-        List<ClienteFedele> clientiFedeli = getClientiFedeli();
-        
-        for(Cliente c : listaClienti)
-        {
-        	System.out.println("Codice Cliente : "+c.getCodCliente());
-        }
-        for(ClienteFedele c : clientiFedeli)
-        {
-        	System.out.println("Codice Cliente Fedele : "+c.getCodCliente());
-        }
-	}
+
 //	public static void main(String [] args) {
+//		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
 //		
 //        Cliente cliente = new Cliente();
-//        cliente.setCodCliente("cod35");
-//        cliente.setEmail("aaab@llfefe.com");
+//        Cliente cliente2 = new Cliente();
+//        cliente.setEmail("test311@llfefe.com");
 //        cliente.setCognome("ciccio");
 //        LocalDate localDate = LocalDate.of(2016, 1, 1);
 //        cliente.setDataDiNascita(localDate);
 //        cliente.setIndirizzo("ciaociao");
 //        cliente.setNome("alex");
-//        //insertCliente(cliente);
-//        boolean login = login("ale.fiore@example.com", "pwd123");
-//		System.out.println("Login = "+login);
+//        cliente.setPassword("pwd123");
+//        
+//        cliente2.setEmail("test367@llfefe.com");
+//        cliente2.setCognome("ciccio");
+//        cliente2.setDataDiNascita(localDate);
+//        cliente2.setIndirizzo("ciaociao");
+//        cliente2.setNome("alex");
+//        cliente2.setPassword("pwd123");
+//        
+//        clienti.add(cliente);
+//        clienti.add(cliente2);
+//        insertClienti(clienti);
+        //insertCliente(cliente);
+        //boolean login = login("test@llfefe.com", "pwd123");
+		//System.out.println("Login = "+login);
+
 //	}
 	
 	public static void insertCliente(Cliente cliente)

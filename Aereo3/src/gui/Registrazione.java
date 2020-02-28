@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 import javax.swing.Box;
@@ -16,6 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import controller.Controller;
+import dominio.Cliente;
 
 public class Registrazione {
 	
@@ -27,7 +31,6 @@ public class Registrazione {
 		gbc_label_3.insets = new Insets(0, 0, 0, 5);
 		gbc_label_3.gridx = 1;
 		gbc_label_3.gridy = 18;
-		//registrationPanel.add(label_3, gbc_label_3);
 		JPanel registrationPanel = new JPanel();
 		registrationPanel.setBackground(Color.BLUE);
 		contentPane.add(registrationPanel, "name_523737106974600");
@@ -252,6 +255,14 @@ public class Registrazione {
 					label_3.setText("Email errate");
 					registrationPanel.add(label_3, gbc_label_3);
 				}
+				Cliente c = new Cliente();
+				c.setNome(textField_2.getText());
+				c.setCognome(textField_3.getText());
+				c.setEmail(textField_5.getText());
+				c.setPassword(passwordField.getText());
+				c.setDataDiNascita(LocalDate.of(1998, 11, 22));
+				c.setIndirizzo(textField_4.getText());
+				Controller.insertCliente(c);
 				registrationPanel.repaint();
 				registrationPanel.revalidate();
 			}

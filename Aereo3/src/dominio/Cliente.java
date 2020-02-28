@@ -27,8 +27,8 @@ import javax.persistence.DiscriminatorType;
 public class Cliente {
 
 	@Id
-	@Column(name = "cod_cliente")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "cod_cliente")
 	private int codCliente;
 
 	@Column(name = "nome")

@@ -2,8 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 //import java.text.SimpleDateFormat;
+
 import java.util.List;
 
 import dataManagment.GestioneAdminDatabase;
@@ -35,8 +35,8 @@ public class Controller {
 //		volo.setDataPartenza(dateformat2.parse(strdate2));
 //		volo.setDataArrivo(dateformat2.parse(ritorno));
 //		volo.setGate("B1");	
-//		volo.setDestinazione("NA08");
-//		volo.setPartenza("BS75");
+//		volo.setDestinazione("BS75");
+//		volo.setPartenza("NA08");
 //		volo.setNumeroPosti(10);
 //		volo.setPromo(null);
 //		insertVolo(volo);
@@ -75,7 +75,7 @@ public class Controller {
 
 	// ritorna lista di partenze
 	public static List<String> getPartenzeVoliDisponibili() {
-		System.out.println(GestioneVoloDatabase.getPartenzeDisponibili());
+		//System.out.println(GestioneVoloDatabase.getPartenzeDisponibili());
 		return GestioneVoloDatabase.getPartenzeDisponibili();
 	}
 

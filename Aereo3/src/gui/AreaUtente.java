@@ -332,22 +332,6 @@ public class AreaUtente {
 		gbc_verticalStrut.gridy = 9;
 		menu.add(verticalStrut, gbc_verticalStrut);
 		
-		JButton btnAreaAdmin = new JButton("Area Admin");
-		btnAreaAdmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.removeAll();
-				contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
-		btnAreaAdmin.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnAreaAdmin = new GridBagConstraints();
-		gbc_btnAreaAdmin.insets = new Insets(0, 0, 5, 0);
-		gbc_btnAreaAdmin.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnAreaAdmin.gridx = 0;
-		gbc_btnAreaAdmin.gridy = 8;
-		menu.add(btnAreaAdmin, gbc_btnAreaAdmin);
 		
 		JLabel lblNewLabel = new JLabel("Sei loggato come: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));

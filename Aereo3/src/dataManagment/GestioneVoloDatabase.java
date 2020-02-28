@@ -11,21 +11,17 @@ import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
 		
-
 	public static List <Volo> getListaVoliDisponibili(){
-				
-	
 		String jpql = "SELECT v FROM Volo as v ";
 		Query query = entityManager.createQuery(jpql);
 		List<Volo> voli = query.getResultList();
 		return voli;
 	}
 	
-	
 	public static List<String> getDestinazioniDisponibili(){
 				
 	
-		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
+		String jpql = "SELECT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
 		Query query = entityManager.createQuery(jpql);
 
 		List<String> destinazioni = query.getResultList();
