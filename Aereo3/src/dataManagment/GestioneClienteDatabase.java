@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 import dominio.Cliente;
+import dominio.ClienteFedele;
+import dominio.Volo;
 
 public class GestioneClienteDatabase extends GestioneDatabase {
 	
@@ -15,7 +17,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		
         Cliente cliente = new Cliente();
         Cliente cliente2 = new Cliente();
-        cliente.setEmail("test311@llfefe.com");
+        cliente.setEmail("test322@llfefe.com");
         cliente.setCognome("ciccio");
         LocalDate localDate = LocalDate.of(2016, 1, 1);
         cliente.setDataDiNascita(localDate);
@@ -32,10 +34,22 @@ public class GestioneClienteDatabase extends GestioneDatabase {
         
         clienti.add(cliente);
         clienti.add(cliente2);
-        insertClienti(clienti);
+        //insertClienti(clienti);
         //insertCliente(cliente);
         //boolean login = login("test@llfefe.com", "pwd123");
 		//System.out.println("Login = "+login);
+        
+        List<Cliente> listaClienti = getClienti();
+        List<ClienteFedele> clientiFedeli = getClientiFedeli();
+        
+        for(Cliente c : listaClienti)
+        {
+        	System.out.println("Codice Cliente : "+c.getCodCliente());
+        }
+        for(ClienteFedele c : clientiFedeli)
+        {
+        	System.out.println("Codice Cliente Fedele : "+c.getCodCliente());
+        }
 	}
 //	public static void main(String [] args) {
 //		
@@ -99,5 +113,21 @@ public class GestioneClienteDatabase extends GestioneDatabase {
         session.update(student);
         tx.commit();
         session.close();*/
+	}
+	
+	public static List<Cliente> getClienti()
+	{
+		String jpql = "SELECT c FROM Cliente as c ";
+		Query query = entityManager.createQuery(jpql);
+		List<Cliente> clienti = query.getResultList();
+		return clienti;
+	}
+	
+	public static List<ClienteFedele> getClientiFedeli()
+	{
+		String jpql = "SELECT c FROM ClienteFedele as c ";
+		Query query = entityManager.createQuery(jpql);
+		List<ClienteFedele> clientiFedeli = query.getResultList();
+		return clientiFedeli;
 	}
 }

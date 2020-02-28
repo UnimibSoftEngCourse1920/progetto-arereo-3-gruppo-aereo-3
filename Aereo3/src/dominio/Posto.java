@@ -18,7 +18,7 @@ public class Posto {
 	private boolean prenotato;
 
 	@Column(name="id_volo")
-	private int idVolo;
+	private char idVolo;
 	
 	@Column(name="prezzo")
 	private double prezzo;
