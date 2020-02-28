@@ -29,15 +29,18 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		Query query = entityManager.createQuery(jpql);
 
 		List<String> destinazioni = query.getResultList();
+		System.out.println(destinazioni);
 		return destinazioni;
 	}
 	
 	public static List<String> getPartenzeDisponibili(){
 		
 		
-		String jpql = "SELECT a.denominazione FROM Volo v, Aereoporto a WHERE v.partenza=a.idAereoporto ";
+		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.partenza=a.idAereoporto ";
 		Query query = entityManager.createQuery(jpql);
 		List<String> partenze = query.getResultList();
+		
+		System.out.println(partenze);
 		return partenze;
 	}
 	

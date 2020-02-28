@@ -11,7 +11,7 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	
 	
 	public static List<Aereoporto> getListaAereoporti(){
-	String jpql = "SELECT a FROM Aereoporto a";
+	String jpql = "SELECT DISTINCT a FROM Aereoporto a";
 	Query query = entityManager.createQuery(jpql);
 	List<Aereoporto> listaAereoporti = query.getResultList();
 	return listaAereoporti;
