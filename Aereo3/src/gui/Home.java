@@ -70,13 +70,10 @@ public class Home extends JFrame {
 	private JLabel lblNewLabel;
 	private JPanel panel_8;
 	private JPanel panel_9;
-	private JPanel posti;
-	private JPanel sceltaPostiPanel;
-	private JLabel lblScegliereIPosti;
-	private Component verticalStrut_6;
-	private JComboBox comboBox_3;
 	private JPanel panel;
 	private JButton btnAreaAdmin;
+	private JPanel panel_5;
+	private JButton btnVisualizzamodificaPrenotazione;
 	/**
 	 * Launch the application.
 	 */
@@ -374,13 +371,6 @@ public class Home extends JFrame {
 		//Creazione volo:
 		/******************************************************/
 		
-		Volo volo = new Volo();
-		volo.setDestinazione(lblAeroportoDiArrivo.getText());
-		volo.setPartenza(lblAeroportoDiPartenza.getText());
-		volo.setDataArrivo( dateChooser_1.getDate());
-		volo.setDataPartenza( dateChooser.getDate());
-		Controller.controlloDisponibilità(volo);
-		
 		
 		/****************************************************/
 		
@@ -429,6 +419,20 @@ public class Home extends JFrame {
 					System.out.println(comboBox_2.getSelectedItem());
 					Integer value_1 = (Integer)comboBox_2.getSelectedItem();
 					int value = value_1.intValue();
+					Volo volo = new Volo();
+					volo.setDestinazione(lblAeroportoDiArrivo.getText());
+					volo.setPartenza(lblAeroportoDiPartenza.getText());
+					volo.setDataArrivo( dateChooser_1.getDate());
+					volo.setDataPartenza( dateChooser.getDate());
+					try {
+						Controller.controlloDisponibilità(volo);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					contentPane.removeAll();
 					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, andataRitorno, value));
 					contentPane.repaint();
@@ -447,6 +451,23 @@ public class Home extends JFrame {
 		gbc_btnCercaIlTuo_1.gridx = 1;
 		gbc_btnCercaIlTuo_1.gridy = 12;
 		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
+		
+		panel_5 = new JPanel();
+		panel_5.setBackground(Color.BLUE);
+		homePanel.add(panel_5, BorderLayout.SOUTH);
+		panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		
+		btnVisualizzamodificaPrenotazione = new JButton("Visualizza/Modifica Prenotazione");
+		btnVisualizzamodificaPrenotazione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(CercaPrenotazione.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnVisualizzamodificaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_5.add(btnVisualizzamodificaPrenotazione);
 		
 		//Nuova interfaccia
 		

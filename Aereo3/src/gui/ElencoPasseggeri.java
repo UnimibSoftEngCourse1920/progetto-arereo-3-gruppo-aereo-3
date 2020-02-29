@@ -26,10 +26,10 @@ public class ElencoPasseggeri {
 		panel_9.setBackground(Color.BLUE);
 		panel_8.add(panel_9, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_9 = new GridBagLayout();
-		gbl_panel_9.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_9.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_9.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_9.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_9.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0};
+		gbl_panel_9.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_9.setLayout(gbl_panel_9);
 		
 		JPanel panel = new JPanel();
@@ -137,6 +137,28 @@ public class ElencoPasseggeri {
 			z++;
 			h++;
 	}
+		
+		JLabel email = new JLabel("Email");
+		email.setForeground(Color.WHITE);
+		email.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints glc_email = new GridBagConstraints();
+		glc_email.anchor = GridBagConstraints.WEST;
+		glc_email.insets = new Insets(0, 0, 5, 5);
+		glc_email.gridx = k;
+		glc_email.gridy = y;
+		panel_9.add(email, glc_email);
+		y++;
+		
+		JTextField email_insert = new JTextField();
+		GridBagConstraints glc_email_text = new GridBagConstraints();
+		glc_email_text.fill = GridBagConstraints.HORIZONTAL;
+		glc_email_text.insets = new Insets(0, 0, 5, 0);
+		glc_email_text.anchor = GridBagConstraints.NORTH;
+		glc_email_text.gridx = k;
+		glc_email_text.gridy = y;
+		panel_9.add(email_insert, glc_email_text);
+		email_insert.setColumns(10);
+		
 		
 		return panel_8;
 	}
