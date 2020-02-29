@@ -6,24 +6,26 @@ import java.util.List;
 import javax.persistence.Query;
 
 import dominio.Admin;
+import dominio.Cliente;
 
 public class GestioneAdminDatabase extends GestioneDatabase{
 
+//	Per debug
+//	public static void main(String[] args) {
+//		System.out.println(isAmministratore("admin", "ciao"));
+//		
+//	}
 
-	public static boolean isAmministratore(Admin probabileAdmin){
+	public static boolean isAmministratore(String username, String password){
 
-
-		String jpql = "SELECT a FROM Admin as a ";
+		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.password=:password";
 		Query query = entityManager.createQuery(jpql);
-		List<Admin> listaAmministratori=new ArrayList<Admin>();
-
-		for(Admin a: listaAmministratori) {
-			if(a.getUsername().equals(probabileAdmin.getUsername())&&a.getPassword().equals(probabileAdmin.getPassword()))
-				return true;
-		}
-
+		query.setParameter("username", username);
+        query.setParameter("password", password);
+		List<Admin> listaAmministratori= query.getResultList();
+		if(listaAmministratori.size() == 1)
+			return true;
 		return false;
 	}
-	
 
 }

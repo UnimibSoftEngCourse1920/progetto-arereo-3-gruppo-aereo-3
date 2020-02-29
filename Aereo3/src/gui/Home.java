@@ -75,6 +75,8 @@ public class Home extends JFrame {
 	private JLabel lblScegliereIPosti;
 	private Component verticalStrut_6;
 	private JComboBox comboBox_3;
+	private JPanel panel;
+	private JButton btnAreaAdmin;
 	/**
 	 * Launch the application.
 	 */
@@ -142,6 +144,23 @@ public class Home extends JFrame {
 		});
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		panel_4.add(btnLogIn);
+		
+		panel = new JPanel();
+		panel.setBackground(Color.BLUE);
+		panel_1.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		
+		btnAreaAdmin = new JButton("Area Admin");
+		btnAreaAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(AccessoAdmin.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnAreaAdmin.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		panel.add(btnAreaAdmin);
 		
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.BLUE);
@@ -431,94 +450,20 @@ public class Home extends JFrame {
 		
 		//Nuova interfaccia
 		
-//		panel_8 = new JPanel();
-//		panel_8.setBackground(Color.BLUE);
-//		contentPane.add(panel_8, "name_1158551504937600");
-//		panel_8.setLayout(new BorderLayout(0, 0));
-//		
-//		panel_9 = new JPanel();
-//		panel_9.setBackground(Color.BLUE);
-//		panel_8.add(panel_9, BorderLayout.WEST);
-//		GridBagLayout gbl_panel_9 = new GridBagLayout();
-//		gbl_panel_9.columnWidths = new int[]{0};
-//		gbl_panel_9.rowHeights = new int[]{0};
-//		gbl_panel_9.columnWeights = new double[]{Double.MIN_VALUE};
-//		gbl_panel_9.rowWeights = new double[]{Double.MIN_VALUE};
-//		panel_9.setLayout(gbl_panel_9);
-//		
-//		posti = new JPanel();
-//		posti.setBackground(Color.BLUE);
-//		contentPane.add(posti, "name_1170960813504800");
-//		posti.setLayout(new BorderLayout(0, 0));
-//		
-//		sceltaPostiPanel = new JPanel();
-//		sceltaPostiPanel.setBackground(Color.BLUE);
-//		posti.add(sceltaPostiPanel, BorderLayout.WEST);
-//		GridBagLayout gbl_sceltaPostiPanel = new GridBagLayout();
-//		gbl_sceltaPostiPanel.columnWidths = new int[]{0, 0};
-//		gbl_sceltaPostiPanel.rowHeights = new int[]{0, 0, 0, 0};
-//		gbl_sceltaPostiPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-//		gbl_sceltaPostiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-//		sceltaPostiPanel.setLayout(gbl_sceltaPostiPanel);
-//		
-//		lblScegliereIPosti = new JLabel("Scegliere i posti:");
-//		lblScegliereIPosti.setForeground(Color.WHITE);
-//		lblScegliereIPosti.setFont(new Font("Tahoma", Font.PLAIN, 30));
-//		GridBagConstraints gbc_lblScegliereIPosti = new GridBagConstraints();
-//		gbc_lblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
-//		gbc_lblScegliereIPosti.gridx = 0;
-//		gbc_lblScegliereIPosti.gridy = 0;
-//		sceltaPostiPanel.add(lblScegliereIPosti, gbc_lblScegliereIPosti);
-//		
-//		verticalStrut_6 = Box.createVerticalStrut(20);
-//		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-//		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
-//		gbc_verticalStrut_6.gridx = 0;
-//		gbc_verticalStrut_6.gridy = 1;
-//		sceltaPostiPanel.add(verticalStrut_6, gbc_verticalStrut_6);
-//		
-//		JLabel [] etichette = new JLabel[value];
-//		JComboBox [] box = new JComboBox[value*2];
-//		GridBagConstraints [] format = new GridBagConstraints[etichette.length*box.length];
-//		
-//		int u = 0;
-//		int y = 2;
-//		int z = 0;
-//		int k = 0;
-//		int h = 0;
-//		
-//		for(int i = 0; i<value;i++) {
-//			etichette[u] = new JLabel("Passeggero " + (i+1));
-//			etichette[u].setForeground(Color.WHITE);
-//			etichette[u].setFont(new Font("Tahoma", Font.PLAIN, 30));
-//			format[z] = new GridBagConstraints();
-//			format[z].anchor = GridBagConstraints.WEST;
-//			format[z].insets = new Insets(0, 0, 5, 5);
-//			format[z].gridx = k;
-//			format[z].gridy = y;
-//			sceltaPostiPanel.add(etichette[u], format[z]);
-//			y++;
-//			u++;
-//			z++;
-//			
-//			box[h] = new JComboBox();
-//			format[z] = new GridBagConstraints();
-//			format[z].fill = GridBagConstraints.HORIZONTAL;
-//			format[z].gridx = k;
-//			format[z].gridy = y;
-//			sceltaPostiPanel.add(box[h], format[z]);
-//			y++;
-//			h++;
-//			z++;
-//			
-//			box[h] = new JComboBox();
-//			format[z] = new GridBagConstraints();
-//			format[z].fill = GridBagConstraints.HORIZONTAL;
-//			format[z].gridx = k;
-//			format[z].gridy = y;
-//			sceltaPostiPanel.add(box[h], format[z]);
-//			
-//		}
+		panel_8 = new JPanel();
+		panel_8.setBackground(Color.BLUE);
+		contentPane.add(panel_8, "name_1158551504937600");
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		panel_9 = new JPanel();
+		panel_9.setBackground(Color.BLUE);
+		panel_8.add(panel_9, BorderLayout.WEST);
+		GridBagLayout gbl_panel_9 = new GridBagLayout();
+		gbl_panel_9.columnWidths = new int[]{0};
+		gbl_panel_9.rowHeights = new int[]{0};
+		gbl_panel_9.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_panel_9.rowWeights = new double[]{Double.MIN_VALUE};
+		panel_9.setLayout(gbl_panel_9);
 	}
 }
 

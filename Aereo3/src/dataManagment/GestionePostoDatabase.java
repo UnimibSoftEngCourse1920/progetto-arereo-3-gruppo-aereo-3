@@ -37,7 +37,9 @@ public class GestionePostoDatabase extends GestioneDatabase {
 
 		}
 			
-		entityManager.getTransaction().begin();
+		if(!(entityManager.getTransaction().isActive()))
+			entityManager.getTransaction().begin();
+
 		for(Posto posto:listaPosti) {
 		entityManager.persist(posto);
 //		entityManager.close();	

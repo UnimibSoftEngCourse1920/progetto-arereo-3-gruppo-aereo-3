@@ -104,6 +104,17 @@ public class Volo {
 		this.promo = promo;
 	}
 	
+	
+	
+
+
+	@Override
+	public String toString() {
+		return "Volo [idVolo=" + idVolo + ", destinazione=" + destinazione + ", partenza=" + partenza
+				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", numeroPosti=" + numeroPosti
+				+ ", gate=" + gate + ", promo=" + promo + "]";
+	}
+
 	/*****************************************/
 	@Override
 	public boolean equals(Object obj) {

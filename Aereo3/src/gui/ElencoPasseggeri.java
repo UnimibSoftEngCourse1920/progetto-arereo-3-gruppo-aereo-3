@@ -40,6 +40,10 @@ public class ElencoPasseggeri {
 		JButton btnNewButton = new JButton("Continua");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8));
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
