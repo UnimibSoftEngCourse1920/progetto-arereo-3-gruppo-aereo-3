@@ -20,6 +20,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.Controller;
+import dataManagment.GestionePostoDatabase;
+import dataManagment.GestionePrenotazioneDatabase;
+import dominio.Cliente;
 import dominio.Posto;
 import dominio.Prenotazione;
 import dominio.Volo;
@@ -29,7 +33,7 @@ import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, Volo idVolo) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, int idVolo, Cliente c) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -118,6 +122,9 @@ public class SceltaPosti {
 			z++;
 			
 			box[h] = new JComboBox();
+			List <Posto> postidisponibili = Controller.getListaPostiDisponibili(idVolo);
+			for (Posto p : postidisponibili)
+				box[h].addItem(p);
 			format[z] = new GridBagConstraints();
 			format[z].fill = GridBagConstraints.HORIZONTAL;
 			format[z].gridx = k;
@@ -127,50 +134,48 @@ public class SceltaPosti {
 			h++;
 			z++;
 			
-			etichette[u] = new JLabel("Fila");
-			etichette[u].setForeground(Color.WHITE);
-			etichette[u].setFont(new Font("Tahoma", Font.PLAIN, 20));
-			format[z] = new GridBagConstraints();
-			format[z].anchor = GridBagConstraints.WEST;
-			format[z].insets = new Insets(0, 0, 5, 5);
-			format[z].gridx = k;
-			format[z].gridy = y;
-			sceltaPostiPanel.add(etichette[u], format[z]);
-			y++;
-			u++;
-			z++;
+//			etichette[u] = new JLabel("Fila");
+//			etichette[u].setForeground(Color.WHITE);
+//			etichette[u].setFont(new Font("Tahoma", Font.PLAIN, 20));
+//			format[z] = new GridBagConstraints();
+//			format[z].anchor = GridBagConstraints.WEST;
+//			format[z].insets = new Insets(0, 0, 5, 5);
+//			format[z].gridx = k;
+//			format[z].gridy = y;
+//			sceltaPostiPanel.add(etichette[u], format[z]);
+//			y++;
+//			u++;
+//			z++;
 			
-			box[h] = new JComboBox();
-			format[z] = new GridBagConstraints();
-			format[z].fill = GridBagConstraints.HORIZONTAL;
-			format[z].gridx = k;
-			format[z].gridy = y;
-			sceltaPostiPanel.add(box[h], format[z]);
-			h++;
-			y++;
-			z++;
+//			box[h] = new JComboBox();
+//			format[z] = new GridBagConstraints();
+//			format[z].fill = GridBagConstraints.HORIZONTAL;
+//			format[z].gridx = k;
+//			format[z].gridy = y;
+//			sceltaPostiPanel.add(box[h], format[z]);
+//			h++;
+//			y++;
+//			z++;
 		}
 		
 		JButton btnNewButton_1 = new JButton("Prenota");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List <Posto> listaPosti = new ArrayList<Posto>();
-				for(int i = 0; i<value*2; i++) {
-					String fila = (String) box[i].getSelectedItem();
-					i++;
-					Integer numero = (Integer) box[i].getSelectedItem();
-					int valore = numero.valueOf(numero);
-					//listaPosti.add(e); TODO: metodo getPosto Clark
+				for(int i = 0; i<value; i++) {
+					/*String s = (String)box[i].getSelectedItem();
+					String[] ss = s.split(", ");
 					
+					char fila = ss[0].charAt(ss[0].length()-1);
+					Integer numero = Integer.parseInt(ss[0].substring(0, ss[0].length()-1));
+					int valore = numero.valueOf(numero);*/
+					
+					Posto p = (Posto)box[i].getSelectedItem();
+					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 				}
-				
-				
-				
-				
-				
-				
-				
-				Prenotazione p = new Prenotazione();
+				//portati dietro cliente
+				//Controller.insertCliente();
+				Controller.insertPrenotazione(c, idVolo, listaPosti);
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));

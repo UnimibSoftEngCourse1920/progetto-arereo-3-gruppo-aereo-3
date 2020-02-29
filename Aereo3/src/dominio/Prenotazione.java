@@ -37,7 +37,7 @@ public class Prenotazione {
 	@Column(name="id_volo")
 	private int idVolo;
 	
-	@Column(name="prezzo_punti_totale")
+	@Column(name="prezzo_punti_totali")
 	private int prezzoPuntiTotale;
 	
 	public int getCodCliente() {

@@ -31,7 +31,6 @@ public class GestionePostoDatabase extends GestioneDatabase {
 				postoDaInserire.getChiaveComposta().setFile(fila);
 				postoDaInserire.getChiaveComposta().setLettera((char) (65 + j));
 				postoDaInserire.setPrezzo(50.00);
-				postoDaInserire.setPrenotato(false);
 				postoDaInserire.setPrezzoPunti(500);
 				postoDaInserire.setPunti(50);
 				postoDaInserire.getChiaveComposta().setIdVolo(volo.getIdVolo());
@@ -61,10 +60,11 @@ public class GestionePostoDatabase extends GestioneDatabase {
 	
 	
 	
-	public static List <Posto> getListaPostiDisponibili(Volo volo){
+	public static List <Posto> getListaPostiDisponibili(int idVolo){
 		
-		String jpql = "SELECT p FROM Posto as p , Volo as v WHERE v.idVolo=p.chiaveCombinata.idVolo  and p.idPrenotazione=NULL";
+		String jpql = "SELECT p FROM Posto as p  WHERE p.chiaveComposta.idVolo=:id  and p.idPrenotazione=NULL";
 		Query query = entityManager.createQuery(jpql);
+		query.setParameter("id", idVolo);
 		List<Posto> listaPosti = query.getResultList();
 	
 		return listaPosti;

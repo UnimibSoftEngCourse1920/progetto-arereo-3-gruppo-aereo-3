@@ -15,10 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dominio.Cliente;
 import dominio.Volo;
 
 public class ElencoPasseggeri {
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, Volo idVolo) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo) {
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
 		contentPane.add(panel_8, "name_1158551504937600");
@@ -38,18 +39,6 @@ public class ElencoPasseggeri {
 		panel.setBackground(Color.BLUE);
 		panel_8.add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new BorderLayout(0, 0));
-		
-		JButton btnNewButton = new JButton("Continua");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo));
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		panel.add(btnNewButton, BorderLayout.EAST);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
@@ -160,6 +149,23 @@ public class ElencoPasseggeri {
 		glc_email_text.gridy = y;
 		panel_9.add(email_insert, glc_email_text);
 		email_insert.setColumns(10);
+		
+
+		JButton btnNewButton = new JButton("Continua");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cliente c = new Cliente();
+				c.setNome(campi[0].getText());
+				c.setCognome(campi[1].getText());
+				c.setEmail(email_insert.getText());
+				contentPane.removeAll();
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo, c));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel.add(btnNewButton, BorderLayout.EAST);
 		
 		
 		return panel_8;

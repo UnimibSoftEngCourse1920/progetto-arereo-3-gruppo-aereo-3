@@ -195,7 +195,7 @@ public class AccessoAdmin {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
 					lblNewLabel.setText("Errore !");
-//					System.out.println(Controller.controlloLoginAmministratore(a));
+					//System.out.println(Controller.controlloLoginAmministratore(a));
 				}
 				
 				else {

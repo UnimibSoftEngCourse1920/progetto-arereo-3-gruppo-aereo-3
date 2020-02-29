@@ -46,6 +46,14 @@ public class AreaAdmin {
 		menuAdmin.add(verticalStrut_6, gbc_verticalStrut_6);
 		
 		JButton btnAggiungiVolo = new JButton("Aggiungi Volo");
+		btnAggiungiVolo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(VoloAdmin.esegui(contentPane));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		btnAggiungiVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbc_btnAggiungiVolo = new GridBagConstraints();
 		gbc_btnAggiungiVolo.insets = new Insets(0, 0, 5, 5);
