@@ -150,6 +150,12 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 	}
 	
+//	public static void cancellaVolo(Date dataPartenza) {
+//		
+//	}
+	
+	
+	
 }
 	//Clark:DA USARE PER DEBUG
 

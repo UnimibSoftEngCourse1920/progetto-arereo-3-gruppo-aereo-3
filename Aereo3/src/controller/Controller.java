@@ -51,6 +51,8 @@ public class Controller {
 		return GestioneVoloDatabase.getListaVoliDisponibili();
 
 	}
+	
+	
 
 	public static List<Volo> getInfoVoli(Volo volo) {
 
@@ -93,9 +95,7 @@ public class Controller {
 		return GestionePostoDatabase.getListaPostiDisponibili(volo);
 	}
 
-	public static void aggiornaPostiDisponibili(List<Posto> listaPostiPrenotati) {
 
-	}
 
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
@@ -118,5 +118,12 @@ public class Controller {
 	public static boolean login(String email, String pass) {
 		return GestioneClienteDatabase.login(email, pass);
 	}
+	
+	public static String parserCodiceAereoporto(String denominazione) {
+	
+		return  GestioneAereoportoDatabase.parserCodiceAereoporto(denominazione);
+
+	}
+
 }
 

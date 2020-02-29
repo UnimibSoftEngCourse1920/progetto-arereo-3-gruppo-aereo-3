@@ -49,9 +49,14 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		entityManager.clear();
 	}
 	
+	
+	
+	
+	
+	
 	public static List <Posto> getListaPostiDisponibili(Volo volo){
 		
-		String jpql = "SELECT p FROM Posto as p , Volo as v WHERE v.idVolo=p.idVolo,p.prenotato=false ";
+		String jpql = "SELECT p FROM Posto as p , Volo as v WHERE v.idVolo=p.idVolo  and p.idPrenotazione=NULL";
 		Query query = entityManager.createQuery(jpql);
 		List<Posto> listaPosti = query.getResultList();
 	

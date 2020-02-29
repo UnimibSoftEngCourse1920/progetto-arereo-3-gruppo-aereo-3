@@ -16,6 +16,9 @@ public class Posto {
 	
 	@Transient
 	private boolean prenotato;
+	
+	@Column(name="id_prenotazione")
+	private int idPrenotazione;
 
 	@Column(name="prezzo")
 	private double prezzo;

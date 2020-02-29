@@ -30,6 +30,7 @@ import javax.swing.table.TableModel;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dataManagment.GestioneVoloDatabase;
 import dominio.Volo;
 
 public class DettaglioVolo {
@@ -37,7 +38,10 @@ public class DettaglioVolo {
 	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo, boolean andataRitorno, int value) {
 		
 		//TODO: Metodo controller per prendere i voli
-		List <Volo> listaVoli = Controller.getListaVoli();
+		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());
+		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
+
+		List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
 		
