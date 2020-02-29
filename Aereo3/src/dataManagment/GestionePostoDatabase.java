@@ -10,6 +10,13 @@ import dominio.Volo;
 
 public class GestionePostoDatabase extends GestioneDatabase {
 
+	public static void main(String...strings) {
+		System.out.println(getPosto('A', 1, 1));
+		
+		
+	}
+	
+	
 	public static void insertPostiVolo(Volo volo) {
 		
 		List <Posto> listaPosti=new ArrayList<Posto>();
@@ -56,7 +63,7 @@ public class GestionePostoDatabase extends GestioneDatabase {
 	
 	public static List <Posto> getListaPostiDisponibili(Volo volo){
 		
-		String jpql = "SELECT p FROM Posto as p , Volo as v WHERE v.idVolo=p.idVolo  and p.idPrenotazione=NULL";
+		String jpql = "SELECT p FROM Posto as p , Volo as v WHERE v.idVolo=p.chiaveCombinata.idVolo  and p.idPrenotazione=NULL";
 		Query query = entityManager.createQuery(jpql);
 		List<Posto> listaPosti = query.getResultList();
 	
@@ -64,9 +71,22 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		
 	}
 	
-	public static void  aggiornaPostiPrenotati(List <Posto> listaPostiDaAggiornare) {
+	public static Posto getPosto(char lettera, int fila, int idVolo) {
+		String jpql = "SELECT p FROM Posto as p , Volo as v WHERE p.chiaveComposta.idVolo=:idVolo  and p.chiaveComposta.lettera=: let and p.chiaveComposta.fila=:fila";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("fila", fila);
+		query.setParameter("idVolo", idVolo);
+		query.setParameter("let", lettera);
+		List<Posto> posto = query.getResultList();
+	
+		return posto.get(0);
 		
 		
 	}
+	
+//	public static void  aggiornaPostiPrenotati(List <Posto> listaPostiDaAggiornare) {
+//		
+//		
+//	}
 	
 }

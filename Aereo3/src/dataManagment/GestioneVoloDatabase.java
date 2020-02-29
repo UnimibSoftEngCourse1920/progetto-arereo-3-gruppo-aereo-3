@@ -16,24 +16,25 @@ import dominio.Volo;
 public class GestioneVoloDatabase extends GestioneDatabase {
 	
 //Clark: Per debug
-//	public static void main(String [] args)	{
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "14-09-2021 8:00";
-//	Date dataPartenza=null;
-//	try {
-//		dataPartenza = dateformat2.parse(strdate2);
-//	} catch (ParseException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//
-//	String	partenza="NA08";
-//	String	destinazione="BS75";
-//	
-//		List<Volo>v= getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
-//		
-//	}
-//	
+	public static void main(String [] args)	{
+		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
+		 String strdate2 = "14-09-2021 8:00";
+	Date dataPartenza=null;
+	try {
+		dataPartenza = dateformat2.parse(strdate2);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	String	partenza="Aereoporto Napoli";
+	String	destinazione="Aereoporto Sofia";
+	
+		List<Volo>v= getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
+		System.out.println(v);
+		
+	}
+	
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
@@ -125,27 +126,37 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 
 	//Clark: Se vuoi i voli di ritorno dai al contrario i parametri.
 	public static List<Volo> getListaVoliAndataORitorno(Date dataPartenza, String partenza, String destinazione ){
-		String jpql = "SELECT v FROM Volo as v WHERE  v.partenza=:partenza and v.destinazione=:destinazione";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("partenza", partenza);
-		query.setParameter("destinazione", destinazione);
+		String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
+		String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
+		Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
+		Query queryPartenza= entityManager.createQuery(jpqlPartenza);
+		queryPartenza.setParameter("partenza", partenza);
+		queryDestinazione.setParameter("destinazione", destinazione);
+		
 		
 		@SuppressWarnings("unchecked")
-		List<Volo> listaVoliAndata=query.getResultList();
+		List<Volo> listaVoli1=queryDestinazione.getResultList();
+		List<Volo> listaVoli2=queryPartenza.getResultList();
+		List <Volo> lista=new ArrayList<Volo>();
+
+		for(Volo v: listaVoli1)
+			for(Volo v1:listaVoli2)
+				if(v1.getIdVolo()==v.getIdVolo())
+					lista.add(v);
+					
 		
 		List <Volo> risultato=new ArrayList<Volo>();
-	
 		Date dataP=new Date();
 		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
 		String dataPartenzaDaPrenotare= dateformat.format(dataPartenza).substring(0, 8);
-		for(Volo volo: listaVoliAndata) {
+		for(Volo volo: lista) {
 			String dataDaConfrontare=dateformat.format(volo.getDataPartenza()).substring(0, 8);
 			if(dataDaConfrontare.equalsIgnoreCase(dataPartenzaDaPrenotare))
 				risultato.add(volo);
 			System.out.println(volo.toString());
 		}
 		
-		return listaVoliAndata;
+		return risultato;
 		
 		
 	}
