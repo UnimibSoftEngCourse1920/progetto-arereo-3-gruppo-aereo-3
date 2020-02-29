@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
@@ -26,19 +25,11 @@ import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.border.LineBorder;
-import javax.swing.JTextField;
 import java.awt.FlowLayout;
-import javax.swing.JPasswordField;
-import javax.swing.JSpinner;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JSlider;
+
 
 public class Home extends JFrame {
 	
@@ -52,8 +43,6 @@ public class Home extends JFrame {
 	private JPanel panel_4;
 	private JButton btnLogIn;
 	private JPanel panel_2;
-	private JRadioButton rdbtnSoloAndata;
-	private JRadioButton rdbtnAndataERitorno;
 	private JLabel lblAeroportoDiPartenza;
 	private JComboBox comboBox;
 	private JLabel lblAeroportoDiArrivo;
@@ -61,15 +50,10 @@ public class Home extends JFrame {
 	private JComboBox comboBox_2;
 	private JLabel lblDataDiPartenza;
 	private JLabel lblNewLabel_1;
-	private JLabel lblDataDiRitorno;
 	private JDateChooser dateChooser;
-	private JDateChooser dateChooser_1;
 	private Date now = new Date(); 
 	private JPanel registrationPanel;
-	private boolean andataRitorno;
 	private JLabel lblNewLabel;
-	private JPanel panel_8;
-	private JPanel panel_9;
 	private JPanel panel;
 	private JButton btnAreaAdmin;
 	private JPanel panel_5;
@@ -183,55 +167,6 @@ public class Home extends JFrame {
 		gbc_verticalStrut_1.gridy = 0;
 		panel_2.add(verticalStrut_1, gbc_verticalStrut_1);
 		
-		rdbtnSoloAndata = new JRadioButton("Solo Andata");
-		rdbtnSoloAndata.setForeground(Color.WHITE);
-		rdbtnSoloAndata.setBackground(Color.BLUE);
-		rdbtnSoloAndata.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_rdbtnSoloAndata = new GridBagConstraints();
-		gbc_rdbtnSoloAndata.anchor = GridBagConstraints.WEST;
-		gbc_rdbtnSoloAndata.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnSoloAndata.gridx = 1;
-		gbc_rdbtnSoloAndata.gridy = 1;
-		rdbtnSoloAndata.setSelected(true);
-		rdbtnSoloAndata.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(lblNewLabel_1 != null)
-					panel_2.remove(lblNewLabel_1);;
-				andataRitorno = false;
-				lblDataDiRitorno.setVisible(false);
-				dateChooser_1.setVisible(false);
-				panel_2.revalidate();
-				panel_2.repaint();
-				}
-		});
-		panel_2.add(rdbtnSoloAndata, gbc_rdbtnSoloAndata);
-		
-		rdbtnAndataERitorno = new JRadioButton("Andata e Ritorno");
-		rdbtnAndataERitorno.setForeground(Color.WHITE);
-		rdbtnAndataERitorno.setBackground(Color.BLUE);
-		rdbtnAndataERitorno.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_rdbtnAndataERitorno = new GridBagConstraints();
-		gbc_rdbtnAndataERitorno.anchor = GridBagConstraints.NORTHWEST;
-		gbc_rdbtnAndataERitorno.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnAndataERitorno.gridx = 3;
-		gbc_rdbtnAndataERitorno.gridy = 1;
-		rdbtnAndataERitorno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(lblNewLabel_1 != null)
-					panel_2.remove(lblNewLabel_1);
-				andataRitorno=true;
-				lblDataDiRitorno.setVisible(true);
-				dateChooser_1.setVisible(true);
-				panel_2.revalidate();
-				panel_2.repaint();
-				}
-		});
-		panel_2.add(rdbtnAndataERitorno, gbc_rdbtnAndataERitorno);
-		
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(rdbtnSoloAndata);
-		bg.add(rdbtnAndataERitorno);
-		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_2 = new GridBagConstraints();
 		gbc_verticalStrut_2.insets = new Insets(0, 0, 5, 5);
@@ -266,7 +201,6 @@ public class Home extends JFrame {
 			Integer valore = i;
 			comboBox_2.addItem(valore);
 			}
-		//int value = comboBox_2.getItemCount();
 		panel_2.add(comboBox_2, gbc_comboBox_2);
 		
 		lblAeroportoDiPartenza = new JLabel("Aeroporto di Partenza:");
@@ -349,34 +283,6 @@ public class Home extends JFrame {
 		gbc_dateChooser.gridy = 10;
 		panel_2.add(dateChooser, gbc_dateChooser);
 		
-		lblDataDiRitorno = new JLabel("Data di Ritorno:");
-		lblDataDiRitorno.setForeground(Color.WHITE);
-		lblDataDiRitorno.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblDataDiRitorno = new GridBagConstraints();
-		gbc_lblDataDiRitorno.anchor = GridBagConstraints.WEST;
-		gbc_lblDataDiRitorno.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDataDiRitorno.gridx = 1;
-		gbc_lblDataDiRitorno.gridy = 11;
-		panel_2.add(lblDataDiRitorno, gbc_lblDataDiRitorno);
-		
-		dateChooser_1 = new JDateChooser();
-		dateChooser_1.setDate(now);
-		GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
-		gbc_dateChooser_1.insets = new Insets(0, 0, 5, 5);
-		gbc_dateChooser_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_dateChooser_1.gridx = 3;
-		gbc_dateChooser_1.gridy = 11;
-		panel_2.add(dateChooser_1, gbc_dateChooser_1);
-		
-		//Creazione volo:
-		/******************************************************/
-		
-		
-		/****************************************************/
-		
-		lblDataDiRitorno.setVisible(false);
-		dateChooser_1.setVisible(false);
-		
 		JButton btnCercaIlTuo_1 = new JButton("Cerca il tuo volo !");
 		btnCercaIlTuo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -394,22 +300,6 @@ public class Home extends JFrame {
 					gbc_lblNewLabel_1.gridy = 12;
 					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 				}
-				else if(dateChooser_1.isVisible() == true && dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
-					
-					if (lblNewLabel_1 != null)
-						panel_2.remove(lblNewLabel_1);
-					
-						lblNewLabel_1 = new JLabel("Attenzione, le date sono errate !");
-						lblNewLabel_1.setForeground(Color.RED);
-						lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-						GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-						gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-						gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-						gbc_lblNewLabel_1.gridx = 3;
-						gbc_lblNewLabel_1.gridy = 12;
-						panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-					}
-				
 				
 				else {
 					
@@ -422,7 +312,6 @@ public class Home extends JFrame {
 					Volo volo = new Volo();
 					volo.setDestinazione(lblAeroportoDiArrivo.getText());
 					volo.setPartenza(lblAeroportoDiPartenza.getText());
-					volo.setDataArrivo( dateChooser_1.getDate());
 					volo.setDataPartenza( dateChooser.getDate());
 //					try {
 //						Controller.controlloDisponibilità(volo);
@@ -434,7 +323,7 @@ public class Home extends JFrame {
 //						e1.printStackTrace();
 //					}
 					contentPane.removeAll();
-					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, andataRitorno, value));
+					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, value));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
@@ -468,23 +357,6 @@ public class Home extends JFrame {
 		});
 		btnVisualizzamodificaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel_5.add(btnVisualizzamodificaPrenotazione);
-		
-		//Nuova interfaccia
-		
-		panel_8 = new JPanel();
-		panel_8.setBackground(Color.BLUE);
-		contentPane.add(panel_8, "name_1158551504937600");
-		panel_8.setLayout(new BorderLayout(0, 0));
-		
-		panel_9 = new JPanel();
-		panel_9.setBackground(Color.BLUE);
-		panel_8.add(panel_9, BorderLayout.WEST);
-		GridBagLayout gbl_panel_9 = new GridBagLayout();
-		gbl_panel_9.columnWidths = new int[]{0};
-		gbl_panel_9.rowHeights = new int[]{0};
-		gbl_panel_9.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_panel_9.rowWeights = new double[]{Double.MIN_VALUE};
-		panel_9.setLayout(gbl_panel_9);
 	}
 }
 

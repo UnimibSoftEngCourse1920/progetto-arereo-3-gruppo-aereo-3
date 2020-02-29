@@ -35,7 +35,7 @@ import dominio.Volo;
 
 public class DettaglioVolo {
 	
-	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo, boolean andataRitorno, int value) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo, int value) {
 		
 		//TODO: Metodo controller per prendere i voli
 //		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());
@@ -85,18 +85,10 @@ public class DettaglioVolo {
 		JButton btnContinua = new JButton("Continua");
 		btnContinua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(andataRitorno == false) {
 					contentPane.removeAll();
 					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, volo));
 					contentPane.repaint();
 					contentPane.revalidate();
-				}
-				else {
-					contentPane.removeAll();
-					contentPane.add(DettaglioVoloRitorno.esegui(contentPane, value, panel_6, volo));
-					contentPane.repaint();
-					contentPane.revalidate();
-				}
 			}
 		});
 		btnContinua.setFont(new Font("Tahoma", Font.PLAIN, 28));
