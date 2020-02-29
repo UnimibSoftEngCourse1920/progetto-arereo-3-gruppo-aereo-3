@@ -13,6 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
+
+import dataManagment.GestioneClienteDatabase;
+import dataManagment.GestionePrenotazioneDatabase;
+
 import javax.persistence.InheritanceType;
 import javax.persistence.DiscriminatorType;
 
@@ -128,7 +132,10 @@ public class Cliente {
 	/******************************************/
 
 	public void paga(Prenotazione prenotazione) {
-
+		//Clark: 
+		//DUBBIO: if saldo carta< del prezzo tot? -> classe carta di cerdito?? || mettere un importo  della carta di default??
+		
+		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
 	}
 
 	/*****************************************/

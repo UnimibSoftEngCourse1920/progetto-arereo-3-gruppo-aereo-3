@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.persistence.Query;
 import dominio.Cliente;
+import dominio.ClienteFedele;
 
 public class GestioneClienteDatabase extends GestioneDatabase {
 	
+
 
 //	public static void main(String [] args) {
 //		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
@@ -36,20 +38,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
         //insertCliente(cliente);
         //boolean login = login("test@llfefe.com", "pwd123");
 		//System.out.println("Login = "+login);
-	
-//	public static void main(String [] args) {
-//		
-//        Cliente cliente = new Cliente();
-//        cliente.setCodCliente("cod35");
-//        cliente.setEmail("aaab@llfefe.com");
-//        cliente.setCognome("ciccio");
-//        LocalDate localDate = LocalDate.of(2016, 1, 1);
-//        cliente.setDataDiNascita(localDate);
-//        cliente.setIndirizzo("ciaociao");
-//        cliente.setNome("alex");
-//        //insertCliente(cliente);
-//        boolean login = login("ale.fiore@example.com", "pwd123");
-//		System.out.println("Login = "+login);
+
 //	}
 	
 	public static void insertCliente(Cliente cliente)
@@ -99,5 +88,21 @@ public class GestioneClienteDatabase extends GestioneDatabase {
         session.update(student);
         tx.commit();
         session.close();*/
+	}
+	
+	public static List<Cliente> getClienti()
+	{
+		String jpql = "SELECT c FROM Cliente as c ";
+		Query query = entityManager.createQuery(jpql);
+		List<Cliente> clienti = query.getResultList();
+		return clienti;
+	}
+	
+	public static List<ClienteFedele> getClientiFedeli()
+	{
+		String jpql = "SELECT c FROM ClienteFedele as c ";
+		Query query = entityManager.createQuery(jpql);
+		List<ClienteFedele> clientiFedeli = query.getResultList();
+		return clientiFedeli;
 	}
 }

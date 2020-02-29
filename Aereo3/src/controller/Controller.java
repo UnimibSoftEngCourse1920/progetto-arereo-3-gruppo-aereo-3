@@ -11,7 +11,6 @@ import dataManagment.GestioneClienteDatabase;
 import dataManagment.GestionePostoDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
 import dataManagment.GestioneVoloDatabase;
-import dominio.Admin;
 import dominio.Cliente;
 import dominio.Posto;
 import dominio.Prenotazione;
@@ -26,11 +25,11 @@ public class Controller {
 		System.out.println("Main da chiamare all'eseguibile");
 		Home.main(args);
 
-		// Per debug
+//		Per debug
 //		Volo volo=new Volo();
 //		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "15-09-2021 8:00";
-//		 String ritorno="7-11-2021 20:00";
+//		 String strdate2 = "14-09-2021 21:30";
+//		 String ritorno="3-11-2021 22:30";
 //		volo.setDataPartenza(dateformat2.parse(strdate2));
 //		volo.setDataArrivo(dateformat2.parse(ritorno));
 //		volo.setGate("B1");	
@@ -80,9 +79,9 @@ public class Controller {
 
 	// controlla se è amministratore
 
-	public static boolean controlloLoginAmministratore(Admin presuntoAdmin) {
+	public static boolean controlloLoginAmministratore(String username, String password) {
 
-		return GestioneAdminDatabase.isAmministratore(presuntoAdmin);
+		return GestioneAdminDatabase.isAmministratore(username,password);
 	}
 
 	public static void insertVolo(Volo volo) {
@@ -98,7 +97,7 @@ public class Controller {
 
 	}
 
-	public static List<Prenotazione> getPrenotazionePerCliente(String codCliente) {
+	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
 	}
@@ -120,12 +119,4 @@ public class Controller {
 		return GestioneClienteDatabase.login(email, pass);
 	}
 }
-//	public static void cambiaPrenotazione(int idPrenotazione, Time orario) {
-//
-//		try {
-//			Cliente.modificaPrenotazione(idPrenotazione, orario);
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+
