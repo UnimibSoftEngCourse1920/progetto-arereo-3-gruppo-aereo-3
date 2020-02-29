@@ -106,8 +106,8 @@ public class Controller {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
 	}
 
-	public static void insertPrenotazione(Prenotazione prenotazione) {
-		GestionePrenotazioneDatabase.insertPrenotazione(prenotazione);
+	public static void insertPrenotazione(Cliente c, Volo v, List<Posto> p) {
+		GestionePrenotazioneDatabase.insertPrenotazione(c, v, p);
 	}
 
 	public static void insertCliente(Cliente cliente) {

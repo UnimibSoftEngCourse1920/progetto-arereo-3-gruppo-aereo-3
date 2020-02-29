@@ -22,13 +22,14 @@ import javax.swing.JPanel;
 
 import dominio.Posto;
 import dominio.Prenotazione;
+import dominio.Volo;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, int idVolo) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, Volo idVolo) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -170,8 +171,6 @@ public class SceltaPosti {
 				
 				
 				Prenotazione p = new Prenotazione();
-				p.setPrezzoTotale(45.00);
-				p.setPuntiTotali(50);
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));

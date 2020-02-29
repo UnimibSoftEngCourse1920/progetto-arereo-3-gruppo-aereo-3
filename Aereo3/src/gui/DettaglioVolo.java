@@ -87,13 +87,13 @@ public class DettaglioVolo {
 			public void actionPerformed(ActionEvent e) {
 				if(andataRitorno == false) {
 					contentPane.removeAll();
-					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, volo.getIdVolo()));
+					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, volo));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
 				else {
 					contentPane.removeAll();
-					contentPane.add(DettaglioVoloRitorno.esegui(contentPane, value, panel_6, volo.getIdVolo()));
+					contentPane.add(DettaglioVoloRitorno.esegui(contentPane, value, panel_6, volo));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}

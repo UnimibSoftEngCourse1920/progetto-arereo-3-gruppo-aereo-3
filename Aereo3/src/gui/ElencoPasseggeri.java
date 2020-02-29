@@ -15,8 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dominio.Volo;
+
 public class ElencoPasseggeri {
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, Volo idVolo) {
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
 		contentPane.add(panel_8, "name_1158551504937600");

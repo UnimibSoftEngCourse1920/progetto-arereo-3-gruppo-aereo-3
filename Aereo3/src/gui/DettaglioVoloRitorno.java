@@ -23,7 +23,7 @@ import dominio.Volo;
 
 public class DettaglioVoloRitorno {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_7, int idVolo) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_7, Volo idVolo) {
 		List <Volo> listaVoli = Controller.getListaVoli();
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
