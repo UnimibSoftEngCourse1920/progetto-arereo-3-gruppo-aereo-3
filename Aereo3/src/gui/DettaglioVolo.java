@@ -38,10 +38,11 @@ public class DettaglioVolo {
 	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo, boolean andataRitorno, int value) {
 		
 		//TODO: Metodo controller per prendere i voli
-		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());
-		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
+//		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());
+//		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
 
-		List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
+		//List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
+		List <Volo> listaVoli = Controller.getListaVoli();
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
 		
@@ -86,13 +87,13 @@ public class DettaglioVolo {
 			public void actionPerformed(ActionEvent e) {
 				if(andataRitorno == false) {
 					contentPane.removeAll();
-					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6));
+					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, volo.getIdVolo()));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
 				else {
 					contentPane.removeAll();
-					contentPane.add(DettaglioVoloRitorno.esegui(contentPane, value, panel_6));
+					contentPane.add(DettaglioVoloRitorno.esegui(contentPane, value, panel_6, volo.getIdVolo()));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}

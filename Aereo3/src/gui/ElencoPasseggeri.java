@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ElencoPasseggeri {
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo) {
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
 		contentPane.add(panel_8, "name_1158551504937600");
@@ -41,7 +41,7 @@ public class ElencoPasseggeri {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8));
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

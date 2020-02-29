@@ -20,14 +20,14 @@ import dataManagment.GestionePrenotazioneDatabase;
 import javax.persistence.InheritanceType;
 import javax.persistence.DiscriminatorType;
 
-@Entity
-@Table(name = "cliente")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name="fedele",
-    discriminatorType=DiscriminatorType.STRING
-)
-@DiscriminatorValue(value="0")
+//@Entity
+//@Table(name = "cliente")
+//@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(
+//    name="fedele",
+//    discriminatorType=DiscriminatorType.STRING
+//)
+//@DiscriminatorValue(value="0")
 public class Cliente {
 
 	@Id

@@ -23,7 +23,7 @@ import dominio.Volo;
 
 public class DettaglioVoloRitorno {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_7) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_7, int idVolo) {
 		List <Volo> listaVoli = Controller.getListaVoli();
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
@@ -68,7 +68,7 @@ public class DettaglioVoloRitorno {
 		btnContinua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6));
+				contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, idVolo));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

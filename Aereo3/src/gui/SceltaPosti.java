@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -17,12 +19,16 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import dominio.Posto;
+import dominio.Prenotazione;
+
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, int idVolo) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -72,12 +78,9 @@ public class SceltaPosti {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel.add(btnNewButton, BorderLayout.WEST);
 		
-		JButton btnNewButton_1 = new JButton("Prenota");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel.add(btnNewButton_1, BorderLayout.EAST);
-		
 		JLabel [] etichette = new JLabel[value*3];
 		JComboBox [] box = new JComboBox[value*2];
+		//Posto [] listaPosti = new Posto[value];
 		GridBagConstraints [] format = new GridBagConstraints[15];
 		
 		int u = 0;
@@ -146,6 +149,34 @@ public class SceltaPosti {
 			y++;
 			z++;
 		}
+		
+		JButton btnNewButton_1 = new JButton("Prenota");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List <Posto> listaPosti = new ArrayList<Posto>();
+				for(int i = 0; i<value*2; i++) {
+					String fila = (String) box[i].getSelectedItem();
+					i++;
+					Integer numero = (Integer) box[i].getSelectedItem();
+					int valore = numero.valueOf(numero);
+					//listaPosti.add(e); TODO: metodo getPosto Clark
+					
+				}
+				
+				
+				
+				
+				
+				
+				
+				Prenotazione p = new Prenotazione();
+				p.setPrezzoTotale(45.00);
+				p.setPuntiTotali(50);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		panel.add(btnNewButton_1, BorderLayout.EAST);
+		
 	return posti;
 }
 }

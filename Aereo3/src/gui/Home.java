@@ -424,15 +424,15 @@ public class Home extends JFrame {
 					volo.setPartenza(lblAeroportoDiPartenza.getText());
 					volo.setDataArrivo( dateChooser_1.getDate());
 					volo.setDataPartenza( dateChooser.getDate());
-					try {
-						Controller.controlloDisponibilità(volo);
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+//					try {
+//						Controller.controlloDisponibilità(volo);
+//					} catch (ClassNotFoundException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					} catch (SQLException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 					contentPane.removeAll();
 					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, andataRitorno, value));
 					contentPane.repaint();

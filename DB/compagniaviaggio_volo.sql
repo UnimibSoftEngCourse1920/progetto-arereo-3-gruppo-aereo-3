@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `volo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `volo` (
-  `id_volo` char(4) NOT NULL,
+  `id_volo` int NOT NULL AUTO_INCREMENT,
   `partenza` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `destinazione` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `data_partenza` datetime NOT NULL,
