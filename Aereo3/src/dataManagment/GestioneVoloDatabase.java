@@ -125,7 +125,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 
 	//Clark: Se vuoi i voli di ritorno dai al contrario i parametri.
 	public static List<Volo> getListaVoliAndataORitorno(Date dataPartenza, String partenza, String destinazione ){
-		String jpql = "SELECT v FROM Volo as v WHERE  v.partenza=:partenza and v.destinazione=:destinazione";
+		String jpql = "SELECT v FROM Volo as v WHERE  v.idVolo=a.idVolo and v.destinazione=:destinazione";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("partenza", partenza);
 		query.setParameter("destinazione", destinazione);
