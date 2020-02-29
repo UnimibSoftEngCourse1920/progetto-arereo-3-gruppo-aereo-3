@@ -67,20 +67,28 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		entityManager.clear();		
 	}
 	
+	//TODO: da testare
 	public static void aggiornaPrenotazioneData(Prenotazione prenotazione,Date data, boolean isArrivo) {
 		Volo voloDaAggiornare=GestioneVoloDatabase.getVoloDiPrenotazione( prenotazione);
+		String jpql=null;
+		Query query=null;
+		if(isArrivo) {
+		jpql= "UPDATE Volo SET dataArrivo=:data and idVolo=:id";
+		query=entityManager.createQuery(jpql);
+		query.setParameter("data", data);
+		query.setParameter("id",voloDaAggiornare.getIdVolo());
+		}
+		else {
+			jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("data", data);		
+			query.setParameter("id",voloDaAggiornare.getIdVolo());
+
+			}
+		 
+		query.executeUpdate();
 		
-		if(isArrivo)
-		voloDaAggiornare.setDataArrivo(data);
-		else
-		voloDaAggiornare.setDataPartenza(data);
-		
-		if(!(entityManager.getTransaction().isActive()))
-		entityManager.getTransaction().begin();
-		
-		entityManager.refresh(voloDaAggiornare);
-		entityManager.getTransaction().commit();
-		entityManager.clear();		
+//	      "WHERE population < :p");
 		
 	}
 	

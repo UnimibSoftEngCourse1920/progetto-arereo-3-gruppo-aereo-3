@@ -18,7 +18,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 //Clark: Per debug
 	public static void main(String [] args)	{
 		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-		 String strdate2 = "14-09-2021 8:00";
+		 String strdate2 = "14-09-2021";
 	Date dataPartenza=null;
 	try {
 		dataPartenza = dateformat2.parse(strdate2);
