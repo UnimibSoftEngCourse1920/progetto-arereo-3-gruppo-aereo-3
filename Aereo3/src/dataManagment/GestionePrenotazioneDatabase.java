@@ -93,7 +93,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 	
 	
-	//TODO: l'orario di che tipo è ? Come modificare solo l' orario di un date?, da testare
+	//TODO: Da testare 
 	public static void aggiornaPrenotazioneOrario(Prenotazione prenotazione, String orario, boolean isArrivo) {
 		Volo voloDaAggiornare=GestioneVoloDatabase.getVoloDiPrenotazione( prenotazione);
 		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
@@ -115,49 +115,65 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 			e.printStackTrace();
 		}
 		
+		String jpql=null;
+		Query query=null;
 		
-		if(isArrivo)
-		voloDaAggiornare.setDataArrivo(data);
+		if(isArrivo) {
+			jpql= "UPDATE Volo SET dataArrivo=:data and idVolo=:id";
+		query=entityManager.createQuery(jpql);
+		query.setParameter("data", data);
+		query.setParameter("id",voloDaAggiornare.getIdVolo());
+		}
 		else
-		voloDaAggiornare.setDataPartenza(data);
+		{
+			jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("data", data);		
+			query.setParameter("id",voloDaAggiornare.getIdVolo());
+
+			}
+		 
 		
-		if(!(entityManager.getTransaction().isActive()))
-			entityManager.getTransaction().begin();
-			
-			entityManager.refresh(voloDaAggiornare);
-			entityManager.getTransaction().commit();
-			entityManager.clear();	
+		query.executeUpdate();
 			
 			
 	}
-	
+	//TODO: da testare
 	public static void aggiornaPrenotazioneDataOrario(Prenotazione prenotazione, String orario, Date data, boolean isArrivo) {
 		
 		Volo voloDaAggiornare=GestioneVoloDatabase.getVoloDiPrenotazione( prenotazione);
 
 		Date nuovaData=null;
 		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
-		
+
 		StringBuilder str=new StringBuilder(dateformat.format(data));
-		
+
 		str.delete(9,str.length()).append(orario);
-		
+
 		try {
 			nuovaData= dateformat.parse(str.toString());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		if(isArrivo)
-			voloDaAggiornare.setDataArrivo(nuovaData);
+		String jpql=null;
+		Query query=null;
+
+		if(isArrivo) {
+			jpql= "UPDATE Volo SET dataArrivo=:data and idVolo=:id";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("data", data);
+			query.setParameter("id",voloDaAggiornare.getIdVolo());
+		}
 		else
-			voloDaAggiornare.setDataPartenza(nuovaData);
-		
-		if(!(entityManager.getTransaction().isActive()))
-			entityManager.getTransaction().begin();
-			
-			entityManager.refresh(voloDaAggiornare);
-			entityManager.getTransaction().commit();
-			entityManager.clear();	
+		{
+			jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("data", data);		
+			query.setParameter("id",voloDaAggiornare.getIdVolo());
+
+		}	
+
+		query.executeUpdate();
 	}
 }
