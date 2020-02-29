@@ -14,6 +14,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import dominio.Cliente;
+import dominio.Posto;
 import dominio.Prenotazione;
 import dominio.Volo;
 import net.bytebuddy.asm.Advice.This;
@@ -35,7 +36,14 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return prenotazioni;
 	}
 
-	public static void insertPrenotazione(Prenotazione p) {
+	public static void insertPrenotazione(Cliente c, Volo v, List<Posto> posti) {
+		
+		Prenotazione p = new Prenotazione();
+		p.setPagato(false);
+		p.setCodCliente(c.getCodCliente());
+		p.setIdVolo(v.getIdVolo());
+		p.setListaBiglietti(posti);
+		
 		entityManager.getTransaction().begin();
 		entityManager.persist(p);
 		entityManager.getTransaction().commit();
