@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import dominio.Posto;
+import dominio.Prenotazione;
 import dominio.Volo;
 
 public class GestionePostoDatabase extends GestioneDatabase {
@@ -84,6 +85,19 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		
 	}
 	
+	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, Prenotazione prenotazione){
+		String jpql=null;
+		Query query=null;
+		
+		for(Posto p: listaPosti) {
+			jpql="UPDATE Posto SET idPrenotazione=:id";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("id", prenotazione.getId());
+			query.executeUpdate();
+		}
+		
+		
+	}
 //	public static void  aggiornaPostiPrenotati(List <Posto> listaPostiDaAggiornare) {
 //		
 //		
