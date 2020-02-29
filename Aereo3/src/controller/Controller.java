@@ -91,7 +91,7 @@ public class Controller {
 		GestionePostoDatabase.insertPostiVolo(volo);
 	}
 
-	public static List<Posto> getListaPostiDisponibili(Volo volo) {
+	public static List<Posto> getListaPostiDisponibili(int volo) {
 		return GestionePostoDatabase.getListaPostiDisponibili(volo);
 	}
 
@@ -106,7 +106,7 @@ public class Controller {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
 	}
 
-	public static void insertPrenotazione(Cliente c, Volo v, List<Posto> p) {
+	public static void insertPrenotazione(Cliente c, int v, List<Posto> p) {
 		GestionePrenotazioneDatabase.insertPrenotazione(c, v, p);
 	}
 

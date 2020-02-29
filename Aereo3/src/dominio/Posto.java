@@ -11,11 +11,8 @@ import javax.persistence.Transient;
 public class Posto {
 
 	@EmbeddedId
-    private PostoCombinedKey chiaveComposta;
+    private PostoCombinedKey chiaveComposta = new PostoCombinedKey();
 
-	
-	@Transient
-	private boolean prenotato;
 	
 	@Column(name="id_prenotazione")
 	private Integer idPrenotazione;
@@ -36,16 +33,6 @@ public class Posto {
 	public PostoCombinedKey getChiaveComposta() {
 		return chiaveComposta;
 	}
-	public void setChiaveComposta(PostoCombinedKey chiaveComposta) {
-		this.chiaveComposta = chiaveComposta;
-	}
-	public boolean isPrenotato() {
-		return prenotato;
-	}
-	public void setPrenotato(boolean prenotato) {
-		this.prenotato = prenotato;
-	}
-	
 	
 	
 	
@@ -75,8 +62,7 @@ public class Posto {
 	}
 	@Override
 	public String toString() {
-		return "Posto [chiaveComposta=" + chiaveComposta + ", prenotato=" + prenotato + ", idPrenotazione="
-				+ idPrenotazione + ", prezzo=" + prezzo + ", punti=" + punti + ", prezzoPunti=" + prezzoPunti + "]";
+		return chiaveComposta + ", prezzo= " + prezzo + ", punti= " + punti + ", prezzoPunti= " + prezzoPunti;
 	}
 	
 	

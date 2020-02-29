@@ -36,14 +36,14 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return prenotazioni;
 	}
 
-	public static void insertPrenotazione(Cliente c, Volo v, List<Posto> posti) {
+	public static void insertPrenotazione(Cliente c, int v, List<Posto> posti) {
 		
 		Prenotazione p = new Prenotazione();
 		p.setPagato(false);
 		p.setCodCliente(c.getCodCliente());
-		p.setIdVolo(v.getIdVolo());
+		p.setIdVolo(v);
 		p.setListaBiglietti(posti);
-		
+			
 		entityManager.getTransaction().begin();
 		entityManager.persist(p);
 		entityManager.getTransaction().commit();

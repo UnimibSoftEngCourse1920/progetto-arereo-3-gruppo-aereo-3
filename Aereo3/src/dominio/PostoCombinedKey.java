@@ -77,7 +77,7 @@ public class PostoCombinedKey implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PostoCombinedKey [fila=" + fila + ", idVolo=" + idVolo + ", lettera=" + lettera + "]";
+		return "" + fila + lettera;
 	}
 	
 }

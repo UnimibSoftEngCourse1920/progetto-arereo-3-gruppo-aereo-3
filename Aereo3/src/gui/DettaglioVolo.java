@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.Box;
@@ -35,14 +36,14 @@ import dominio.Volo;
 
 public class DettaglioVolo {
 	
-	static JPanel esegui(JPanel contentPane, JPanel homePanel, Volo volo, int value) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, int value, String partenza, String arrivo, Date data) {
 		
 		//TODO: Metodo controller per prendere i voli
 //		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());
 //		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
 
 		//List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
-		List <Volo> listaVoli = Controller.getListaVoli();
+		List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(data, partenza, arrivo);
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
 		
@@ -82,18 +83,6 @@ public class DettaglioVolo {
 		panel_6.add(panel_8, BorderLayout.SOUTH);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnContinua = new JButton("Continua");
-		btnContinua.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					contentPane.removeAll();
-					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, volo));
-					contentPane.repaint();
-					contentPane.revalidate();
-			}
-		});
-		btnContinua.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel_8.add(btnContinua, BorderLayout.EAST);
-		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,13 +98,28 @@ public class DettaglioVolo {
 		JComboBox comboBox = new JComboBox();
 		for(Volo v : listaVoli) {
 			StringBuilder stringa = new StringBuilder();
-			stringa.append("ID Volo " + v.getIdVolo());
+			stringa.append(v.getIdVolo());
 			stringa.append(", Partenza " + v.getDataPartenza());
 			stringa.append(", Arrivo " + v.getDataArrivo());
 			comboBox.addItem(stringa.toString());
 			System.out.println(stringa.toString());
 		}
 		panel_8.add(comboBox, BorderLayout.CENTER);
+		
+		JButton btnContinua = new JButton("Continua");
+		btnContinua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					String v = (String) comboBox.getSelectedItem();
+					String[] params = v.split(", ");
+					int idVolo = Integer.parseInt(params[0]);
+					contentPane.removeAll();
+					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, idVolo));
+					contentPane.repaint();
+					contentPane.revalidate();
+			}
+		});
+		btnContinua.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		panel_8.add(btnContinua, BorderLayout.EAST);
 		
 		JPanel panel_9 = new JPanel();
 		panel_9.setBorder(new LineBorder(new Color(0, 0, 0), 2));
