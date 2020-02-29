@@ -17,11 +17,22 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	return listaAereoporti;
 	}
 	
-	public static String parserAereoporto(String idAereoporto) {
+	public static String parserAereoporto(String idAereoporto  ) {
 		for(Aereoporto a:listaAereoporti) {
 			if(a.getIdAereoporto().equals(idAereoporto));
 			return a.getDenominazione();
 		}
 		return null;
+	}
+	public static String parserCodiceAereoporto(String denominazione) {
+		String jpql = "SELECT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
+		Query query = entityManager.createQuery(jpql);	
+		query.setParameter("campoDenominazione", denominazione);
+		
+		List <String> risultato=query.getResultList();
+		for(String s: risultato)
+			System.out.println(s);
+		return risultato.get(0);
+		
 	}
 }

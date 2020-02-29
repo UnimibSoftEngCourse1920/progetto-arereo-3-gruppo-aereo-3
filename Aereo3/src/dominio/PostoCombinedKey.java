@@ -28,6 +28,10 @@ public class PostoCombinedKey implements Serializable {
 		return this.idVolo = idVolo;
 	}
 
+	public int getIdVolo() {
+		return idVolo;
+	}
+
 	public int getFila() {
 		return fila;
 	}
