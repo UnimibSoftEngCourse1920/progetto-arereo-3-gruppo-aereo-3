@@ -305,7 +305,22 @@ public class Home extends JFrame {
 		JButton btnCercaIlTuo_1 = new JButton("Cerca il tuo volo !");
 		btnCercaIlTuo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedItem().equals(comboBox_1.getSelectedItem())) {
+				
+				if (dateChooser.getDate().before(now)) {
+					if (lblNewLabel_1 != null)
+						panel_2.remove(lblNewLabel_1);
+					
+					lblNewLabel_1 = new JLabel("Data errate !");
+					lblNewLabel_1.setForeground(Color.RED);
+					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+					GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+					gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+					gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+					gbc_lblNewLabel_1.gridx = 3;
+					gbc_lblNewLabel_1.gridy = 12;
+					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+				}
+				else if(comboBox.getSelectedItem().equals(comboBox_1.getSelectedItem())) {
 					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
 					

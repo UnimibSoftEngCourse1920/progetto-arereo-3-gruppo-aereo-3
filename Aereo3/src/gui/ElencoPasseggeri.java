@@ -19,6 +19,7 @@ import dominio.Cliente;
 import dominio.Volo;
 
 public class ElencoPasseggeri {
+	
 	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo) {
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
@@ -149,11 +150,33 @@ public class ElencoPasseggeri {
 		glc_email_text.gridy = y;
 		panel_9.add(email_insert, glc_email_text);
 		email_insert.setColumns(10);
+		y++;
 		
-
+		JLabel errore = new JLabel("");
+		errore.setForeground(Color.RED);
+		errore.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints glc_errore = new GridBagConstraints();
+		glc_errore.anchor = GridBagConstraints.WEST;
+		glc_errore.insets = new Insets(0, 0, 5, 5);
+		glc_errore.gridx = k;
+		glc_errore.gridy = y;
+		panel_9.add(errore, glc_errore);
+		
 		JButton btnNewButton = new JButton("Continua");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean continua = true;
+				for (int i = 0; i<campi.length;i++) {
+					if (campi[i].getText().equals("") || email_insert.getText().equals("")){
+						continua=false;
+						if (!errore.getText().equals("")) {
+							errore.setText("");
+						}
+						errore.setText("Errore");
+					}
+				}
+				
+				if (continua == true) {
 				Cliente c = new Cliente();
 				c.setNome(campi[0].getText());
 				c.setCognome(campi[1].getText());
@@ -162,6 +185,7 @@ public class ElencoPasseggeri {
 				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo, c));
 				contentPane.repaint();
 				contentPane.revalidate();
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
