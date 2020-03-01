@@ -24,7 +24,7 @@ public class Controller {
 	public static void main(String... args) throws ParseException {
 
 		System.out.println("Main da chiamare all'eseguibile");
-//		Home.main(args);
+		Home.main(args);
 
 //		Per debug
 //		Volo volo=new Volo();

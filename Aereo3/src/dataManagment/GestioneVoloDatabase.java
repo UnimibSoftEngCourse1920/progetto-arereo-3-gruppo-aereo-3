@@ -132,6 +132,11 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		}
 		volo.setDataArrivo(nuovaDataA);
 		
+		String  denominazione= GestioneAereoportoDatabase.parserCodiceAereoporto(volo.getDestinazione());
+		volo.setDestinazione(denominazione);
+		denominazione=GestioneAereoportoDatabase.parserCodiceAereoporto(volo.getPartenza());
+		volo.setPartenza(denominazione);
+		
 		
 		if(!(entityManager.getTransaction().isActive()))
 			entityManager.getTransaction().begin();

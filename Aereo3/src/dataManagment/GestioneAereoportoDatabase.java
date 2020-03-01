@@ -23,6 +23,13 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	return listaAereoporti;
 	}
 	
+	public static List <String> getDenominazioniAereoporti(){
+		String jpql= "SELECT DISTINCT a.denominazione FROM Aereoporto as a";
+		Query query= entityManager.createQuery(jpql);
+		List<String> listaNomiAereoporti= query.getResultList();
+		return listaNomiAereoporti;
+	}
+	
 	public static String parserAereoporto(String idAereoporto  ) {
 		
 		for(Aereoporto a:listaAereoporti) {
