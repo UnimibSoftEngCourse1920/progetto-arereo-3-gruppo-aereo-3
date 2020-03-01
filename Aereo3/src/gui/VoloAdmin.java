@@ -258,6 +258,22 @@ public class VoloAdmin {
 	textField_5.setColumns(10);
 	
 	JButton btnAggiungiVolo = new JButton("Aggiungi Volo");
+	btnAggiungiVolo.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Volo v = new Volo();
+			v.setPartenza(textField.getText());
+			v.setDestinazione(textField_1.getText());
+			v.setDataPartenza(dateChooser_1.getDate());
+			v.setDataArrivo(dateChooser_2.getDate());
+			v.setGate(textField_4.getText());
+			v.setNumeroPosti(Integer.parseInt(textField_5.getText()));
+			String oraPartenza = (String) comboBox_3.getSelectedItem();
+			String minutiPartenza = (String) comboBox_4.getSelectedItem();
+			String oraArrivo = (String) comboBox_5.getSelectedItem();
+			String minutiArrivo = (String) comboBox_6.getSelectedItem();
+			Controller.insertVolo(v, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo);
+		}
+	});
 	btnAggiungiVolo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	GridBagConstraints gbc_btnAggiungiVolo = new GridBagConstraints();
 	gbc_btnAggiungiVolo.anchor = GridBagConstraints.WEST;
