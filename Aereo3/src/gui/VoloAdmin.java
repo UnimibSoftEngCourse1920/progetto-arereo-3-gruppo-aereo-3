@@ -154,7 +154,7 @@ public class VoloAdmin {
 			v.setDataArrivo(dateChooser_2.getDate());
 			v.setGate(textField_4.getText());
 			v.setNumeroPosti(Integer.parseInt(textField_5.getText()));
-			Controller.insertVolo(v);
+//			Controller.insertVolo(v);
 			contentPane.removeAll();
 			//contentPane.add();
 			contentPane.repaint();

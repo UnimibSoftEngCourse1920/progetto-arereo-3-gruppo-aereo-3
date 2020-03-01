@@ -328,23 +328,33 @@ public class Home extends JFrame {
 					System.out.println(comboBox_2.getSelectedItem());
 					Integer value_1 = (Integer)comboBox_2.getSelectedItem();
 					int value = value_1.intValue();
-					Volo volo = new Volo();
-//					volo.setDestinazione(lblAeroportoDiArrivo.getText());
-//					volo.setPartenza(lblAeroportoDiPartenza.getText());
-//					volo.setDataPartenza( dateChooser.getDate());
-//					try {
-//						Controller.controlloDisponibilità(volo);
-//					} catch (ClassNotFoundException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					} catch (SQLException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-					contentPane.removeAll();
-					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, value, comboBox.getSelectedItem().toString(), comboBox_1.getSelectedItem().toString(), dateChooser.getDate()));
-					contentPane.repaint();
-					contentPane.revalidate();
+					
+					Date dataPartenza= dateChooser.getDate();
+					String partenza= (String)comboBox.getSelectedItem();
+					String destinazione= (String) comboBox_1.getSelectedItem();
+					try {
+						if(Controller.controlloDisponibilità(dataPartenza, partenza, destinazione)) {
+						contentPane.removeAll();
+						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, value, comboBox.getSelectedItem().toString(), comboBox_1.getSelectedItem().toString(), dateChooser.getDate()));
+						contentPane.repaint();
+						contentPane.revalidate();
+						}
+						else {
+							if (lblNewLabel_1 != null)
+								panel_2.remove(lblNewLabel_1);
+							lblNewLabel_1 = new JLabel("Volo inesistente !");
+							lblNewLabel_1.setForeground(Color.RED);
+							lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+							GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+							gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+							gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+							gbc_lblNewLabel_1.gridx = 3;
+							gbc_lblNewLabel_1.gridy = 12;
+							panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+						}
+					} catch (ClassNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					}
 				}
 				
 		

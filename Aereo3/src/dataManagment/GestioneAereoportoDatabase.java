@@ -7,17 +7,24 @@ import javax.persistence.Query;
 import dominio.Aereoporto;
 
 public class GestioneAereoportoDatabase extends GestioneDatabase {
+	
+//	public static void main (String...strings) {
+//		System.out.println(parserCodiceAereoporto("Aereoporto Sofia"));
+//	}
+	
+	
 	static List<Aereoporto> listaAereoporti= getListaAereoporti();
 	
 	
 	public static List<Aereoporto> getListaAereoporti(){
-	String jpql = "SELECT DISTINCT a FROM Aereoporto a";
+	String jpql = "SELECT DISTINCT a FROM Aereoporto as a";
 	Query query = entityManager.createQuery(jpql);
 	List<Aereoporto> listaAereoporti = query.getResultList();
 	return listaAereoporti;
 	}
 	
 	public static String parserAereoporto(String idAereoporto  ) {
+		
 		for(Aereoporto a:listaAereoporti) {
 			if(a.getIdAereoporto().equals(idAereoporto));
 			return a.getDenominazione();
@@ -25,7 +32,7 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 		return null;
 	}
 	public static String parserCodiceAereoporto(String denominazione) {
-		String jpql = "SELECT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
+		String jpql = "SELECT DISTINCT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
 		Query query = entityManager.createQuery(jpql);	
 		query.setParameter("campoDenominazione", denominazione);
 		
