@@ -3,6 +3,7 @@ package controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import dataManagment.GestioneAdminDatabase;
@@ -40,9 +41,14 @@ public class Controller {
 //		insertVolo(volo);
 	}
 
-	public static boolean controlloDisponibilità(Volo voloDaControllare) throws SQLException, ClassNotFoundException {
+	public static boolean controlloDisponibilità(Date dataPartenza, String partenza, String destinazione ) throws SQLException, ClassNotFoundException {
 
-		return Cliente.consultaVolo(voloDaControllare);
+		List<Volo> listVoli=GestioneVoloDatabase.getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
+		
+		if(listVoli.size()==0 || listVoli==null)
+			return false;
+		
+		return true;
 
 	}
 
@@ -86,8 +92,8 @@ public class Controller {
 		return GestioneAdminDatabase.isAmministratore(username,password);
 	}
 
-	public static void insertVolo(Volo volo) {
-		GestioneVoloDatabase.insertVolo(volo);
+	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {
+		GestioneVoloDatabase.insertVolo(volo, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo );
 		GestionePostoDatabase.insertPostiVolo(volo);
 	}
 

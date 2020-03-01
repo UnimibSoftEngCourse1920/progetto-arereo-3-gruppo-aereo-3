@@ -16,25 +16,25 @@ import dominio.Volo;
 public class GestioneVoloDatabase extends GestioneDatabase {
 	
 //Clark: Per debug
-	public static void main(String [] args)	{
-		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-		 String strdate2 = "14-09-2021 8:00";
-	Date dataPartenza=null;
-	try {
-		dataPartenza = dateformat2.parse(strdate2);
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-
-	String	partenza="Aereoporto Napoli";
-	String	destinazione="Aereoporto Sofia";
-	
-		List<Volo>v= getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
-		System.out.println(v);
-		
-	}
-	
+//	public static void main(String [] args)	{
+//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
+//		 String strdate2 = "14-09-2021";
+//	Date dataPartenza=null;
+//	try {
+//		dataPartenza = dateformat2.parse(strdate2);
+//	} catch (ParseException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//
+//	String	partenza="Aereoporto Napoli";
+//	String	destinazione="Aereoporto Sofia";
+//	
+//		List<Volo>v= getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
+//		System.out.println(v);
+//		
+//	}
+//	
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
@@ -103,7 +103,10 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 	}
 	
-	public static void insertVolo(Volo volo) {
+	
+	//Parametro Volo senza mettere la data
+	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
+			String minutiArrivo) {	
 		
 		if(!(entityManager.getTransaction().isActive()))
 			entityManager.getTransaction().begin();
@@ -160,27 +163,12 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		
 	}
+
+
 	
-//	public static void cancellaVolo(Date dataPartenza) {
-//		
-//	}
 	
+
 	
 	
 }
-	//Clark:DA USARE PER DEBUG
-
-//	public static void main(String [] args) {
-//		EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDB");
-//		EntityManager entityManager = factory.createEntityManager();		
-//		
-//		String jpql = "SELECT v FROM Cliente as v";
-//		Query query = entityManager.createQuery(jpql);
-//		List<Cliente> clienti = query.getResultList();
-//		System.out.println("Lista Clienti :");
-//		for(Cliente c : clienti)
-//		{
-//			System.out.println(c.getCognome()+" "+c.getNome());
-//		}
-//	}
 
