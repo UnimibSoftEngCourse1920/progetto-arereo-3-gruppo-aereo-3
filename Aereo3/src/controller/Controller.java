@@ -24,21 +24,21 @@ public class Controller {
 	public static void main(String... args) throws ParseException {
 
 		System.out.println("Main da chiamare all'eseguibile");
-		Home.main(args);
+//		Home.main(args);
 
 //		Per debug
 //		Volo volo=new Volo();
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "14-09-2021 21:30";
-//		 String ritorno="3-11-2021 22:30";
+//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+//		 String strdate2 = "15-03-2020 12:00:00";
+//		 String ritorno="15-03-2020 12:40:00";
 //		volo.setDataPartenza(dateformat2.parse(strdate2));
 //		volo.setDataArrivo(dateformat2.parse(ritorno));
-//		volo.setGate("B1");	
-//		volo.setDestinazione("BS75");
-//		volo.setPartenza("NA08");
-//		volo.setNumeroPosti(10);
+//		volo.setGate("B3");	
+//		volo.setDestinazione("NA08");
+//		volo.setPartenza("BS75");
+//		volo.setNumeroPosti(5);
 //		volo.setPromo(null);
-//		insertVolo(volo);
+//		insertVolo(volo,"15","30","16","30");
 	}
 
 	public static boolean controlloDisponibilità(Date dataPartenza, String partenza, String destinazione ) throws SQLException, ClassNotFoundException {
@@ -94,6 +94,7 @@ public class Controller {
 
 	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {
 		GestioneVoloDatabase.insertVolo(volo, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo );
+
 		GestionePostoDatabase.insertPostiVolo(volo);
 	}
 

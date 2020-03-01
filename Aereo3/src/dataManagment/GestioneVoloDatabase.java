@@ -104,9 +104,34 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	}
 	
 	
-	//Parametro Volo senza mettere la data
+	
 	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
 			String minutiArrivo) {	
+		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		StringBuilder data= new StringBuilder();
+
+		String dataPartenza= dataFormat.format(volo.getDataPartenza());
+		data.append(dataPartenza.substring(0,11)).append(oraPartenza).append(":").append(minutiPartenza);
+		Date nuovaDataP=null;
+		try {
+			nuovaDataP = dataFormat.parse(data.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		volo.setDataPartenza(nuovaDataP);
+		data= new StringBuilder();
+		
+		String dataArrivo= dataFormat.format(volo.getDataArrivo());
+		data.append(dataArrivo.substring(0,11)).append(oraArrivo).append(":").append(minutiArrivo);
+		Date nuovaDataA=null;
+		
+		try {
+			nuovaDataA = dataFormat.parse(data.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		volo.setDataArrivo(nuovaDataA);
+		
 		
 		if(!(entityManager.getTransaction().isActive()))
 			entityManager.getTransaction().begin();

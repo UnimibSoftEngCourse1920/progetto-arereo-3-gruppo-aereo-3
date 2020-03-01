@@ -29,6 +29,7 @@ import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -305,6 +306,10 @@ public class Home extends JFrame {
 		JButton btnCercaIlTuo_1 = new JButton("Cerca il tuo volo !");
 		btnCercaIlTuo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+//				SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+//				String dataScelta= dateformat2.format(dateChooser.getDate());
+//				System.out.println(dataScelta);
 				if(comboBox.getSelectedItem().equals(comboBox_1.getSelectedItem())) {
 					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
