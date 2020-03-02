@@ -3,6 +3,7 @@ package dominio;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Cliente {
 	private String cognome;
 
 	@Column(name = "data_di_nascita")
-	private LocalDate dataDiNascita;
+	private Date dataDiNascita;
 
 	@Column(name = "email")
 	private String email;
@@ -76,11 +77,11 @@ public class Cliente {
 		this.cognome = cognome;
 	}
 
-	public LocalDate getDataDiNascita() {
+	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
 
-	public void setDataDiNascita(LocalDate localDate) {
+	public void setDataDiNascita(Date localDate) {
 		this.dataDiNascita = localDate;
 	}
 

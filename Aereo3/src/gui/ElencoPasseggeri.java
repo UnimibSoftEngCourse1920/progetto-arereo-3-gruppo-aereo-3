@@ -8,12 +8,17 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.regex.Pattern;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.toedter.calendar.JDateChooser;
 
 import dominio.Cliente;
 import dominio.Volo;
@@ -25,6 +30,8 @@ public class ElencoPasseggeri {
 		panel_8.setBackground(Color.BLUE);
 		contentPane.add(panel_8, "name_1158551504937600");
 		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		Date now = new Date();
 		
 		JPanel panel_9 = new JPanel();
 		panel_9.setBackground(Color.BLUE);
@@ -152,6 +159,27 @@ public class ElencoPasseggeri {
 		email_insert.setColumns(10);
 		y++;
 		
+		JLabel dataNascita = new JLabel("Inserire data di nascita");
+		dataNascita.setForeground(Color.WHITE);
+		dataNascita.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints glc_nascita = new GridBagConstraints();
+		glc_nascita.anchor = GridBagConstraints.WEST;
+		glc_nascita.insets = new Insets(0, 0, 5, 5);
+		glc_nascita.gridx = k;
+		glc_nascita.gridy = y;
+		panel_9.add(dataNascita, glc_nascita);
+		y++;
+		
+		JDateChooser dataDiNascita = new JDateChooser();
+		dataDiNascita.setDate(now);
+		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
+		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
+		gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
+		gbc_dateChooser.gridx = k;
+		gbc_dateChooser.gridy = y;
+		panel_9.add(dataDiNascita, gbc_dateChooser);
+		y++;
+		
 		JLabel errore = new JLabel("");
 		errore.setForeground(Color.RED);
 		errore.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -167,7 +195,7 @@ public class ElencoPasseggeri {
 			public void actionPerformed(ActionEvent e) {
 				boolean continua = true;
 				for (int i = 0; i<campi.length;i++) {
-					if (campi[i].getText().equals("") || email_insert.getText().equals("")){
+					if (campi[i].getText().equals("") || email_insert.getText().equals("") || email_insert.isValid() == false){
 						continua=false;
 						if (!errore.getText().equals("")) {
 							errore.setText("");
@@ -176,15 +204,28 @@ public class ElencoPasseggeri {
 					}
 				}
 				
-				if (continua == true) {
-				Cliente c = new Cliente();
-				c.setNome(campi[0].getText());
-				c.setCognome(campi[1].getText());
-				c.setEmail(email_insert.getText());
-				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo, c));
-				contentPane.repaint();
-				contentPane.revalidate();
+				if(dataDiNascita.getDate().after(now)) {
+					continua=false;
+					if (!errore.getText().equals("")) {
+						errore.setText("");
+					}
+					errore.setText("Errore");
+				}
+				
+				else if (continua == true) {
+					if (!errore.getText().equals("")) {
+						errore.setText("");
+					}
+					Cliente c = new Cliente();
+					c.setNome(campi[0].getText());
+					c.setCognome(campi[1].getText());
+					c.setEmail(email_insert.getText());
+					c.setDataDiNascita(dataDiNascita.getDate());
+					c.setIndirizzo("Via Duomo");
+					contentPane.removeAll();
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo, c));
+					contentPane.repaint();
+					contentPane.revalidate();
 				}
 			}
 		});
@@ -193,5 +234,18 @@ public class ElencoPasseggeri {
 		
 		
 		return panel_8;
+	}
+	
+	public static boolean isValid(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                "[a-zA-Z0-9_+&*-]+)*@" + 
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                "A-Z]{2,7}$"; 
+                  
+		Pattern pat = Pattern.compile(emailRegex); 
+		if (email == null) 
+			return false; 
+		
+		return pat.matcher(email).matches();
 	}
 }

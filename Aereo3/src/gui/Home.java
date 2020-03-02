@@ -20,6 +20,7 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dominio.Aereoporto;
+import dominio.Cliente;
 import dominio.Volo;
 
 import java.awt.GridBagLayout;
@@ -32,9 +33,11 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 
 public class Home extends JFrame {
@@ -64,25 +67,27 @@ public class Home extends JFrame {
 	private JButton btnAreaAdmin;
 	private JPanel panel_5;
 	private JButton btnVisualizzamodificaPrenotazione;
-	private JPanel panel_6;
-	private JPanel panel_7;
-	private JLabel lblPagamento;
-	private Component verticalStrut_6;
-	private JLabel lblNumeroDiCarta;
-	private JTextField textField;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private Component verticalStrut_7;
-	private Component verticalStrut_8;
-	private JButton btnNewButton;
-	private Component verticalStrut_9;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
-	private Component verticalStrut_10;
-	private JButton btnNewButton_1;
-	private JPanel panel_8;
-	private JButton btnNewButton_2;
+	private JPanel registration_panel;
 	private JButton btnBack;
+	private Component verticalStrut_6;
+	private JLabel lblNome;
+	private JTextField textField;
+	private JLabel lblCognome;
+	private JTextField textField_1;
+	private JLabel lblDataDiNascita;
+	private JDateChooser dateChooser_1;
+	private JLabel lblIndirizzo;
+	private JTextField textField_2;
+	private JLabel lblEmail;
+	private JTextField textField_3;
+	private JLabel lblNewLabel_2;
+	private JPasswordField passwordField;
+	private JLabel lblConfermaPassword;
+	private Component verticalStrut_7;
+	private JButton btnRegistrati;
+	private JLabel lblNewLabel_3;
+	private JPasswordField passwordField_1;
+
 	/**
 	 * Launch the application.
 	 */
@@ -411,6 +416,237 @@ public class Home extends JFrame {
 		
 		//Nuovo panel
 		
+		registration_panel = new JPanel();
+		registration_panel.setBackground(Color.BLUE);
+		contentPane.add(registration_panel, "name_5801880281900");
+		GridBagLayout gbl_registration_panel = new GridBagLayout();
+		gbl_registration_panel.columnWidths = new int[]{0, 0};
+		gbl_registration_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_registration_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_registration_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		registration_panel.setLayout(gbl_registration_panel);
+		
+		btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(homePanel);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_btnBack = new GridBagConstraints();
+		gbc_btnBack.anchor = GridBagConstraints.WEST;
+		gbc_btnBack.insets = new Insets(0, 0, 5, 0);
+		gbc_btnBack.gridx = 0;
+		gbc_btnBack.gridy = 0;
+		registration_panel.add(btnBack, gbc_btnBack);
+		
+		verticalStrut_6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
+		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_6.gridx = 0;
+		gbc_verticalStrut_6.gridy = 1;
+		registration_panel.add(verticalStrut_6, gbc_verticalStrut_6);
+		
+		lblNome = new JLabel("Nome");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNome.setForeground(Color.WHITE);
+		GridBagConstraints gbc_lblNome = new GridBagConstraints();
+		gbc_lblNome.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNome.anchor = GridBagConstraints.WEST;
+		gbc_lblNome.gridx = 0;
+		gbc_lblNome.gridy = 2;
+		registration_panel.add(lblNome, gbc_lblNome);
+		
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 0;
+		gbc_textField.gridy = 3;
+		registration_panel.add(textField, gbc_textField);
+		textField.setColumns(10);
+		
+		lblCognome = new JLabel("Cognome");
+		lblCognome.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblCognome.setForeground(Color.WHITE);
+		GridBagConstraints gbc_lblCognome = new GridBagConstraints();
+		gbc_lblCognome.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCognome.anchor = GridBagConstraints.WEST;
+		gbc_lblCognome.gridx = 0;
+		gbc_lblCognome.gridy = 4;
+		registration_panel.add(lblCognome, gbc_lblCognome);
+		
+		textField_1 = new JTextField();
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.gridx = 0;
+		gbc_textField_1.gridy = 5;
+		registration_panel.add(textField_1, gbc_textField_1);
+		textField_1.setColumns(10);
+		
+		lblDataDiNascita = new JLabel("Data di Nascita");
+		lblDataDiNascita.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblDataDiNascita.setForeground(Color.WHITE);
+		GridBagConstraints gbc_lblDataDiNascita = new GridBagConstraints();
+		gbc_lblDataDiNascita.insets = new Insets(0, 0, 5, 0);
+		gbc_lblDataDiNascita.anchor = GridBagConstraints.WEST;
+		gbc_lblDataDiNascita.gridx = 0;
+		gbc_lblDataDiNascita.gridy = 6;
+		registration_panel.add(lblDataDiNascita, gbc_lblDataDiNascita);
+		
+		dateChooser_1 = new JDateChooser();
+		GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
+		gbc_dateChooser_1.insets = new Insets(0, 0, 5, 0);
+		gbc_dateChooser_1.fill = GridBagConstraints.BOTH;
+		gbc_dateChooser_1.gridx = 0;
+		gbc_dateChooser_1.gridy = 7;
+		registration_panel.add(dateChooser_1, gbc_dateChooser_1);
+		
+		lblIndirizzo = new JLabel("Indirizzo");
+		lblIndirizzo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblIndirizzo.setForeground(Color.WHITE);
+		GridBagConstraints gbc_lblIndirizzo = new GridBagConstraints();
+		gbc_lblIndirizzo.insets = new Insets(0, 0, 5, 0);
+		gbc_lblIndirizzo.anchor = GridBagConstraints.WEST;
+		gbc_lblIndirizzo.gridx = 0;
+		gbc_lblIndirizzo.gridy = 8;
+		registration_panel.add(lblIndirizzo, gbc_lblIndirizzo);
+		
+		textField_2 = new JTextField();
+		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 0;
+		gbc_textField_2.gridy = 9;
+		registration_panel.add(textField_2, gbc_textField_2);
+		textField_2.setColumns(10);
+		
+		lblEmail = new JLabel("Email");
+		lblEmail.setForeground(Color.WHITE);
+		lblEmail.setBackground(Color.WHITE);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.insets = new Insets(0, 0, 5, 0);
+		gbc_lblEmail.anchor = GridBagConstraints.WEST;
+		gbc_lblEmail.gridx = 0;
+		gbc_lblEmail.gridy = 10;
+		registration_panel.add(lblEmail, gbc_lblEmail);
+		
+		textField_3 = new JTextField();
+		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_3.gridx = 0;
+		gbc_textField_3.gridy = 11;
+		registration_panel.add(textField_3, gbc_textField_3);
+		textField_3.setColumns(10);
+		
+		lblNewLabel_2 = new JLabel("Password");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_2.gridx = 0;
+		gbc_lblNewLabel_2.gridy = 12;
+		registration_panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		passwordField = new JPasswordField();
+		GridBagConstraints gbc_passwordField = new GridBagConstraints();
+		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
+		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.gridx = 0;
+		gbc_passwordField.gridy = 13;
+		registration_panel.add(passwordField, gbc_passwordField);
+		
+		lblConfermaPassword = new JLabel("Conferma Password");
+		lblConfermaPassword.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblConfermaPassword.setForeground(Color.WHITE);
+		GridBagConstraints gbc_lblConfermaPassword = new GridBagConstraints();
+		gbc_lblConfermaPassword.insets = new Insets(0, 0, 5, 0);
+		gbc_lblConfermaPassword.anchor = GridBagConstraints.WEST;
+		gbc_lblConfermaPassword.gridx = 0;
+		gbc_lblConfermaPassword.gridy = 14;
+		registration_panel.add(lblConfermaPassword, gbc_lblConfermaPassword);
+		
+		passwordField_1 = new JPasswordField();
+		GridBagConstraints gbc_passwordField_1 = new GridBagConstraints();
+		gbc_passwordField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_passwordField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField_1.gridx = 0;
+		gbc_passwordField_1.gridy = 15;
+		registration_panel.add(passwordField_1, gbc_passwordField_1);
+		
+		verticalStrut_7 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
+		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 0);
+		gbc_verticalStrut_7.gridx = 0;
+		gbc_verticalStrut_7.gridy = 16;
+		registration_panel.add(verticalStrut_7, gbc_verticalStrut_7);
+		
+		lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setForeground(Color.RED);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_3.gridx = 0;
+		gbc_lblNewLabel_3.gridy = 18;
+		registration_panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		
+		btnRegistrati = new JButton("Registrati ");
+		btnRegistrati.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (! lblNewLabel_3.getText().equals(""))
+					lblNewLabel_3.setText("");
+				
+				if(!(passwordField.getText().equals(passwordField_1.getText())) || passwordField.getText().equals("") || passwordField_1.getText().equals("")) {
+					lblNewLabel_3.setText("Password Errate !");
+				}
+				
+				else if(dateChooser_1.getDate().after(now)) {
+					lblNewLabel_3.setText("Errore nella data");
+				}
+				
+				else if(isValid(textField_3.getText()) == false || textField_3.getText().equals("")) {
+					lblNewLabel_3.setText("Email errate");
+				}
+				Cliente c = new Cliente();
+				c.setNome(textField.getText());
+				c.setCognome(textField_1.getText());
+				c.setEmail(textField_3.getText());
+				c.setPassword(passwordField.getText());
+				c.setDataDiNascita(dateChooser_1.getDate());
+				c.setIndirizzo(textField_2.getText());
+				Controller.insertCliente(c);
+				registrationPanel.repaint();
+				registrationPanel.revalidate();
+			}
+		});
+		btnRegistrati.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_btnRegistrati = new GridBagConstraints();
+		gbc_btnRegistrati.insets = new Insets(0, 0, 5, 0);
+		gbc_btnRegistrati.anchor = GridBagConstraints.WEST;
+		gbc_btnRegistrati.gridx = 0;
+		gbc_btnRegistrati.gridy = 17;
+		registration_panel.add(btnRegistrati, gbc_btnRegistrati);
+		
+	}
+	
+	public static boolean isValid(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                "[a-zA-Z0-9_+&*-]+)*@" + 
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                "A-Z]{2,7}$"; 
+                  
+		Pattern pat = Pattern.compile(emailRegex); 
+		if (email == null) 
+			return false; 
+		
+		return pat.matcher(email).matches();
 	}
 }
 
