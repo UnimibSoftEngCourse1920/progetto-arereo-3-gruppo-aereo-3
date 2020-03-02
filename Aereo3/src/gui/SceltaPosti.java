@@ -162,6 +162,8 @@ public class SceltaPosti {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List <Posto> listaPosti = new ArrayList<Posto>();
+				double costo = 0;
+				int costoPunti = 0;
 				for(int i = 0; i<value; i++) {
 					/*String s = (String)box[i].getSelectedItem();
 					String[] ss = s.split(", ");
@@ -171,11 +173,18 @@ public class SceltaPosti {
 					int valore = numero.valueOf(numero);*/
 					
 					Posto p = (Posto)box[i].getSelectedItem();
+					costo = costo + p.getPrezzo();
+					costoPunti = costoPunti + p.getPrezzoPunti();
 					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 				}
 				//portati dietro cliente
-				Controller.insertCliente(c);
-				Controller.insertPrenotazione(c, idVolo, listaPosti);
+//				Controller.insertCliente(c);
+//				Controller.insertPrenotazione(c, idVolo, listaPosti);
+				
+				contentPane.removeAll();
+				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti));
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));

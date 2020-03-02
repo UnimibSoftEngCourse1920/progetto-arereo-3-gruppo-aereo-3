@@ -64,6 +64,25 @@ public class Home extends JFrame {
 	private JButton btnAreaAdmin;
 	private JPanel panel_5;
 	private JButton btnVisualizzamodificaPrenotazione;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JLabel lblPagamento;
+	private Component verticalStrut_6;
+	private JLabel lblNumeroDiCarta;
+	private JTextField textField;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private Component verticalStrut_7;
+	private Component verticalStrut_8;
+	private JButton btnNewButton;
+	private Component verticalStrut_9;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private Component verticalStrut_10;
+	private JButton btnNewButton_1;
+	private JPanel panel_8;
+	private JButton btnNewButton_2;
+	private JButton btnBack;
 	/**
 	 * Launch the application.
 	 */
