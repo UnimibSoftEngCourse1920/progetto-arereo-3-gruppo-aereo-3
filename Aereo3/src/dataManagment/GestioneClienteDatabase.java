@@ -80,7 +80,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	}
 
 	public static Cliente login(String email, String pwd) {
-		String jpql = "SELECT c FROM Cliente as c where c.email=:email and c.password=:pwd";
+		String jpql = "SELECT c FROM Cliente as c where c.email=:email and c.psw=:pwd";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("email", email);
 		query.setParameter("pwd", pwd);

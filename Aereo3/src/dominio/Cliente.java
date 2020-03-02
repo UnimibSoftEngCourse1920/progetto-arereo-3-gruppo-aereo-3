@@ -45,16 +45,16 @@ public class Cliente {
 	private String indirizzo;
 	
 	@Column(name = "password")
-	private String password;
+	private String psw;
 	
 	
 
-	public String getPassword() {
-		return password;
+	public String getPsw() {
+		return psw;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPsw(String password) {
+		this.psw = password;
 	}
 
 	public int getCodCliente() {

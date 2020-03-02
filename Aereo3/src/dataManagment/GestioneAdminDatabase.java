@@ -20,12 +20,12 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 //		
 //	}
 
-	public static boolean isAmministratore(String username, String password){
+	public static boolean isAmministratore(String username, String psw){
 
-		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.password=:password";
+		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.psw=:psw";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("username", username);
-        query.setParameter("password", password);
+        query.setParameter("psw", psw);
 		List<Admin> listaAmministratori= query.getResultList();
 		if(listaAmministratori.size() == 1)
 			return true;

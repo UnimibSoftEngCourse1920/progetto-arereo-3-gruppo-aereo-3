@@ -232,7 +232,7 @@ public class Registrazione_1 {
 				c.setNome(textField.getText());
 				c.setCognome(textField_1.getText());
 				c.setEmail(textField_3.getText());
-				c.setPassword(passwordField.getText());
+				c.setPsw(passwordField.getText());
 				c.setDataDiNascita(dateChooser_1.getDate());
 				c.setIndirizzo(textField_2.getText());
 				Controller.insertCliente(c);
