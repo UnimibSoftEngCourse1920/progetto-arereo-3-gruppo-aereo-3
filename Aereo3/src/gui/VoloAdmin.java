@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dataManagment.GestioneAereoportoDatabase;
 import dominio.Volo;
 
 public class VoloAdmin {
@@ -42,33 +44,39 @@ public class VoloAdmin {
 	gbc_lblPartenza.gridy = 1;
 	panel_6.add(lblPartenza, gbc_lblPartenza);
 	
-	JTextField textField = new JTextField();
-	GridBagConstraints gbc_textField = new GridBagConstraints();
-	gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-	gbc_textField.insets = new Insets(0, 0, 5, 0);
-	gbc_textField.gridx = 0;
-	gbc_textField.gridy = 2;
-	panel_6.add(textField, gbc_textField);
-	textField.setColumns(10);
+	List <String> aeroportiDisponibili = GestioneAereoportoDatabase.getDenominazioniAereoporti();
+	
+	JComboBox comboBox = new JComboBox();
+	for(String aeroporto : aeroportiDisponibili) {
+		comboBox.addItem(aeroporto);
+	}
+	GridBagConstraints gbc_comboBox = new GridBagConstraints();
+	gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+	gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+	gbc_comboBox.gridx = 0;
+	gbc_comboBox.gridy = 2;
+	panel_6.add(comboBox, gbc_comboBox);
 	
 	JLabel lblDestinazione = new JLabel("Destinazione:");
 	lblDestinazione.setForeground(Color.WHITE);
 	lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	GridBagConstraints gbc_lblDestinazione = new GridBagConstraints();
 	gbc_lblDestinazione.anchor = GridBagConstraints.WEST;
-	gbc_lblDestinazione.insets = new Insets(0, 0, 5, 0);
+	gbc_lblDestinazione.insets = new Insets(0, 0, 5, 5);
 	gbc_lblDestinazione.gridx = 0;
 	gbc_lblDestinazione.gridy = 3;
 	panel_6.add(lblDestinazione, gbc_lblDestinazione);
 	
-	JTextField textField_1 = new JTextField();
-	GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-	gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-	gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-	gbc_textField_1.gridx = 0;
-	gbc_textField_1.gridy = 4;
-	panel_6.add(textField_1, gbc_textField_1);
-	textField_1.setColumns(10);
+	JComboBox comboBox_1 = new JComboBox();
+	for(String aeroporto : aeroportiDisponibili) {
+		comboBox_1.addItem(aeroporto);
+	}
+	GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+	gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+	gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+	gbc_comboBox_1.gridx = 0;
+	gbc_comboBox_1.gridy = 4;
+	panel_6.add(comboBox_1, gbc_comboBox_1);
 	
 	JLabel lblDataPartenza = new JLabel("Data Partenza.");
 	lblDataPartenza.setForeground(Color.WHITE);
@@ -261,8 +269,8 @@ public class VoloAdmin {
 	btnAggiungiVolo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			Volo v = new Volo();
-			v.setPartenza(textField.getText());
-			v.setDestinazione(textField_1.getText());
+			v.setPartenza((String)comboBox.getSelectedItem());
+			v.setDestinazione((String) comboBox_1.getSelectedItem());
 			v.setDataPartenza(dateChooser_1.getDate());
 			v.setDataArrivo(dateChooser_2.getDate());
 			v.setGate(textField_4.getText());
