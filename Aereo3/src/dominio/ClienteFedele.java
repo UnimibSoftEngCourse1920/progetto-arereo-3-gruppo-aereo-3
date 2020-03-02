@@ -2,29 +2,47 @@ package dominio;
 
 import java.util.Date;
 
-
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name="cliente")
-@DiscriminatorValue("1")
+@Table(name = "cliente_fedele")
 public class ClienteFedele extends Cliente {
 
 	@Column(name = "punti")
 	private int punti;
 
-	@Column(name="data_iscrizione")
+	@Column(name = "data_iscrizione")
 	private Date dataIscrizione;
-
-	@Transient
-	@Column(name="data_ultimo_biglietto")
+	
+	@Column(name = "data_ultimo_biglietto")
 	private Date ultimoBiglietto;
 
-//    private static PagaStrategy strategy;
+	// data in cui il cliente è diventato infedele (dopo due anni che non acquista
+	// biglietti)
+	@Column(name = "infedele")
+	private Date infedele;
+	
+	
+
+	public Date getInfedele() {
+		return infedele;
+	}
+
+	public void setInfedele(Date infedele) {
+		this.infedele = infedele;
+	}
+	
+	public void setCodCliente(int codCliente) {
+		this.codCliente = codCliente;
+	}
+
+	public void setUltimoBiglietto(Date ultimoBiglietto) {
+		this.ultimoBiglietto = ultimoBiglietto;
+	}
 
 	public int getPunti() {
 		return punti;
@@ -33,20 +51,19 @@ public class ClienteFedele extends Cliente {
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-	
-	
+
 	public Date getDataIscrizione() {
 		return dataIscrizione;
 	}
+
 	public void setDataIscrizione(Date dataIscrizione) {
 
 		this.dataIscrizione = dataIscrizione;
 	}
-	
-	
+
 	public Date getUltimoBiglietto() {
 		// da sistemare
 		return null;
 
-}
+	}
 }

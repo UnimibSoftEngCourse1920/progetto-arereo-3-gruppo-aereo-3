@@ -117,7 +117,7 @@ public class Controller {
 		GestioneClienteDatabase.insertCliente(cliente);
 	}
 
-	public static boolean login(String email, String pass) {
+	public static Cliente login(String email, String pass) {
 		return GestioneClienteDatabase.login(email, pass);
 	}
 }
