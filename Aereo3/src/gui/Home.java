@@ -64,28 +64,6 @@ public class Home extends JFrame {
 	private JButton btnAreaAdmin;
 	private JPanel panel_5;
 	private JButton btnVisualizzamodificaPrenotazione;
-	private JPanel panel_6;
-	private JLabel lblPartenza;
-	private JLabel lblDestinazione;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JLabel lblDataPartenza;
-	private JLabel lblDataArrivo;
-	private JLabel lblGate;
-	private JTextField textField_4;
-	private JLabel lblNumeroPosti;
-	private JTextField textField_5;
-	private JButton btnAggiungiVolo;
-	private JDateChooser dateChooser_1;
-	private JDateChooser dateChooser_2;
-	private JLabel lblNewLabel_2;
-	private JComboBox comboBox_3;
-	private JLabel lblMinuti;
-	private JComboBox comboBox_4;
-	private JLabel lblOra;
-	private JComboBox comboBox_5;
-	private JLabel lblMinuti_1;
-	private JComboBox comboBox_6;
 	/**
 	 * Launch the application.
 	 */
@@ -316,7 +294,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 
-				if (dateChooser.getDate().before(now)) {
+				if (dateChooser.getDate().getDay() < now.getDay()) {
 					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
 					

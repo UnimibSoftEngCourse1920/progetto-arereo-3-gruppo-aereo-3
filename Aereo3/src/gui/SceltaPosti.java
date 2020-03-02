@@ -174,7 +174,7 @@ public class SceltaPosti {
 					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 				}
 				//portati dietro cliente
-				//Controller.insertCliente();
+				Controller.insertCliente(c);
 				Controller.insertPrenotazione(c, idVolo, listaPosti);
 			}
 		});

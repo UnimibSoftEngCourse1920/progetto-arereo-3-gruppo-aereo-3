@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dominio.Cliente;
 
 public class Accesso {
 	
@@ -135,9 +136,9 @@ public class Accesso {
 				}
 				
 				else{
-					Controller.login(textField.getText(), textField_1.getText());
+					Cliente c = Controller.login(textField.getText(), textField_1.getText());
 					contentPane.removeAll();
-					contentPane.add(AreaUtente.esegui(contentPane, homePanel));
+					contentPane.add(AreaUtente.esegui(contentPane, homePanel, c));
 					contentPane.repaint();
 					contentPane.revalidate();
 					}

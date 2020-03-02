@@ -4,21 +4,32 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import controller.Controller;
+import dominio.Cliente;
+import dominio.Prenotazione;
+import dominio.Volo;
 
 public class AreaUtente {
-	static JPanel esegui(JPanel contentPane, JPanel homePanel) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, Cliente c) {
 		JPanel areaUtente = new JPanel ();
 		areaUtente.setBackground(Color.BLUE);
 		contentPane.add(areaUtente, "name_864878817126900");
@@ -236,6 +247,51 @@ public class AreaUtente {
 				prenotazioni.add(lblLeTuePrenotazioni, gbc_lblLeTuePrenotazioni);
 				contentPane.repaint();
 				contentPane.revalidate();
+				
+				Component verticalStrut_16 = Box.createVerticalStrut(20);
+				GridBagConstraints gbc_verticalStrut_16 = new GridBagConstraints();
+				gbc_verticalStrut_16.insets = new Insets(0, 0, 5, 0);
+				gbc_verticalStrut_16.gridx = 1;
+				gbc_verticalStrut_16.gridy = 2;
+				prenotazioni.add(verticalStrut_16, gbc_verticalStrut_16);
+				
+				Component horizontalStrut_6 = Box.createHorizontalStrut(20);
+				GridBagConstraints gbc_horizontalStrut_6 = new GridBagConstraints();
+				gbc_horizontalStrut_6.insets = new Insets(0, 0, 0, 5);
+				gbc_horizontalStrut_6.gridx = 0;
+				gbc_horizontalStrut_6.gridy = 3;
+				prenotazioni.add(horizontalStrut_6, gbc_horizontalStrut_6);
+				
+				List <Prenotazione> listaPrenotazioni = Controller.getPrenotazionePerCliente(c.getCodCliente());
+				
+				Object rows [][] = new Object [listaPrenotazioni.size()][4];
+				
+				String [] columns = {"ID Prenotazione", "Prezzo Totale", "Prezzo Punti", "Pagata"};
+				
+				int i = 0;
+				
+				for(Prenotazione p : listaPrenotazioni) {
+					rows[i][0] = p.getId();
+					rows[i][1] = p.getPrezzoTotale();
+					rows[i][2] = p.getPrezzoPuntiTotale();
+					rows[i][3] = p.isPagato();
+					i++;
+				}
+				
+				TableModel model = new DefaultTableModel(rows, columns)
+				  {
+				    public boolean isCellEditable(int row, int columns)
+				    {
+				      return false;
+				    }
+				  };
+				JTable table = new JTable(model);
+				table.setPreferredSize(new Dimension(800, 500));
+				GridBagConstraints gbc_table = new GridBagConstraints();
+				gbc_table.insets = new Insets(0, 0, 0, 5);
+				gbc_table.gridx = 1;
+				gbc_table.gridy = 3;
+				prenotazioni.add(new JScrollPane(table), gbc_table);
 			}
 		});
 		btnPrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
