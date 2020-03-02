@@ -77,6 +77,14 @@ public class AreaAdmin {
 		menuAdmin.add(verticalStrut_8, gbc_verticalStrut_8);
 		
 		JButton btnModificaVolo = new JButton("Modifica Volo");
+		btnModificaVolo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_5.removeAll();
+				panel_5.add(ModificaAdmin.esegui(panel_5));
+				panel_5.repaint();
+				panel_5.revalidate();
+			}
+		});
 		btnModificaVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbc_btnModificaVolo = new GridBagConstraints();
 		gbc_btnModificaVolo.anchor = GridBagConstraints.NORTHWEST;

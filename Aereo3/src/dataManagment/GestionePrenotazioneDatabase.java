@@ -20,6 +20,7 @@ import dominio.Volo;
 import net.bytebuddy.asm.Advice.This;
 
 public class GestionePrenotazioneDatabase extends GestioneDatabase {
+
 	public static List<Prenotazione> getPrenotazioniPerCliente(int codCliente){
 		
 		String jpql = "SELECT p FROM Prenotazione as p WHERE codCliente like " + codCliente;
