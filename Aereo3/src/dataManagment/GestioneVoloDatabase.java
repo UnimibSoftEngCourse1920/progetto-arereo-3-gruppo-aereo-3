@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.Query;
 import javax.xml.crypto.Data;
@@ -16,25 +17,24 @@ import dominio.Volo;
 public class GestioneVoloDatabase extends GestioneDatabase {
 	
 //Clark: Per debug
-//	public static void main(String [] args)	{
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "14-09-2021";
-//	Date dataPartenza=null;
-//	try {
-//		dataPartenza = dateformat2.parse(strdate2);
-//	} catch (ParseException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//
-//	String	partenza="Aereoporto Napoli";
-//	String	destinazione="Aereoporto Sofia";
-//	
-//		List<Volo>v= getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
-//		System.out.println(v);
+//	public static void main(String [] args) throws ParseException	{
+//		Volo volo=new Volo();
+//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+//		 String strdate2 = "11-03-2020 12:00:00";
+//		 String ritorno="11-03-2020 12:40:00";
+//		volo.setDataPartenza(dateformat2.parse(strdate2));
+//		volo.setDataArrivo(dateformat2.parse(ritorno));
+//		volo.setGate("B3");	
+//		volo.setDestinazione("BS75");
+//		volo.setPartenza("MI95");
+//		volo.setNumeroPosti(5);
+//		volo.setPromo(null);
+//		List <String> orari =getOrariPartenzaVolo(volo);
+//		for(String o: orari)
+//			System.out.println(o);
 //		
 //	}
-//	
+	
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
@@ -199,5 +199,60 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+//	
+//	static SimpleDateFormat dFormat= new SimpleDateFormat ("dd-MM-yyyy");
+//	static SimpleDateFormat tFormat= new SimpleDateFormat("HH:mm");
+//	
+//	public static List <String> getOrariPartenzaVolo(Volo volo){
+//		
+//	String jpql="SELECT v.dataPartenza FROM Volo as v  WHERE v.partenza=:partenza AND v.destinazione=:destinazione";
+//	Query query=entityManager.createQuery(jpql);
+//	query.setParameter("partenza", volo.getPartenza());
+//	query.setParameter("destinazione", volo.getDestinazione());
+//	 tFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//
+//	List <Date> listaDateDaParsare=query.getResultList();
+//	
+//
+//	List<String> listaOrari= new ArrayList<String>();
+//	for (Date d:listaDateDaParsare) {
+//		String data= dFormat.format(d);
+//		if(dFormat.format(volo.getDataPartenza()).equals(data));
+//			listaOrari.add(tFormat.format(d));
+//	}
+//	
+//	return listaOrari;
+//		
+//	}
+//	
+//	public static List <String> getOrariArrivoVolo(Volo volo){
+//		
+//	String jpql="SELECT v.dataArrivo FROM Volo as v  WHERE v.partenza=:partenza AND v.destinazione=:destinazione";
+//	Query query=entityManager.createQuery(jpql);
+//	query.setParameter("partenza", volo.getPartenza());
+//	query.setParameter("destinazione", volo.getDestinazione());
+//	
+//	List <Date> listaDateDaParsare=query.getResultList();
+//
+//	tFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//
+//	List<String> listaOrari= new ArrayList<String>();
+//	for (Date d:listaDateDaParsare) {
+//		String data= dFormat.format(d);
+//		if(dFormat.format(volo.getDataArrivo()).equals(data));
+//			listaOrari.add(tFormat.format(d));
+//	}
+//	
+//	return listaOrari;
+//		
+//	}
+	
+	
 }
 
