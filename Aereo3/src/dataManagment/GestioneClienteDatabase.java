@@ -10,6 +10,7 @@ import javax.transaction.Transaction;
 
 import dominio.Cliente;
 import dominio.ClienteFedele;
+import dominio.Prenotazione;
 
 public class GestioneClienteDatabase extends GestioneDatabase {
 
@@ -88,6 +89,15 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		if (clienti.size() == 1)
 			return clienti.get(0);
 		return null;
+	}
+	
+	public static Prenotazione loginCliente(int idPrenotazione, String email ) {
+		String jpql= "SELECT p FROM Cliente as c, Prenotazione as p WHERE p.codCliente=c.codCliente AND c.email=:email AND p.id=:idP";
+		Query query = entityManager.createQuery(jpql).setParameter("email", email).setParameter("idP", idPrenotazione);
+		List <Prenotazione> lista= query.getResultList();
+		return lista.get(0);
+		
+		
 	}
 
 	public static void signToLoyalty(Cliente cliente, String nome, String cognome, String indirizzo,
