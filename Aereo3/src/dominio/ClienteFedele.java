@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente_fedele")
 public class ClienteFedele extends Cliente {
-
+	
 	@Column(name = "punti")
 	private int punti;
 
@@ -35,10 +35,6 @@ public class ClienteFedele extends Cliente {
 
 	public void setInfedele(Date infedele) {
 		this.infedele = infedele;
-	}
-	
-	public void setCodCliente(int codCliente) {
-		this.codCliente = codCliente;
 	}
 
 	public void setUltimoBiglietto(Date ultimoBiglietto) {

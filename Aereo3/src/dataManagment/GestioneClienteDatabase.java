@@ -54,6 +54,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 			System.out.println("Codice Cliente Fedele : " + c.getCodCliente());
 		}
 		
+		System.out.println(login("ale@gmail.com","pwd123").getCodCliente());
 		signToLoyalty(ale, "", "", "", new Date(), email);
 	}
 
@@ -94,7 +95,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 		System.out.println(cliente.getCognome());
 		ClienteFedele cf = new ClienteFedele();
-		cf.setCodCliente(cliente.getCodCliente());
+		//cf.setCodCliente(cliente.getCodCliente());
 		cf.setPunti(0);
 		cf.setDataIscrizione(new Date());
 		cf.setCognome("aaaa");

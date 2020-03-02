@@ -25,8 +25,8 @@ public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-
-	protected int codCliente;
+	@Column(name = "cod_cliente")
+	private int codCliente;
 
 	@Column(name = "nome")
 	private String nome;
