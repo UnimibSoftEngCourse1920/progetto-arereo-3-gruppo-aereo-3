@@ -27,5 +27,9 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 			return true;
 		return false;
 	}
+	
+	public static void aggiornaVolo(int idVolo) {
+		
+	}
 
 }

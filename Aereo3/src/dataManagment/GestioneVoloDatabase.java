@@ -44,7 +44,13 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	}
 	
 	
-	
+	public static Volo getVolo(int idVolo) {
+		String jpqlVolo = "SELECT v FROM Volo as v, WHERE v.idVolo=:idVolo";
+		Query queryVolo = entityManager.createQuery(jpqlVolo);
+		queryVolo.setParameter("idVolo", idVolo);
+		List <Volo> v = queryVolo.getResultList();
+		return v.get(0);
+	}
 	
 	
 	public static List<String> getDestinazioniDisponibili(){
@@ -190,6 +196,35 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		}
 		
 		return risultato;
+		
+		
+	}
+	
+	public static void aggiornaVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {
+		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		StringBuilder data= new StringBuilder();
+
+		String dataPartenza= dataFormat.format(volo.getDataPartenza());
+		data.append(dataPartenza.substring(0,11)).append(oraPartenza).append(":").append(minutiPartenza);
+		Date nuovaDataP=null;
+		try {
+			nuovaDataP = dataFormat.parse(data.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		volo.setDataPartenza(nuovaDataP);
+		data= new StringBuilder();
+		
+		String dataArrivo= dataFormat.format(volo.getDataArrivo());
+		data.append(dataArrivo.substring(0,11)).append(oraArrivo).append(":").append(minutiArrivo);
+		Date nuovaDataA=null;
+		
+		try {
+			nuovaDataA = dataFormat.parse(data.toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		volo.setDataArrivo(nuovaDataA);
 		
 		
 	}
