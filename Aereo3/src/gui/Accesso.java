@@ -128,7 +128,7 @@ public class Accesso {
 					lblNewLabel_1.setText("Errore !");
 				}
 				
-				else if (Controller.login(textField.getText(), textField_1.getText()) == false) { //aggiungere errore email non trovata nel database
+				else if (Controller.login(textField.getText(), textField_1.getText()) == null) { //aggiungere errore email non trovata nel database
 					if (lblNewLabel_1.getText() != "")
 						lblNewLabel_1.setText("");
 					lblNewLabel_1.setText("Errore !");

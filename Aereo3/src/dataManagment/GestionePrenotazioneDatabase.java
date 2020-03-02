@@ -76,24 +76,17 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 	
 	//TODO: da testare
-	public static void aggiornaPrenotazioneData(Prenotazione prenotazione,Date data, boolean isArrivo) {
+	public static void aggiornaPrenotazioneData(Prenotazione prenotazione,Date data) {
 		Volo voloDaAggiornare=GestioneVoloDatabase.getVoloDiPrenotazione( prenotazione);
 		String jpql=null;
 		Query query=null;
-		if(isArrivo) {
-		jpql= "UPDATE Volo SET dataArrivo=:data and idVolo=:id";
-		query=entityManager.createQuery(jpql);
-		query.setParameter("data", data);
-		query.setParameter("id",voloDaAggiornare.getIdVolo());
-		}
-		else {
+		
 			jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
 			query=entityManager.createQuery(jpql);
 			query.setParameter("data", data);		
 			query.setParameter("id",voloDaAggiornare.getIdVolo());
-
-			}
-		 
+			
+		
 		query.executeUpdate();
 		
 //	      "WHERE population < :p");
@@ -102,15 +95,10 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	
 	
 	//TODO: Da testare 
-	public static void aggiornaPrenotazioneOrario(Prenotazione prenotazione, String orario, boolean isArrivo) {
+	public static void aggiornaPrenotazioneOrario(Prenotazione prenotazione, String orario) {
 		Volo voloDaAggiornare=GestioneVoloDatabase.getVoloDiPrenotazione( prenotazione);
 		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
-		Date dataDaAggiornare =null;
-
-		if(isArrivo) 
-			dataDaAggiornare= voloDaAggiornare.getDataArrivo();
-		else
-			dataDaAggiornare= voloDaAggiornare.getDataPartenza();
+		Date dataDaAggiornare= voloDaAggiornare.getDataPartenza();
 
 		StringBuilder str=new StringBuilder (dateformat.format(dataDaAggiornare));
 		str.delete(9,str.length());
@@ -126,20 +114,14 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		String jpql=null;
 		Query query=null;
 		
-		if(isArrivo) {
-			jpql= "UPDATE Volo SET dataArrivo=:data and idVolo=:id";
-		query=entityManager.createQuery(jpql);
-		query.setParameter("data", data);
-		query.setParameter("id",voloDaAggiornare.getIdVolo());
-		}
-		else
-		{
+	
+		
 			jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
 			query=entityManager.createQuery(jpql);
 			query.setParameter("data", data);		
 			query.setParameter("id",voloDaAggiornare.getIdVolo());
 
-			}
+			
 		 
 		
 		query.executeUpdate();
@@ -147,7 +129,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 			
 	}
 	//TODO: da testare
-	public static void aggiornaPrenotazioneDataOrario(Prenotazione prenotazione, String orario, Date data, boolean isArrivo) {
+	public static void aggiornaPrenotazioneDataOrario(Prenotazione prenotazione, String orario, Date data) {
 		
 		Volo voloDaAggiornare=GestioneVoloDatabase.getVoloDiPrenotazione( prenotazione);
 
@@ -164,23 +146,14 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 			e.printStackTrace();
 		}
 
-		String jpql=null;
-		Query query=null;
+		
 
-		if(isArrivo) {
-			jpql= "UPDATE Volo SET dataArrivo=:data and idVolo=:id";
-			query=entityManager.createQuery(jpql);
-			query.setParameter("data", data);
-			query.setParameter("id",voloDaAggiornare.getIdVolo());
-		}
-		else
-		{
-			jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
-			query=entityManager.createQuery(jpql);
+	
+		String jpql= "UPDATE Volo SET dataPartenza=:data and idVolo=:id";
+		Query	query=entityManager.createQuery(jpql);
 			query.setParameter("data", data);		
 			query.setParameter("id",voloDaAggiornare.getIdVolo());
 
-		}	
 
 		query.executeUpdate();
 	}

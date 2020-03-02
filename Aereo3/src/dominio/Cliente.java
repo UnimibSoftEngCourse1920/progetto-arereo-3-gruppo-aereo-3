@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,22 +16,17 @@ import dataManagment.GestioneClienteDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
 
 import javax.persistence.InheritanceType;
-import javax.persistence.DiscriminatorType;
 
-//@Entity
-//@Table(name = "cliente")
-//@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(
-//    name="fedele",
-//    discriminatorType=DiscriminatorType.STRING
-//)
-//@DiscriminatorValue(value="0")
+
+@Entity
+@Table(name = "cliente")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "cod_cliente")
-	private int codCliente;
+
+	protected int codCliente;
 
 	@Column(name = "nome")
 	private String nome;
@@ -50,12 +43,10 @@ public class Cliente {
 	@Column(name = "indirizzo")
 	private String indirizzo;
 	
-	//data in cui il cliente è diventato infedele (dopo due anni che non acquista biglietti)
-	@Column(name = "infedele")
-	private LocalDate infedele;
-	
 	@Column(name = "password")
 	private String password;
+	
+	
 
 	public String getPassword() {
 		return password;
@@ -64,17 +55,9 @@ public class Cliente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public int getCodCliente() {
 		return codCliente;
-	}
-
-	public LocalDate getInfedele() {
-		return infedele;
-	}
-
-	public void setInfedele(LocalDate infedele) {
-		this.infedele = infedele;
 	}
 
 	public String getNome() {
