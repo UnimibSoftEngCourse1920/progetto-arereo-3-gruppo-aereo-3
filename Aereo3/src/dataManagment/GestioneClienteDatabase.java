@@ -14,49 +14,49 @@ import dominio.ClienteFedele;
 public class GestioneClienteDatabase extends GestioneDatabase {
 
 
-	public static void main(String[] args) {
-		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
-
-		Cliente cliente = new Cliente();
-		Cliente cliente2 = new Cliente();
-		cliente.setEmail("ale@gmail.com");
-		cliente.setCognome("ciccio");
-		LocalDate localDate = LocalDate.of(2016, 1, 1);
-		cliente.setDataDiNascita(localDate);
-		cliente.setIndirizzo("ciaociao");
-		cliente.setNome("alex");
-		cliente.setPassword("pwd123");
-
-		cliente2.setEmail("test367@llfefe.com");
-		cliente2.setCognome("ciccio");
-		cliente2.setDataDiNascita(localDate);
-		cliente2.setIndirizzo("ciaociao");
-		cliente2.setNome("alex");
-		cliente2.setPassword("pwd123");
-
-		clienti.add(cliente);
-		clienti.add(cliente2);
-
-		List<Cliente> listaClienti = getClienti();
-		List<ClienteFedele> clientiFedeli = getClientiFedeli();
-		
-		String email="test@example.com";
-		String jpql = "SELECT c FROM Cliente as c where c.email=:email";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("email", email);
-		Cliente ale = (Cliente) query.getSingleResult();
-		entityManager.clear();
-
-		for (Cliente c : listaClienti) {
-			System.out.println("Codice Cliente : " + c.getCodCliente());
-		}
-		for (ClienteFedele c : clientiFedeli) {
-			System.out.println("Codice Cliente Fedele : " + c.getCodCliente());
-		}
-		
-		System.out.println(login("ale@gmail.com","pwd123").getCodCliente());
-		signToLoyalty(ale, "", "", "", new Date(), email);
-	}
+//	public static void main(String[] args) {
+//		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
+//
+//		Cliente cliente = new Cliente();
+//		Cliente cliente2 = new Cliente();
+//		cliente.setEmail("ale@gmail.com");
+//		cliente.setCognome("ciccio");
+//		LocalDate localDate = LocalDate.of(2016, 1, 1);
+//		cliente.setDataDiNascita(localDate);
+//		cliente.setIndirizzo("ciaociao");
+//		cliente.setNome("alex");
+//		cliente.setPassword("pwd123");
+//
+//		cliente2.setEmail("test367@llfefe.com");
+//		cliente2.setCognome("ciccio");
+//		cliente2.setDataDiNascita(localDate);
+//		cliente2.setIndirizzo("ciaociao");
+//		cliente2.setNome("alex");
+//		cliente2.setPassword("pwd123");
+//
+//		clienti.add(cliente);
+//		clienti.add(cliente2);
+//
+//		List<Cliente> listaClienti = getClienti();
+//		List<ClienteFedele> clientiFedeli = getClientiFedeli();
+//		
+//		String email="test@example.com";
+//		String jpql = "SELECT c FROM Cliente as c where c.email=:email";
+//		Query query = entityManager.createQuery(jpql);
+//		query.setParameter("email", email);
+//		Cliente ale = (Cliente) query.getSingleResult();
+//		entityManager.clear();
+//
+//		for (Cliente c : listaClienti) {
+//			System.out.println("Codice Cliente : " + c.getCodCliente());
+//		}
+//		for (ClienteFedele c : clientiFedeli) {
+//			System.out.println("Codice Cliente Fedele : " + c.getCodCliente());
+//		}
+//		
+//		System.out.println(login("ale@gmail.com","pwd123").getCodCliente());
+//		signToLoyalty(ale, "", "", "", new Date(), email);
+//	}
 
 	public static void insertCliente(Cliente cliente) {
 		entityManager.getTransaction().begin();

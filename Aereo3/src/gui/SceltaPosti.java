@@ -178,8 +178,8 @@ public class SceltaPosti {
 					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 				}
 				//portati dietro cliente
-//				Controller.insertCliente(c);
-//				Controller.insertPrenotazione(c, idVolo, listaPosti);
+				Controller.insertCliente(c);
+				Controller.insertPrenotazione(c, idVolo, listaPosti);
 				
 				contentPane.removeAll();
 				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti));
