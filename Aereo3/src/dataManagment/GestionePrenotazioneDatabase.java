@@ -22,7 +22,7 @@ import net.bytebuddy.asm.Advice.This;
 public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	public static List<Prenotazione> getPrenotazioniPerCliente(int codCliente){
 		
-		String jpql = "SELECT p FROM Prenotazione as p WHERE codCliente like " + codCliente;
+		String jpql = "SELECT p FROM Prenotazione as p WHERE codCliente = " + codCliente;
 		Query query = entityManager.createQuery(jpql);
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni;
@@ -30,7 +30,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	
 	public static List<Prenotazione> getPrenotazioniPerVolo(String idVolo){
 		
-		String jpql = "SELECT p FROM Prenotazione as p WHERE idVolo like " + idVolo;
+		String jpql = "SELECT p FROM Prenotazione as p WHERE idVolo = " + idVolo;
 		Query query = entityManager.createQuery(jpql);
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni;
