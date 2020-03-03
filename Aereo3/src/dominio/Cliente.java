@@ -27,7 +27,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cod_cliente")
-	private int codCliente;
+	protected int codCliente;
 
 	@Column(name = "nome")
 	private String nome;
@@ -43,19 +43,7 @@ public class Cliente {
 
 	@Column(name = "indirizzo")
 	private String indirizzo;
-	
-	@Column(name = "password")
-	private String psw;
-	
-	
 
-	public String getPsw() {
-		return psw;
-	}
-
-	public void setPsw(String password) {
-		this.psw = password;
-	}
 
 	public int getCodCliente() {
 		return codCliente;
@@ -81,8 +69,9 @@ public class Cliente {
 		return dataDiNascita;
 	}
 
-	public void setDataDiNascita(Date localDate) {
-		this.dataDiNascita = localDate;
+
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
 	}
 
 	public String getEmail() {
