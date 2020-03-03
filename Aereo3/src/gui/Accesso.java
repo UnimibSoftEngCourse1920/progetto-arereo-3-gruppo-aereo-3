@@ -124,13 +124,13 @@ public class Accesso {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(textField.getText().equals("") || textField_1.getText().equals("")) {
-					if (lblNewLabel_1.getText() != "")
+					if ( ! lblNewLabel_1.getText().equals(""))
 						lblNewLabel_1.setText("");
 					lblNewLabel_1.setText("Errore !");
 				}
 				
 				else if (Controller.login(textField.getText(), textField_1.getText()) == null) { //aggiungere errore email non trovata nel database
-					if (lblNewLabel_1.getText() != "")
+					if (! lblNewLabel_1.getText().equals(""))
 						lblNewLabel_1.setText("");
 					lblNewLabel_1.setText("Errore !");
 				}
@@ -197,7 +197,7 @@ public class Accesso {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(Registrazione_1.esegui(contentPane, logInPanel));
+				contentPane.add(Registrazione.esegui(contentPane, logInPanel));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

@@ -36,8 +36,8 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	public static String parserAereoporto(String idAereoporto  ) {
 		
 		for(Aereoporto a:listaAereoporti) {
-			if(a.getIdAereoporto().equals(idAereoporto));
-			return a.getDenominazione();
+			if(a.getIdAereoporto().equals(idAereoporto))
+				return a.getDenominazione();
 		}
 		return null;
 	}

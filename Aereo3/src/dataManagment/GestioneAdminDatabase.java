@@ -2,7 +2,6 @@ package dataManagment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import dominio.Admin;
-import dominio.Cliente;
 import dominio.Volo;
 
 public class GestioneAdminDatabase extends GestioneDatabase{
@@ -23,13 +21,15 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 //		
 //	}
 
-	public static boolean isAmministratore(String username, String password){
-		logger.debug("inizio debug");
+
 		
-		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.password=:password";
-		Query query = entityManager.createQuery(jpql);
+	public static boolean isAmministratore(String username, String psw){
+
+		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.psw=:psw";
+	Query query = entityManager.createQuery(jpql);
 		query.setParameter("username", username);
-        query.setParameter("password", password);
+        query.setParameter("psw", psw);
+		@SuppressWarnings("unchecked")
 		List<Admin> listaAmministratori= query.getResultList();
 		if(listaAmministratori.size() == 1)
 			return true;

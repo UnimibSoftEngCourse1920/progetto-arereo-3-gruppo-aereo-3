@@ -18,7 +18,7 @@ public class GestoreMail {
 	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 
 	final private String username = "aereo3project@gmail.com";
-    final private String password = "ProgettoAereo3!";
+    final private String psw = "ProgettoAereo3!";
     
     private static GestoreMail instance = null;
     
@@ -59,7 +59,7 @@ public class GestoreMail {
 	    	
     		Transport transport = getMailSession.getTransport("smtp");
 	    	 
-			transport.connect("smtp.gmail.com", username, password);
+			transport.connect("smtp.gmail.com", username, psw);
 			transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
 			transport.close();
 			
