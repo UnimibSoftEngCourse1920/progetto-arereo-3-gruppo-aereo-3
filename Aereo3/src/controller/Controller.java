@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -113,6 +115,14 @@ public class Controller {
 		GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, prenotazione);
 	}
 	
+	public static List<Posto> getPostiPerPrenotazione(int idPrenotazione){
+		return GestionePostoDatabase.getPostiPerPrenotazione(idPrenotazione);
+	}
+	
+	public static int getNumPostiPerPrenotazione(int idPrenotazione) {
+		return GestionePostoDatabase.getNumPostiPerPrenotazione(idPrenotazione);
+	}
+	
 	/********************************************************/
 	//GESTIONE PRENOTAZIONI
 	/****************************************************/
@@ -147,15 +157,24 @@ public class Controller {
 	}
 
 
+	public static void eliminaPrenotazione(int id) {
+		GestionePrenotazioneDatabase.deletePrenotazione(id);
+	}
+
+
 	/***************************************************/
 	//GESTIONE PROMOZIONE
 	/***************************************************/
 	public static List<Promozione> getPromozioni(){
-		return GestionePromozioneDatabase.getPromozioni();
+		return GestionePromozioneDatabase.getAllPromozioni();
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String msg, Volo v) {
 		GestionePromozioneDatabase.insertPromozione(inizio, fine, msg, v);
+	}
+	
+	public static Promozione getPromozione(int idPromo) {
+		return GestionePromozioneDatabase.getPromozione(idPromo);
 	}
 	/***************************************************/
 	//GESTIONE VOLO
