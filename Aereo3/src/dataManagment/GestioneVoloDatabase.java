@@ -94,7 +94,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	
 	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
 			String minutiArrivo) {	
-		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		StringBuilder data= new StringBuilder();
 
 		String dataPartenza= dataFormat.format(volo.getDataPartenza());
@@ -167,7 +167,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		List <Volo> risultato=new ArrayList<Volo>();
 		Date dataP=new Date();
-		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
+		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy HH:mm");
 		String dataPartenzaDaPrenotare= dateformat.format(dataPartenza).substring(0, 8);
 		for(Volo volo: lista) {
 			String dataDaConfrontare=dateformat.format(volo.getDataPartenza()).substring(0, 8);

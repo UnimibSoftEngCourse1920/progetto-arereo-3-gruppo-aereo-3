@@ -38,10 +38,11 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 	
 	public static void aggiornaVolo(int idVolo, String orarioPartenza, String minutiPartenza, String gate, Date dataPartenza, String orarioArrivo, String minutiArrivo, Date dataArrivo) {
 		Volo voloDaAggiornare = GestioneVoloDatabase.getVolo(idVolo);
-		
-		Date nuovaData=null;
-		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
+		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy HH:mm");
+		dateformat.setTimeZone();
 
+		Date nuovaData=null;
+		
 		StringBuilder str=new StringBuilder();
 		String data= dateformat.format(dataPartenza);
 
@@ -54,7 +55,7 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		}
 		
 		Date nuovaData_1 = null;
-		SimpleDateFormat dateformat_1 = new SimpleDateFormat("dd-MM-yy hh:mm");
+		SimpleDateFormat dateformat_1 = new SimpleDateFormat("dd-MM-yy HH:mm");
 		
 		StringBuilder str_1 = new StringBuilder();
 		String data_1 = dateformat_1.format(dataArrivo);
@@ -66,14 +67,15 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		} catch (ParseException e) {
 			logger.error(e);
 		}
-		
-		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo";
+		entityManager.getTransaction().begin();
+		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData , dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("nuovaData", nuovaData);
 		query.setParameter("nuovaData_1", nuovaData_1);
 		query.setParameter("idVolo", idVolo);
-		
-		query.executeUpdate();
+		query;
+		entityManager.clear();
+	
 		
 		
 	}

@@ -96,11 +96,11 @@ public class Controller {
 	return GestioneClienteDatabase.loginCliente(idPrenotazione, email);
 	}
 	
-	public static void signToLoyalty(Cliente cliente, String nome, String cognome, String indirizzo,
-			Date date, String email) {
-		GestioneClienteDatabase.signToLoyalty(cliente, nome, cognome, indirizzo, date, email);
-	}
-	
+//	public static void signToLoyalty(Cliente cliente, String nome, String cognome, String indirizzo,
+//			Date date, String email) {
+//		GestioneClienteDatabase.signToLoyalty(cliente, nome, cognome, indirizzo, date, email);
+//	}
+//	
 	public static void deleteCliente(Cliente cliente) {
 		GestioneClienteDatabase.deleteCliente(cliente);
 	}
