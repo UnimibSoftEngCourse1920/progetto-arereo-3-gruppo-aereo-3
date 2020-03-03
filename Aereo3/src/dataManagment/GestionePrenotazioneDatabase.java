@@ -67,6 +67,12 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		
 	}
 	
+	public static void deletePrenotazione(int id) {
+		String jpql = "DELETE Prenotazione p WHERE p.idPrenotazione = :idp";
+		Query query = entityManager.createQuery(jpql).setParameter("idp", id);
+		query.executeUpdate();
+	}
+	
 	/*****************BRANCH CLARK************************************/
 
 	public static void pagamentoPrenotazione(Prenotazione prenotazione) {
