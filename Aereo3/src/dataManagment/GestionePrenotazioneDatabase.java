@@ -15,7 +15,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 
 	public static List<Prenotazione> getPrenotazioniPerCliente(int codCliente){
 		
-		String jpql = "SELECT p FROM Prenotazione as p WHERE codCliente like " + codCliente;
+		String jpql = "SELECT p FROM Prenotazione as p WHERE codCliente = " + codCliente;
 		Query query = entityManager.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
@@ -24,7 +24,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	
 	public static List<Prenotazione> getPrenotazioniPerVolo(String idVolo){
 		
-		String jpql = "SELECT p FROM Prenotazione as p WHERE idVolo like " + idVolo;
+		String jpql = "SELECT p FROM Prenotazione as p WHERE idVolo = " + idVolo;
 		Query query = entityManager.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
@@ -67,6 +67,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		
 	}
 	
+
 	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
 		String jpql = "SELECT p.id FROM Prenotazione as p WHERE codCliente like " + c.getCodCliente();
 		Query query = entityManager.createQuery(jpql);
@@ -75,6 +76,12 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		int risultato = value.intValue();
 		System.out.println(risultato);
 		return risultato;
+	}
+	
+	public static void deletePrenotazione(int id) {
+		String jpql = "DELETE Prenotazione p WHERE p.idPrenotazione = :idp";
+		Query query = entityManager.createQuery(jpql).setParameter("idp", id);
+		query.executeUpdate();
 	}
 	
 	/*****************BRANCH CLARK************************************/
@@ -87,4 +94,4 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 
 		
-	}
+}

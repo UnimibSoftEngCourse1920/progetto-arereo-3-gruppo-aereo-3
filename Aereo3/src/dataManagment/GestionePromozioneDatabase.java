@@ -11,7 +11,7 @@ import dominio.Volo;
 
 public class GestionePromozioneDatabase extends GestioneDatabase {
 	
-	public static List<Promozione> getPromozioni(){
+	public static List<Promozione> getAllPromozioni(){
 		String jpql = "SELECT p FROM Promozione as p";
 		Query query = entityManager.createQuery(jpql);
 		List<Promozione> promozioni = query.getResultList();
@@ -29,5 +29,12 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		entityManager.persist(p);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
+	}
+	
+	public static Promozione getPromozione(int codPromo){
+		String jpql = "SELECT p FROM Promozione as p WHERE idPromozione = :cp";
+		Query query = entityManager.createQuery(jpql).setParameter("cp", codPromo);
+		Promozione promo = (Promozione) query.getResultList().get(0);
+		return promo;
 	}
 }
