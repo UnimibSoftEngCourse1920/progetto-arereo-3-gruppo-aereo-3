@@ -33,20 +33,6 @@ public class Controller {
 	public static void main(String [] args) throws ParseException {
 		System.out.println("Main da chiamare all'eseguibile");
 		Home.main(args);
-
-		//		Per debug
-//		Volo volo=new Volo();
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-//		String strdate2 = "15-03-2020 12:00:00";
-//		String ritorno="15-03-2020 12:40:00";
-//		volo.setDataPartenza(dateformat2.parse(strdate2));
-//		volo.setDataArrivo(dateformat2.parse(ritorno));
-//		volo.setGate("B3");	
-//		volo.setDestinazione("NA08");
-//		volo.setPartenza("BS75");
-//		volo.setNumeroPosti(5);
-//		volo.setPromo(null);
-//		insertVolo(volo,"15","30","16","30");
 	}
 
 	

@@ -175,8 +175,9 @@ public class SceltaPosti {
 					Posto p = (Posto)box[i].getSelectedItem();
 					costo = costo + p.getPrezzo();
 					costoPunti = costoPunti + p.getPrezzoPunti();
-					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
+					listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 				}
+				System.out.println(listaPosti);
 				//portati dietro cliente
 				Controller.insertCliente(c);
 				Controller.insertPrenotazione(c, idVolo, listaPosti);

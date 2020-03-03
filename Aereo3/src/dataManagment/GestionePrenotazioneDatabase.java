@@ -73,7 +73,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		List<Integer>prenotazione = query.getResultList();
 		Integer value = prenotazione.get(0);
 		int risultato = value.intValue();
-		System.out.println(risultato);
 		return risultato;
 	}
 	
