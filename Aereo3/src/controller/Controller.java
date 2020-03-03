@@ -161,7 +161,7 @@ public class Controller {
 	//GESTIONE PROMOZIONE
 	/***************************************************/
 	public static List<Promozione> getPromozioni(){
-		return GestionePromozioneDatabase.getPromozioni();
+		return GestionePromozioneDatabase.getAllPromozioni();
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String msg, Volo v) {
