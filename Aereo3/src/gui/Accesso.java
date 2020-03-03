@@ -197,7 +197,7 @@ public class Accesso {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(Registrazione_1.esegui(contentPane, logInPanel));
+				contentPane.add(Registrazione.esegui(contentPane, logInPanel));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

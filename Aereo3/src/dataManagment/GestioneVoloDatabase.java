@@ -6,35 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.persistence.Query;
-import javax.xml.crypto.Data;
 
 import dominio.Prenotazione;
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
-	
-//Clark: Per debug
-//	public static void main(String [] args) throws ParseException	{
-//		Volo volo=new Volo();
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-//		 String strdate2 = "11-03-2020 12:00:00";
-//		 String ritorno="11-03-2020 12:40:00";
-//		volo.setDataPartenza(dateformat2.parse(strdate2));
-//		volo.setDataArrivo(dateformat2.parse(ritorno));
-//		volo.setGate("B3");	
-//		volo.setDestinazione("BS75");
-//		volo.setPartenza("MI95");
-//		volo.setNumeroPosti(5);
-//		volo.setPromo(null);
-//		List <String> orari =getOrariPartenzaVolo(volo);
-//		for(String o: orari)
-//			System.out.println(o);
-//		
-//	}
-	
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
@@ -99,10 +77,6 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 				if(v.getDestinazione().equals(volo.getDestinazione()))
 					if(v.getDestinazione().contentEquals(volo.getDestinazione()))
 						listaInfoVoli.add(v);
-//			{
-//				listaPartenze.add(v.getPartenza());
-//				listaDestinazioni.add(v.getDestinazione());
-//			}
 		}
 		
 		return listaInfoVoli;
@@ -150,8 +124,6 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		entityManager.persist(volo);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
-
-//		entityManager.getTransaction().rollback();
 	}
 	
 	
@@ -163,7 +135,6 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 				
 	}
 
-	//Clark: Se vuoi i voli di ritorno dai al contrario i parametri.
 	public static List<Volo> getListaVoliAndataORitorno(Date dataPartenza, String partenza, String destinazione ){
 		String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
 		String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
@@ -198,61 +169,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		return risultato;
 		
 		
-	}
-	
-	
-	
-	
-	
-	
-//	
-//	static SimpleDateFormat dFormat= new SimpleDateFormat ("dd-MM-yyyy");
-//	static SimpleDateFormat tFormat= new SimpleDateFormat("HH:mm");
-//	
-//	public static List <String> getOrariPartenzaVolo(Volo volo){
-//		
-//	String jpql="SELECT v.dataPartenza FROM Volo as v  WHERE v.partenza=:partenza AND v.destinazione=:destinazione";
-//	Query query=entityManager.createQuery(jpql);
-//	query.setParameter("partenza", volo.getPartenza());
-//	query.setParameter("destinazione", volo.getDestinazione());
-//	 tFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//
-//	List <Date> listaDateDaParsare=query.getResultList();
-//	
-//
-//	List<String> listaOrari= new ArrayList<String>();
-//	for (Date d:listaDateDaParsare) {
-//		String data= dFormat.format(d);
-//		if(dFormat.format(volo.getDataPartenza()).equals(data));
-//			listaOrari.add(tFormat.format(d));
-//	}
-//	
-//	return listaOrari;
-//		
-//	}
-//	
-//	public static List <String> getOrariArrivoVolo(Volo volo){
-//		
-//	String jpql="SELECT v.dataArrivo FROM Volo as v  WHERE v.partenza=:partenza AND v.destinazione=:destinazione";
-//	Query query=entityManager.createQuery(jpql);
-//	query.setParameter("partenza", volo.getPartenza());
-//	query.setParameter("destinazione", volo.getDestinazione());
-//	
-//	List <Date> listaDateDaParsare=query.getResultList();
-//
-//	tFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//
-//	List<String> listaOrari= new ArrayList<String>();
-//	for (Date d:listaDateDaParsare) {
-//		String data= dFormat.format(d);
-//		if(dFormat.format(volo.getDataArrivo()).equals(data));
-//			listaOrari.add(tFormat.format(d));
-//	}
-//	
-//	return listaOrari;
-//		
-//	}
-	
+	}	
 	
 }
 
