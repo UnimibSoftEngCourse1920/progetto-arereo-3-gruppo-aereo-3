@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.exception.DataException;
 
 import java.awt.CardLayout;
@@ -19,6 +21,7 @@ import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dataManagment.GestioneAereoportoDatabase;
 import dominio.Aereoporto;
 import dominio.Cliente;
 import dominio.Volo;
@@ -43,6 +46,7 @@ import javax.swing.JPasswordField;
 public class Home extends JFrame {
 	
 	//Dichiarazione variabili;
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 
 	private JPanel contentPane;
 	private JPanel homePanel;
@@ -99,7 +103,7 @@ public class Home extends JFrame {
 					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error(e);
 				}
 			}
 		});
@@ -380,8 +384,8 @@ public class Home extends JFrame {
 							panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 						}
 					} catch (ClassNotFoundException | SQLException e1) {
-						e1.printStackTrace();
-					}
+							logger.error(e1);	
+							}
 				}
 				
 		

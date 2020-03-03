@@ -8,12 +8,15 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import dominio.Admin;
 import dominio.Cliente;
 import dominio.Volo;
 
 public class GestioneAdminDatabase extends GestioneDatabase{
-
+	private static Log logger=LogFactory.getLog(GestioneAdminDatabase.class);
 //	Per debug
 //	public static void main(String[] args) {
 //		System.out.println(isAmministratore("admin", "ciao"));
@@ -21,7 +24,8 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 //	}
 
 	public static boolean isAmministratore(String username, String password){
-
+		logger.debug("inizio debug");
+		
 		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.password=:password";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("username", username);
@@ -46,7 +50,7 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		try {
 			nuovaData= dateformat.parse(str.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		Date nuovaData_1 = null;
@@ -60,7 +64,7 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		try {
 			nuovaData_1 = dateformat_1.parse(str_1.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo";

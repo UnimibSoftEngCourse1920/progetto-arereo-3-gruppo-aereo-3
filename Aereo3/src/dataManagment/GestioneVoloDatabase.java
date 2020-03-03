@@ -11,6 +11,9 @@ import java.util.TimeZone;
 import javax.persistence.Query;
 import javax.xml.crypto.Data;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import dominio.Prenotazione;
 import dominio.Volo;
 
@@ -109,7 +112,8 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 	}
 	
-	
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+
 	
 	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
 			String minutiArrivo) {	
@@ -122,7 +126,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		try {
 			nuovaDataP = dataFormat.parse(data.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		volo.setDataPartenza(nuovaDataP);
 		data= new StringBuilder();
@@ -134,7 +138,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		try {
 			nuovaDataA = dataFormat.parse(data.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		volo.setDataArrivo(nuovaDataA);
 		
@@ -164,7 +168,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	}
 
 	//Clark: Se vuoi i voli di ritorno dai al contrario i parametri.
-	public static List<Volo> getListaVoliAndataORitorno(Date dataPartenza, String partenza, String destinazione ){
+	public static List<Volo> getListaVoliAndata(Date dataPartenza, String partenza, String destinazione ){
 		String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
 		String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
 		Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);

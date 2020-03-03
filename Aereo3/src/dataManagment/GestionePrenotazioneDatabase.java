@@ -80,6 +80,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		Query query= entityManager.createQuery(jpql).setParameter("pagato", true).setParameter("id", prenotazione.getId());	
 		query.executeUpdate();
 	}
+	
 //	
 //	//TODO: da testare
 //	public static void aggiornaPrenotazioneData(Prenotazione prenotazione,Date data) {

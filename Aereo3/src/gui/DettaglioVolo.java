@@ -43,7 +43,7 @@ public class DettaglioVolo {
 //		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
 
 		//List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
-		List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(data, partenza, arrivo);
+		List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndata(data, partenza, arrivo);
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
 		
