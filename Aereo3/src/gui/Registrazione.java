@@ -22,6 +22,7 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dominio.Cliente;
+import dominio.ClienteFedele;
 
 public class Registrazione {
 	
@@ -229,14 +230,14 @@ public class Registrazione {
 				}
 				
 				else{
-				Cliente c = new Cliente();
+				ClienteFedele c = new ClienteFedele();
 				c.setNome(textField.getText());
 				c.setCognome(textField1.getText());
 				c.setEmail(textField3.getText());
 				c.setPsw(passwordField.getText());
 				c.setDataDiNascita(dateChooser1.getDate());
 				c.setIndirizzo(textField2.getText());
-				Controller.insertCliente(c);
+				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();
 				registrationPanel.revalidate();

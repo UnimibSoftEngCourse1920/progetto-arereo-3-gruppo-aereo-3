@@ -20,6 +20,15 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		entityManager.clear();
 		System.out.println("Record Successfully Inserted In The Database");
 	}
+	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+		entityManager.getTransaction().begin();
+		entityManager.persist(cliente);
+		entityManager.getTransaction().commit();
+
+		entityManager.clear();
+		System.out.println("Record Successfully Inserted In The Database");
+	}
 
 	public static void insertClienti(ArrayList<Cliente> clienti) {
 		entityManager.getTransaction().begin();

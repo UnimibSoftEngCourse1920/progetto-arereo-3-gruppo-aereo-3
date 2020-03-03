@@ -74,6 +74,11 @@ public class Controller {
 		GestioneClienteDatabase.insertCliente(cliente);
 	}
 	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+
+		GestioneClienteDatabase.insertClienteFedele(cliente);
+	}
+	
 	public static void insertListaClienti(ArrayList<Cliente> clienti) {
 		GestioneClienteDatabase.insertClienti(clienti);
 	}
