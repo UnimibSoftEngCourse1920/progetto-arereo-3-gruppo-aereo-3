@@ -9,9 +9,16 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import dataManagment.GestioneAereoportoDatabase;
+
 public class GestoreMail {
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+
 	final private String username = "aereo3project@gmail.com";
-    final private String password = "ProgettoAereo3!";
+    final private String psw = "ProgettoAereo3!";
     
     private static GestoreMail instance = null;
     
@@ -39,7 +46,7 @@ public class GestoreMail {
 		try {
 			generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
 		} catch(AddressException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		}
 		
 		generateMailMessage.setSubject(subject);
@@ -52,13 +59,12 @@ public class GestoreMail {
 	    	
     		Transport transport = getMailSession.getTransport("smtp");
 	    	 
-			transport.connect("smtp.gmail.com", username, password);
+			transport.connect("smtp.gmail.com", username, psw);
 			transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
 			transport.close();
 			
 		} catch (MessagingException e) {
-    		e.printStackTrace();
-    		//sistemare la cattura dell'eccezione
+    		logger.error(e);
     	}
     }
 }

@@ -1,45 +1,43 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.hibernate.exception.DataException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import java.awt.CardLayout;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dominio.Aereoporto;
-import dominio.Volo;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JRadioButton;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import javax.swing.JTextField;
 
 
+
+@SuppressWarnings("serial")
 public class Home extends JFrame {
 	
 	//Dichiarazione variabili;
+	private static Log logger=LogFactory.getLog(Home.class);
 
 	private JPanel contentPane;
 	private JPanel homePanel;
@@ -64,28 +62,7 @@ public class Home extends JFrame {
 	private JButton btnAreaAdmin;
 	private JPanel panel_5;
 	private JButton btnVisualizzamodificaPrenotazione;
-	private JPanel panel_6;
-	private JLabel lblPartenza;
-	private JLabel lblDestinazione;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JLabel lblDataPartenza;
-	private JLabel lblDataArrivo;
-	private JLabel lblGate;
-	private JTextField textField_4;
-	private JLabel lblNumeroPosti;
-	private JTextField textField_5;
-	private JButton btnAggiungiVolo;
-	private JDateChooser dateChooser_1;
-	private JDateChooser dateChooser_2;
-	private JLabel lblNewLabel_2;
-	private JComboBox comboBox_3;
-	private JLabel lblMinuti;
-	private JComboBox comboBox_4;
-	private JLabel lblOra;
-	private JComboBox comboBox_5;
-	private JLabel lblMinuti_1;
-	private JComboBox comboBox_6;
+
 	/**
 	 * Launch the application.
 	 */
@@ -97,7 +74,7 @@ public class Home extends JFrame {
 					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error(e);
 				}
 			}
 		});
@@ -316,7 +293,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 
-				if (dateChooser.getDate().before(now)) {
+				if (dateChooser.getDate().getDay() < now.getDay()) {
 					if (lblNewLabel_1 != null)
 						panel_2.remove(lblNewLabel_1);
 					
@@ -378,8 +355,8 @@ public class Home extends JFrame {
 							panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 						}
 					} catch (ClassNotFoundException | SQLException e1) {
-						e1.printStackTrace();
-					}
+							logger.error(e1);	
+							}
 				}
 				
 		
@@ -413,7 +390,7 @@ public class Home extends JFrame {
 		panel_5.add(btnVisualizzamodificaPrenotazione);
 		
 		//Nuovo panel
+	}		
 		
-	}
 }
 

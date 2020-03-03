@@ -8,43 +8,32 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.xml.crypto.Data;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import dominio.Prenotazione;
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
 	
-//Clark: Per debug
-//	public static void main(String [] args)	{
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm");
-//		 String strdate2 = "14-09-2021";
-//	Date dataPartenza=null;
-//	try {
-//		dataPartenza = dateformat2.parse(strdate2);
-//	} catch (ParseException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//
-//	String	partenza="Aereoporto Napoli";
-//	String	destinazione="Aereoporto Sofia";
-//	
-//		List<Volo>v= getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
-//		System.out.println(v);
-//		
-//	}
-//	
-	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
 		Query query = entityManager.createQuery(jpql);
+		@SuppressWarnings("unchecked")
 		List<Volo> voli = query.getResultList();
 		return voli;
 	}
 	
 	
-	
+	public static Volo getVolo(int idVolo) {
+		String jpqlVolo = "SELECT v FROM Volo as v WHERE v.idVolo=:idVolo";
+		Query queryVolo = entityManager.createQuery(jpqlVolo);
+		queryVolo.setParameter("idVolo", idVolo);
+		@SuppressWarnings("unchecked")
+		List <Volo> v = queryVolo.getResultList();
+		return v.get(0);
+	}
 	
 	
 	public static List<String> getDestinazioniDisponibili(){
@@ -53,6 +42,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
 		Query query = entityManager.createQuery(jpql);
 
+		@SuppressWarnings("unchecked")
 		List<String> destinazioni = query.getResultList();
 		System.out.println(destinazioni);
 		return destinazioni;
@@ -93,17 +83,14 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 				if(v.getDestinazione().equals(volo.getDestinazione()))
 					if(v.getDestinazione().contentEquals(volo.getDestinazione()))
 						listaInfoVoli.add(v);
-//			{
-//				listaPartenze.add(v.getPartenza());
-//				listaDestinazioni.add(v.getDestinazione());
-//			}
 		}
 		
 		return listaInfoVoli;
 		
 	}
 	
-	
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+
 	
 	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
 			String minutiArrivo) {	
@@ -116,7 +103,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		try {
 			nuovaDataP = dataFormat.parse(data.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		volo.setDataPartenza(nuovaDataP);
 		data= new StringBuilder();
@@ -128,7 +115,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		try {
 			nuovaDataA = dataFormat.parse(data.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		volo.setDataArrivo(nuovaDataA);
 		
@@ -144,21 +131,20 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		entityManager.persist(volo);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
-
-//		entityManager.getTransaction().rollback();
 	}
 	
 	
 	public static Volo getVoloDiPrenotazione(Prenotazione prenotazione) {
 		String jpql="SELECT v FROM Volo as v, Prenotazione as p WHERE v.idVolo=p.idVolo";
 		Query query=entityManager.createQuery(jpql);
+		@SuppressWarnings("unchecked")
 		List<Volo> volo=query.getResultList();
 		return volo.get(0);
 				
 	}
 
-	//Clark: Se vuoi i voli di ritorno dai al contrario i parametri.
-	public static List<Volo> getListaVoliAndataORitorno(Date dataPartenza, String partenza, String destinazione ){
+
+	public static List<Volo> getListaVoliAndata(Date dataPartenza, String partenza, String destinazione ){
 		String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
 		String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
 		Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
@@ -169,6 +155,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		@SuppressWarnings("unchecked")
 		List<Volo> listaVoli1=queryDestinazione.getResultList();
+		@SuppressWarnings("unchecked")
 		List<Volo> listaVoli2=queryPartenza.getResultList();
 		List <Volo> lista=new ArrayList<Volo>();
 
@@ -192,13 +179,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		return risultato;
 		
 		
-	}
-
-
-	
-	
-
-	
+	}	
 	
 }
 

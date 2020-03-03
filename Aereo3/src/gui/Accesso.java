@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dominio.Cliente;
 
 public class Accesso {
 	
@@ -123,21 +124,21 @@ public class Accesso {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(textField.getText().equals("") || textField_1.getText().equals("")) {
-					if (lblNewLabel_1.getText() != "")
+					if ( ! lblNewLabel_1.getText().equals(""))
 						lblNewLabel_1.setText("");
 					lblNewLabel_1.setText("Errore !");
 				}
 				
 				else if (Controller.login(textField.getText(), textField_1.getText()) == null) { //aggiungere errore email non trovata nel database
-					if (lblNewLabel_1.getText() != "")
+					if (! lblNewLabel_1.getText().equals(""))
 						lblNewLabel_1.setText("");
 					lblNewLabel_1.setText("Errore !");
 				}
 				
 				else{
-					Controller.login(textField.getText(), textField_1.getText());
+					Cliente c = Controller.login(textField.getText(), textField_1.getText());
 					contentPane.removeAll();
-					contentPane.add(AreaUtente.esegui(contentPane, homePanel));
+					contentPane.add(AreaUtente.esegui(contentPane, homePanel, c));
 					contentPane.repaint();
 					contentPane.revalidate();
 					}

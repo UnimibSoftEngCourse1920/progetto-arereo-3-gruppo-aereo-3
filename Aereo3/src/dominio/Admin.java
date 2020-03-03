@@ -19,7 +19,7 @@ public class Admin {
 	private String username;
 	
 	@Column(name="password")
-	private String password;
+	private String psw;
 
 	public String getIdAdmin() {
 		return idAdmin;
@@ -29,16 +29,16 @@ public class Admin {
 		return username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPsw() {
+		return psw;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPsw(String password) {
+		this.psw = password;
 	}
 	
 	

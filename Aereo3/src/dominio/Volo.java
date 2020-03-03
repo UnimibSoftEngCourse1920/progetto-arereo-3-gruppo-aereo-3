@@ -116,20 +116,6 @@ public class Volo {
 	}
 
 	/*****************************************/
-	@Override
-	public boolean equals(Object obj) {
-		Volo v=(Volo) obj;
-		
-		if(!(this.getPartenza().equalsIgnoreCase(v.getPartenza())))
-			return false;
-		
-		if(!(this.getDestinazione().equalsIgnoreCase(v.getDestinazione())))
-			return false;
 
-		if(!(this.getDataPartenza().toString().equalsIgnoreCase(v.getDataPartenza().toString())))
-			return false;
-
-		return true;
-	}
 
 }
