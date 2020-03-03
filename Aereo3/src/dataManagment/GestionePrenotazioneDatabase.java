@@ -38,7 +38,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		p.setCodCliente(c.getCodCliente());
 		p.setIdVolo(v);
 		p.setListaBiglietti(posti);
-			
+		
 		entityManager.getTransaction().begin();
 		entityManager.persist(p);
 		entityManager.getTransaction().commit();

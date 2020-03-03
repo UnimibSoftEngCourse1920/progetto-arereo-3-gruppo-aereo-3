@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -125,6 +127,14 @@ public class Controller {
 	
 	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, Prenotazione prenotazione){
 		GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, prenotazione);
+	}
+	
+	public static List<Posto> getPostiPerPrenotazione(int idPrenotazione){
+		return GestionePostoDatabase.getPostiPerPrenotazione(idPrenotazione);
+	}
+	
+	public static int getNumPostiPerPrenotazione(int idPrenotazione) {
+		return GestionePostoDatabase.getNumPostiPerPrenotazione(idPrenotazione);
 	}
 	
 	/********************************************************/

@@ -57,9 +57,21 @@ public class GestionePostoDatabase extends GestioneDatabase {
 	}
 	
 	
+	public static List<Posto> getPostiPerPrenotazione(int idPrenotazione){
+		String jpql = "SELECT p FROM Posto as p  WHERE p.idPrenotazione=:id";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("id", idPrenotazione);
+		List<Posto> listaPosti = query.getResultList();
+		return listaPosti;
+	}
 	
-	
-	
+	public static int getNumPostiPerPrenotazione(int idPrenotazione) {
+		String jpql = "SELECT count(*) FROM Posto as p  WHERE p.idPrenotazione=:id";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("id", idPrenotazione);
+		int nPosti = (int) query.getResultList().get(0);
+		return nPosti;
+	}
 	
 	public static List <Posto> getListaPostiDisponibili(int idVolo){
 		

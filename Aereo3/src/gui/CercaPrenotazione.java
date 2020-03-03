@@ -94,7 +94,7 @@ public class CercaPrenotazione {
 				Volo v = Controller.getVolo(p.getIdVolo());
 				String partenza = v.getPartenza();
 				String arrivo = v.getDestinazione();
-				//int value = p.getListaBiglietti().size();
+				int value = Controller.getNumPostiPerPrenotazione(p.getId());
 				Date data = v.getDataPartenza();
 				contentPane.removeAll();
 				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, data, modifica));
