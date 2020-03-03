@@ -28,6 +28,7 @@ public class ClienteFedele extends Cliente {
 	@Column(name = "infedele")
 	private Date infedele;
 	
+
 	@Column(name = "indirizzo")
 	private String indirizzo;
 	
