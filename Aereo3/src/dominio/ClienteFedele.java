@@ -28,6 +28,19 @@ public class ClienteFedele extends Cliente {
 	@Column(name = "infedele")
 	private Date infedele;
 	
+	@Column(name = "password")
+	private String password;
+	
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 
 	public Date getInfedele() {
 		return infedele;

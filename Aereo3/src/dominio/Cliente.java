@@ -3,6 +3,7 @@ package dominio;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cod_cliente")
-	private int codCliente;
+	protected int codCliente;
 
 	@Column(name = "nome")
 	private String nome;
@@ -35,7 +36,7 @@ public class Cliente {
 	private String cognome;
 
 	@Column(name = "data_di_nascita")
-	private LocalDate dataDiNascita;
+	private Date dataDiNascita;
 
 	@Column(name = "email")
 	private String email;
@@ -43,18 +44,6 @@ public class Cliente {
 	@Column(name = "indirizzo")
 	private String indirizzo;
 	
-	@Column(name = "password")
-	private String password;
-	
-	
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public int getCodCliente() {
 		return codCliente;
@@ -76,12 +65,12 @@ public class Cliente {
 		this.cognome = cognome;
 	}
 
-	public LocalDate getDataDiNascita() {
+	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
 
-	public void setDataDiNascita(LocalDate localDate) {
-		this.dataDiNascita = localDate;
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
 	}
 
 	public String getEmail() {
