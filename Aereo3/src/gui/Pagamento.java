@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 public class Pagamento {
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione) {
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(Color.BLUE);
 		contentPane.add(panel_6, "name_1494837157713800");
@@ -43,6 +43,23 @@ public class Pagamento {
 		gbc_lblPagamento.gridx = 0;
 		gbc_lblPagamento.gridy = 0;
 		panel_7.add(lblPagamento, gbc_lblPagamento);
+		
+		Component horizonatlStrut = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut = new  GridBagConstraints();
+		gbcHorizontalStrut.insets = new Insets(0, 0, 5, 0);
+		gbcHorizontalStrut.gridx = 1;
+		gbcHorizontalStrut.gridy = 0;
+		panel_7.add(horizonatlStrut, gbcHorizontalStrut);
+		
+		JLabel labelPrenotazione = new JLabel("Il tuo id Prenotazione è: " + Integer.toString(idPrenotazione));
+		labelPrenotazione.setForeground(Color.WHITE);
+		labelPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		GridBagConstraints gbcLabelPrenotazione = new GridBagConstraints();
+		gbcLabelPrenotazione.anchor = GridBagConstraints.WEST;
+		gbcLabelPrenotazione.insets = new Insets(0, 0, 5, 0);
+		gbcLabelPrenotazione.gridx = 2;
+		gbcLabelPrenotazione.gridy = 0;
+		panel_7.add(labelPrenotazione, gbcLabelPrenotazione);
 		
 		Component verticalStrut_6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
@@ -171,6 +188,10 @@ public class Pagamento {
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(posti);
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));

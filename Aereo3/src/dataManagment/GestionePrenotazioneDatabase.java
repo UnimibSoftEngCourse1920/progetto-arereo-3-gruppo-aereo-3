@@ -59,12 +59,22 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 	
 	public static Prenotazione getPrenotazioneDaId(int id) {
-		String jpql="SELECT p FROM Prenotaizone as p WHERE  p.id=:";
+		String jpql="SELECT p FROM Prenotazione as p WHERE  p.id=:id";
 		Query query = entityManager.createQuery(jpql).setParameter("id", id);
 		@SuppressWarnings("unchecked")
 		List <Prenotazione>  lista= query.getResultList();
 		return lista.get(0);
 		
+	}
+	
+	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
+		String jpql = "SELECT p.id FROM Prenotazione as p WHERE codCliente like " + c.getCodCliente();
+		Query query = entityManager.createQuery(jpql);
+		List<Integer>prenotazione = query.getResultList();
+		Integer value = prenotazione.get(0);
+		int risultato = value.intValue();
+		System.out.println(risultato);
+		return risultato;
 	}
 	
 	/*****************BRANCH CLARK************************************/

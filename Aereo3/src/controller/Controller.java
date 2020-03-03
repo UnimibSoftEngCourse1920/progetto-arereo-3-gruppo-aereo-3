@@ -155,6 +155,10 @@ public class Controller {
 	public static void pagamentoPrenotazione(Prenotazione prenotazione) {
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
 	}
+	
+	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
+		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v, posti);
+	}
 
 
 	/***************************************************/

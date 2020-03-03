@@ -8,12 +8,17 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.Controller;
+import dominio.Prenotazione;
+import dominio.Volo;
 
 public class CercaPrenotazione {
 	
@@ -26,6 +31,8 @@ public class CercaPrenotazione {
 		gbl_prenotazione.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_prenotazione.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		prenotazione.setLayout(gbl_prenotazione);
+		
+		boolean modifica = true;
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.WHITE);
@@ -80,6 +87,21 @@ public class CercaPrenotazione {
 		prenotazione.add(verticalStrut_1, gbc_verticalStrut_1);
 		
 		JButton btnCerca = new JButton("Cerca !");
+		btnCerca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Prenotazione p = Controller.getPrenotazione(Integer.parseInt(textField_1.getText()));
+				System.out.println(p.getListaBiglietti());
+				Volo v = Controller.getVolo(p.getIdVolo());
+				String partenza = v.getPartenza();
+				String arrivo = v.getDestinazione();
+				//int value = p.getListaBiglietti().size();
+				Date data = v.getDataPartenza();
+				contentPane.removeAll();
+				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, data, modifica));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		btnCerca.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_btnCerca = new GridBagConstraints();
 		gbc_btnCerca.anchor = GridBagConstraints.WEST;

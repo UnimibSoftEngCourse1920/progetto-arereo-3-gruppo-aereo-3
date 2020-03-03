@@ -36,7 +36,7 @@ import dominio.Volo;
 
 public class DettaglioVolo {
 	
-	static JPanel esegui(JPanel contentPane, JPanel homePanel, int value, String partenza, String arrivo, Date data) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, int value, String partenza, String arrivo, Date data, boolean modifica) {
 		
 		//TODO: Metodo controller per prendere i voli
 //		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());

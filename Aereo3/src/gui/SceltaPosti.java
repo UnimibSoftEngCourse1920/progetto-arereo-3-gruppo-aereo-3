@@ -180,9 +180,9 @@ public class SceltaPosti {
 				//portati dietro cliente
 				Controller.insertCliente(c);
 				Controller.insertPrenotazione(c, idVolo, listaPosti);
-				
+				int idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
 				contentPane.removeAll();
-				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti));
+				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

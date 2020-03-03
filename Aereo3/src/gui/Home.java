@@ -62,6 +62,31 @@ public class Home extends JFrame {
 	private JButton btnAreaAdmin;
 	private JPanel panel_5;
 	private JButton btnVisualizzamodificaPrenotazione;
+	private boolean modifica;
+	private JPanel panel_6;
+	private JLabel lblLaTuaPrenotazione;
+	private Component verticalStrut_6;
+	private JLabel lblPartenza;
+	private Component verticalStrut_7;
+	private JLabel lblDestinazione;
+	private Component verticalStrut_8;
+	private JLabel lblDataPartenza;
+	private Component verticalStrut_9;
+	private JLabel lblNewLabel_2;
+	private Component verticalStrut_10;
+	private JLabel lblNewLabel_3;
+	private Component verticalStrut_11;
+	private JLabel lblModificaPrenotazione;
+	private Component verticalStrut_12;
+	private JLabel lblNuovaData;
+	private JDateChooser dateChooser_1;
+	private Component verticalStrut_13;
+	private JButton btnModifica;
+	private JButton btnBack;
+	private Component verticalStrut_14;
+	private Component verticalStrut_15;
+	private Component verticalStrut_16;
+	private Component verticalStrut_17;
 
 	/**
 	 * Launch the application.
@@ -96,6 +121,8 @@ public class Home extends JFrame {
 		homePanel = new JPanel();
 		contentPane.add(homePanel, "name_358108283923800");
 		homePanel.setLayout(new BorderLayout(0, 0));
+		
+		modifica = false;
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.BLUE);
@@ -337,7 +364,7 @@ public class Home extends JFrame {
 					try {
 						if(Controller.controlloDisponibilità(dataPartenza, partenza, destinazione)) {
 						contentPane.removeAll();
-						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, value, comboBox.getSelectedItem().toString(), comboBox_1.getSelectedItem().toString(), dateChooser.getDate()));
+						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, value, comboBox.getSelectedItem().toString(), comboBox_1.getSelectedItem().toString(), dateChooser.getDate(), modifica));
 						contentPane.repaint();
 						contentPane.revalidate();
 						}
