@@ -31,10 +31,10 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		entityManager.clear();
 	}
 	
-	public static List<Promozione> getPromozione(int codPromo){
+	public static Promozione getPromozione(int codPromo){
 		String jpql = "SELECT p FROM Promozione as p WHERE idPromozione = :cp";
 		Query query = entityManager.createQuery(jpql).setParameter("cp", codPromo);
-		List<Promozione> promozioni = query.getResultList();
-		return promozioni;
+		Promozione promo = (Promozione) query.getResultList().get(0);
+		return promo;
 	}
 }

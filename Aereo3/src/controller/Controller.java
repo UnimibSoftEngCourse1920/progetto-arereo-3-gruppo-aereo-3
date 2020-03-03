@@ -155,7 +155,10 @@ public class Controller {
 	public static void pagamentoPrenotazione(Prenotazione prenotazione) {
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
 	}
-
+	
+	public static void eliminaPrenotazione(int id) {
+		GestionePrenotazioneDatabase.deletePrenotazione(id);
+	}
 
 	/***************************************************/
 	//GESTIONE PROMOZIONE
@@ -166,6 +169,10 @@ public class Controller {
 	
 	public static void insertPromozione(Date inizio, Date fine, String msg, Volo v) {
 		GestionePromozioneDatabase.insertPromozione(inizio, fine, msg, v);
+	}
+	
+	public static Promozione getPromozione(int idPromo) {
+		return GestionePromozioneDatabase.getPromozione(idPromo);
 	}
 	/***************************************************/
 	//GESTIONE VOLO
