@@ -27,6 +27,8 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	}
 	
 	
+	
+	
 	public static Volo getVolo(int idVolo) {
 		String jpqlVolo = "SELECT v FROM Volo as v WHERE v.idVolo=:idVolo";
 		Query queryVolo = entityManager.createQuery(jpqlVolo);
@@ -148,24 +150,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 
 
 	public static List<Volo> getListaVoliAndata(Date dataPartenza, String partenza, String destinazione ){
-		String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
-		String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
-		Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
-		Query queryPartenza= entityManager.createQuery(jpqlPartenza);
-		queryPartenza.setParameter("partenza", partenza);
-		queryDestinazione.setParameter("destinazione", destinazione);
-		
-		
-		@SuppressWarnings("unchecked")
-		List<Volo> listaVoli1=queryDestinazione.getResultList();
-		@SuppressWarnings("unchecked")
-		List<Volo> listaVoli2=queryPartenza.getResultList();
-		List <Volo> lista=new ArrayList<Volo>();
-
-		for(Volo v: listaVoli1)
-			for(Volo v1:listaVoli2)
-				if(v1.getIdVolo()==v.getIdVolo())
-					lista.add(v);
+		List <Volo> lista = getVoloPartenzaDestinazione(partenza, destinazione);
 					
 		
 		List <Volo> risultato=new ArrayList<Volo>();
@@ -185,6 +170,29 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		
 	}	
+	
+		public static List<Volo> getVoloPartenzaDestinazione(String partenza, String destinazione) {
+			String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
+			String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
+			Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
+			Query queryPartenza= entityManager.createQuery(jpqlPartenza);
+			queryPartenza.setParameter("partenza", partenza);
+			queryDestinazione.setParameter("destinazione", destinazione);
+			
+			
+			@SuppressWarnings("unchecked")
+			List<Volo> listaVoli1=queryDestinazione.getResultList();
+			@SuppressWarnings("unchecked")
+			List<Volo> listaVoli2=queryPartenza.getResultList();
+			List <Volo> lista=new ArrayList<Volo>();
+
+			for(Volo v: listaVoli1)
+				for(Volo v1:listaVoli2)
+					if(v1.getIdVolo()==v.getIdVolo())
+						lista.add(v);
+			System.out.println(lista);
+			return lista;
+		}
 	
 }
 

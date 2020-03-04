@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -8,17 +9,25 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.toedter.calendar.JDateChooser;
 
+import dataManagment.GestioneAereoportoDatabase;
+import dataManagment.GestioneVoloDatabase;
+import dominio.Volo;
+
 public class VisualizzaModificaPrenotazione {
-	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date data, boolean modifica, int value) {
+	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int id) {
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(Color.BLUE);
 		contentPane.add(panel_6, "name_58028579602300");
@@ -46,7 +55,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_6.gridy = 1;
 		panel_6.add(verticalStrut_6, gbc_verticalStrut_6);
 		
-		JLabel lblPartenza = new JLabel("Partenza: " + partenza);
+		JLabel lblPartenza = new JLabel("Partenza: " + GestioneAereoportoDatabase.getDenominazione(partenza));
 		lblPartenza.setForeground(Color.WHITE);
 		lblPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblPartenza = new GridBagConstraints();
@@ -63,7 +72,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_7.gridy = 3;
 		panel_6.add(verticalStrut_7, gbc_verticalStrut_7);
 		
-		JLabel lblDestinazione = new JLabel("Destinazione: " + arrivo);
+		JLabel lblDestinazione = new JLabel("Destinazione: " + GestioneAereoportoDatabase.getDenominazione(arrivo));
 		lblDestinazione.setForeground(Color.WHITE);
 		lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblDestinazione = new GridBagConstraints();
@@ -80,7 +89,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_8.gridy = 5;
 		panel_6.add(verticalStrut_8, gbc_verticalStrut_8);
 		
-		JLabel lblDataPartenza = new JLabel("Data Partenza");
+		JLabel lblDataPartenza = new JLabel("Data Partenza: " + convertiData(dataPartenza));
 		lblDataPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDataPartenza.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lblDataPartenza = new GridBagConstraints();
@@ -97,7 +106,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_9.gridy = 7;
 		panel_6.add(verticalStrut_9, gbc_verticalStrut_9);
 		
-		JLabel lblNewLabel_2 = new JLabel("Data Arrivo");
+		JLabel lblNewLabel_2 = new JLabel("Data Arrivo: " + convertiData(dataArrivo));
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
@@ -158,13 +167,27 @@ public class VisualizzaModificaPrenotazione {
 		gbc_lblNuovaData.gridy = 14;
 		panel_6.add(lblNuovaData, gbc_lblNuovaData);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
-		gbc_dateChooser_1.insets = new Insets(0, 0, 5, 0);
-		gbc_dateChooser_1.fill = GridBagConstraints.BOTH;
-		gbc_dateChooser_1.gridx = 0;
-		gbc_dateChooser_1.gridy = 15;
-		panel_6.add(dateChooser_1, gbc_dateChooser_1);
+		String partenza1 = GestioneAereoportoDatabase.getDenominazione(partenza);
+		String arrivo1 = GestioneAereoportoDatabase.getDenominazione(arrivo);
+		
+		List <Volo> listaVoli = GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
+		
+		JComboBox nuovoVolo = new JComboBox();
+		GridBagConstraints gbcNuovoVolo = new GridBagConstraints();
+		gbcNuovoVolo.fill = GridBagConstraints.HORIZONTAL;
+		gbcNuovoVolo.insets = new Insets(0, 0, 5, 5);
+		gbcNuovoVolo.gridx = 0;
+		gbcNuovoVolo.gridy = 15;
+		for(Volo v : listaVoli) {
+			if(v.getIdVolo() != id) {
+			StringBuilder stringa = new StringBuilder();
+			stringa.append(v.getIdVolo());
+			stringa.append(", Partenza " + v.getDataPartenza());
+			stringa.append(", Arrivo " + v.getDataArrivo());
+			nuovoVolo.addItem(stringa.toString());
+			System.out.println(stringa.toString());}
+		}
+		panel_6.add(nuovoVolo, gbcNuovoVolo);
 		
 		Component verticalStrut_13 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_13 = new GridBagConstraints();
@@ -231,5 +254,12 @@ public class VisualizzaModificaPrenotazione {
 		panel_6.add(btnBack, gbc_btnBack);
 		
 		return panel_6;
+	}
+	
+	public static String convertiData(Date data) {
+		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		String dataStringa= dtFormat.format(data);
+		return dataStringa;
 	}
 }

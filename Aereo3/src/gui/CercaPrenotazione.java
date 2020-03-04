@@ -90,14 +90,16 @@ public class CercaPrenotazione {
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Prenotazione p = Controller.loginCliente(Integer.parseInt(textField_1.getText()), textField.getText());
+				int id = p.getIdVolo();
 				System.out.println(Controller.getPostiPerPrenotazione(p.getId()));
 				Volo v = Controller.getVolo(p.getIdVolo());
 				String partenza = v.getPartenza();
 				String arrivo = v.getDestinazione();
 				int value = Controller.getPostiPerPrenotazione(p.getId()).size();
-				Date data = v.getDataPartenza();
+				Date dataPartenza = v.getDataPartenza();
+				Date dataArrivo = v.getDataArrivo();
 				contentPane.removeAll();
-				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, data, modifica, value));
+				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, id));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
