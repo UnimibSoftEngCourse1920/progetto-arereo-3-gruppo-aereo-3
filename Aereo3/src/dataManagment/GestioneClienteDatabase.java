@@ -21,7 +21,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 
 	public static void main(String[] args) throws ParseException {
-		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
+		ArrayList <Cliente> clienti = new ArrayList<Cliente>();
 
 		Cliente cliente = new Cliente();
 		Cliente cliente2 = new Cliente();
@@ -126,14 +126,13 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	}
 
 	public static ClienteFedele signToLoyalty(String nome, String cognome,
-			String indirizzo, Date dataDiNascita, String email, String pwd) {
+			String indirizzo, Date date, String pwd) {
 
 		ClienteFedele cf = new ClienteFedele();
 
 		cf.setNome(nome);
 		cf.setCognome(cognome);
-		cf.setDataDiNascita(dataDiNascita);
-		cf.setEmail(email);
+		cf.setDataDiNascita(date);
 		cf.setIndirizzo(indirizzo);
 		cf.setPsw(pwd);
 		cf.setPunti(0);

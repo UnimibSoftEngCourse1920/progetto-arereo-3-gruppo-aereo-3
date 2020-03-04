@@ -101,11 +101,12 @@ public class Controller {
 	return GestioneClienteDatabase.loginCliente(idPrenotazione, email);
 	}
 	
-	public static void signToLoyalty(Cliente cliente, String nome, String cognome, String indirizzo,
-			Date date, String email, String psw) {
-		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, email, psw);
+
+	public static void signToLoyalty(String nome, String cognome, String indirizzo,
+			Date date, String psw) {
+		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, psw);
 	}
-	
+
 	public static void deleteCliente(Cliente cliente) {
 		GestioneClienteDatabase.deleteCliente(cliente);
 	}
