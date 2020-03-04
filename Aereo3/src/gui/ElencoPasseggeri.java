@@ -26,26 +26,26 @@ import dominio.Volo;
 public class ElencoPasseggeri {
 	
 	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo) {
-		JPanel panel_8 = new JPanel();
-		panel_8.setBackground(Color.BLUE);
-		contentPane.add(panel_8, "name_1158551504937600");
-		panel_8.setLayout(new BorderLayout(0, 0));
+		JPanel panel8 = new JPanel();
+		panel8.setBackground(Color.BLUE);
+		contentPane.add(panel8, "name_1158551504937600");
+		panel8.setLayout(new BorderLayout(0, 0));
 		
 		Date now = new Date();
 		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBackground(Color.BLUE);
-		panel_8.add(panel_9, BorderLayout.CENTER);
-		GridBagLayout gbl_panel_9 = new GridBagLayout();
-		gbl_panel_9.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_9.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0};
-		gbl_panel_9.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_9.setLayout(gbl_panel_9);
+		JPanel panel9 = new JPanel();
+		panel9.setBackground(Color.BLUE);
+		panel8.add(panel9, BorderLayout.CENTER);
+		GridBagLayout gblPanel9 = new GridBagLayout();
+		gblPanel9.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblPanel9.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0};
+		gblPanel9.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gblPanel9.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel9.setLayout(gblPanel9);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLUE);
-		panel_8.add(panel, BorderLayout.SOUTH);
+		panel8.add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnBack = new JButton("BACK");
@@ -79,7 +79,7 @@ public class ElencoPasseggeri {
 			format[z].insets = new Insets(0, 0, 5, 5);
 			format[z].gridx = k;
 			format[z].gridy = y;
-			panel_9.add(etichette[u], format[z]);
+			panel9.add(etichette[u], format[z]);
 			u++;
 			y++;
 			z++;
@@ -92,7 +92,7 @@ public class ElencoPasseggeri {
 			format[z].insets = new Insets(0, 0, 5, 5);
 			format[z].gridx = k;
 			format[z].gridy = y;
-			panel_9.add(etichette[u], format[z]);
+			panel9.add(etichette[u], format[z]);
 			u++;
 			y++;
 			z++;
@@ -104,7 +104,7 @@ public class ElencoPasseggeri {
 			format[z].anchor = GridBagConstraints.NORTH;
 			format[z].gridx = k;
 			format[z].gridy = y;
-			panel_9.add(campi[h], format[z]);
+			panel9.add(campi[h], format[z]);
 			campi[h].setColumns(10);
 			y++;
 			h++;
@@ -118,7 +118,7 @@ public class ElencoPasseggeri {
 			format[z].insets = new Insets(0, 0, 5, 5);
 			format[z].gridx = k;
 			format[z].gridy = y;
-			panel_9.add(etichette[u], format[z]);
+			panel9.add(etichette[u], format[z]);
 			u++;
 			y++;
 			z++;
@@ -130,7 +130,7 @@ public class ElencoPasseggeri {
 			format[z].anchor = GridBagConstraints.NORTH;
 			format[z].gridx = k;
 			format[z].gridy = y;
-			panel_9.add(campi[h], format[z]);
+			panel9.add(campi[h], format[z]);
 			campi[h].setColumns(10);
 			y++;
 			z++;
@@ -140,62 +140,62 @@ public class ElencoPasseggeri {
 		JLabel email = new JLabel("Email");
 		email.setForeground(Color.WHITE);
 		email.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints glc_email = new GridBagConstraints();
-		glc_email.anchor = GridBagConstraints.WEST;
-		glc_email.insets = new Insets(0, 0, 5, 5);
-		glc_email.gridx = k;
-		glc_email.gridy = y;
-		panel_9.add(email, glc_email);
+		GridBagConstraints glcEmail = new GridBagConstraints();
+		glcEmail.anchor = GridBagConstraints.WEST;
+		glcEmail.insets = new Insets(0, 0, 5, 5);
+		glcEmail.gridx = k;
+		glcEmail.gridy = y;
+		panel9.add(email, glcEmail);
 		y++;
 		
-		JTextField email_insert = new JTextField();
-		GridBagConstraints glc_email_text = new GridBagConstraints();
-		glc_email_text.fill = GridBagConstraints.HORIZONTAL;
-		glc_email_text.insets = new Insets(0, 0, 5, 0);
-		glc_email_text.anchor = GridBagConstraints.NORTH;
-		glc_email_text.gridx = k;
-		glc_email_text.gridy = y;
-		panel_9.add(email_insert, glc_email_text);
-		email_insert.setColumns(10);
+		JTextField emailInsert = new JTextField();
+		GridBagConstraints glcEmailText = new GridBagConstraints();
+		glcEmailText.fill = GridBagConstraints.HORIZONTAL;
+		glcEmailText.insets = new Insets(0, 0, 5, 0);
+		glcEmailText.anchor = GridBagConstraints.NORTH;
+		glcEmailText.gridx = k;
+		glcEmailText.gridy = y;
+		panel9.add(emailInsert, glcEmailText);
+		emailInsert.setColumns(10);
 		y++;
 		
 		JLabel dataNascita = new JLabel("Inserire data di nascita");
 		dataNascita.setForeground(Color.WHITE);
 		dataNascita.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints glc_nascita = new GridBagConstraints();
-		glc_nascita.anchor = GridBagConstraints.WEST;
-		glc_nascita.insets = new Insets(0, 0, 5, 5);
-		glc_nascita.gridx = k;
-		glc_nascita.gridy = y;
-		panel_9.add(dataNascita, glc_nascita);
+		GridBagConstraints glcNascita = new GridBagConstraints();
+		glcNascita.anchor = GridBagConstraints.WEST;
+		glcNascita.insets = new Insets(0, 0, 5, 5);
+		glcNascita.gridx = k;
+		glcNascita.gridy = y;
+		panel9.add(dataNascita, glcNascita);
 		y++;
 		
 		JDateChooser dataDiNascita = new JDateChooser();
 		dataDiNascita.setDate(now);
-		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
-		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
-		gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
-		gbc_dateChooser.gridx = k;
-		gbc_dateChooser.gridy = y;
-		panel_9.add(dataDiNascita, gbc_dateChooser);
+		GridBagConstraints gbcDateChooser = new GridBagConstraints();
+		gbcDateChooser.insets = new Insets(0, 0, 5, 5);
+		gbcDateChooser.fill = GridBagConstraints.HORIZONTAL;
+		gbcDateChooser.gridx = k;
+		gbcDateChooser.gridy = y;
+		panel9.add(dataDiNascita, gbcDateChooser);
 		y++;
 		
 		JLabel errore = new JLabel("");
 		errore.setForeground(Color.RED);
 		errore.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints glc_errore = new GridBagConstraints();
-		glc_errore.anchor = GridBagConstraints.WEST;
-		glc_errore.insets = new Insets(0, 0, 5, 5);
-		glc_errore.gridx = k;
-		glc_errore.gridy = y;
-		panel_9.add(errore, glc_errore);
+		GridBagConstraints glcErrore = new GridBagConstraints();
+		glcErrore.anchor = GridBagConstraints.WEST;
+		glcErrore.insets = new Insets(0, 0, 5, 5);
+		glcErrore.gridx = k;
+		glcErrore.gridy = y;
+		panel9.add(errore, glcErrore);
 		
 		JButton btnNewButton = new JButton("Continua");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean continua = true;
 				for (int i = 0; i<campi.length;i++) {
-					if (campi[i].getText().equals("") || email_insert.getText().equals("") || email_insert.isValid() == false){
+					if (campi[i].getText().equals("") || emailInsert.getText().equals("") || emailInsert.isValid() == false){
 						continua=false;
 						if (!errore.getText().equals("")) {
 							errore.setText("");
@@ -219,11 +219,11 @@ public class ElencoPasseggeri {
 					Cliente c = new Cliente();
 					c.setNome(campi[0].getText());
 					c.setCognome(campi[1].getText());
-					c.setEmail(email_insert.getText());
+					c.setEmail(emailInsert.getText());
 					c.setDataDiNascita(dataDiNascita.getDate());
 					c.setIndirizzo("Via Duomo");
 					contentPane.removeAll();
-					contentPane.add(SceltaPosti.esegui(contentPane, value, panel_8, idVolo, c));
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
@@ -233,7 +233,7 @@ public class ElencoPasseggeri {
 		panel.add(btnNewButton, BorderLayout.EAST);
 		
 		
-		return panel_8;
+		return panel8;
 	}
 	
 	public static boolean isValid(String email) {

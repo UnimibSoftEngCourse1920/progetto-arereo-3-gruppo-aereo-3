@@ -19,37 +19,37 @@ import javax.swing.JTextField;
 public class Pagamento {
 	
 	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione) {
-		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(Color.BLUE);
-		contentPane.add(panel_6, "name_1494837157713800");
-		panel_6.setLayout(new BorderLayout(0, 0));
+		JPanel panel6 = new JPanel();
+		panel6.setBackground(Color.BLUE);
+		contentPane.add(panel6, "name_1494837157713800");
+		panel6.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(Color.BLUE);
-		panel_6.add(panel_7, BorderLayout.WEST);
-		GridBagLayout gbl_panel_7 = new GridBagLayout();
-		gbl_panel_7.columnWidths = new int[]{0, 0};
-		gbl_panel_7.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_7.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_7.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_7.setLayout(gbl_panel_7);
+		JPanel panel7 = new JPanel();
+		panel7.setBackground(Color.BLUE);
+		panel6.add(panel7, BorderLayout.WEST);
+		GridBagLayout gblPanel7 = new GridBagLayout();
+		gblPanel7.columnWidths = new int[]{0, 0};
+		gblPanel7.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblPanel7.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gblPanel7.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel7.setLayout(gblPanel7);
 		
 		JLabel lblPagamento = new JLabel("Pagamento:");
 		lblPagamento.setForeground(Color.WHITE);
 		lblPagamento.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblPagamento = new GridBagConstraints();
-		gbc_lblPagamento.anchor = GridBagConstraints.WEST;
-		gbc_lblPagamento.insets = new Insets(0, 0, 5, 0);
-		gbc_lblPagamento.gridx = 0;
-		gbc_lblPagamento.gridy = 0;
-		panel_7.add(lblPagamento, gbc_lblPagamento);
+		GridBagConstraints gbcLblPagamento = new GridBagConstraints();
+		gbcLblPagamento.anchor = GridBagConstraints.WEST;
+		gbcLblPagamento.insets = new Insets(0, 0, 5, 0);
+		gbcLblPagamento.gridx = 0;
+		gbcLblPagamento.gridy = 0;
+		panel7.add(lblPagamento, gbcLblPagamento);
 		
 		Component horizonatlStrut = Box.createHorizontalStrut(20);
 		GridBagConstraints gbcHorizontalStrut = new  GridBagConstraints();
 		gbcHorizontalStrut.insets = new Insets(0, 0, 5, 0);
 		gbcHorizontalStrut.gridx = 1;
 		gbcHorizontalStrut.gridy = 0;
-		panel_7.add(horizonatlStrut, gbcHorizontalStrut);
+		panel7.add(horizonatlStrut, gbcHorizontalStrut);
 		
 		JLabel labelPrenotazione = new JLabel("Il tuo id Prenotazione è: " + Integer.toString(idPrenotazione));
 		labelPrenotazione.setForeground(Color.WHITE);
@@ -59,14 +59,14 @@ public class Pagamento {
 		gbcLabelPrenotazione.insets = new Insets(0, 0, 5, 0);
 		gbcLabelPrenotazione.gridx = 2;
 		gbcLabelPrenotazione.gridy = 0;
-		panel_7.add(labelPrenotazione, gbcLabelPrenotazione);
+		panel7.add(labelPrenotazione, gbcLabelPrenotazione);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
 		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
 		gbc_verticalStrut_6.gridx = 0;
 		gbc_verticalStrut_6.gridy = 1;
-		panel_7.add(verticalStrut_6, gbc_verticalStrut_6);
+		panel7.add(verticalStrut6, gbc_verticalStrut_6);
 		
 		JLabel lblNewLabel_2 = new JLabel("Costo Totale");
 		lblNewLabel_2.setForeground(Color.WHITE);
@@ -76,7 +76,7 @@ public class Pagamento {
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_2.gridx = 0;
 		gbc_lblNewLabel_2.gridy = 2;
-		panel_7.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		panel7.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel(String.valueOf(costo)+"$");
 		lblNewLabel_3.setForeground(Color.WHITE);
@@ -86,14 +86,14 @@ public class Pagamento {
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_3.gridx = 0;
 		gbc_lblNewLabel_3.gridy = 3;
-		panel_7.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		panel7.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		Component verticalStrut_7 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
 		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 0);
 		gbc_verticalStrut_7.gridx = 0;
 		gbc_verticalStrut_7.gridy = 4;
-		panel_7.add(verticalStrut_7, gbc_verticalStrut_7);
+		panel7.add(verticalStrut_7, gbc_verticalStrut_7);
 		
 		JLabel lblNumeroDiCarta = new JLabel("Numero di carta");
 		lblNumeroDiCarta.setForeground(Color.WHITE);
@@ -103,7 +103,7 @@ public class Pagamento {
 		gbc_lblNumeroDiCarta.anchor = GridBagConstraints.WEST;
 		gbc_lblNumeroDiCarta.gridx = 0;
 		gbc_lblNumeroDiCarta.gridy = 5;
-		panel_7.add(lblNumeroDiCarta, gbc_lblNumeroDiCarta);
+		panel7.add(lblNumeroDiCarta, gbc_lblNumeroDiCarta);
 		
 		JTextField textField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
@@ -111,7 +111,7 @@ public class Pagamento {
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 0;
 		gbc_textField.gridy = 6;
-		panel_7.add(textField, gbc_textField);
+		panel7.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
 		Component verticalStrut_8 = Box.createVerticalStrut(20);
@@ -119,7 +119,7 @@ public class Pagamento {
 		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 0);
 		gbc_verticalStrut_8.gridx = 0;
 		gbc_verticalStrut_8.gridy = 7;
-		panel_7.add(verticalStrut_8, gbc_verticalStrut_8);
+		panel7.add(verticalStrut_8, gbc_verticalStrut_8);
 		
 		JButton btnNewButton = new JButton("Paga");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -128,14 +128,14 @@ public class Pagamento {
 		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 8;
-		panel_7.add(btnNewButton, gbc_btnNewButton);
+		panel7.add(btnNewButton, gbc_btnNewButton);
 		
 		Component verticalStrut_9 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
 		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 0);
 		gbc_verticalStrut_9.gridx = 0;
 		gbc_verticalStrut_9.gridy = 9;
-		panel_7.add(verticalStrut_9, gbc_verticalStrut_9);
+		panel7.add(verticalStrut_9, gbc_verticalStrut_9);
 		
 		JLabel lblNewLabel_4 = new JLabel("Costo in Punti");
 		lblNewLabel_4.setForeground(Color.WHITE);
@@ -145,7 +145,7 @@ public class Pagamento {
 		gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_4.gridx = 0;
 		gbc_lblNewLabel_4.gridy = 10;
-		panel_7.add(lblNewLabel_4, gbc_lblNewLabel_4);
+		panel7.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel(String.valueOf(costoPunti));
 		lblNewLabel_5.setForeground(Color.WHITE);
@@ -155,14 +155,14 @@ public class Pagamento {
 		gbc_lblNewLabel_5.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_5.gridx = 0;
 		gbc_lblNewLabel_5.gridy = 11;
-		panel_7.add(lblNewLabel_5, gbc_lblNewLabel_5);
+		panel7.add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
 		Component verticalStrut_10 = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut_10 = new GridBagConstraints();
 		gbc_verticalStrut_10.insets = new Insets(0, 0, 5, 0);
 		gbc_verticalStrut_10.gridx = 0;
 		gbc_verticalStrut_10.gridy = 12;
-		panel_7.add(verticalStrut_10, gbc_verticalStrut_10);
+		panel7.add(verticalStrut_10, gbc_verticalStrut_10);
 		
 		JButton btnNewButton_1 = new JButton("Paga");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -170,11 +170,11 @@ public class Pagamento {
 		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton_1.gridx = 0;
 		gbc_btnNewButton_1.gridy = 13;
-		panel_7.add(btnNewButton_1, gbc_btnNewButton_1);
+		panel7.add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.BLUE);
-		panel_6.add(panel_8, BorderLayout.SOUTH);
+		panel6.add(panel_8, BorderLayout.SOUTH);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnNewButton_2 = new JButton("Paga pi\u00F9 avanti");
@@ -197,7 +197,7 @@ public class Pagamento {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_8.add(btnBack, BorderLayout.WEST);
 		
-		return panel_6;
+		return panel6;
 	}
 
 }

@@ -44,28 +44,28 @@ public class SceltaPosti {
 		JPanel sceltaPostiPanel = new JPanel();
 		sceltaPostiPanel.setBackground(Color.BLUE);
 		posti.add(sceltaPostiPanel, BorderLayout.WEST);
-		GridBagLayout gbl_sceltaPostiPanel = new GridBagLayout();
-		gbl_sceltaPostiPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_sceltaPostiPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_sceltaPostiPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_sceltaPostiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		sceltaPostiPanel.setLayout(gbl_sceltaPostiPanel);
+		GridBagLayout gblSceltaPostiPanel = new GridBagLayout();
+		gblSceltaPostiPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblSceltaPostiPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblSceltaPostiPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gblSceltaPostiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		sceltaPostiPanel.setLayout(gblSceltaPostiPanel);
 		
 		JLabel lblScegliereIPosti = new JLabel("Scegliere i posti:");
 		lblScegliereIPosti.setForeground(Color.WHITE);
 		lblScegliereIPosti.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblScegliereIPosti = new GridBagConstraints();
-		gbc_lblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
-		gbc_lblScegliereIPosti.gridx = 0;
-		gbc_lblScegliereIPosti.gridy = 0;
-		sceltaPostiPanel.add(lblScegliereIPosti, gbc_lblScegliereIPosti);
+		GridBagConstraints gbcLblScegliereIPosti = new GridBagConstraints();
+		gbcLblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
+		gbcLblScegliereIPosti.gridx = 0;
+		gbcLblScegliereIPosti.gridy = 0;
+		sceltaPostiPanel.add(lblScegliereIPosti, gbcLblScegliereIPosti);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_6.gridx = 0;
-		gbc_verticalStrut_6.gridy = 1;
-		sceltaPostiPanel.add(verticalStrut_6, gbc_verticalStrut_6);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
+		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut6.gridx = 0;
+		gbcVerticalStrut6.gridy = 1;
+		sceltaPostiPanel.add(verticalStrut6, gbcVerticalStrut6);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLUE);
@@ -169,15 +169,15 @@ public class SceltaPosti {
 		gbcErrore.gridy = y;
 		sceltaPostiPanel.add(errore, gbcErrore);
 		
-		JButton btnNewButton_1 = new JButton("Prenota");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnNewButton1 = new JButton("Prenota");
+		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(! GestioneClienteDatabase.trovaMail(c.getEmail())) {
+				if(! Controller.trovaMail(c.getEmail())) {
 					Controller.insertCliente(c);
 				}
-				Cliente cliente = GestioneClienteDatabase.getCliente(c.getEmail());
+				Cliente cliente = Controller.getCliente(c.getEmail());
 				
-				if(! GestionePrenotazioneDatabase.trovaCliente(cliente.getCodCliente(), idVolo)) {
+				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 				List <Posto> listaPosti = new ArrayList<Posto>();
 				double costo = 0;
 				int costoPunti = 0;
@@ -199,7 +199,7 @@ public class SceltaPosti {
 				
 				Controller.insertPrenotazione(cliente, idVolo, listaPosti);
 				int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-				GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+				Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 				contentPane.removeAll();
 				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
 				contentPane.repaint();
@@ -209,8 +209,8 @@ public class SceltaPosti {
 				}
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel.add(btnNewButton_1, BorderLayout.EAST);
+		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		panel.add(btnNewButton1, BorderLayout.EAST);
 		
 	return posti;
 }
