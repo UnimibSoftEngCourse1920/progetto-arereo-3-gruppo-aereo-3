@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import com.toedter.calendar.JDateChooser;
 
+import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneVoloDatabase;
 import dominio.Volo;
@@ -55,7 +56,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_6.gridy = 1;
 		panel_6.add(verticalStrut_6, gbc_verticalStrut_6);
 		
-		JLabel lblPartenza = new JLabel("Partenza: " + GestioneAereoportoDatabase.getDenominazione(partenza));
+		JLabel lblPartenza = new JLabel("Partenza: " + Controller.parserAereoporto(partenza));
 		lblPartenza.setForeground(Color.WHITE);
 		lblPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblPartenza = new GridBagConstraints();
@@ -72,7 +73,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_7.gridy = 3;
 		panel_6.add(verticalStrut_7, gbc_verticalStrut_7);
 		
-		JLabel lblDestinazione = new JLabel("Destinazione: " + GestioneAereoportoDatabase.getDenominazione(arrivo));
+		JLabel lblDestinazione = new JLabel("Destinazione: " + Controller.parserAereoporto(arrivo));
 		lblDestinazione.setForeground(Color.WHITE);
 		lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblDestinazione = new GridBagConstraints();
