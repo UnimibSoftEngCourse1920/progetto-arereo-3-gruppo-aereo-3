@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import com.toedter.calendar.JDateChooser;
 
 public class VisualizzaModificaPrenotazione {
-	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date data, boolean modifica) {
+	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date data, boolean modifica, int value) {
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(Color.BLUE);
 		contentPane.add(panel_6, "name_58028579602300");
@@ -63,7 +63,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_7.gridy = 3;
 		panel_6.add(verticalStrut_7, gbc_verticalStrut_7);
 		
-		JLabel lblDestinazione = new JLabel("Destinazione" + arrivo);
+		JLabel lblDestinazione = new JLabel("Destinazione: " + arrivo);
 		lblDestinazione.setForeground(Color.WHITE);
 		lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblDestinazione = new GridBagConstraints();
@@ -114,7 +114,7 @@ public class VisualizzaModificaPrenotazione {
 		gbc_verticalStrut_10.gridy = 9;
 		panel_6.add(verticalStrut_10, gbc_verticalStrut_10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Numero di Biglietti");
+		JLabel lblNewLabel_3 = new JLabel("Numero di Biglietti: " + Integer.toString(value));
 		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();

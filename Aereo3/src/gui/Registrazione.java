@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dominio.Cliente;
 import dominio.ClienteFedele;
 
 public class Registrazione {
@@ -237,6 +236,7 @@ public class Registrazione {
 				c.setPsw(passwordField.getText());
 				c.setDataDiNascita(dateChooser1.getDate());
 				c.setIndirizzo(textField2.getText());
+				c.setDataIscrizione(now);
 				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();

@@ -199,4 +199,21 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		}
 		return estrattoPunti;
 	}
+	
+	public static boolean trovaMail (String email) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
+		Query query =entityManager.createQuery(jpql).setParameter("email", email);
+		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.size() == 0)
+			return false;
+		else
+			return true;
+	}
+	
+	public static Cliente getCliente(String email) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
+		Query query = entityManager.createQuery(jpql).setParameter("email", email);
+		List <Cliente> ris = query.getResultList();
+		return ris.get(0);
+	}
 }

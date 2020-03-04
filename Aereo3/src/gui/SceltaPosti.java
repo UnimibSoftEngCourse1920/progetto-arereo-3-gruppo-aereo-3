@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
+import dataManagment.GestioneClienteDatabase;
 import dataManagment.GestionePostoDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
 import dominio.Cliente;
@@ -158,9 +159,20 @@ public class SceltaPosti {
 //			z++;
 		}
 		
+		
+		JLabel errore = new JLabel("");
+		errore.setForeground(Color.RED);
+		errore.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbcErrore = new GridBagConstraints();
+		gbcErrore.insets = new Insets(0, 0, 5, 0);
+		gbcErrore.gridx = k;
+		gbcErrore.gridy = y;
+		sceltaPostiPanel.add(errore, gbcErrore);
+		
 		JButton btnNewButton_1 = new JButton("Prenota");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(! GestionePrenotazioneDatabase.trovaCliente(GestioneClienteDatabase.getCliente(c.getEmail()).getCodCliente(), idVolo)) {
 				List <Posto> listaPosti = new ArrayList<Posto>();
 				double costo = 0;
 				int costoPunti = 0;
@@ -177,14 +189,22 @@ public class SceltaPosti {
 					costoPunti = costoPunti + p.getPrezzoPunti();
 					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 				}
+				System.out.println(listaPosti);
 				//portati dietro cliente
-				Controller.insertCliente(c);
-				Controller.insertPrenotazione(c, idVolo, listaPosti);
-				int idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
+				if(! GestioneClienteDatabase.trovaMail(c.getEmail())) {
+					Controller.insertCliente(c);
+				}
+				Cliente cliente = GestioneClienteDatabase.getCliente(c.getEmail());
+				Controller.insertPrenotazione(cliente, idVolo, listaPosti);
+				int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+				GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, Controller.getPrenotazione(idVolo));
 				contentPane.removeAll();
 				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
 				contentPane.repaint();
-				contentPane.revalidate();
+				contentPane.revalidate();}
+				else {
+					errore.setText("Il cliente ha già una prenotazione per questo volo");
+				}
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
