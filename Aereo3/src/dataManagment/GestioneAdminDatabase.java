@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.Query;
 
@@ -15,67 +16,65 @@ import dominio.Volo;
 
 public class GestioneAdminDatabase extends GestioneDatabase{
 	private static Log logger=LogFactory.getLog(GestioneAdminDatabase.class);
-//	Per debug
-//	public static void main(String[] args) {
-//		System.out.println(isAmministratore("admin", "ciao"));
-//		
-//	}
+	//	Per debug
+	//	public static void main(String[] args) {
+	//		System.out.println(isAmministratore("admin", "ciao"));
+	//		
+	//	}
 
 
-		
+
 	public static boolean isAmministratore(String username, String psw){
 
 		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.psw=:psw";
-	Query query = entityManager.createQuery(jpql);
+		Query query = entityManager.createQuery(jpql);
 		query.setParameter("username", username);
-        query.setParameter("psw", psw);
+		query.setParameter("psw", psw);
 		@SuppressWarnings("unchecked")
 		List<Admin> listaAmministratori= query.getResultList();
 		if(listaAmministratori.size() == 1)
 			return true;
 		return false;
 	}
-	
+
 	public static void aggiornaVolo(int idVolo, String orarioPartenza, String minutiPartenza, String gate, Date dataPartenza, String orarioArrivo, String minutiArrivo, Date dataArrivo) {
 		Volo voloDaAggiornare = GestioneVoloDatabase.getVolo(idVolo);
-		
-		Date nuovaData=null;
-		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
+		SimpleDateFormat dFormat=new SimpleDateFormat("dd-MM-yyyy");
+		dFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-		StringBuilder str=new StringBuilder();
-		String data= dateformat.format(dataPartenza);
+		String data1= dFormat.format(dataPartenza)+" "+ orarioPartenza+":"+minutiPartenza;
+		String data2= dFormat.format(dataArrivo)+" "+ orarioArrivo+":"+minutiArrivo;
 
-		str.append(data.substring(0,11)).append(orarioPartenza).append(":").append(minutiPartenza);
+		Date dataP=null;
 
 		try {
-			nuovaData= dateformat.parse(str.toString());
+			dataP= dtFormat.parse(data1);
 		} catch (ParseException e) {
 			logger.error(e);
 		}
-		
-		Date nuovaData_1 = null;
-		SimpleDateFormat dateformat_1 = new SimpleDateFormat("dd-MM-yy hh:mm");
-		
-		StringBuilder str_1 = new StringBuilder();
-		String data_1 = dateformat_1.format(dataArrivo);
-		
-		str_1.append(data_1.substring(0,11)).append(orarioArrivo).append(":").append(minutiArrivo);
-		
+
+		Date dataA=null;
+
 		try {
-			nuovaData_1 = dateformat_1.parse(str_1.toString());
+			dataA= dtFormat.parse(data2);
 		} catch (ParseException e) {
 			logger.error(e);
 		}
-		
-		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo";
+		entityManager.getTransaction().begin();
+		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData , gate=:gate, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo ";
 		Query query = entityManager.createQuery(jpql);
-		query.setParameter("nuovaData", nuovaData);
-		query.setParameter("nuovaData_1", nuovaData_1);
+		query.setParameter("nuovaData", dataP);
+		query.setParameter("nuovaData_1", dataA);
 		query.setParameter("idVolo", idVolo);
-		
+		query.setParameter("gate", gate);
+
 		query.executeUpdate();
-		
-		
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+
+
 	}
 
 }
