@@ -25,97 +25,99 @@ public class CercaPrenotazione {
 	static JPanel esegui(JPanel contentPane, JPanel homePanel) {
 		JPanel prenotazione = new JPanel();
 		prenotazione.setBackground(Color.BLUE);
-		GridBagLayout gbl_prenotazione = new GridBagLayout();
-		gbl_prenotazione.columnWidths = new int[]{442, 10, 0};
-		gbl_prenotazione.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_prenotazione.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_prenotazione.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		prenotazione.setLayout(gbl_prenotazione);
+		GridBagLayout gblPrenotazione = new GridBagLayout();
+		gblPrenotazione.columnWidths = new int[]{442, 10, 0};
+		gblPrenotazione.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblPrenotazione.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gblPrenotazione.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		prenotazione.setLayout(gblPrenotazione);
 		
 		boolean modifica = true;
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 5;
-		prenotazione.add(lblEmail, gbc_lblEmail);
+		GridBagConstraints gbcLblEmail = new GridBagConstraints();
+		gbcLblEmail.anchor = GridBagConstraints.WEST;
+		gbcLblEmail.insets = new Insets(0, 0, 5, 5);
+		gbcLblEmail.gridx = 0;
+		gbcLblEmail.gridy = 5;
+		prenotazione.add(lblEmail, gbcLblEmail);
 		
 		JTextField textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 0;
-		gbc_textField.gridy = 6;
-		prenotazione.add(textField, gbc_textField);
+		GridBagConstraints gbcTextField = new GridBagConstraints();
+		gbcTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbcTextField.insets = new Insets(0, 0, 5, 5);
+		gbcTextField.gridx = 0;
+		gbcTextField.gridy = 6;
+		prenotazione.add(textField, gbcTextField);
 		textField.setColumns(10);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
-		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut.gridx = 0;
-		gbc_verticalStrut.gridy = 7;
-		prenotazione.add(verticalStrut, gbc_verticalStrut);
+		GridBagConstraints gbcVerticalStrut = new GridBagConstraints();
+		gbcVerticalStrut.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut.gridx = 0;
+		gbcVerticalStrut.gridy = 7;
+		prenotazione.add(verticalStrut, gbcVerticalStrut);
 		
 		JLabel lblIdVolo = new JLabel("ID Prenotazione:");
 		lblIdVolo.setForeground(Color.WHITE);
 		lblIdVolo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblIdVolo = new GridBagConstraints();
-		gbc_lblIdVolo.anchor = GridBagConstraints.WEST;
-		gbc_lblIdVolo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIdVolo.gridx = 0;
-		gbc_lblIdVolo.gridy = 8;
-		prenotazione.add(lblIdVolo, gbc_lblIdVolo);
+		GridBagConstraints gbcLblIdVolo = new GridBagConstraints();
+		gbcLblIdVolo.anchor = GridBagConstraints.WEST;
+		gbcLblIdVolo.insets = new Insets(0, 0, 5, 5);
+		gbcLblIdVolo.gridx = 0;
+		gbcLblIdVolo.gridy = 8;
+		prenotazione.add(lblIdVolo, gbcLblIdVolo);
 		
-		JTextField textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.gridx = 0;
-		gbc_textField_1.gridy = 9;
-		prenotazione.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		JTextField textField1 = new JTextField();
+		GridBagConstraints gbcTextField_1 = new GridBagConstraints();
+		gbcTextField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbcTextField_1.insets = new Insets(0, 0, 5, 5);
+		gbcTextField_1.gridx = 0;
+		gbcTextField_1.gridy = 9;
+		prenotazione.add(textField1, gbcTextField_1);
+		textField1.setColumns(10);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
-		gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_1.gridx = 0;
-		gbc_verticalStrut_1.gridy = 10;
-		prenotazione.add(verticalStrut_1, gbc_verticalStrut_1);
+		Component verticalStrut1 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut1 = new GridBagConstraints();
+		gbcVerticalStrut1.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut1.gridx = 0;
+		gbcVerticalStrut1.gridy = 10;
+		prenotazione.add(verticalStrut1, gbcVerticalStrut1);
 		
 		JButton btnCerca = new JButton("Cerca !");
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Prenotazione p = Controller.loginCliente(Integer.parseInt(textField_1.getText()), textField.getText());
+				Prenotazione p = Controller.loginCliente(Integer.parseInt(textField1.getText()), textField.getText());
+				int id = p.getIdVolo();
 				System.out.println(Controller.getPostiPerPrenotazione(p.getId()));
 				Volo v = Controller.getVolo(p.getIdVolo());
 				String partenza = v.getPartenza();
 				String arrivo = v.getDestinazione();
 				int value = Controller.getPostiPerPrenotazione(p.getId()).size();
-				Date data = v.getDataPartenza();
+				Date dataPartenza = v.getDataPartenza();
+				Date dataArrivo = v.getDataArrivo();
 				contentPane.removeAll();
-				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, data, modifica, value));
+				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, id));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
 		});
 		btnCerca.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_btnCerca = new GridBagConstraints();
-		gbc_btnCerca.anchor = GridBagConstraints.WEST;
-		gbc_btnCerca.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCerca.gridx = 0;
-		gbc_btnCerca.gridy = 11;
-		prenotazione.add(btnCerca, gbc_btnCerca);
+		GridBagConstraints gbcBtnCerca = new GridBagConstraints();
+		gbcBtnCerca.anchor = GridBagConstraints.WEST;
+		gbcBtnCerca.insets = new Insets(0, 0, 0, 5);
+		gbcBtnCerca.gridx = 0;
+		gbcBtnCerca.gridy = 11;
+		prenotazione.add(btnCerca, gbcBtnCerca);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_2 = new GridBagConstraints();
-		gbc_verticalStrut_2.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_2.gridx = 0;
-		gbc_verticalStrut_2.gridy = 12;
-		prenotazione.add(verticalStrut_2, gbc_verticalStrut_2);
+		Component verticalStrut2 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut2 = new GridBagConstraints();
+		gbcVerticalStrut2.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut2.gridx = 0;
+		gbcVerticalStrut2.gridy = 12;
+		prenotazione.add(verticalStrut2, gbcVerticalStrut2);
 		
 		JButton btnNewButton = new JButton("BACK");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -127,12 +129,12 @@ public class CercaPrenotazione {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 13;
-		prenotazione.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
+		gbcBtnNewButton.anchor = GridBagConstraints.WEST;
+		gbcBtnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbcBtnNewButton.gridx = 0;
+		gbcBtnNewButton.gridy = 13;
+		prenotazione.add(btnNewButton, gbcBtnNewButton);
 		
 		return prenotazione;
 	}

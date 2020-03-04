@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -8,170 +9,193 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.toedter.calendar.JDateChooser;
 
+import controller.Controller;
+import dataManagment.GestioneAereoportoDatabase;
+import dataManagment.GestioneVoloDatabase;
+import dominio.Volo;
+
 public class VisualizzaModificaPrenotazione {
-	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date data, boolean modifica, int value) {
-		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(Color.BLUE);
-		contentPane.add(panel_6, "name_58028579602300");
-		GridBagLayout gbl_panel_6 = new GridBagLayout();
-		gbl_panel_6.columnWidths = new int[]{0, 0};
-		gbl_panel_6.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_6.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_6.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_6.setLayout(gbl_panel_6);
+	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int id) {
+		JPanel panel6 = new JPanel();
+		panel6.setBackground(Color.BLUE);
+		contentPane.add(panel6, "name_58028579602300");
+		GridBagLayout gblPanel6 = new GridBagLayout();
+		gblPanel6.columnWidths = new int[]{0, 0};
+		gblPanel6.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblPanel6.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gblPanel6.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel6.setLayout(gblPanel6);
 		
 		JLabel lblLaTuaPrenotazione = new JLabel("La tua Prenotazione");
 		lblLaTuaPrenotazione.setForeground(Color.WHITE);
 		lblLaTuaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblLaTuaPrenotazione = new GridBagConstraints();
-		gbc_lblLaTuaPrenotazione.anchor = GridBagConstraints.WEST;
-		gbc_lblLaTuaPrenotazione.insets = new Insets(0, 0, 5, 0);
-		gbc_lblLaTuaPrenotazione.gridx = 0;
-		gbc_lblLaTuaPrenotazione.gridy = 0;
-		panel_6.add(lblLaTuaPrenotazione, gbc_lblLaTuaPrenotazione);
+		GridBagConstraints gbcLblLaTuaPrenotazione = new GridBagConstraints();
+		gbcLblLaTuaPrenotazione.anchor = GridBagConstraints.WEST;
+		gbcLblLaTuaPrenotazione.insets = new Insets(0, 0, 5, 0);
+		gbcLblLaTuaPrenotazione.gridx = 0;
+		gbcLblLaTuaPrenotazione.gridy = 0;
+		panel6.add(lblLaTuaPrenotazione, gbcLblLaTuaPrenotazione);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_6.gridx = 0;
-		gbc_verticalStrut_6.gridy = 1;
-		panel_6.add(verticalStrut_6, gbc_verticalStrut_6);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
+		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut6.gridx = 0;
+		gbcVerticalStrut6.gridy = 1;
+		panel6.add(verticalStrut6, gbcVerticalStrut6);
 		
-		JLabel lblPartenza = new JLabel("Partenza: " + partenza);
+		JLabel lblPartenza = new JLabel("Partenza: " + Controller.parserAereoporto(partenza));
 		lblPartenza.setForeground(Color.WHITE);
 		lblPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblPartenza = new GridBagConstraints();
-		gbc_lblPartenza.insets = new Insets(0, 0, 5, 0);
-		gbc_lblPartenza.anchor = GridBagConstraints.WEST;
-		gbc_lblPartenza.gridx = 0;
-		gbc_lblPartenza.gridy = 2;
-		panel_6.add(lblPartenza, gbc_lblPartenza);
+		GridBagConstraints gbcLblPartenza = new GridBagConstraints();
+		gbcLblPartenza.insets = new Insets(0, 0, 5, 0);
+		gbcLblPartenza.anchor = GridBagConstraints.WEST;
+		gbcLblPartenza.gridx = 0;
+		gbcLblPartenza.gridy = 2;
+		panel6.add(lblPartenza, gbcLblPartenza);
 		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
-		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_7.gridx = 0;
-		gbc_verticalStrut_7.gridy = 3;
-		panel_6.add(verticalStrut_7, gbc_verticalStrut_7);
+		Component verticalStrut7 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut7 = new GridBagConstraints();
+		gbcVerticalStrut7.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut7.gridx = 0;
+		gbcVerticalStrut7.gridy = 3;
+		panel6.add(verticalStrut7, gbcVerticalStrut7);
 		
-		JLabel lblDestinazione = new JLabel("Destinazione: " + arrivo);
+		JLabel lblDestinazione = new JLabel("Destinazione: " + Controller.parserAereoporto(arrivo));
 		lblDestinazione.setForeground(Color.WHITE);
 		lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblDestinazione = new GridBagConstraints();
-		gbc_lblDestinazione.insets = new Insets(0, 0, 5, 0);
-		gbc_lblDestinazione.anchor = GridBagConstraints.WEST;
-		gbc_lblDestinazione.gridx = 0;
-		gbc_lblDestinazione.gridy = 4;
-		panel_6.add(lblDestinazione, gbc_lblDestinazione);
+		GridBagConstraints gbcLblDestinazione = new GridBagConstraints();
+		gbcLblDestinazione.insets = new Insets(0, 0, 5, 0);
+		gbcLblDestinazione.anchor = GridBagConstraints.WEST;
+		gbcLblDestinazione.gridx = 0;
+		gbcLblDestinazione.gridy = 4;
+		panel6.add(lblDestinazione, gbcLblDestinazione);
 		
-		Component verticalStrut_8 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
-		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_8.gridx = 0;
-		gbc_verticalStrut_8.gridy = 5;
-		panel_6.add(verticalStrut_8, gbc_verticalStrut_8);
+		Component verticalStrut8 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut8 = new GridBagConstraints();
+		gbcVerticalStrut8.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut8.gridx = 0;
+		gbcVerticalStrut8.gridy = 5;
+		panel6.add(verticalStrut8, gbcVerticalStrut8);
 		
-		JLabel lblDataPartenza = new JLabel("Data Partenza");
+		JLabel lblDataPartenza = new JLabel("Data Partenza: " + convertiData(dataPartenza));
 		lblDataPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDataPartenza.setForeground(Color.WHITE);
-		GridBagConstraints gbc_lblDataPartenza = new GridBagConstraints();
-		gbc_lblDataPartenza.insets = new Insets(0, 0, 5, 0);
-		gbc_lblDataPartenza.anchor = GridBagConstraints.WEST;
-		gbc_lblDataPartenza.gridx = 0;
-		gbc_lblDataPartenza.gridy = 6;
-		panel_6.add(lblDataPartenza, gbc_lblDataPartenza);
+		GridBagConstraints gbcLblDataPartenza = new GridBagConstraints();
+		gbcLblDataPartenza.insets = new Insets(0, 0, 5, 0);
+		gbcLblDataPartenza.anchor = GridBagConstraints.WEST;
+		gbcLblDataPartenza.gridx = 0;
+		gbcLblDataPartenza.gridy = 6;
+		panel6.add(lblDataPartenza, gbcLblDataPartenza);
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
-		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_9.gridx = 0;
-		gbc_verticalStrut_9.gridy = 7;
-		panel_6.add(verticalStrut_9, gbc_verticalStrut_9);
+		Component verticalStrut9 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
+		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut9.gridx = 0;
+		gbcVerticalStrut9.gridy = 7;
+		panel6.add(verticalStrut9, gbcVerticalStrut9);
 		
-		JLabel lblNewLabel_2 = new JLabel("Data Arrivo");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 8;
-		panel_6.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lblNewLabel2 = new JLabel("Data Arrivo: " + convertiData(dataArrivo));
+		lblNewLabel2.setForeground(Color.WHITE);
+		lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblNewLabel2 = new GridBagConstraints();
+		gbcLblNewLabel2.insets = new Insets(0, 0, 5, 0);
+		gbcLblNewLabel2.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel2.gridx = 0;
+		gbcLblNewLabel2.gridy = 8;
+		panel6.add(lblNewLabel2, gbcLblNewLabel2);
 		
-		Component verticalStrut_10 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_10 = new GridBagConstraints();
-		gbc_verticalStrut_10.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_10.gridx = 0;
-		gbc_verticalStrut_10.gridy = 9;
-		panel_6.add(verticalStrut_10, gbc_verticalStrut_10);
+		Component verticalStrut10 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut10 = new GridBagConstraints();
+		gbcVerticalStrut10.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut10.gridx = 0;
+		gbcVerticalStrut10.gridy = 9;
+		panel6.add(verticalStrut10, gbcVerticalStrut10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Numero di Biglietti: " + Integer.toString(value));
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_3.gridx = 0;
-		gbc_lblNewLabel_3.gridy = 10;
-		panel_6.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel lblNewLabel3 = new JLabel("Numero di Biglietti: " + Integer.toString(value));
+		lblNewLabel3.setForeground(Color.WHITE);
+		lblNewLabel3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblNewLabel3 = new GridBagConstraints();
+		gbcLblNewLabel3.insets = new Insets(0, 0, 5, 0);
+		gbcLblNewLabel3.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel3.gridx = 0;
+		gbcLblNewLabel3.gridy = 10;
+		panel6.add(lblNewLabel3, gbcLblNewLabel3);
 		
-		Component verticalStrut_11 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_11 = new GridBagConstraints();
-		gbc_verticalStrut_11.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_11.gridx = 0;
-		gbc_verticalStrut_11.gridy = 11;
-		panel_6.add(verticalStrut_11, gbc_verticalStrut_11);
+		Component verticalStrut11 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut11 = new GridBagConstraints();
+		gbcVerticalStrut11.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut11.gridx = 0;
+		gbcVerticalStrut11.gridy = 11;
+		panel6.add(verticalStrut11, gbcVerticalStrut11);
 		
 		JLabel lblModificaPrenotazione = new JLabel("Modifica Prenotazione");
 		lblModificaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblModificaPrenotazione.setForeground(Color.WHITE);
-		GridBagConstraints gbc_lblModificaPrenotazione = new GridBagConstraints();
-		gbc_lblModificaPrenotazione.insets = new Insets(0, 0, 5, 0);
-		gbc_lblModificaPrenotazione.anchor = GridBagConstraints.WEST;
-		gbc_lblModificaPrenotazione.gridx = 0;
-		gbc_lblModificaPrenotazione.gridy = 12;
-		panel_6.add(lblModificaPrenotazione, gbc_lblModificaPrenotazione);
+		GridBagConstraints gbcLblModificaPrenotazione = new GridBagConstraints();
+		gbcLblModificaPrenotazione.insets = new Insets(0, 0, 5, 0);
+		gbcLblModificaPrenotazione.anchor = GridBagConstraints.WEST;
+		gbcLblModificaPrenotazione.gridx = 0;
+		gbcLblModificaPrenotazione.gridy = 12;
+		panel6.add(lblModificaPrenotazione, gbcLblModificaPrenotazione);
 		
-		Component verticalStrut_12 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_12 = new GridBagConstraints();
-		gbc_verticalStrut_12.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_12.gridx = 0;
-		gbc_verticalStrut_12.gridy = 13;
-		panel_6.add(verticalStrut_12, gbc_verticalStrut_12);
+		Component verticalStrut12 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut12 = new GridBagConstraints();
+		gbcVerticalStrut12.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut12.gridx = 0;
+		gbcVerticalStrut12.gridy = 13;
+		panel6.add(verticalStrut12, gbcVerticalStrut12);
 		
 		JLabel lblNuovaData = new JLabel("Nuova Data");
 		lblNuovaData.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNuovaData.setForeground(Color.WHITE);
-		GridBagConstraints gbc_lblNuovaData = new GridBagConstraints();
-		gbc_lblNuovaData.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNuovaData.anchor = GridBagConstraints.WEST;
-		gbc_lblNuovaData.gridx = 0;
-		gbc_lblNuovaData.gridy = 14;
-		panel_6.add(lblNuovaData, gbc_lblNuovaData);
+		GridBagConstraints gbcLblNuovaData = new GridBagConstraints();
+		gbcLblNuovaData.insets = new Insets(0, 0, 5, 0);
+		gbcLblNuovaData.anchor = GridBagConstraints.WEST;
+		gbcLblNuovaData.gridx = 0;
+		gbcLblNuovaData.gridy = 14;
+		panel6.add(lblNuovaData, gbcLblNuovaData);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
-		gbc_dateChooser_1.insets = new Insets(0, 0, 5, 0);
-		gbc_dateChooser_1.fill = GridBagConstraints.BOTH;
-		gbc_dateChooser_1.gridx = 0;
-		gbc_dateChooser_1.gridy = 15;
-		panel_6.add(dateChooser_1, gbc_dateChooser_1);
+		String partenza1 = Controller.parserAereoporto(partenza);
+		String arrivo1 = Controller.parserAereoporto(arrivo);
 		
-		Component verticalStrut_13 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_13 = new GridBagConstraints();
-		gbc_verticalStrut_13.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_13.gridx = 0;
-		gbc_verticalStrut_13.gridy = 16;
-		panel_6.add(verticalStrut_13, gbc_verticalStrut_13);
+		List <Volo> listaVoli = Controller.getPartenzaDestinazione(partenza1, arrivo1);
+		
+		JComboBox nuovoVolo = new JComboBox();
+		GridBagConstraints gbcNuovoVolo = new GridBagConstraints();
+		gbcNuovoVolo.fill = GridBagConstraints.HORIZONTAL;
+		gbcNuovoVolo.insets = new Insets(0, 0, 5, 5);
+		gbcNuovoVolo.gridx = 0;
+		gbcNuovoVolo.gridy = 15;
+		for(Volo v : listaVoli) {
+			if(v.getIdVolo() != id) {
+			StringBuilder stringa = new StringBuilder();
+			stringa.append(v.getIdVolo());
+			stringa.append(", Partenza " + v.getDataPartenza());
+			stringa.append(", Arrivo " + v.getDataArrivo());
+			nuovoVolo.addItem(stringa.toString());
+			System.out.println(stringa.toString());}
+		}
+		panel6.add(nuovoVolo, gbcNuovoVolo);
+		
+		Component verticalStrut13 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut13 = new GridBagConstraints();
+		gbcVerticalStrut13.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut13.gridx = 0;
+		gbcVerticalStrut13.gridy = 16;
+		panel6.add(verticalStrut13, gbcVerticalStrut13);
 		
 		JButton btnModifica = new JButton("Modifica");
 		btnModifica.addActionListener(new ActionListener() {
@@ -179,40 +203,40 @@ public class VisualizzaModificaPrenotazione {
 			}
 		});
 		btnModifica.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_btnModifica = new GridBagConstraints();
-		gbc_btnModifica.insets = new Insets(0, 0, 5, 0);
-		gbc_btnModifica.anchor = GridBagConstraints.WEST;
-		gbc_btnModifica.gridx = 0;
-		gbc_btnModifica.gridy = 17;
-		panel_6.add(btnModifica, gbc_btnModifica);
+		GridBagConstraints gbcBtnModifica = new GridBagConstraints();
+		gbcBtnModifica.insets = new Insets(0, 0, 5, 0);
+		gbcBtnModifica.anchor = GridBagConstraints.WEST;
+		gbcBtnModifica.gridx = 0;
+		gbcBtnModifica.gridy = 17;
+		panel6.add(btnModifica, gbcBtnModifica);
 		
-		Component verticalStrut_14 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_14 = new GridBagConstraints();
-		gbc_verticalStrut_14.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_14.gridx = 0;
-		gbc_verticalStrut_14.gridy = 18;
-		panel_6.add(verticalStrut_14, gbc_verticalStrut_14);
+		Component verticalStrut14 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut14 = new GridBagConstraints();
+		gbcVerticalStrut14.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut14.gridx = 0;
+		gbcVerticalStrut14.gridy = 18;
+		panel6.add(verticalStrut14, gbcVerticalStrut14);
 		
-		Component verticalStrut_15 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_15 = new GridBagConstraints();
-		gbc_verticalStrut_15.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_15.gridx = 0;
-		gbc_verticalStrut_15.gridy = 19;
-		panel_6.add(verticalStrut_15, gbc_verticalStrut_15);
+		Component verticalStrut15 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut15 = new GridBagConstraints();
+		gbcVerticalStrut15.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut15.gridx = 0;
+		gbcVerticalStrut15.gridy = 19;
+		panel6.add(verticalStrut15, gbcVerticalStrut15);
 		
-		Component verticalStrut_16 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_16 = new GridBagConstraints();
-		gbc_verticalStrut_16.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_16.gridx = 0;
-		gbc_verticalStrut_16.gridy = 20;
-		panel_6.add(verticalStrut_16, gbc_verticalStrut_16);
+		Component verticalStrut16 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut16 = new GridBagConstraints();
+		gbcVerticalStrut16.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut16.gridx = 0;
+		gbcVerticalStrut16.gridy = 20;
+		panel6.add(verticalStrut16, gbcVerticalStrut16);
 		
-		Component verticalStrut_17 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_17 = new GridBagConstraints();
-		gbc_verticalStrut_17.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_17.gridx = 0;
-		gbc_verticalStrut_17.gridy = 21;
-		panel_6.add(verticalStrut_17, gbc_verticalStrut_17);
+		Component verticalStrut17 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut17 = new GridBagConstraints();
+		gbcVerticalStrut17.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut17.gridx = 0;
+		gbcVerticalStrut17.gridy = 21;
+		panel6.add(verticalStrut17, gbcVerticalStrut17);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
@@ -224,12 +248,19 @@ public class VisualizzaModificaPrenotazione {
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-		gbc_btnBack.anchor = GridBagConstraints.WEST;
-		gbc_btnBack.gridx = 0;
-		gbc_btnBack.gridy = 22;
-		panel_6.add(btnBack, gbc_btnBack);
+		GridBagConstraints gbcBtnBack = new GridBagConstraints();
+		gbcBtnBack.anchor = GridBagConstraints.WEST;
+		gbcBtnBack.gridx = 0;
+		gbcBtnBack.gridy = 22;
+		panel6.add(btnBack, gbcBtnBack);
 		
-		return panel_6;
+		return panel6;
+	}
+	
+	public static String convertiData(Date data) {
+		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		String dataStringa= dtFormat.format(data);
+		return dataStringa;
 	}
 }

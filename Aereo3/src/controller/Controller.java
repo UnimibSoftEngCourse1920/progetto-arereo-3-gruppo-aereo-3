@@ -55,6 +55,18 @@ public class Controller {
 	//GESTIONE CLIENTI
 	
 	/********************************************************/
+	public static Cliente getCliente(String email) {
+		return GestioneClienteDatabase.getCliente(email);
+	}
+	
+	public static boolean trovaMail(String email) {
+		return GestioneClienteDatabase.trovaMail(email);
+	}
+	
+	public static boolean trovaCliente(int cliente, int idVolo) {
+		return GestionePrenotazioneDatabase.trovaCliente(cliente, idVolo);
+	}
+	
 	public static void insertCliente(Cliente cliente) {
 
 		GestioneClienteDatabase.insertCliente(cliente);
@@ -225,6 +237,10 @@ public class Controller {
 	
 	/****************************************************/
 	//GESTIONE AEREOPORTO
+	
+	public static List<String> getDenominazioneAereoporti(){
+		return GestioneAereoportoDatabase.getDenominazioniAereoporti();
+	}
 
 	public static String getDenominazioneAereoporto(String idAereoporto) {
 
@@ -239,7 +255,9 @@ public class Controller {
 	public static String parserAereoporto(String idAereoporto  ) {
 		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
 	}
-
-
+	
+	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
+		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
+	}
 }
 
