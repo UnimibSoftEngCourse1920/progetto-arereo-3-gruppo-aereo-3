@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,6 +22,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import dominio.Cliente;
+import dominio.ClienteFedele;
 import dominio.Volo;
 
 public class ElencoPasseggeri {
@@ -180,6 +182,20 @@ public class ElencoPasseggeri {
 		panel9.add(dataDiNascita, gbcDateChooser);
 		y++;
 		
+		JButton logIn = new JButton("LogIn");
+		boolean loggato = false;
+		ClienteFedele c1 = null;
+		logIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LogInDialog logindlg = new LogInDialog();
+				logindlg.setVisible(true);
+				System.out.println(""+logindlg.isSuccessed());
+				}
+			});
+		logIn.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel8.add(logIn, BorderLayout.EAST);
+		
+		
 		JLabel errore = new JLabel("");
 		errore.setForeground(Color.RED);
 		errore.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -218,12 +234,17 @@ public class ElencoPasseggeri {
 					if (!errore.getText().equals("")) {
 						errore.setText("");
 					}
-					Cliente c = new Cliente();
-					c.setNome(campi[0].getText());
-					c.setCognome(campi[1].getText());
-					c.setEmail(emailInsert.getText());
-					c.setDataDiNascita(dataDiNascita.getDate());
-					c.setIndirizzo("Via Duomo");
+					Cliente c;
+					if (! loggato) {
+						c  = new Cliente();
+						c.setNome(campi[0].getText());
+						c.setCognome(campi[1].getText());
+						c.setEmail(emailInsert.getText());
+						c.setDataDiNascita(dataDiNascita.getDate());
+						c.setIndirizzo("Via Duomo");}
+					else {
+						c = c1;
+					}
 					contentPane.removeAll();
 					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP));
 					contentPane.repaint();

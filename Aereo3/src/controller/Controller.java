@@ -91,7 +91,7 @@ public class Controller {
 		return true;
 
 	}
-	public static Cliente login(String email, String pass) {
+	public static ClienteFedele login(String email, String pass) {
 		return GestioneClienteDatabase.login(email, pass);
 	}
 
