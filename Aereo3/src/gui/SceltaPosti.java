@@ -172,7 +172,12 @@ public class SceltaPosti {
 		JButton btnNewButton_1 = new JButton("Prenota");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(! GestionePrenotazioneDatabase.trovaCliente(GestioneClienteDatabase.getCliente(c.getEmail()).getCodCliente(), idVolo)) {
+				if(! GestioneClienteDatabase.trovaMail(c.getEmail())) {
+					Controller.insertCliente(c);
+				}
+				Cliente cliente = GestioneClienteDatabase.getCliente(c.getEmail());
+				
+				if(! GestionePrenotazioneDatabase.trovaCliente(cliente.getCodCliente(), idVolo)) {
 				List <Posto> listaPosti = new ArrayList<Posto>();
 				double costo = 0;
 				int costoPunti = 0;
@@ -191,13 +196,10 @@ public class SceltaPosti {
 				}
 				System.out.println(listaPosti);
 				//portati dietro cliente
-				if(! GestioneClienteDatabase.trovaMail(c.getEmail())) {
-					Controller.insertCliente(c);
-				}
-				Cliente cliente = GestioneClienteDatabase.getCliente(c.getEmail());
+				
 				Controller.insertPrenotazione(cliente, idVolo, listaPosti);
 				int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-				GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, Controller.getPrenotazione(idVolo));
+				GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 				contentPane.removeAll();
 				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
 				contentPane.repaint();

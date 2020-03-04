@@ -131,7 +131,7 @@ public class Controller {
 		return GestionePostoDatabase.getPosto(lettera, fila, idVolo);
 	}
 	
-	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, Prenotazione prenotazione){
+	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, int prenotazione){
 		GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, prenotazione);
 	}
 	
@@ -148,11 +148,6 @@ public class Controller {
 	/****************************************************/
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
-
-	}
-	
-	public static Prenotazione getPrenotazione(int id) {
-		return GestionePrenotazioneDatabase.getPrenotazioneDaId(id);
 
 	}
 	

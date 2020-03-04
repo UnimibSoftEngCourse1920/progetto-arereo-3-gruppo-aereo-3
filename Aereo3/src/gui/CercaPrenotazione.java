@@ -89,7 +89,7 @@ public class CercaPrenotazione {
 		JButton btnCerca = new JButton("Cerca !");
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Prenotazione p = Controller.getPrenotazione(Integer.parseInt(textField_1.getText()));
+				Prenotazione p = Controller.loginCliente(Integer.parseInt(textField_1.getText()), textField.getText());
 				System.out.println(Controller.getPostiPerPrenotazione(p.getId()));
 				Volo v = Controller.getVolo(p.getIdVolo());
 				String partenza = v.getPartenza();

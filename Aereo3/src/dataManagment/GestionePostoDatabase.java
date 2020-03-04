@@ -97,16 +97,17 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		
 	}
 	
-	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, Prenotazione prenotazione){
+	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, int idPrenotazione){
 		String jpql=null;
 		Query query=null;
 		entityManager.getTransaction().begin();
 		for(Posto p: listaPosti) {
-			jpql="UPDATE Posto SET idPrenotazione=:id WHERE fila=:fila and lettera=:lettera";
+			jpql="UPDATE Posto SET idPrenotazione=:id WHERE fila=:fila and lettera=:lettera and chiaveComposta.idVolo=:idVolo";
 			query=entityManager.createQuery(jpql);
-			query.setParameter("id", prenotazione.getId());
+			query.setParameter("id", idPrenotazione);
 			query.setParameter("fila", p.getChiaveComposta().getFila());
 			query.setParameter("lettera", p.getChiaveComposta().getLettera());
+			query.setParameter("idVolo", p.getChiaveComposta().getIdVolo());
 			query.executeUpdate();
 		}
 		
