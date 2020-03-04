@@ -34,7 +34,7 @@ import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, int idVolo, Cliente c) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -76,7 +76,7 @@ public class SceltaPosti {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(panel_8);
+				contentPane.add(panel8);
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
@@ -178,33 +178,32 @@ public class SceltaPosti {
 				Cliente cliente = Controller.getCliente(c.getEmail());
 				
 				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
-				List <Posto> listaPosti = new ArrayList<Posto>();
-				double costo = 0;
-				int costoPunti = 0;
-				for(int i = 0; i<value; i++) {
-					/*String s = (String)box[i].getSelectedItem();
-					String[] ss = s.split(", ");
-					
-					char fila = ss[0].charAt(ss[0].length()-1);
-					Integer numero = Integer.parseInt(ss[0].substring(0, ss[0].length()-1));
-					int valore = numero.valueOf(numero);*/
-					
-					Posto p = (Posto)box[i].getSelectedItem();
-					costo = costo + p.getPrezzo();
-					costoPunti = costoPunti + p.getPrezzoPunti();
-					listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
-				}
-				System.out.println(listaPosti);
-				//portati dietro cliente
-				
-				Controller.insertPrenotazione(cliente, idVolo, listaPosti);
-				int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-				Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
-				contentPane.removeAll();
-				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
-				contentPane.repaint();
-				contentPane.revalidate();}
-				else {
+					List <Posto> listaPosti = new ArrayList<Posto>();
+					double costo = 0;
+					int costoPunti = 0;
+					for(int i = 0; i<value; i++) {
+						/*String s = (String)box[i].getSelectedItem();
+						String[] ss = s.split(", ");
+						
+						char fila = ss[0].charAt(ss[0].length()-1);
+						Integer numero = Integer.parseInt(ss[0].substring(0, ss[0].length()-1));
+						int valore = numero.valueOf(numero);*/
+						
+						Posto p = (Posto)box[i].getSelectedItem();
+						costo = costo + p.getPrezzo();
+						costoPunti = costoPunti + p.getPrezzoPunti();
+						listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
+						}
+					System.out.println(listaPosti);
+					//portati dietro cliente
+					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
+					int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+					contentPane.removeAll();
+					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
+					contentPane.repaint();
+					contentPane.revalidate();
+				} else {
 					errore.setText("Il cliente ha già una prenotazione per questo volo");
 				}
 			}

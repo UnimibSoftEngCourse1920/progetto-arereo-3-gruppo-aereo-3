@@ -25,10 +25,11 @@ import com.toedter.calendar.JDateChooser;
 import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneVoloDatabase;
+import dominio.Cliente;
 import dominio.Volo;
 
 public class VisualizzaModificaPrenotazione {
-	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int id) {
+	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_58028579602300");
@@ -180,7 +181,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcNuovoVolo.gridx = 0;
 		gbcNuovoVolo.gridy = 15;
 		for(Volo v : listaVoli) {
-			if(v.getIdVolo() != id) {
+			if(v.getIdVolo() != idVolo) {
 			StringBuilder stringa = new StringBuilder();
 			stringa.append(v.getIdVolo());
 			stringa.append(", Partenza " + v.getDataPartenza());
@@ -200,6 +201,16 @@ public class VisualizzaModificaPrenotazione {
 		JButton btnModifica = new JButton("Modifica");
 		btnModifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String v = (String) nuovoVolo.getSelectedItem();
+				String[] params = v.split(", ");
+				int newIdVolo = Integer.parseInt(params[0]);
+				contentPane.removeAll();
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c));
+				if(modifica)
+					Controller.eliminaPrenotazione(oldIdPrenotazione);
+				contentPane.repaint();
+				contentPane.revalidate();
+				
 			}
 		});
 		btnModifica.setFont(new Font("Tahoma", Font.PLAIN, 20));

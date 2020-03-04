@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dominio.Cliente;
 import dominio.Prenotazione;
 import dominio.Volo;
 
@@ -90,7 +91,8 @@ public class CercaPrenotazione {
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Prenotazione p = Controller.loginCliente(Integer.parseInt(textField1.getText()), textField.getText());
-				int id = p.getIdVolo();
+				Cliente c = Controller.getCliente(textField.getText());
+				int idVolo = p.getIdVolo();
 				System.out.println(Controller.getPostiPerPrenotazione(p.getId()));
 				Volo v = Controller.getVolo(p.getIdVolo());
 				String partenza = v.getPartenza();
@@ -99,7 +101,7 @@ public class CercaPrenotazione {
 				Date dataPartenza = v.getDataPartenza();
 				Date dataArrivo = v.getDataArrivo();
 				contentPane.removeAll();
-				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, id));
+				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, idVolo, c, p.getId()));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
