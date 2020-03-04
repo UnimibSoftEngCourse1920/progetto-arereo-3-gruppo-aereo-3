@@ -145,41 +145,41 @@ public class AccessoAdmin {
 		adminLogIn.add(lblPassword, gbcLblPassword);
 		
 		Component horizontalStrut5 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_5 = new GridBagConstraints();
-		gbc_horizontalStrut_5.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_5.gridx = 0;
-		gbc_horizontalStrut_5.gridy = 9;
-		adminLogIn.add(horizontalStrut5, gbc_horizontalStrut_5);
+		GridBagConstraints gbcHorizontalStrut5 = new GridBagConstraints();
+		gbcHorizontalStrut5.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut5.gridx = 0;
+		gbcHorizontalStrut5.gridy = 9;
+		adminLogIn.add(horizontalStrut5, gbcHorizontalStrut5);
 		
 		JPasswordField passwordField = new JPasswordField();
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 1;
-		gbc_passwordField.gridy = 9;
-		adminLogIn.add(passwordField, gbc_passwordField);
+		GridBagConstraints gbcPasswordField = new GridBagConstraints();
+		gbcPasswordField.insets = new Insets(0, 0, 5, 5);
+		gbcPasswordField.fill = GridBagConstraints.HORIZONTAL;
+		gbcPasswordField.gridx = 1;
+		gbcPasswordField.gridy = 9;
+		adminLogIn.add(passwordField, gbcPasswordField);
 		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
-		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_7.gridx = 1;
-		gbc_verticalStrut_7.gridy = 10;
-		adminLogIn.add(verticalStrut_7, gbc_verticalStrut_7);
+		Component verticalStrut7 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut7 = new GridBagConstraints();
+		gbcVerticalStrut7.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut7.gridx = 1;
+		gbcVerticalStrut7.gridy = 10;
+		adminLogIn.add(verticalStrut7, gbcVerticalStrut7);
 		
-		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_7 = new GridBagConstraints();
-		gbc_horizontalStrut_7.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_7.gridx = 0;
-		gbc_horizontalStrut_7.gridy = 11;
-		adminLogIn.add(horizontalStrut_7, gbc_horizontalStrut_7);
+		Component horizontalStrut7 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut7 = new GridBagConstraints();
+		gbcHorizontalStrut7.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut7.gridx = 0;
+		gbcHorizontalStrut7.gridy = 11;
+		adminLogIn.add(horizontalStrut7, gbcHorizontalStrut7);
 		
 		JButton btnNewButton = new JButton("Accedi !");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 11;
+		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
+		gbcBtnNewButton.anchor = GridBagConstraints.WEST;
+		gbcBtnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbcBtnNewButton.gridx = 1;
+		gbcBtnNewButton.gridy = 11;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				Admin a = new Admin();
@@ -208,22 +208,22 @@ public class AccessoAdmin {
 				}
 			}
 		});
-		adminLogIn.add(btnNewButton, gbc_btnNewButton);
+		adminLogIn.add(btnNewButton, gbcBtnNewButton);
 		
-		Component verticalStrut_13 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_13 = new GridBagConstraints();
-		gbc_verticalStrut_13.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_13.gridx = 1;
-		gbc_verticalStrut_13.gridy = 13;
-		adminLogIn.add(verticalStrut_13, gbc_verticalStrut_13);
+		Component verticalStrut13 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut13 = new GridBagConstraints();
+		gbcVerticalStrut13.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut13.gridx = 1;
+		gbcVerticalStrut13.gridy = 13;
+		adminLogIn.add(verticalStrut13, gbcVerticalStrut13);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-		gbc_btnBack.anchor = GridBagConstraints.WEST;
-		gbc_btnBack.insets = new Insets(0, 0, 5, 5);
-		gbc_btnBack.gridx = 1;
-		gbc_btnBack.gridy = 14;
+		GridBagConstraints gbcBtnBack = new GridBagConstraints();
+		gbcBtnBack.anchor = GridBagConstraints.WEST;
+		gbcBtnBack.insets = new Insets(0, 0, 5, 5);
+		gbcBtnBack.gridx = 1;
+		gbcBtnBack.gridy = 14;
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
@@ -232,14 +232,14 @@ public class AccessoAdmin {
 				contentPane.revalidate();
 				}
 		});
-		adminLogIn.add(btnBack, gbc_btnBack);
+		adminLogIn.add(btnBack, gbcBtnBack);
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_4 = new GridBagConstraints();
-		gbc_horizontalStrut_4.insets = new Insets(0, 0, 0, 5);
-		gbc_horizontalStrut_4.gridx = 0;
-		gbc_horizontalStrut_4.gridy = 15;
-		adminLogIn.add(horizontalStrut_4, gbc_horizontalStrut_4);
+		Component horizontalStrut4 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut4 = new GridBagConstraints();
+		gbcHorizontalStrut4.insets = new Insets(0, 0, 0, 5);
+		gbcHorizontalStrut4.gridx = 0;
+		gbcHorizontalStrut4.gridy = 15;
+		adminLogIn.add(horizontalStrut4, gbcHorizontalStrut4);
 		
 		return adminLogIn;
 	}
