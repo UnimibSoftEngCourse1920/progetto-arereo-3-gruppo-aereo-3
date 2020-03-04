@@ -34,7 +34,7 @@ import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c, boolean modifica, int oldP) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -203,6 +203,8 @@ public class SceltaPosti {
 					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
 					contentPane.repaint();
 					contentPane.revalidate();
+					if(modifica)
+						Controller.eliminaPrenotazione(GestionePrenotazioneDatabase.getPrenotazioneId(oldP));
 				} else {
 					errore.setText("Il cliente ha già una prenotazione per questo volo");
 				}

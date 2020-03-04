@@ -205,12 +205,9 @@ public class VisualizzaModificaPrenotazione {
 				String[] params = v.split(", ");
 				int newIdVolo = Integer.parseInt(params[0]);
 				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c));
-				if(modifica)
-					Controller.eliminaPrenotazione(oldIdPrenotazione);
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione));
 				contentPane.repaint();
 				contentPane.revalidate();
-				
 			}
 		});
 		btnModifica.setFont(new Font("Tahoma", Font.PLAIN, 20));

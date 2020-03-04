@@ -25,7 +25,7 @@ import dominio.Volo;
 
 public class ElencoPasseggeri {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo, boolean modifica) {
 		JPanel panel8 = new JPanel();
 		panel8.setBackground(Color.BLUE);
 		contentPane.add(panel8, "name_1158551504937600");
@@ -190,6 +190,8 @@ public class ElencoPasseggeri {
 		glcErrore.gridy = y;
 		panel9.add(errore, glcErrore);
 		
+		int oldP = -1;
+		
 		JButton btnNewButton = new JButton("Continua");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -223,7 +225,7 @@ public class ElencoPasseggeri {
 					c.setDataDiNascita(dataDiNascita.getDate());
 					c.setIndirizzo("Via Duomo");
 					contentPane.removeAll();
-					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c));
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}

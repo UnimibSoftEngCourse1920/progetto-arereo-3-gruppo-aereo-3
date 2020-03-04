@@ -67,11 +67,9 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return risultato;
 	}
 	
-	public static void deletePrenotazione(int id) {
+	public static void deletePrenotazione(Prenotazione p) {
 		entityManager.getTransaction().begin();
-		String jpql = "DELETE Prenotazione p WHERE p.idPrenotazione = :idp";
-		Query query = entityManager.createQuery(jpql).setParameter("idp", id);
-		query.executeUpdate();
+		entityManager.remove(p);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 	}
@@ -94,6 +92,14 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 			return false;
 		else 
 			return true;
+	}
+	
+	public static Prenotazione getPrenotazioneId(int id) {
+		String jpql = "SELECT p FROM Prenotazione as p WHERE p.id =: id";
+		Query query = entityManager.createQuery(jpql).setParameter("id", id);
+		@SuppressWarnings("unchecked")
+		List<Prenotazione> prenotazioni = query.getResultList();
+		return prenotazioni.get(0);
 	}
 
 		

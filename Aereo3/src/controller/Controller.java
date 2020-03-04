@@ -170,8 +170,8 @@ public class Controller {
 	}
 
 
-	public static void eliminaPrenotazione(int id) {
-		GestionePrenotazioneDatabase.deletePrenotazione(id);
+	public static void eliminaPrenotazione(Prenotazione p) {
+		GestionePrenotazioneDatabase.deletePrenotazione(p);
 	}
 
 
