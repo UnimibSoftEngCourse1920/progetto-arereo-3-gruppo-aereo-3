@@ -60,6 +60,11 @@ public class Controller {
 		GestioneClienteDatabase.insertCliente(cliente);
 	}
 	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+
+		GestioneClienteDatabase.insertClienteFedele(cliente);
+	}
+	
 	public static void insertListaClienti(ArrayList<Cliente> clienti) {
 		GestioneClienteDatabase.insertClienti(clienti);
 	}
@@ -82,11 +87,12 @@ public class Controller {
 	return GestioneClienteDatabase.loginCliente(idPrenotazione, email);
 	}
 	
-//	public static void signToLoyalty(Cliente cliente, String nome, String cognome, String indirizzo,
-//			Date date, String email) {
-//		GestioneClienteDatabase.signToLoyalty(cliente, nome, cognome, indirizzo, date, email);
-//	}
-//	
+
+	public static void signToLoyalty(String nome, String cognome, String indirizzo,
+			Date date, String psw) {
+		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, psw);
+	}
+
 	public static void deleteCliente(Cliente cliente) {
 		GestioneClienteDatabase.deleteCliente(cliente);
 	}
@@ -111,7 +117,7 @@ public class Controller {
 		return GestionePostoDatabase.getPosto(lettera, fila, idVolo);
 	}
 	
-	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, Prenotazione prenotazione){
+	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, int prenotazione){
 		GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, prenotazione);
 	}
 	
@@ -128,11 +134,6 @@ public class Controller {
 	/****************************************************/
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
-
-	}
-	
-	public static Prenotazione getPrenotazione(int id) {
-		return GestionePrenotazioneDatabase.getPrenotazioneDaId(id);
 
 	}
 	

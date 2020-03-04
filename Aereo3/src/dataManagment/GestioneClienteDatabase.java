@@ -85,6 +85,15 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 		entityManager.clear();
 	}
+	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+		entityManager.getTransaction().begin();
+		entityManager.persist(cliente);
+		entityManager.getTransaction().commit();
+
+		entityManager.clear();
+		System.out.println("Record Successfully Inserted In The Database");
+	}
 
 	public static void insertClienti(ArrayList<Cliente> clienti) {
 		entityManager.getTransaction().begin();
@@ -116,17 +125,16 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		
 	}
 
-	public static ClienteFedele signToLoyalty(Cliente cliente, String cognome,
-			String indirizzo, String indirizzo2, Date date, String pwd) {
+	public static ClienteFedele signToLoyalty(String nome, String cognome,
+			String indirizzo, Date date, String pwd) {
 
 		ClienteFedele cf = new ClienteFedele();
 
-		cf.setNome(cliente);
+		cf.setNome(nome);
 		cf.setCognome(cognome);
-		cf.setDataDiNascita(indirizzo2);
-		cf.setEmail(date);
+		cf.setDataDiNascita(date);
 		cf.setIndirizzo(indirizzo);
-		cf.setPassword(pwd);
+		cf.setPsw(pwd);
 		cf.setPunti(0);
 		cf.setDataIscrizione(new Date());
 
@@ -189,5 +197,22 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 			estrattoPunti.put(p.getIdVolo(), p.getPuntiTotali());
 		}
 		return estrattoPunti;
+	}
+	
+	public static boolean trovaMail (String email) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
+		Query query =entityManager.createQuery(jpql).setParameter("email", email);
+		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.size() == 0)
+			return false;
+		else
+			return true;
+	}
+	
+	public static Cliente getCliente(String email) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
+		Query query = entityManager.createQuery(jpql).setParameter("email", email);
+		List <Cliente> ris = query.getResultList();
+		return ris.get(0);
 	}
 }

@@ -28,22 +28,43 @@ public class ClienteFedele extends Cliente {
 	@Column(name = "infedele")
 	private Date infedele;
 	
+
+	@Column(name = "indirizzo")
+	private String indirizzo;
+	
 	@Column(name = "password")
-	private String password;
+	private String psw;
 	
+	@Column(name = "data_di_nascita")
+	private Date dataDiNascita;
 	
 
-	public String getPassword() {
-		return password;
+	public Date getDataDiNascita() {
+		return dataDiNascita;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
 	}
-	
 
 	public Date getInfedele() {
 		return infedele;
+	}
+
+	public String getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public String getPsw() {
+		return psw;
+	}
+
+	public void setPsw(String psw) {
+		this.psw = psw;
 	}
 
 	public void setInfedele(Date infedele) {

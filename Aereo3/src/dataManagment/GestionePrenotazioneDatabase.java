@@ -58,19 +58,9 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return prenotazioni;
 	}
 	
-	public static Prenotazione getPrenotazioneDaId(int id) {
-		String jpql="SELECT p FROM Prenotazione as p WHERE  p.id=:id";
-		Query query = entityManager.createQuery(jpql).setParameter("id", id);
-		@SuppressWarnings("unchecked")
-		List <Prenotazione>  lista= query.getResultList();
-		return lista.get(0);
-		
-	}
-	
-
 	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
-		String jpql = "SELECT p.id FROM Prenotazione as p WHERE codCliente like " + c.getCodCliente();
-		Query query = entityManager.createQuery(jpql);
+		String jpql = "SELECT p.id FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
+		Query query = entityManager.createQuery(jpql).setParameter("codCliente", c.getCodCliente()).setParameter("idVolo", v);
 		List<Integer>prenotazione = query.getResultList();
 		Integer value = prenotazione.get(0);
 		int risultato = value.intValue();
@@ -78,9 +68,12 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 	
 	public static void deletePrenotazione(int id) {
+		entityManager.getTransaction().begin();
 		String jpql = "DELETE Prenotazione p WHERE p.idPrenotazione = :idp";
 		Query query = entityManager.createQuery(jpql).setParameter("idp", id);
 		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
 	}
 	
 	/*****************BRANCH CLARK************************************/
@@ -90,6 +83,17 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		String jpql ="UPDATE Prenotazione SET pagato=:pagato WHERE id=:id ";
 		Query query= entityManager.createQuery(jpql).setParameter("pagato", true).setParameter("id", prenotazione.getId());	
 		query.executeUpdate();
+	}
+	
+	public static boolean trovaCliente(int codCliente, int idVolo) {
+		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
+		Query query = entityManager.createQuery(jpql).setParameter("codCliente", codCliente).setParameter("idVolo", idVolo);
+		List <Prenotazione> ris = query.getResultList();
+		System.out.println(ris);
+		if(ris == null || ris.size() == 0)
+			return false;
+		else 
+			return true;
 	}
 
 		
