@@ -22,6 +22,8 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dominio.ClienteFedele;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class Registrazione {
 	
@@ -241,6 +243,9 @@ public class Registrazione {
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();
 				registrationPanel.revalidate();
+				
+				GestoreMail ge = GestoreMail.getInstance();
+				ge.sendMail(c.getEmail(), MessaggiPredefiniti.FEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.FEDELE_TXT.getMessaggio());
 				}
 			}
 		});
