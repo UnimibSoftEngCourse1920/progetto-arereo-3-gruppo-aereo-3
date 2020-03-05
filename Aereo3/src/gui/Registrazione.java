@@ -245,8 +245,8 @@ public class Registrazione {
 				registrationPanel.repaint();
 				registrationPanel.revalidate();
 				
-				GestoreMail ge = GestoreMail.getInstance();
-				ge.sendMail(c.getEmail(), MessaggiPredefiniti.FEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.FEDELE_TXT.getMessaggio());
+				GestoreMail ge = Controller.getGestoreMail();
+				Controller.sendMail(ge, c.getEmail(), MessaggiPredefiniti.FEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.FEDELE_TXT.getMessaggio());
 				}
 			}
 		});

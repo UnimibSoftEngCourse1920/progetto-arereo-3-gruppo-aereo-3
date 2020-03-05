@@ -176,7 +176,7 @@ public class Pagamento {
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//se il pagamento va a buon fine
-				GestoreMail ge = GestoreMail.getInstance();
+				GestoreMail ge = Controller.getGestoreMail();
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 				Volo v = Controller.getVolo(idVolo);
@@ -184,7 +184,7 @@ public class Pagamento {
 				for(Posto p : listaPosti)
 					txt += p.toString();
 				txt += "Prenotazione PAGATA";
-				ge.sendMail(c.getEmail(), sbj, txt);
+				Controller.sendMail(ge, c.getEmail(), sbj, txt);
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 20));

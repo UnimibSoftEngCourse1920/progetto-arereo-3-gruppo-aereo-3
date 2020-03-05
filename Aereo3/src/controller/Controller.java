@@ -27,6 +27,7 @@ import dominio.Prenotazione;
 import dominio.Promozione;
 import dominio.Volo;
 import gui.Home;
+import mailManagment.GestoreMail;
 
 public class Controller {
 	private static Log logger= LogFactory.getLog(Controller.class);
@@ -258,6 +259,16 @@ public class Controller {
 	
 	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
 		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
+	}
+	
+	/****************************************************/
+	//GESTIONE MAIL
+	public static GestoreMail getGestoreMail() {
+		return GestoreMail.getInstance();
+	}
+	
+	public static void sendMail(GestoreMail ge, String email, String subject, String content) {
+		ge.sendMail(email, subject, content);
 	}
 }
 
