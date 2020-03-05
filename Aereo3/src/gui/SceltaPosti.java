@@ -201,7 +201,7 @@ public class SceltaPosti {
 					int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
 					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 					contentPane.removeAll();
-					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
+					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione, cliente, idVolo, listaPosti));
 					contentPane.repaint();
 					contentPane.revalidate();
 					if(modifica)
