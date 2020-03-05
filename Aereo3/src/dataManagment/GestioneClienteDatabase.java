@@ -130,7 +130,6 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		cf.setPunti(0);
 		cf.setDataIscrizione(new Date());
 
-		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cf);
 		entityManager.getTransaction().commit();

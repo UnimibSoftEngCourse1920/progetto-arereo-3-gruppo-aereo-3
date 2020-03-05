@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import dominio.Admin;
+import dominio.ClienteFedele;
 import dominio.Volo;
 
 public class GestioneAdminDatabase extends GestioneDatabase{
@@ -40,13 +41,14 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		Volo voloDaAggiornare = GestioneVoloDatabase.getVolo(idVolo);
 		
 		Date nuovaData=null;
-		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy hh:mm");
+		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy HH:mm");
 
 		StringBuilder str=new StringBuilder();
 		String data= dateformat.format(dataPartenza);
 
 		str.append(data.substring(0,11)).append(orarioPartenza).append(":").append(minutiPartenza);
 
+		System.out.println("dataPartenza "+str.toString());
 		try {
 			nuovaData= dateformat.parse(str.toString());
 		} catch (ParseException e) {
@@ -54,12 +56,13 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		}
 		
 		Date nuovaData_1 = null;
-		SimpleDateFormat dateformat_1 = new SimpleDateFormat("dd-MM-yy hh:mm");
+		SimpleDateFormat dateformat_1 = new SimpleDateFormat("dd-MM-yy HH:mm");
 		
 		StringBuilder str_1 = new StringBuilder();
 		String data_1 = dateformat_1.format(dataArrivo);
 		
 		str_1.append(data_1.substring(0,11)).append(orarioArrivo).append(":").append(minutiArrivo);
+		System.out.println("dataDest "+str_1.toString());
 		
 		try {
 			nuovaData_1 = dateformat_1.parse(str_1.toString());
@@ -67,14 +70,15 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 			logger.error(e);
 		}
 		
-		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("nuovaData", nuovaData);
-		query.setParameter("nuovaData_1", nuovaData_1);
-		query.setParameter("idVolo", idVolo);
 		
-		query.executeUpdate();
+		Volo volo = entityManager.find(Volo.class, idVolo);
+		entityManager.getTransaction().begin();
+		volo.setDataPartenza(nuovaData);
+		volo.setDataArrivo(nuovaData_1);
+		volo.setGate(gate);
+		entityManager.getTransaction().commit();
 		
+		System.out.println("Aggiornato");
 		
 	}
 
