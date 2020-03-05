@@ -18,11 +18,10 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		return promozioni;
 	}
 	
-	public static void insertPromozione(Date inizio, Date fine, String msg, Volo v) {
+	public static void insertPromozione(Date inizio, Date fine, Volo v) {
 		Promozione p = new Promozione();
 		p.setDataInizio(inizio);
 		p.setDataFine(fine);
-		p.setMessaggio(msg);
 		p.setIdVolo(v.getIdVolo());
 		
 		entityManager.getTransaction().begin();

@@ -23,9 +23,6 @@ public class Promozione {
 	@Column(name="data_fine")
 	private Date dataFine;
 	
-	@Column(name="messaggio")
-	private String messaggio;
-	
 	@Column(name="sconto")
 	private double sconto;
 	
@@ -54,14 +51,6 @@ public class Promozione {
 	
 	public void setDataFine(Date dataFine) {
 		this.dataFine = dataFine;
-	}
-	
-	public String getMessaggio() {
-		return messaggio;
-	}
-	
-	public void setMessaggio(String messaggio) {
-		this.messaggio = messaggio;
 	}
 
 	public int getIdVolo() {
