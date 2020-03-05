@@ -223,67 +223,67 @@ public class ElencoPasseggeri {
 		gblPanel10.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel10.setLayout(gblPanel10);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
-		gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_1.gridx = 0;
-		gbc_verticalStrut_1.gridy = 0;
-		panel10.add(verticalStrut_1, gbc_verticalStrut_1);
+		Component verticalStrut1 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut1 = new GridBagConstraints();
+		gbcVerticalStrut1.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut1.gridx = 0;
+		gbcVerticalStrut1.gridy = 0;
+		panel10.add(verticalStrut1, gbcVerticalStrut1);
 		
-		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_2 = new GridBagConstraints();
-		gbc_verticalStrut_2.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_2.gridx = 0;
-		gbc_verticalStrut_2.gridy = 2;
-		panel10.add(verticalStrut_2, gbc_verticalStrut_2);
+		Component verticalStrut2 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut2 = new GridBagConstraints();
+		gbcVerticalStrut2.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut2.gridx = 0;
+		gbcVerticalStrut2.gridy = 2;
+		panel10.add(verticalStrut2, gbcVerticalStrut2);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setVisible(false);
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 3;
-		panel10.add(lblEmail, gbc_lblEmail);
+		GridBagConstraints gbcLblEmail = new GridBagConstraints();
+		gbcLblEmail.anchor = GridBagConstraints.WEST;
+		gbcLblEmail.insets = new Insets(0, 0, 5, 5);
+		gbcLblEmail.gridx = 0;
+		gbcLblEmail.gridy = 3;
+		panel10.add(lblEmail, gbcLblEmail);
 		
 		JTextField textField = new JTextField();
 		textField.setVisible(false);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 0;
-		gbc_textField.gridy = 4;
-		panel10.add(textField, gbc_textField);
+		GridBagConstraints gbcTextField = new GridBagConstraints();
+		gbcTextField.insets = new Insets(0, 0, 5, 5);
+		gbcTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbcTextField.gridx = 0;
+		gbcTextField.gridy = 4;
+		panel10.add(textField, gbcTextField);
 		textField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setVisible(false);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPassword.setForeground(Color.WHITE);
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.anchor = GridBagConstraints.WEST;
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.gridx = 0;
-		gbc_lblPassword.gridy = 5;
-		panel10.add(lblPassword, gbc_lblPassword);
+		GridBagConstraints gbcLblPassword = new GridBagConstraints();
+		gbcLblPassword.anchor = GridBagConstraints.WEST;
+		gbcLblPassword.insets = new Insets(0, 0, 5, 5);
+		gbcLblPassword.gridx = 0;
+		gbcLblPassword.gridy = 5;
+		panel10.add(lblPassword, gbcLblPassword);
 		
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setVisible(false);
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 0;
-		gbc_passwordField.gridy = 6;
-		panel10.add(passwordField, gbc_passwordField);
+		GridBagConstraints gbcPasswordField = new GridBagConstraints();
+		gbcPasswordField.insets = new Insets(0, 0, 5, 5);
+		gbcPasswordField.fill = GridBagConstraints.HORIZONTAL;
+		gbcPasswordField.gridx = 0;
+		gbcPasswordField.gridy = 6;
+		panel10.add(passwordField, gbcPasswordField);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_3 = new GridBagConstraints();
-		gbc_verticalStrut_3.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_3.gridx = 0;
-		gbc_verticalStrut_3.gridy = 7;
-		panel10.add(verticalStrut_3, gbc_verticalStrut_3);
+		Component verticalStrut3 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut3 = new GridBagConstraints();
+		gbcVerticalStrut3.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut3.gridx = 0;
+		gbcVerticalStrut3.gridy = 7;
+		panel10.add(verticalStrut3, gbcVerticalStrut3);
 		
 		JButton btnNewButton1 = new JButton("LOGIN");
 		btnNewButton1.setVisible(false);
@@ -302,12 +302,12 @@ public class ElencoPasseggeri {
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 8;
-		panel10.add(btnNewButton1, gbc_btnNewButton);
+		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
+		gbcBtnNewButton.anchor = GridBagConstraints.WEST;
+		gbcBtnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbcBtnNewButton.gridx = 0;
+		gbcBtnNewButton.gridy = 8;
+		panel10.add(btnNewButton1, gbcBtnNewButton);
 		
 		JCheckBox chckbxSonoUnCliente = new JCheckBox("Sono un Cliente Fedele");
 		chckbxSonoUnCliente.addActionListener(new ActionListener() {
@@ -341,12 +341,12 @@ public class ElencoPasseggeri {
 		chckbxSonoUnCliente.setBackground(Color.BLUE);
 		chckbxSonoUnCliente.setForeground(Color.WHITE);
 		chckbxSonoUnCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_chckbxSonoUnCliente = new GridBagConstraints();
-		gbc_chckbxSonoUnCliente.anchor = GridBagConstraints.WEST;
-		gbc_chckbxSonoUnCliente.insets = new Insets(0, 0, 5, 5);
-		gbc_chckbxSonoUnCliente.gridx = 0;
-		gbc_chckbxSonoUnCliente.gridy = 1;
-		panel10.add(chckbxSonoUnCliente, gbc_chckbxSonoUnCliente);
+		GridBagConstraints gbcChckbxSonoUnCliente = new GridBagConstraints();
+		gbcChckbxSonoUnCliente.anchor = GridBagConstraints.WEST;
+		gbcChckbxSonoUnCliente.insets = new Insets(0, 0, 5, 5);
+		gbcChckbxSonoUnCliente.gridx = 0;
+		gbcChckbxSonoUnCliente.gridy = 1;
+		panel10.add(chckbxSonoUnCliente, gbcChckbxSonoUnCliente);
 		
 		JButton btnNewButton = new JButton("Continua");
 		btnNewButton.addActionListener(new ActionListener() {
