@@ -28,6 +28,8 @@ import dominio.Promozione;
 import dominio.Volo;
 import gui.Home;
 import mailManagment.GestoreMail;
+import paymentManagment.CartaDiCredito;
+import paymentManagment.GestorePagamento;
 
 public class Controller {
 	private static Log logger= LogFactory.getLog(Controller.class);
@@ -269,6 +271,12 @@ public class Controller {
 	
 	public static void sendMail(GestoreMail ge, String email, String subject, String content) {
 		ge.sendMail(email, subject, content);
+	}
+	
+	/****************************************************/
+	//GESTIONE PAGAMENTO
+	public static boolean paga(CartaDiCredito cc) {
+		return GestorePagamento.paga(cc);
 	}
 }
 
