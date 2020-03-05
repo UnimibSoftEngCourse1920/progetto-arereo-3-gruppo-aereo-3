@@ -361,6 +361,7 @@ public class ElencoPasseggeri {
 						errore.setText("");
 					}
 					Cliente c = Controller.login(textField.getText(), passwordField.getText());
+					boolean fedele = true;
 					if (c == null) {
 						c  = new Cliente();
 						c.setNome(campi[0].getText());
@@ -368,9 +369,10 @@ public class ElencoPasseggeri {
 						c.setEmail(emailInsert.getText());
 						c.setDataDiNascita(dataDiNascita.getDate());
 						c.setIndirizzo("");
+						fedele = false;
 					}
 					contentPane.removeAll();
-					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP));
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}

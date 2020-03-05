@@ -28,7 +28,7 @@ import paymentManagment.CartaDiCredito;
 
 public class Pagamento {
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione, Cliente c, int idVolo, List<Posto> listaPosti) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -188,6 +188,15 @@ public class Pagamento {
 						txt += p.toString();
 					txt += "Prenotazione PAGATA";
 					Controller.sendMail(ge, c.getEmail(), sbj, txt);
+					
+					if(fedele) {
+						int punti = 0;
+						for(Posto p : listaPosti) {
+							punti += p.getPunti();
+						}
+						Controller.addPunti(c.getCodCliente(), punti);
+						
+					}
 				}
 			}
 		});
@@ -198,6 +207,15 @@ public class Pagamento {
 		gbcBtnNewButton1.gridy = 13;
 		panel7.add(btnNewButton1, gbcBtnNewButton1);
 		
+		/*
+		 * Se è fedele dare la possibilità di pagare con punti
+		 * inserire button paga con punti
+		 * renderlo visibile solo se cliente è fedele e se ha abbastanza punti
+		 * copia incolla di "paga" ma senza controlli perchè tanto è fedele
+		 * 
+		 * inserire data di expiry e cvc della carta di credito
+		 * aggiornare parametri in paga
+		 */
 		
 		JPanel panel8 = new JPanel();
 		panel8.setBackground(Color.BLUE);

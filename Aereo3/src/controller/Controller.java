@@ -121,6 +121,14 @@ public class Controller {
 		return GestioneClienteDatabase.getClientiFedeli();
 	}
 	
+	public static boolean isFedele(Cliente c) {
+		return GestioneClienteDatabase.isFedele(c);
+	}
+	
+	public static void addPunti(int codiceCliente, int punti) {
+		GestioneClienteDatabase.addPunti(codiceCliente, punti);
+	}
+	
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/

@@ -240,6 +240,7 @@ public class Registrazione {
 				c.setDataDiNascita(dateChooser1.getDate());
 				c.setIndirizzo(textField2.getText());
 				c.setDataIscrizione(now);
+				c.setUltimoBiglietto(now);
 				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();

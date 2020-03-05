@@ -215,4 +215,14 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		List <Cliente> ris = query.getResultList();
 		return ris.get(0);
 	}
+	
+	public static boolean isFedele(Cliente c) {
+		String jpql = "SELECT c FROM ClienteFedele as c WHERE c.codCliente=:codice";
+		Query query = entityManager.createQuery(jpql).setParameter("codice", c.getCodCliente());
+		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.size()==0)
+			return false;
+		else
+			return true;
+	}
 }

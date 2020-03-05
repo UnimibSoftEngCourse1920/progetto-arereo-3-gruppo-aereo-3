@@ -204,8 +204,9 @@ public class VisualizzaModificaPrenotazione {
 				String v = (String) nuovoVolo.getSelectedItem();
 				String[] params = v.split(", ");
 				int newIdVolo = Integer.parseInt(params[0]);
+				boolean fedele = Controller.isFedele(c);
 				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione));
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione, fedele));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

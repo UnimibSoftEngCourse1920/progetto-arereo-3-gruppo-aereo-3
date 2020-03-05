@@ -203,6 +203,9 @@ public class AccessoAdmin {
 //					System.out.println(Controller.controlloLoginAmministratore(a));
 					contentPane.removeAll();
 					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+					//notifica prenotazioni insolute
+					//notifica infedeltà
+					//rimozione infedeli da un anno
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
