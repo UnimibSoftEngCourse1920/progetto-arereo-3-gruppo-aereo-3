@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
+import dataManagment.GestioneClienteDatabase;
 import dataManagment.GestionePostoDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
 import dominio.Cliente;
@@ -33,7 +34,7 @@ import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_8, int idVolo, Cliente c) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c, boolean modifica, int oldP, boolean fedele) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -43,28 +44,29 @@ public class SceltaPosti {
 		JPanel sceltaPostiPanel = new JPanel();
 		sceltaPostiPanel.setBackground(Color.BLUE);
 		posti.add(sceltaPostiPanel, BorderLayout.WEST);
-		GridBagLayout gbl_sceltaPostiPanel = new GridBagLayout();
-		gbl_sceltaPostiPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_sceltaPostiPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_sceltaPostiPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_sceltaPostiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		sceltaPostiPanel.setLayout(gbl_sceltaPostiPanel);
+		GridBagLayout gblSceltaPostiPanel = new GridBagLayout();
+		gblSceltaPostiPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblSceltaPostiPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblSceltaPostiPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gblSceltaPostiPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		sceltaPostiPanel.setLayout(gblSceltaPostiPanel);
 		
 		JLabel lblScegliereIPosti = new JLabel("Scegliere i posti:");
 		lblScegliereIPosti.setForeground(Color.WHITE);
 		lblScegliereIPosti.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblScegliereIPosti = new GridBagConstraints();
-		gbc_lblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
-		gbc_lblScegliereIPosti.gridx = 0;
-		gbc_lblScegliereIPosti.gridy = 0;
-		sceltaPostiPanel.add(lblScegliereIPosti, gbc_lblScegliereIPosti);
+		GridBagConstraints gbcLblScegliereIPosti = new GridBagConstraints();
+		gbcLblScegliereIPosti.anchor = GridBagConstraints.WEST;
+		gbcLblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
+		gbcLblScegliereIPosti.gridx = 0;
+		gbcLblScegliereIPosti.gridy = 0;
+		sceltaPostiPanel.add(lblScegliereIPosti, gbcLblScegliereIPosti);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_6.gridx = 0;
-		gbc_verticalStrut_6.gridy = 1;
-		sceltaPostiPanel.add(verticalStrut_6, gbc_verticalStrut_6);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
+		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut6.gridx = 0;
+		gbcVerticalStrut6.gridy = 1;
+		sceltaPostiPanel.add(verticalStrut6, gbcVerticalStrut6);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLUE);
@@ -75,7 +77,7 @@ public class SceltaPosti {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
-				contentPane.add(panel_8);
+				contentPane.add(panel8);
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
@@ -158,37 +160,59 @@ public class SceltaPosti {
 //			z++;
 		}
 		
-		JButton btnNewButton_1 = new JButton("Prenota");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		
+		JLabel errore = new JLabel("");
+		errore.setForeground(Color.RED);
+		errore.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbcErrore = new GridBagConstraints();
+		gbcErrore.insets = new Insets(0, 0, 5, 0);
+		gbcErrore.gridx = k;
+		gbcErrore.gridy = y;
+		sceltaPostiPanel.add(errore, gbcErrore);
+		
+		JButton btnNewButton1 = new JButton("Prenota");
+		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List <Posto> listaPosti = new ArrayList<Posto>();
-				double costo = 0;
-				int costoPunti = 0;
-				for(int i = 0; i<value; i++) {
-					/*String s = (String)box[i].getSelectedItem();
-					String[] ss = s.split(", ");
-					
-					char fila = ss[0].charAt(ss[0].length()-1);
-					Integer numero = Integer.parseInt(ss[0].substring(0, ss[0].length()-1));
-					int valore = numero.valueOf(numero);*/
-					
-					Posto p = (Posto)box[i].getSelectedItem();
-					costo = costo + p.getPrezzo();
-					costoPunti = costoPunti + p.getPrezzoPunti();
-					listaPosti.add(GestionePostoDatabase.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
+				if(! Controller.trovaMail(c.getEmail())) {
+					Controller.insertCliente(c);
 				}
-				//portati dietro cliente
-				Controller.insertCliente(c);
-				Controller.insertPrenotazione(c, idVolo, listaPosti);
-				int idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
-				contentPane.removeAll();
-				contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione));
-				contentPane.repaint();
-				contentPane.revalidate();
+				Cliente cliente = Controller.getCliente(c.getEmail());
+				
+				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
+					List <Posto> listaPosti = new ArrayList<Posto>();
+					double costo = 0;
+					int costoPunti = 0;
+					for(int i = 0; i<value; i++) {
+						/*String s = (String)box[i].getSelectedItem();
+						String[] ss = s.split(", ");
+						
+						char fila = ss[0].charAt(ss[0].length()-1);
+						Integer numero = Integer.parseInt(ss[0].substring(0, ss[0].length()-1));
+						int valore = numero.valueOf(numero);*/
+						
+						Posto p = (Posto)box[i].getSelectedItem();
+						costo = costo + p.getPrezzo();
+						costoPunti = costoPunti + p.getPrezzoPunti();
+						listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
+						}
+					System.out.println(listaPosti);
+					//portati dietro cliente
+					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
+					int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+					contentPane.removeAll();
+					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione, cliente, idVolo, listaPosti, fedele));
+					contentPane.repaint();
+					contentPane.revalidate();
+					if(modifica)
+						Controller.eliminaPrenotazione(GestionePrenotazioneDatabase.getPrenotazioneId(oldP));
+				} else {
+					errore.setText("Il cliente ha già una prenotazione per questo volo");
+				}
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel.add(btnNewButton_1, BorderLayout.EAST);
+		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		panel.add(btnNewButton1, BorderLayout.EAST);
 		
 	return posti;
 }

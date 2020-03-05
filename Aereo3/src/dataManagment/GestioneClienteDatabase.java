@@ -5,11 +5,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.persistence.Query;
 
@@ -21,7 +23,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 
 	public static void main(String[] args) throws ParseException {
-		ArrayList<Cliente> clienti = new ArrayList<Cliente>();
+		ArrayList <Cliente> clienti = new ArrayList<Cliente>();
 
 		Cliente cliente = new Cliente();
 		Cliente cliente2 = new Cliente();
@@ -85,6 +87,15 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 		entityManager.clear();
 	}
+	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+		entityManager.getTransaction().begin();
+		entityManager.persist(cliente);
+		entityManager.getTransaction().commit();
+
+		entityManager.clear();
+		System.out.println("Record Successfully Inserted In The Database");
+	}
 
 	public static void insertClienti(ArrayList<Cliente> clienti) {
 		entityManager.getTransaction().begin();
@@ -97,7 +108,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 
 	public static ClienteFedele login(String email, String pwd) {
-		String jpql = "SELECT c FROM ClienteFedele as c where c.email=:email and c.password=:pwd";
+		String jpql = "SELECT c FROM ClienteFedele as c where c.email=:email and c.psw=:pwd";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("email", email);
 		query.setParameter("pwd", pwd);
@@ -117,16 +128,15 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	}
 
 	public static ClienteFedele signToLoyalty(String nome, String cognome,
-			String indirizzo, Date dataDiNascita, String email, String pwd) {
+			String indirizzo, Date date, String pwd) {
 
 		ClienteFedele cf = new ClienteFedele();
 
 		cf.setNome(nome);
 		cf.setCognome(cognome);
-		cf.setDataDiNascita(dataDiNascita);
-		cf.setEmail(email);
+		cf.setDataDiNascita(date);
 		cf.setIndirizzo(indirizzo);
-		cf.setPassword(pwd);
+		cf.setPsw(pwd);
 		cf.setPunti(0);
 		cf.setDataIscrizione(new Date());
 
@@ -188,5 +198,70 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 			estrattoPunti.put(p.getIdVolo(), p.getPuntiTotali());
 		}
 		return estrattoPunti;
+	}
+	
+	public static boolean trovaMail (String email) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
+		Query query =entityManager.createQuery(jpql).setParameter("email", email);
+		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.size() == 0)
+			return false;
+		else
+			return true;
+	}
+	
+	public static Cliente getCliente(String email) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
+		Query query = entityManager.createQuery(jpql).setParameter("email", email);
+		List <Cliente> ris = query.getResultList();
+		return ris.get(0);
+	}
+	
+	public static boolean isFedele(Cliente c) {
+		String jpql = "SELECT c FROM ClienteFedele as c WHERE c.codCliente=:codice";
+		Query query = entityManager.createQuery(jpql).setParameter("codice", c.getCodCliente());
+		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.size()==0)
+			return false;
+		else
+			return true;
+	}
+	
+	public static Cliente getCliente(int id) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.codCliente=:cod";
+		Query query = entityManager.createQuery(jpql).setParameter("cod", id);
+		List <Cliente> ris = query.getResultList();
+		return ris.get(0);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		List <ClienteFedele> lista = GestioneClienteDatabase.getClientiFedeli();
+		List <ClienteFedele> ris = new ArrayList<ClienteFedele>();
+		Date data = new Date();
+		System.out.println(data);
+		for(ClienteFedele c : lista) {
+			if(c.getInfedele().getDate()==data.getDate() && c.getInfedele().getMonth()==data.getMonth() && c.getInfedele().getYear()==data.getYear())
+				ris.add(c);
+		}
+		return ris;
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
+		String jpql = "UPDATE ClienteFedele SET infedele=:inf WHERE codCliente=:cod";
+		Query query = entityManager.createQuery(jpql).setParameter("inf", newInfedele).setParameter("cod", c.getCodCliente());
+		query.executeUpdate();
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere() {
+		List <ClienteFedele> lista = GestioneClienteDatabase.getClientiFedeli();
+		List <ClienteFedele> ris = new ArrayList<ClienteFedele>();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, -1);
+		Date data = cal.getTime();
+		for(ClienteFedele c : lista) {
+			if(c.getInfedele().getDate()==data.getDate() && c.getInfedele().getMonth()==data.getMonth() && c.getInfedele().getYear()==data.getYear())
+				ris.add(c);
+		}
+		return ris;
 	}
 }

@@ -43,7 +43,7 @@ public class DettaglioVolo {
 //		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
 
 		//List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
-		List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndata(data, partenza, arrivo);
+		List <Volo> listaVoli = Controller.getListaVoliAndata(data, partenza, arrivo);
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
 		
@@ -70,18 +70,18 @@ public class DettaglioVolo {
 		JTable table = new JTable(model);
 		table.setPreferredSize(new Dimension(800, 500));
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(100, 100, 894, 717);
-		panel_6.setBackground(Color.BLUE);
-		contentPane.add(panel_6);
-		panel_6.setLayout(new BorderLayout(0, 0));
+		JPanel panel6 = new JPanel();
+		panel6.setBounds(100, 100, 894, 717);
+		panel6.setBackground(Color.BLUE);
+		contentPane.add(panel6);
+		panel6.setLayout(new BorderLayout(0, 0));
 	
 		
-		JPanel panel_8 = new JPanel();
-		panel_8.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_8.setBackground(Color.BLUE);
-		panel_6.add(panel_8, BorderLayout.SOUTH);
-		panel_8.setLayout(new BorderLayout(0, 0));
+		JPanel panel8 = new JPanel();
+		panel8.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel8.setBackground(Color.BLUE);
+		panel6.add(panel8, BorderLayout.SOUTH);
+		panel8.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
@@ -93,7 +93,7 @@ public class DettaglioVolo {
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel_8.add(btnBack, BorderLayout.WEST);
+		panel8.add(btnBack, BorderLayout.WEST);
 		
 		JComboBox comboBox = new JComboBox();
 		for(Volo v : listaVoli) {
@@ -104,7 +104,7 @@ public class DettaglioVolo {
 			comboBox.addItem(stringa.toString());
 			System.out.println(stringa.toString());
 		}
-		panel_8.add(comboBox, BorderLayout.CENTER);
+		panel8.add(comboBox, BorderLayout.CENTER);
 		
 		JButton btnContinua = new JButton("Continua");
 		btnContinua.addActionListener(new ActionListener() {
@@ -113,32 +113,32 @@ public class DettaglioVolo {
 					String[] params = v.split(", ");
 					int idVolo = Integer.parseInt(params[0]);
 					contentPane.removeAll();
-					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel_6, idVolo));
+					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel6, idVolo, modifica));
 					contentPane.repaint();
 					contentPane.revalidate();
 			}
 		});
 		btnContinua.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel_8.add(btnContinua, BorderLayout.EAST);
+		panel8.add(btnContinua, BorderLayout.EAST);
 		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_9.setBackground(Color.BLUE);
-		panel_6.add(panel_9, BorderLayout.CENTER);
-		panel_9.setLayout(new BorderLayout(0, 0));
+		JPanel panel9 = new JPanel();
+		panel9.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel9.setBackground(Color.BLUE);
+		panel6.add(panel9, BorderLayout.CENTER);
+		panel9.setLayout(new BorderLayout(0, 0));
 		
-		panel_9.add(new JScrollPane(table));
+		panel9.add(new JScrollPane(table));
 		
 		JPanel panel = new JPanel();
 		panel.setForeground(Color.WHITE);
 		panel.setBackground(Color.BLUE);
-		panel_9.add(panel, BorderLayout.SOUTH);
+		panel9.add(panel, BorderLayout.SOUTH);
 		
 		JLabel lblSelezionaVolo = new JLabel("Seleziona Volo di Andata:");
 		lblSelezionaVolo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblSelezionaVolo.setForeground(Color.WHITE);
 		panel.add(lblSelezionaVolo);
 
-	return panel_6;
+	return panel6;
 	}
 }

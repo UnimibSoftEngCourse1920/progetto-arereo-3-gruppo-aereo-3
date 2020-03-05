@@ -27,6 +27,9 @@ import dominio.Prenotazione;
 import dominio.Promozione;
 import dominio.Volo;
 import gui.Home;
+import mailManagment.GestoreMail;
+import paymentManagment.CartaDiCredito;
+import paymentManagment.GestorePagamento;
 
 public class Controller {
 	private static Log logger= LogFactory.getLog(Controller.class);
@@ -35,20 +38,6 @@ public class Controller {
 	public static void main(String [] args) throws ParseException {
 		System.out.println("Main da chiamare all'eseguibile");
 		Home.main(args);
-
-		//		Per debug
-//		Volo volo=new Volo();
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-//		String strdate2 = "15-03-2020 12:00:00";
-//		String ritorno="15-03-2020 12:40:00";
-//		volo.setDataPartenza(dateformat2.parse(strdate2));
-//		volo.setDataArrivo(dateformat2.parse(ritorno));
-//		volo.setGate("B3");	
-//		volo.setDestinazione("NA08");
-//		volo.setPartenza("BS75");
-//		volo.setNumeroPosti(5);
-//		volo.setPromo(null);
-//		insertVolo(volo,"15","30","16","30");
 	}
 
 	
@@ -69,9 +58,26 @@ public class Controller {
 	//GESTIONE CLIENTI
 	
 	/********************************************************/
+	public static Cliente getCliente(String email) {
+		return GestioneClienteDatabase.getCliente(email);
+	}
+	
+	public static boolean trovaMail(String email) {
+		return GestioneClienteDatabase.trovaMail(email);
+	}
+	
+	public static boolean trovaCliente(int cliente, int idVolo) {
+		return GestionePrenotazioneDatabase.trovaCliente(cliente, idVolo);
+	}
+	
 	public static void insertCliente(Cliente cliente) {
 
 		GestioneClienteDatabase.insertCliente(cliente);
+	}
+	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+
+		GestioneClienteDatabase.insertClienteFedele(cliente);
 	}
 	
 	public static void insertListaClienti(ArrayList<Cliente> clienti) {
@@ -88,7 +94,7 @@ public class Controller {
 		return true;
 
 	}
-	public static Cliente login(String email, String pass) {
+	public static ClienteFedele login(String email, String pass) {
 		return GestioneClienteDatabase.login(email, pass);
 	}
 
@@ -96,11 +102,12 @@ public class Controller {
 	return GestioneClienteDatabase.loginCliente(idPrenotazione, email);
 	}
 	
-	public static void signToLoyalty(Cliente cliente, String nome, String cognome, String indirizzo,
-			Date date, String email) {
-		GestioneClienteDatabase.signToLoyalty(cliente, nome, cognome, indirizzo, date, email);
+
+	public static void signToLoyalty(String nome, String cognome, String indirizzo,
+			Date date, String psw) {
+		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, psw);
 	}
-	
+
 	public static void deleteCliente(Cliente cliente) {
 		GestioneClienteDatabase.deleteCliente(cliente);
 	}
@@ -114,6 +121,30 @@ public class Controller {
 		return GestioneClienteDatabase.getClientiFedeli();
 	}
 	
+	public static boolean isFedele(Cliente c) {
+		return GestioneClienteDatabase.isFedele(c);
+	}
+	
+	public static void addPunti(int codiceCliente, int punti) {
+		GestioneClienteDatabase.addPunti(codiceCliente, punti);
+	}
+	
+	public static Cliente getCliente(int id) {
+		return GestioneClienteDatabase.getCliente(id);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		return GestioneClienteDatabase.getClientiInfedeli();
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
+		GestioneClienteDatabase.updateInfedelta(c, newInfedele);
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere(){
+		return GestioneClienteDatabase.getClientiDaRimuovere();
+	}
+	
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/
@@ -125,7 +156,7 @@ public class Controller {
 		return GestionePostoDatabase.getPosto(lettera, fila, idVolo);
 	}
 	
-	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, Prenotazione prenotazione){
+	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, int prenotazione){
 		GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, prenotazione);
 	}
 	
@@ -142,11 +173,6 @@ public class Controller {
 	/****************************************************/
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
-
-	}
-	
-	public static Prenotazione getPrenotazione(int id) {
-		return GestionePrenotazioneDatabase.getPrenotazioneDaId(id);
 
 	}
 	
@@ -171,20 +197,20 @@ public class Controller {
 	}
 
 
-	public static void eliminaPrenotazione(int id) {
-		GestionePrenotazioneDatabase.deletePrenotazione(id);
+	public static void eliminaPrenotazione(Prenotazione p) {
+		GestionePrenotazioneDatabase.deletePrenotazione(p);
 	}
 
 
 	/***************************************************/
 	//GESTIONE PROMOZIONE
 	/***************************************************/
-	public static List<Promozione> getPromozioni(){
-		return GestionePromozioneDatabase.getAllPromozioni();
+	public static List<Promozione> getPromozioni(Date now){
+		return GestionePromozioneDatabase.getAllPromozioni(now);
 	}
 	
-	public static void insertPromozione(Date inizio, Date fine, String msg, Volo v) {
-		GestionePromozioneDatabase.insertPromozione(inizio, fine, msg, v);
+	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
+		GestionePromozioneDatabase.insertPromozione(inizio, fine, partenza, arrivo, sconto, perFedele);
 	}
 	
 	public static Promozione getPromozione(int idPromo) {
@@ -238,6 +264,10 @@ public class Controller {
 	
 	/****************************************************/
 	//GESTIONE AEREOPORTO
+	
+	public static List<String> getDenominazioneAereoporti(){
+		return GestioneAereoportoDatabase.getDenominazioniAereoporti();
+	}
 
 	public static String getDenominazioneAereoporto(String idAereoporto) {
 
@@ -252,7 +282,25 @@ public class Controller {
 	public static String parserAereoporto(String idAereoporto  ) {
 		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
 	}
-
-
+	
+	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
+		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
+	}
+	
+	/****************************************************/
+	//GESTIONE MAIL
+	public static GestoreMail getGestoreMail() {
+		return GestoreMail.getInstance();
+	}
+	
+	public static void sendMail(GestoreMail ge, String email, String subject, String content) {
+		ge.sendMail(email, subject, content);
+	}
+	
+	/****************************************************/
+	//GESTIONE PAGAMENTO
+	public static boolean paga(CartaDiCredito cc, double importo) {
+		return GestorePagamento.paga(cc, importo);
+	}
 }
 

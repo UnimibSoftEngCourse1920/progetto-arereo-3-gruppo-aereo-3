@@ -24,11 +24,11 @@ public class AreaAdmin {
 		contentPane.add(areaAdmin, "name_881526299580700");
 		areaAdmin.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_5.setBackground(Color.BLUE);
-		areaAdmin.add(panel_5, BorderLayout.CENTER);
-		panel_5.setLayout(new CardLayout(0, 0));
+		JPanel panel5 = new JPanel();
+		panel5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel5.setBackground(Color.BLUE);
+		areaAdmin.add(panel5, BorderLayout.CENTER);
+		panel5.setLayout(new CardLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("Benvenuto nell'area Admin");
 		lblNewLabel.setForeground(Color.WHITE);
@@ -38,99 +38,107 @@ public class AreaAdmin {
 		JPanel menuAdmin = new JPanel();
 		menuAdmin.setBackground(Color.BLUE);
 		areaAdmin.add(menuAdmin, BorderLayout.WEST);
-		GridBagLayout gbl_menuAdmin = new GridBagLayout();
-		gbl_menuAdmin.columnWidths = new int[]{0, 0, 0};
-		gbl_menuAdmin.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_menuAdmin.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_menuAdmin.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		menuAdmin.setLayout(gbl_menuAdmin);
+		GridBagLayout gblMenuAdmin = new GridBagLayout();
+		gblMenuAdmin.columnWidths = new int[]{0, 0, 0};
+		gblMenuAdmin.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblMenuAdmin.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gblMenuAdmin.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		menuAdmin.setLayout(gblMenuAdmin);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_6.gridx = 0;
-		gbc_verticalStrut_6.gridy = 0;
-		menuAdmin.add(verticalStrut_6, gbc_verticalStrut_6);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
+		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut6.gridx = 0;
+		gbcVerticalStrut6.gridy = 0;
+		menuAdmin.add(verticalStrut6, gbcVerticalStrut6);
 		
 		JButton btnAggiungiVolo = new JButton("Aggiungi Volo");
 		btnAggiungiVolo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel_5.removeAll();
-				panel_5.add(VoloAdmin.esegui(panel_5));
-				panel_5.repaint();
-				panel_5.revalidate();
+				panel5.removeAll();
+				panel5.add(VoloAdmin.esegui(panel5));
+				panel5.repaint();
+				panel5.revalidate();
 			}
 		});
 		btnAggiungiVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnAggiungiVolo = new GridBagConstraints();
-		gbc_btnAggiungiVolo.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAggiungiVolo.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnAggiungiVolo.gridx = 0;
-		gbc_btnAggiungiVolo.gridy = 1;
-		menuAdmin.add(btnAggiungiVolo, gbc_btnAggiungiVolo);
+		GridBagConstraints gbcBtnAggiungiVolo = new GridBagConstraints();
+		gbcBtnAggiungiVolo.insets = new Insets(0, 0, 5, 5);
+		gbcBtnAggiungiVolo.anchor = GridBagConstraints.NORTHWEST;
+		gbcBtnAggiungiVolo.gridx = 0;
+		gbcBtnAggiungiVolo.gridy = 1;
+		menuAdmin.add(btnAggiungiVolo, gbcBtnAggiungiVolo);
 		
-		Component verticalStrut_8 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
-		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_8.gridx = 0;
-		gbc_verticalStrut_8.gridy = 2;
-		menuAdmin.add(verticalStrut_8, gbc_verticalStrut_8);
+		Component verticalStrut8 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut8 = new GridBagConstraints();
+		gbcVerticalStrut8.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut8.gridx = 0;
+		gbcVerticalStrut8.gridy = 2;
+		menuAdmin.add(verticalStrut8, gbcVerticalStrut8);
 		
 		JButton btnModificaVolo = new JButton("Modifica Volo");
 		btnModificaVolo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel_5.removeAll();
-				panel_5.add(ModificaAdmin.esegui(panel_5));
-				panel_5.repaint();
-				panel_5.revalidate();
+				panel5.removeAll();
+				panel5.add(ModificaAdmin.esegui(panel5));
+				panel5.repaint();
+				panel5.revalidate();
 			}
 		});
 		btnModificaVolo.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnModificaVolo = new GridBagConstraints();
-		gbc_btnModificaVolo.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnModificaVolo.insets = new Insets(0, 0, 5, 5);
-		gbc_btnModificaVolo.gridx = 0;
-		gbc_btnModificaVolo.gridy = 3;
-		menuAdmin.add(btnModificaVolo, gbc_btnModificaVolo);
+		GridBagConstraints gbcBtnModificaVolo = new GridBagConstraints();
+		gbcBtnModificaVolo.anchor = GridBagConstraints.NORTHWEST;
+		gbcBtnModificaVolo.insets = new Insets(0, 0, 5, 5);
+		gbcBtnModificaVolo.gridx = 0;
+		gbcBtnModificaVolo.gridy = 3;
+		menuAdmin.add(btnModificaVolo, gbcBtnModificaVolo);
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
-		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_9.gridx = 0;
-		gbc_verticalStrut_9.gridy = 4;
-		menuAdmin.add(verticalStrut_9, gbc_verticalStrut_9);
+		Component verticalStrut9 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
+		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut9.gridx = 0;
+		gbcVerticalStrut9.gridy = 4;
+		menuAdmin.add(verticalStrut9, gbcVerticalStrut9);
 		
 		JButton btnCreaPromozione = new JButton("Crea Promozione");
+		btnCreaPromozione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel5.removeAll();
+				panel5.add(PromozioneAdmin.esegui(panel5));
+				panel5.repaint();
+				panel5.revalidate();
+			}
+		});
 		btnCreaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnCreaPromozione = new GridBagConstraints();
-		gbc_btnCreaPromozione.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnCreaPromozione.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCreaPromozione.gridx = 0;
-		gbc_btnCreaPromozione.gridy = 5;
-		menuAdmin.add(btnCreaPromozione, gbc_btnCreaPromozione);
+		GridBagConstraints gbcBtnCreaPromozione = new GridBagConstraints();
+		gbcBtnCreaPromozione.anchor = GridBagConstraints.NORTHWEST;
+		gbcBtnCreaPromozione.insets = new Insets(0, 0, 5, 5);
+		gbcBtnCreaPromozione.gridx = 0;
+		gbcBtnCreaPromozione.gridy = 5;
+		menuAdmin.add(btnCreaPromozione, gbcBtnCreaPromozione);
 		
-		Component verticalStrut_10 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_10 = new GridBagConstraints();
-		gbc_verticalStrut_10.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_10.gridx = 0;
-		gbc_verticalStrut_10.gridy = 6;
-		menuAdmin.add(verticalStrut_10, gbc_verticalStrut_10);
+		Component verticalStrut10 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut10 = new GridBagConstraints();
+		gbcVerticalStrut10.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut10.gridx = 0;
+		gbcVerticalStrut10.gridy = 6;
+		menuAdmin.add(verticalStrut10, gbcVerticalStrut10);
 		
 		JButton btnEliminaPromozione = new JButton("Elimina Promozione");
 		btnEliminaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnEliminaPromozione = new GridBagConstraints();
-		gbc_btnEliminaPromozione.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnEliminaPromozione.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEliminaPromozione.gridx = 0;
-		gbc_btnEliminaPromozione.gridy = 7;
-		menuAdmin.add(btnEliminaPromozione, gbc_btnEliminaPromozione);
+		GridBagConstraints gbcBtnEliminaPromozione = new GridBagConstraints();
+		gbcBtnEliminaPromozione.anchor = GridBagConstraints.NORTHWEST;
+		gbcBtnEliminaPromozione.insets = new Insets(0, 0, 5, 5);
+		gbcBtnEliminaPromozione.gridx = 0;
+		gbcBtnEliminaPromozione.gridy = 7;
+		menuAdmin.add(btnEliminaPromozione, gbcBtnEliminaPromozione);
 		
-		Component verticalStrut_11 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_11 = new GridBagConstraints();
-		gbc_verticalStrut_11.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_11.gridx = 0;
-		gbc_verticalStrut_11.gridy = 8;
-		menuAdmin.add(verticalStrut_11, gbc_verticalStrut_11);
+		Component verticalStrut11 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut11 = new GridBagConstraints();
+		gbcVerticalStrut11.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut11.gridx = 0;
+		gbcVerticalStrut11.gridy = 8;
+		menuAdmin.add(verticalStrut11, gbcVerticalStrut11);
 		
 		JButton btnLog = new JButton("Log Out");
 		btnLog.addActionListener(new ActionListener() {
@@ -142,12 +150,12 @@ public class AreaAdmin {
 			}
 		});
 		btnLog.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbc_btnLog = new GridBagConstraints();
-		gbc_btnLog.anchor = GridBagConstraints.WEST;
-		gbc_btnLog.insets = new Insets(0, 0, 0, 5);
-		gbc_btnLog.gridx = 0;
-		gbc_btnLog.gridy = 30;
-		menuAdmin.add(btnLog, gbc_btnLog);
+		GridBagConstraints gbcBtnLog = new GridBagConstraints();
+		gbcBtnLog.anchor = GridBagConstraints.WEST;
+		gbcBtnLog.insets = new Insets(0, 0, 0, 5);
+		gbcBtnLog.gridx = 0;
+		gbcBtnLog.gridy = 30;
+		menuAdmin.add(btnLog, gbcBtnLog);
 		
 		return areaAdmin;
 	}
