@@ -193,8 +193,8 @@ public class Controller {
 		return GestionePromozioneDatabase.getAllPromozioni();
 	}
 	
-	public static void insertPromozione(Date inizio, Date fine, Volo v, double sconto) {
-		GestionePromozioneDatabase.insertPromozione(inizio, fine, v, sconto);
+	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
+		GestionePromozioneDatabase.insertPromozione(inizio, fine, partenza, arrivo, sconto, perFedele);
 	}
 	
 	public static Promozione getPromozione(int idPromo) {

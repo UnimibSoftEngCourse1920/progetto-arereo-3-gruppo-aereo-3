@@ -26,8 +26,14 @@ public class Promozione {
 	@Column(name="sconto")
 	private double sconto;
 	
-	@Column(name="id_volo")
-	private int idVolo;
+	@Column(name="partenza")
+	private String partenza;
+	
+	@Column(name="destinazione")
+	private String destinazione;
+	
+	@Column(name="fedele")
+	private boolean perFedele;
 
 	public double getSconto() {
 		return sconto;
@@ -53,12 +59,32 @@ public class Promozione {
 		this.dataFine = dataFine;
 	}
 
-	public int getIdVolo() {
-		return idVolo;
+	public String getPartenza() {
+		return partenza;
 	}
 
-	public void setIdVolo(int idVolo) {
-		this.idVolo = idVolo;
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
+	}
+
+	public String getDestinazione() {
+		return destinazione;
+	}
+
+	public void setDestinazione(String destinazione) {
+		this.destinazione = destinazione;
+	}
+
+	public boolean isPerFedele() {
+		return perFedele;
+	}
+
+	public int getIdPromozione() {
+		return idPromozione;
+	}
+
+	public void setFedele(boolean fedele) {
+		this.perFedele = fedele;
 	}
 	
 }
