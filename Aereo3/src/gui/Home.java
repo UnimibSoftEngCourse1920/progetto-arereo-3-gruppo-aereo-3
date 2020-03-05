@@ -409,6 +409,18 @@ public class Home extends JFrame {
 		btnVisualizzamodificaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel5.add(btnVisualizzamodificaPrenotazione);
 		
+		JButton btnPromozioni = new JButton("Visualizza Promozioni");
+		btnPromozioni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(ListaPromozioni.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnPromozioni.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel5.add(btnPromozioni);
+		
 		//Nuovo panel
 	}		
 		

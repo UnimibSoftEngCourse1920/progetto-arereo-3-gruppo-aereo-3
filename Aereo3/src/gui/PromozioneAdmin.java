@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -107,7 +108,7 @@ public class PromozioneAdmin {
 		gbcScontoField.gridx = 0;
 		gbcScontoField.gridy = 8;
 		panel_1.add(scontoField, gbcScontoField);
-		scontoField.setColumns(0);
+		scontoField.setColumns(10);
 		gbc_verticalStrut_3.gridx = 0;
 		gbc_verticalStrut_3.gridy = 9;
 		
@@ -118,12 +119,66 @@ public class PromozioneAdmin {
 		gbc_verticalStrut_5.gridy = 9;
 		panel_1.add(verticalStrut_5, gbc_verticalStrut_5);
 		
-		Volo v = null;
+		JLabel partenza = new JLabel("Partenza");
+		partenza.setForeground(Color.WHITE);
+		partenza.setFont(new Font ("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints bcdPartenza = new GridBagConstraints();
+		bcdPartenza.insets = new Insets(0, 0, 5, 5);
+		bcdPartenza.anchor = GridBagConstraints.WEST;
+		bcdPartenza.gridx = 0;
+		bcdPartenza.gridy = 10;
+		panel_1.add(partenza, bcdPartenza);
+		
+		JTextField partenzaField = new JTextField();
+		GridBagConstraints gbcPartenzaField = new GridBagConstraints();
+		gbcPartenzaField.fill = GridBagConstraints.HORIZONTAL;
+		gbcPartenzaField.insets = new Insets(0, 0, 5, 5);
+		gbcPartenzaField.gridx = 0;
+		gbcPartenzaField.gridy = 11;
+		panel_1.add(partenzaField, gbcPartenzaField);
+		partenzaField.setColumns(10);
+		
+		JLabel destinazione = new JLabel("Destinazione");
+		destinazione.setForeground(Color.WHITE);
+		destinazione.setFont(new Font ("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcDestinazione = new GridBagConstraints();
+		gbcDestinazione.insets = new Insets(0, 0, 5, 5);
+		gbcDestinazione.anchor = GridBagConstraints.WEST;
+		gbcDestinazione.gridx = 0;
+		gbcDestinazione.gridy = 12;
+		panel_1.add(destinazione, gbcDestinazione);
+		
+		JTextField destinazioneField = new JTextField();
+		GridBagConstraints gbcDestinazioneField = new GridBagConstraints();
+		gbcDestinazioneField.fill = GridBagConstraints.HORIZONTAL;
+		gbcDestinazioneField.insets = new Insets(0, 0, 5, 5);
+		gbcDestinazioneField.gridx = 0;
+		gbcDestinazioneField.gridy = 13;
+		panel_1.add(destinazioneField, gbcDestinazioneField);
+		partenzaField.setColumns(10);
+		
+		JCheckBox chckbxSonoUnCliente = new JCheckBox("Solo per Cliente Fedele");
+		chckbxSonoUnCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		chckbxSonoUnCliente.setBackground(Color.BLUE);
+		chckbxSonoUnCliente.setForeground(Color.WHITE);
+		chckbxSonoUnCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcChckbxSonoUnCliente = new GridBagConstraints();
+		gbcChckbxSonoUnCliente.anchor = GridBagConstraints.WEST;
+		gbcChckbxSonoUnCliente.insets = new Insets(0, 0, 5, 5);
+		gbcChckbxSonoUnCliente.gridx = 0;
+		gbcChckbxSonoUnCliente.gridy = 14;
+		panel_1.add(chckbxSonoUnCliente, gbcChckbxSonoUnCliente);
 		
 		JButton btnCreaPromozione = new JButton("Crea Promozione");
 		btnCreaPromozione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controller.insertPromozione(dateChooser_1.getDate(), dateChooser_2.getDate(), v, Double.parseDouble(scontoField.getText()));
+				if(chckbxSonoUnCliente.isSelected())
+					Controller.insertPromozione(dateChooser_1.getDate(), dateChooser_2.getDate(), partenzaField.getText(), destinazioneField.getText(), Double.parseDouble(scontoField.getText()), true);
+				else
+					Controller.insertPromozione(dateChooser_1.getDate(), dateChooser_2.getDate(), partenzaField.getText(), destinazioneField.getText(), Double.parseDouble(scontoField.getText()), false);
 			}
 		});
 		btnCreaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -131,7 +186,7 @@ public class PromozioneAdmin {
 		gbc_btnCreaPromozione.anchor = GridBagConstraints.WEST;
 		gbc_btnCreaPromozione.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCreaPromozione.gridx = 0;
-		gbc_btnCreaPromozione.gridy = 10;
+		gbc_btnCreaPromozione.gridy = 15;
 		panel_1.add(btnCreaPromozione, gbc_btnCreaPromozione);
 		
 		return panel_1;

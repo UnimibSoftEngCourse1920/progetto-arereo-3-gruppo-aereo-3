@@ -11,9 +11,9 @@ import dominio.Volo;
 
 public class GestionePromozioneDatabase extends GestioneDatabase {
 	
-	public static List<Promozione> getAllPromozioni(){
-		String jpql = "SELECT p FROM Promozione as p";
-		Query query = entityManager.createQuery(jpql);
+	public static List<Promozione> getAllPromozioni(Date now){
+		String jpql = "SELECT p FROM Promozione as p WHERE p.dataFine>:now";
+		Query query = entityManager.createQuery(jpql).setParameter("now", now);
 		List<Promozione> promozioni = query.getResultList();
 		return promozioni;
 	}
