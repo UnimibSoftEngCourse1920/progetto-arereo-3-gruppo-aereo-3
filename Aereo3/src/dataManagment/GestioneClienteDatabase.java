@@ -256,10 +256,9 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	public static List<ClienteFedele> getClientiDaRimuovere() {
 		List <ClienteFedele> lista = GestioneClienteDatabase.getClientiFedeli();
 		List <ClienteFedele> ris = new ArrayList<ClienteFedele>();
-		/*Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.YEAR, -1);
-		Date data = cal.getTime();*/
-		Date data = new Date();
+		Date data = cal.getTime();
 		for(ClienteFedele c : lista) {
 			if(c.getInfedele().getDate()==data.getDate() && c.getInfedele().getMonth()==data.getMonth() && c.getInfedele().getYear()==data.getYear())
 				ris.add(c);

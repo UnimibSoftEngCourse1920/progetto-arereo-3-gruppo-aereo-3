@@ -212,27 +212,25 @@ public class AccessoAdmin {
 					
 					GestoreMail ge = Controller.getGestoreMail();
 					//notifica prenotazioni insolute
-					System.out.println("notifica prenotazioni insolute");
 					List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();
 					for(Prenotazione p : prenotazioniInScadenza) {
-						System.out.println(p);
 						Cliente c = Controller.getCliente(p.getCodCliente());
 						String sbj = MessaggiPredefiniti.SCADENZAPRENOTAZIONE_SUBJ.getMessaggio() + " " + p.getId();
 						Controller.sendMail(ge, c.getEmail(), sbj, MessaggiPredefiniti.SCADENZAPRENOTAZIONE_TXT.getMessaggio());
 					}
+					
+					//rimozione prenotazioni scadute
+					//TO-DO
+					
 					//notifica infedeltà
-					System.out.println("notifica infedeltà");
 					List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();
 					for(ClienteFedele ci : clientiInfedeli) {
-						System.out.println(ci);
 						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_TXT.getMessaggio());
 					}
 						
 					//rimozione infedeli da un anno
-					System.out.println("rimozione infedeli");
 					List<ClienteFedele> clientiDaRimuovere = Controller.getClientiDaRimuovere();
 					for(ClienteFedele ci : clientiDaRimuovere) {
-						System.out.println(ci);
 						Controller.deleteCliente(ci);
 						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_TXT.getMessaggio());
 					}

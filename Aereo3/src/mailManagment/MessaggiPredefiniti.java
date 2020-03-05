@@ -10,8 +10,8 @@ public enum MessaggiPredefiniti {
 			+ "Se non verrà pagata tale prenotazione sarà automaticamente cancellata"),
 	INFEDELE_SUBJ("Inattività programma fedeltà"),
 	INFEDELE_TXT("Si avvisa il gentile cliente che non avendo acquistato biglietti per 2 anni"
-			+ "il suo account è in uno stato di \"infedeltà\"; se non acquista un biglietto"
-			+ "nell'arco del prossimo anno il suo account sarà automaticamente cancellato"),
+			+ " il suo account è in uno stato di \"infedeltà\"; se non acquista un biglietto"
+			+ " nell'arco del prossimo anno il suo account sarà automaticamente cancellato"),
 	FEDELE_SUBJ("Programma Fedeltà compagnia Aereo3PJ"),
 	FEDELE_TXT("Gentile cliente, \n"
 			+ "Grazie per aver aderito al nostro programma fedeltà! \n"
