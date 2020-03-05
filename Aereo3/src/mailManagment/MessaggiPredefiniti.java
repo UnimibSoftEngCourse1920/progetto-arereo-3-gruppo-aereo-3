@@ -18,7 +18,10 @@ public enum MessaggiPredefiniti {
 			+ "CONDIZIONI D'USO: \n"
 			+ "- Se non si compra un biglietto nell'arco di 2 anni passerà in uno stato di \"infedeltà\" \n"
 			+ "- Se è in stato di infedeltà e non compra un biglietto nell'arco di un anno verrà automaticamente rimosso \n"
-			+ "- Riceverà tutte le ultime promozioni della compagnia via mail");
+			+ "- Riceverà tutte le ultime promozioni della compagnia via mail"),
+	INFEDELE_RIMOZIONE_SUBJ("Rimozione dal programma fedeltà"),
+	INFEDELE_RIMOZIONE_TXT("Si avvisa il gentile cliente che vista le sua inattività, è stato rimosso dal"
+			+ " programma di fedeltà come da condizioni d\'uso.");
 	
 	private final String messaggio;
 	

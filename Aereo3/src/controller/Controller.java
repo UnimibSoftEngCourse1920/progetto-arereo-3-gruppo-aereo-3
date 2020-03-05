@@ -129,6 +129,22 @@ public class Controller {
 		GestioneClienteDatabase.addPunti(codiceCliente, punti);
 	}
 	
+	public static Cliente getCliente(int id) {
+		return GestioneClienteDatabase.getCliente(id);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		return GestioneClienteDatabase.getClientiInfedeli();
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
+		GestioneClienteDatabase.updateInfedelta(c, newInfedele);
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere(){
+		return GestioneClienteDatabase.getClientiDaRimuovere();
+	}
+	
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/

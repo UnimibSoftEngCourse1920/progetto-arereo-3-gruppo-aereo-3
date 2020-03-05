@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -19,7 +20,11 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dominio.ClienteFedele;
+import dominio.Promozione;
 import dominio.Volo;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class PromozioneAdmin {
 	
@@ -175,10 +180,22 @@ public class PromozioneAdmin {
 		JButton btnCreaPromozione = new JButton("Crea Promozione");
 		btnCreaPromozione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(chckbxSonoUnCliente.isSelected())
+				if(chckbxSonoUnCliente.isSelected()) 
 					Controller.insertPromozione(dateChooser_1.getDate(), dateChooser_2.getDate(), partenzaField.getText(), destinazioneField.getText(), Double.parseDouble(scontoField.getText()), true);
 				else
 					Controller.insertPromozione(dateChooser_1.getDate(), dateChooser_2.getDate(), partenzaField.getText(), destinazioneField.getText(), Double.parseDouble(scontoField.getText()), false);
+				
+				GestoreMail ge = Controller.getGestoreMail();
+				List<ClienteFedele> clientiFedeli = Controller.getClientiFedeli();
+				String txt = "Nuova promozione dal " + ListaPromozioni.convertiData(dateChooser_1.getDate())
+						+ " al " + ListaPromozioni.convertiData(dateChooser_2.getDate())
+						+ " per i voli da " + partenzaField.getText()
+						+ " a " + destinazioneField.getText()
+						+ " con uno sconto del " + scontoField.getText() + "%"
+						+ ". Affrettati a comprare un biglietto con la nuova promozione prima che finiscano!";
+				for(ClienteFedele c : clientiFedeli) {
+					Controller.sendMail(ge, c.getEmail(), MessaggiPredefiniti.NUOVAPROMOZIONE_SUBJ.getMessaggio(), txt);
+				}
 			}
 		});
 		btnCreaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 20));

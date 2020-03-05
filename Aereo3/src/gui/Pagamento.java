@@ -9,7 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.Box;
@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import controller.Controller;
 import dominio.Cliente;
+import dominio.ClienteFedele;
 import dominio.Posto;
 import dominio.Volo;
 import mailManagment.GestoreMail;
@@ -195,6 +196,9 @@ public class Pagamento {
 							punti += p.getPunti();
 						}
 						Controller.addPunti(c.getCodCliente(), punti);
+						
+						Date newInfedele = new Date();
+						Controller.updateInfedelta((ClienteFedele) c, newInfedele);
 						
 					}
 				}

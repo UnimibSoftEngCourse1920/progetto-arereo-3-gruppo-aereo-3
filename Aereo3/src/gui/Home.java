@@ -313,7 +313,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 
-				if (dateChooser.getDate().getDay() < now.getDay()) {
+				if (dateChooser.getDate().before(now)) {
 					if (lblNewLabel1 != null)
 						panel2.remove(lblNewLabel1);
 					

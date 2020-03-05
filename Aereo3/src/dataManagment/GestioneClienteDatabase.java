@@ -5,11 +5,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.persistence.Query;
 
@@ -224,5 +226,44 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 			return false;
 		else
 			return true;
+	}
+	
+	public static Cliente getCliente(int id) {
+		String jpql = "SELECT c FROM Cliente as c WHERE c.codCliente=:cod";
+		Query query = entityManager.createQuery(jpql).setParameter("cod", id);
+		List <Cliente> ris = query.getResultList();
+		return ris.get(0);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		List <ClienteFedele> lista = GestioneClienteDatabase.getClientiFedeli();
+		List <ClienteFedele> ris = new ArrayList<ClienteFedele>();
+		Date data = new Date();
+		System.out.println(data);
+		for(ClienteFedele c : lista) {
+			if(c.getInfedele().getDate()==data.getDate() && c.getInfedele().getMonth()==data.getMonth() && c.getInfedele().getYear()==data.getYear())
+				ris.add(c);
+		}
+		return ris;
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
+		String jpql = "UPDATE ClienteFedele SET infedele=:inf WHERE codCliente=:cod";
+		Query query = entityManager.createQuery(jpql).setParameter("inf", newInfedele).setParameter("cod", c.getCodCliente());
+		query.executeUpdate();
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere() {
+		List <ClienteFedele> lista = GestioneClienteDatabase.getClientiFedeli();
+		List <ClienteFedele> ris = new ArrayList<ClienteFedele>();
+		/*Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, -1);
+		Date data = cal.getTime();*/
+		Date data = new Date();
+		for(ClienteFedele c : lista) {
+			if(c.getInfedele().getDate()==data.getDate() && c.getInfedele().getMonth()==data.getMonth() && c.getInfedele().getYear()==data.getYear())
+				ris.add(c);
+		}
+		return ris;
 	}
 }
