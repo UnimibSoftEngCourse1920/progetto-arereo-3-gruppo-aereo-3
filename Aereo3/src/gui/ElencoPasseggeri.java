@@ -37,7 +37,7 @@ public class ElencoPasseggeri {
 		
 		JPanel panel9 = new JPanel();
 		panel9.setBackground(Color.BLUE);
-		panel8.add(panel9, BorderLayout.CENTER);
+		panel8.add(panel9, BorderLayout.WEST);
 		GridBagLayout gblPanel9 = new GridBagLayout();
 		gblPanel9.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gblPanel9.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0};
