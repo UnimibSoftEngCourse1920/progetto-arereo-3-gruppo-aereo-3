@@ -55,6 +55,7 @@ public class SceltaPosti {
 		lblScegliereIPosti.setForeground(Color.WHITE);
 		lblScegliereIPosti.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcLblScegliereIPosti = new GridBagConstraints();
+		gbcLblScegliereIPosti.anchor = GridBagConstraints.WEST;
 		gbcLblScegliereIPosti.insets = new Insets(0, 0, 5, 0);
 		gbcLblScegliereIPosti.gridx = 0;
 		gbcLblScegliereIPosti.gridy = 0;

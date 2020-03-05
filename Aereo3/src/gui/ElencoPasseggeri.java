@@ -187,20 +187,6 @@ public class ElencoPasseggeri {
 		panel9.add(dataDiNascita, gbcDateChooser);
 		y++;
 		
-		JButton logIn = new JButton("LogIn");
-		boolean loggato = false;
-		ClienteFedele c1 = null;
-		logIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LogInDialog logindlg = new LogInDialog();
-				logindlg.setVisible(true);
-				System.out.println(""+logindlg.isSuccessed());
-				}
-			});
-		logIn.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		panel8.add(logIn, BorderLayout.EAST);
-		
-		
 		JLabel errore = new JLabel("");
 		errore.setForeground(Color.RED);
 		errore.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -289,15 +275,15 @@ public class ElencoPasseggeri {
 		btnNewButton1.setVisible(false);
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClienteFedele c = Controller.login(textField.getText(), passwordField.getText());
-				if(c != null) {
-					campi[0].setText(c.getNome());
+				ClienteFedele c1 = Controller.login(textField.getText(), passwordField.getText());
+				if(c1 != null) {
+					campi[0].setText(c1.getNome());
 					campi[0].setEditable(false);
-					campi[1].setText(c.getCognome());
+					campi[1].setText(c1.getCognome());
 					campi[1].setEditable(false);
-					emailInsert.setText(c.getEmail());
+					emailInsert.setText(c1.getEmail());
 					emailInsert.setEditable(false);
-					dataDiNascita.setDate(c.getDataDiNascita());
+					dataDiNascita.setDate(c1.getDataDiNascita());
 				}
 			}
 		});
@@ -374,16 +360,14 @@ public class ElencoPasseggeri {
 					if (!errore.getText().equals("")) {
 						errore.setText("");
 					}
-					Cliente c;
-					if (! loggato) {
+					Cliente c = Controller.login(textField.getText(), passwordField.getText());
+					if (c == null) {
 						c  = new Cliente();
 						c.setNome(campi[0].getText());
 						c.setCognome(campi[1].getText());
 						c.setEmail(emailInsert.getText());
 						c.setDataDiNascita(dataDiNascita.getDate());
-						c.setIndirizzo("Via Duomo");}
-					else {
-						c = c1;
+						c.setIndirizzo("");
 					}
 					contentPane.removeAll();
 					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP));
