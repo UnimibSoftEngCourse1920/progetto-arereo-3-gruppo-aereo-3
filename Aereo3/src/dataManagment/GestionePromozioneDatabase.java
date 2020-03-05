@@ -23,7 +23,10 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		p.setDataInizio(inizio);
 		p.setDataFine(fine);
 		p.setSconto(sconto);
-		p.setIdVolo(v.getIdVolo());
+		if (v != null)
+			p.setIdVolo(v.getIdVolo());
+		else
+			p.setIdVolo(1);
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(p);

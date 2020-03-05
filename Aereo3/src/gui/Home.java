@@ -31,6 +31,7 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dominio.ClienteFedele;
+import dominio.Volo;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
@@ -68,18 +69,17 @@ public class Home extends JFrame {
 	private JPanel panel5;
 	private JButton btnVisualizzamodificaPrenotazione;
 	private boolean modifica;
-	private JPanel panel10;
-	private JCheckBox chckbxSonoUnCliente;
+	private JPanel panel_1;
+	private JLabel lblDataDiInizio;
+	private JDateChooser dateChooser_1;
 	private Component verticalStrut_1;
 	private Component verticalStrut_2;
-	private JLabel lblEmail;
-	private JTextField textField;
-	private JLabel lblPassword;
-	private JPasswordField passwordField;
+	private JLabel lblDataDiFine;
+	private JDateChooser dateChooser_2;
 	private Component verticalStrut_3;
-	private JButton btnNewButton;
-	private JPanel panel_1;
-	private JCheckBox chckbxCiao;
+	private Component verticalStrut_5;
+	private JButton btnCreaPromozione;
+
 
 	/**
 	 * Launch the application.
@@ -408,10 +408,6 @@ public class Home extends JFrame {
 		});
 		btnVisualizzamodificaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel5.add(btnVisualizzamodificaPrenotazione);
-		
-	
-		
-		
 		
 		//Nuovo panel
 	}		
