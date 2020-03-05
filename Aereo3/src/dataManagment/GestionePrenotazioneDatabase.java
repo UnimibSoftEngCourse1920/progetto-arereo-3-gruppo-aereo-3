@@ -87,7 +87,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql).setParameter("codCliente", codCliente).setParameter("idVolo", idVolo);
 		List <Prenotazione> ris = query.getResultList();
-		System.out.println(ris);
+		//System.out.println(ris);
 		if(ris == null || ris.size() == 0)
 			return false;
 		else 

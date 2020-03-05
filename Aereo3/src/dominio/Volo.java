@@ -108,9 +108,9 @@ public class Volo {
 	
 
 
-	@Override
-	public String toString() {
-		return "Volo [idVolo=" + idVolo + ", destinazione=" + destinazione + ", partenza=" + partenza
+	//@Override
+	public String toString(String partenza, String arrivo) {
+		return "Volo [idVolo=" + idVolo + ", destinazione=" + arrivo + ", partenza=" + partenza
 				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", gate=" + gate + "]";
 	}
 

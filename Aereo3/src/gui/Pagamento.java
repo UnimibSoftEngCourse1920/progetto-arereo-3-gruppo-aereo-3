@@ -207,7 +207,9 @@ public class Pagamento {
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 				Volo v = Controller.getVolo(idVolo);
-				txt += v.toString();
+				String partenza = Controller.getDenominazioneAereoporto(v.getPartenza());
+				String arrivo = Controller.getDenominazioneAereoporto(v.getDestinazione());
+				txt += v.toString(partenza, arrivo);
 				for(Posto p : listaPosti)
 					txt += p.toString();
 				txt += "Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";

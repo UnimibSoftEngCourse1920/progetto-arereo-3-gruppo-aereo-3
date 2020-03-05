@@ -232,6 +232,7 @@ public class Registrazione {
 				
 				else{
 				ClienteFedele c = new ClienteFedele();
+				lblNewLabel3.setText("Registrazione andata a buon fine");
 				c.setNome(textField.getText());
 				c.setCognome(textField1.getText());
 				c.setEmail(textField3.getText());
