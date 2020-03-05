@@ -275,8 +275,8 @@ public class Controller {
 	
 	/****************************************************/
 	//GESTIONE PAGAMENTO
-	public static boolean paga(CartaDiCredito cc) {
-		return GestorePagamento.paga(cc);
+	public static boolean paga(CartaDiCredito cc, double importo) {
+		return GestorePagamento.paga(cc, importo);
 	}
 }
 

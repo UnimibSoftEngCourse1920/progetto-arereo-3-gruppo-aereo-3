@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class GestorePagamento {
 	
-	public static boolean paga(CartaDiCredito cc) {
+	public static boolean paga(CartaDiCredito cc, double importo) {
 		boolean cartaValida = GestorePagamento.validate(cc);
 		boolean pagato = false;
 		if(cartaValida) {

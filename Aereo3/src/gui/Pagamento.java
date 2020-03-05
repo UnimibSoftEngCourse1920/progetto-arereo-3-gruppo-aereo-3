@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.List;
 
 import javax.swing.Box;
@@ -23,6 +24,7 @@ import dominio.Posto;
 import dominio.Volo;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
+import paymentManagment.CartaDiCredito;
 
 public class Pagamento {
 	
@@ -175,16 +177,18 @@ public class Pagamento {
 		JButton btnNewButton1 = new JButton("Paga");
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//se il pagamento va a buon fine
-				GestoreMail ge = Controller.getGestoreMail();
-				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
-				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
-				Volo v = Controller.getVolo(idVolo);
-				txt += v.toString();
-				for(Posto p : listaPosti)
-					txt += p.toString();
-				txt += "Prenotazione PAGATA";
-				Controller.sendMail(ge, c.getEmail(), sbj, txt);
+				CartaDiCredito cc = new CartaDiCredito(textField.getText(), new Date(2022, 01, 01), "111");
+				if(Controller.paga(cc, costo)) {
+					GestoreMail ge = Controller.getGestoreMail();
+					String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
+					String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
+					Volo v = Controller.getVolo(idVolo);
+					txt += v.toString();
+					for(Posto p : listaPosti)
+						txt += p.toString();
+					txt += "Prenotazione PAGATA";
+					Controller.sendMail(ge, c.getEmail(), sbj, txt);
+				}
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 20));
