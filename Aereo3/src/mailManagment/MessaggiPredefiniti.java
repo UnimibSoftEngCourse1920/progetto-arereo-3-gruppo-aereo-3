@@ -10,15 +10,21 @@ public enum MessaggiPredefiniti {
 			+ "Se non verrà pagata tale prenotazione sarà automaticamente cancellata"),
 	INFEDELE_SUBJ("Inattività programma fedeltà"),
 	INFEDELE_TXT("Si avvisa il gentile cliente che non avendo acquistato biglietti per 2 anni"
-			+ "il suo account è in uno stato di \"infedeltà\"; se non acquista un biglietto"
-			+ "nell'arco del prossimo anno il suo account sarà automaticamente cancellato"),
+			+ " il suo account è in uno stato di \"infedeltà\"; se non acquista un biglietto"
+			+ " nell'arco del prossimo anno il suo account sarà automaticamente cancellato"),
 	FEDELE_SUBJ("Programma Fedeltà compagnia Aereo3PJ"),
 	FEDELE_TXT("Gentile cliente, \n"
 			+ "Grazie per aver aderito al nostro programma fedeltà! \n"
 			+ "CONDIZIONI D'USO: \n"
 			+ "- Se non si compra un biglietto nell'arco di 2 anni passerà in uno stato di \"infedeltà\" \n"
 			+ "- Se è in stato di infedeltà e non compra un biglietto nell'arco di un anno verrà automaticamente rimosso \n"
-			+ "- Riceverà tutte le ultime promozioni della compagnia via mail");
+			+ "- Riceverà tutte le ultime promozioni della compagnia via mail"),
+	INFEDELE_RIMOZIONE_SUBJ("Rimozione dal programma fedeltà"),
+	INFEDELE_RIMOZIONE_TXT("Si avvisa il gentile cliente che vista le sua inattività, è stato rimosso dal"
+			+ " programma di fedeltà come da condizioni d\'uso."),
+	PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ("Rimozione scadenza insoluta id. "),
+	PRENOTAZIONESCADUTA_RIMOZIONE_TXT("Si avvisa il cliente che non avendo pagato la prenotazione entro i "
+			+ "termini stabiliti dal regolamento, la sua prenotazione è stata annullata.");
 	
 	private final String messaggio;
 	

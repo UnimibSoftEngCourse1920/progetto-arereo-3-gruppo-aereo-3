@@ -129,6 +129,22 @@ public class Controller {
 		GestioneClienteDatabase.addPunti(codiceCliente, punti);
 	}
 	
+	public static Cliente getCliente(int id) {
+		return GestioneClienteDatabase.getCliente(id);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		return GestioneClienteDatabase.getClientiInfedeli();
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
+		GestioneClienteDatabase.updateInfedelta(c, newInfedele);
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere(){
+		return GestioneClienteDatabase.getClientiDaRimuovere();
+	}
+	
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/
@@ -184,7 +200,14 @@ public class Controller {
 	public static void eliminaPrenotazione(Prenotazione p) {
 		GestionePrenotazioneDatabase.deletePrenotazione(p);
 	}
-
+	
+	public static List<Prenotazione> getPrenotazioniScadute(){
+		return GestionePrenotazioneDatabase.getPrenotazioniScadute();
+	}
+	
+	public static void deletePrenotazione(Prenotazione p) {
+		GestionePrenotazioneDatabase.deletePrenotazione(p);
+	}
 
 	/***************************************************/
 	//GESTIONE PROMOZIONE

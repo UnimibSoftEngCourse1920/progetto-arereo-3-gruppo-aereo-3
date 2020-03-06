@@ -25,11 +25,12 @@ import javax.swing.table.TableModel;
 
 import controller.Controller;
 import dominio.Cliente;
+import dominio.ClienteFedele;
 import dominio.Prenotazione;
 import dominio.Volo;
 
 public class AreaUtente {
-	static JPanel esegui(JPanel contentPane, JPanel homePanel, Cliente c) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, ClienteFedele c) {
 		JPanel areaUtente = new JPanel ();
 		areaUtente.setBackground(Color.BLUE);
 		contentPane.add(areaUtente, "name_864878817126900");
@@ -96,6 +97,16 @@ public class AreaUtente {
 				gbcLblNome.gridy = 1;
 				datiPersonali.add(lblNome, gbcLblNome);
 				
+				JLabel lblNomeCliente = new JLabel(c.getNome());
+				lblNomeCliente.setForeground(Color.WHITE);
+				lblNomeCliente.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				GridBagConstraints gbcLblNomeCliente = new GridBagConstraints();
+				gbcLblNomeCliente.insets = new Insets(0, 0, 5, 0);
+				gbcLblNomeCliente.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblNomeCliente.gridx = 3;
+				gbcLblNomeCliente.gridy = 1;
+				datiPersonali.add(lblNomeCliente, gbcLblNomeCliente);
+				
 				Component verticalStrut11 = Box.createVerticalStrut(20);
 				GridBagConstraints gbcVerticalStrut11 = new GridBagConstraints();
 				gbcVerticalStrut11.insets = new Insets(0, 0, 5, 0);
@@ -119,6 +130,16 @@ public class AreaUtente {
 				gbcLblCognome.gridx = 1;
 				gbcLblCognome.gridy = 3;
 				datiPersonali.add(lblCognome, gbcLblCognome);
+				
+				JLabel lblCognomeCliente = new JLabel(c.getCognome());
+				lblCognomeCliente.setForeground(Color.WHITE);
+				lblCognomeCliente.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				GridBagConstraints gbcLblCognomeCliente = new GridBagConstraints();
+				gbcLblCognomeCliente.insets = new Insets(0, 0, 5, 0);
+				gbcLblCognomeCliente.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblCognomeCliente.gridx = 3;
+				gbcLblCognomeCliente.gridy = 3;
+				datiPersonali.add(lblCognomeCliente, gbcLblCognomeCliente);
 				
 				Component verticalStrut12 = Box.createVerticalStrut(20);
 				GridBagConstraints gbcVerticalStrut12 = new GridBagConstraints();
@@ -144,6 +165,16 @@ public class AreaUtente {
 				gbcLblEmail.gridy = 5;
 				datiPersonali.add(lblEmail, gbcLblEmail);
 				
+				JLabel lblEmailCliente = new JLabel(c.getEmail());
+				lblEmailCliente.setForeground(Color.WHITE);
+				lblEmailCliente.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				GridBagConstraints gbcLblEmailCliente = new GridBagConstraints();
+				gbcLblEmailCliente.insets = new Insets(0, 0, 5, 0);
+				gbcLblEmailCliente.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblEmailCliente.gridx = 3;
+				gbcLblEmailCliente.gridy = 5;
+				datiPersonali.add(lblEmailCliente, gbcLblEmailCliente);
+				
 				Component verticalStrut13 = Box.createVerticalStrut(20);
 				GridBagConstraints gbcVerticalStrut13 = new GridBagConstraints();
 				gbcVerticalStrut13.insets = new Insets(0, 0, 5, 0);
@@ -167,6 +198,16 @@ public class AreaUtente {
 				gbcLblIndirizzo.gridx = 1;
 				gbcLblIndirizzo.gridy = 7;
 				datiPersonali.add(lblIndirizzo, gbcLblIndirizzo);
+				
+				JLabel lblIndirizzoCliente = new JLabel(c.getIndirizzo());
+				lblIndirizzoCliente.setForeground(Color.WHITE);
+				lblIndirizzoCliente.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				GridBagConstraints gbcLblIndirizzoCliente = new GridBagConstraints();
+				gbcLblIndirizzoCliente.insets = new Insets(0, 0, 5, 0);
+				gbcLblIndirizzoCliente.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblIndirizzoCliente.gridx = 3;
+				gbcLblIndirizzoCliente.gridy = 7;
+				datiPersonali.add(lblIndirizzoCliente, gbcLblIndirizzoCliente);
 				
 				Component verticalStrut14 = Box.createVerticalStrut(20);
 				GridBagConstraints gbcVerticalStrut14 = new GridBagConstraints();
@@ -192,6 +233,18 @@ public class AreaUtente {
 				datiPersonali.add(lblPassword, gbcLblPassword);
 				contentPane.repaint();
 				contentPane.revalidate();
+				
+				JLabel lblPasswordCliente = new JLabel(c.getPsw());
+				lblPasswordCliente.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				lblPasswordCliente.setForeground(Color.WHITE);
+				GridBagConstraints gbcLblPasswordCliente = new GridBagConstraints();
+				gbcLblPasswordCliente.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblPasswordCliente.gridx = 3;
+				gbcLblPasswordCliente.gridy = 9;
+				datiPersonali.add(lblPasswordCliente, gbcLblPasswordCliente);
+				
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnDatiPersonali.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -213,54 +266,17 @@ public class AreaUtente {
 		btnPrenotazioni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
+				
 				JPanel prenotazioni = new JPanel();
+				prenotazioni.setBounds(100, 100, 894, 717);
 				prenotazioni.setBackground(Color.BLUE);
-				panel.add(prenotazioni, "name_866024865084500");
-				GridBagLayout gblPrenotazioni = new GridBagLayout();
-				gblPrenotazioni.columnWidths = new int[]{0, 0, 0};
-				gblPrenotazioni.rowHeights = new int[]{0, 0, 0};
-				gblPrenotazioni.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				gblPrenotazioni.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				prenotazioni.setLayout(gblPrenotazioni);
-				
-				Component verticalStrut15 = Box.createVerticalStrut(20);
-				GridBagConstraints gbcVerticalStrut15 = new GridBagConstraints();
-				gbcVerticalStrut15.insets = new Insets(0, 0, 5, 0);
-				gbcVerticalStrut15.gridx = 1;
-				gbcVerticalStrut15.gridy = 0;
-				prenotazioni.add(verticalStrut15, gbcVerticalStrut15);
-				
-				Component horizontalStrut5 = Box.createHorizontalStrut(20);
-				GridBagConstraints gbcHorizontalStrut5 = new GridBagConstraints();
-				gbcHorizontalStrut5.insets = new Insets(0, 0, 0, 5);
-				gbcHorizontalStrut5.gridx = 0;
-				gbcHorizontalStrut5.gridy = 1;
-				prenotazioni.add(horizontalStrut5, gbcHorizontalStrut5);
+				panel.add(prenotazioni);
+				prenotazioni.setLayout(new BorderLayout(0, 0));
 				
 				JLabel lblLeTuePrenotazioni = new JLabel("Le tue Prenotazioni:");
 				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
 				lblLeTuePrenotazioni.setForeground(Color.WHITE);
-				GridBagConstraints gbcLblLeTuePrenotazioni = new GridBagConstraints();
-				gbcLblLeTuePrenotazioni.anchor = GridBagConstraints.WEST;
-				gbcLblLeTuePrenotazioni.gridx = 1;
-				gbcLblLeTuePrenotazioni.gridy = 1;
-				prenotazioni.add(lblLeTuePrenotazioni, gbcLblLeTuePrenotazioni);
-				contentPane.repaint();
-				contentPane.revalidate();
-				
-				Component verticalStrut16 = Box.createVerticalStrut(20);
-				GridBagConstraints gbcVerticalStrut16 = new GridBagConstraints();
-				gbcVerticalStrut16.insets = new Insets(0, 0, 5, 0);
-				gbcVerticalStrut16.gridx = 1;
-				gbcVerticalStrut16.gridy = 2;
-				prenotazioni.add(verticalStrut16, gbcVerticalStrut16);
-				
-				Component horizontalStrut6 = Box.createHorizontalStrut(20);
-				GridBagConstraints gbcHorizontalStrut6 = new GridBagConstraints();
-				gbcHorizontalStrut6.insets = new Insets(0, 0, 0, 5);
-				gbcHorizontalStrut6.gridx = 0;
-				gbcHorizontalStrut6.gridy = 3;
-				prenotazioni.add(horizontalStrut6, gbcHorizontalStrut6);
+				prenotazioni.add(lblLeTuePrenotazioni, BorderLayout.NORTH);
 				
 				List <Prenotazione> listaPrenotazioni = Controller.getPrenotazionePerCliente(c.getCodCliente());
 				
@@ -287,11 +303,11 @@ public class AreaUtente {
 				  };
 				JTable table = new JTable(model);
 				table.setPreferredSize(new Dimension(800, 500));
-				GridBagConstraints gbcTable = new GridBagConstraints();
-				gbcTable.insets = new Insets(0, 0, 0, 5);
-				gbcTable.gridx = 1;
-				gbcTable.gridy = 3;
-				prenotazioni.add(new JScrollPane(table), gbcTable);
+				
+				prenotazioni.add(new JScrollPane(table), BorderLayout.CENTER);
+				
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnPrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));

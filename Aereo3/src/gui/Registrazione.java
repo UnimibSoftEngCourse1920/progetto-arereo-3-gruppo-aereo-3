@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -241,6 +242,10 @@ public class Registrazione {
 				c.setIndirizzo(textField2.getText());
 				c.setDataIscrizione(now);
 				c.setUltimoBiglietto(now);
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.YEAR, 2);
+				Date infedele = cal.getTime();
+				c.setInfedele(infedele);
 				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();
