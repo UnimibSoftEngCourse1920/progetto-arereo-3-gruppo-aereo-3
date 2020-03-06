@@ -3,6 +3,8 @@ package mailManagment;
 public enum MessaggiPredefiniti {
 	NUOVAPROMOZIONE_SUBJ("PROMOZIONE ECCEZIONALE!"),
 	RESOCONTOPRENOTAZIONE_SUBJ("Resoconto prenotazione id. "),
+	MODIFICA_VOLO_SBJ("Modifica volo id. "),
+	MODIFICA_VOLO_TXT("Si comunica che il volo è cambiato, di seguito le nuove info: "),
 	RESOCONTOPRENOTAZIONE_TXT("Gentile cliente, \n"
 			+ "Qui di seguito il resoconto della sua prenotazione da esibire al check-in: \n"),
 	SCADENZAPRENOTAZIONE_SUBJ("Avviso scadenza prenotazione id. "),

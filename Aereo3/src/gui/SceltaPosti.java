@@ -197,9 +197,6 @@ public class SceltaPosti {
 					contentPane.revalidate();
 					if(modifica)
 						Controller.eliminaPrenotazione(GestionePrenotazioneDatabase.getPrenotazioneId(oldP));
-					else {
-					errore.setText("Il cliente ha già una prenotazione per questo volo");
-				}
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 28));

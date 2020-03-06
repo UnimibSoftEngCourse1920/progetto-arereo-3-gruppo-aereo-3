@@ -250,10 +250,13 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		return ris;
 	}
 	
-	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
-		String jpql = "UPDATE ClienteFedele SET infedele=:inf WHERE codCliente=:cod";
-		Query query = entityManager.createQuery(jpql).setParameter("inf", newInfedele).setParameter("cod", c.getCodCliente());
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele, Date ultimoBiglietto) {
+		entityManager.getTransaction().begin();
+		String jpql = "UPDATE ClienteFedele SET infedele=:inf, ultimoBiglietto=:ub WHERE codCliente=:cod";
+		Query query = entityManager.createQuery(jpql).setParameter("inf", newInfedele).setParameter("ub", ultimoBiglietto).setParameter("cod", c.getCodCliente());
 		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
 	}
 	
 	public static List<ClienteFedele> getClientiDaRimuovere() {

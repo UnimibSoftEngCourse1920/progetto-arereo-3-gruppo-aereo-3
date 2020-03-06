@@ -137,8 +137,8 @@ public class Controller {
 		return GestioneClienteDatabase.getClientiInfedeli();
 	}
 	
-	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
-		GestioneClienteDatabase.updateInfedelta(c, newInfedele);
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele, Date ultimoBiglietto) {
+		GestioneClienteDatabase.updateInfedelta(c, newInfedele, ultimoBiglietto);
 	}
 	
 	public static List<ClienteFedele> getClientiDaRimuovere(){
@@ -176,7 +176,7 @@ public class Controller {
 
 	}
 	
-	public static List<Prenotazione> getPrenotazioniPerVolo(String idVolo) {
+	public static List<Prenotazione> getPrenotazioniPerVolo(int idVolo) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
 	}
 	
@@ -188,7 +188,7 @@ public class Controller {
 		return GestionePrenotazioneDatabase.getPrenotazioniInScadenza();
 	}
 
-	public static void pagamentoPrenotazione(Prenotazione prenotazione) {
+	public static void pagamentoPrenotazione(int prenotazione) {
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
 	}
 	
