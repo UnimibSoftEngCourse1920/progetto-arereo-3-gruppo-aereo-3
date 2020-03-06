@@ -5,7 +5,7 @@ public enum MessaggiPredefiniti {
 	RESOCONTOPRENOTAZIONE_SUBJ("Resoconto prenotazione id. "),
 	RESOCONTOPRENOTAZIONE_TXT("Gentile cliente, \n"
 			+ "Qui di seguito il resoconto della sua prenotazione da esibire al check-in: \n"),
-	SCADENZAPRENOTAZIONE_SUBJ("Avviso scadenza prenotazione id."),
+	SCADENZAPRENOTAZIONE_SUBJ("Avviso scadenza prenotazione id. "),
 	SCADENZAPRENOTAZIONE_TXT("Si avvisa il gentile cliente che la prenotazione scade tra 24h \n"
 			+ "Se non verrà pagata tale prenotazione sarà automaticamente cancellata"),
 	INFEDELE_SUBJ("Inattività programma fedeltà"),

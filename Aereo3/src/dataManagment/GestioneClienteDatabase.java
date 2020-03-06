@@ -215,6 +215,9 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
 		Query query = entityManager.createQuery(jpql).setParameter("email", email);
 		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.isEmpty())
+			return null;
+		
 		return ris.get(0);
 	}
 	

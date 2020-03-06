@@ -173,12 +173,6 @@ public class SceltaPosti {
 		JButton btnNewButton1 = new JButton("Prenota");
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(! Controller.trovaMail(c.getEmail())) {
-					Controller.insertCliente(c);
-				}
-				Cliente cliente = Controller.getCliente(c.getEmail());
-				
-				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 					List <Posto> listaPosti = new ArrayList<Posto>();
 					double costo = 0;
 					int costoPunti = 0;
@@ -197,16 +191,13 @@ public class SceltaPosti {
 						}
 					System.out.println(listaPosti);
 					//portati dietro cliente
-					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
-					int idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 					contentPane.removeAll();
-					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, idPrenotazione, cliente, idVolo, listaPosti, fedele));
+					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, c, idVolo, listaPosti, fedele));
 					contentPane.repaint();
 					contentPane.revalidate();
 					if(modifica)
 						Controller.eliminaPrenotazione(GestionePrenotazioneDatabase.getPrenotazioneId(oldP));
-				} else {
+					else {
 					errore.setText("Il cliente ha già una prenotazione per questo volo");
 				}
 			}

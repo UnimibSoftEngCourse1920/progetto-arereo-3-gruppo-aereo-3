@@ -9,6 +9,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dataManagment.GestioneClienteDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
@@ -29,7 +33,7 @@ import paymentManagment.CartaDiCredito;
 
 public class Pagamento {
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -62,15 +66,15 @@ public class Pagamento {
 		gbcHorizontalStrut.gridy = 0;
 		panel7.add(horizonatlStrut, gbcHorizontalStrut);
 		
-		JLabel labelPrenotazione = new JLabel("Il tuo id Prenotazione è: " + Integer.toString(idPrenotazione));
-		labelPrenotazione.setForeground(Color.WHITE);
-		labelPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		GridBagConstraints gbcLabelPrenotazione = new GridBagConstraints();
-		gbcLabelPrenotazione.anchor = GridBagConstraints.WEST;
-		gbcLabelPrenotazione.insets = new Insets(0, 0, 5, 0);
-		gbcLabelPrenotazione.gridx = 2;
-		gbcLabelPrenotazione.gridy = 0;
-		panel7.add(labelPrenotazione, gbcLabelPrenotazione);
+//		JLabel labelPrenotazione = new JLabel("Il tuo id Prenotazione è: " + Integer.toString(idPrenotazione));
+//		labelPrenotazione.setForeground(Color.WHITE);
+//		labelPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 25));
+//		GridBagConstraints gbcLabelPrenotazione = new GridBagConstraints();
+//		gbcLabelPrenotazione.anchor = GridBagConstraints.WEST;
+//		gbcLabelPrenotazione.insets = new Insets(0, 0, 5, 0);
+//		gbcLabelPrenotazione.gridx = 2;
+//		gbcLabelPrenotazione.gridy = 0;
+//		panel7.add(labelPrenotazione, gbcLabelPrenotazione);
 		
 		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
@@ -149,6 +153,10 @@ public class Pagamento {
 		panel7.add(verticalStrut9, gbcVerticalStrut9);
 		
 		JLabel lblNewLabel4 = new JLabel("Costo in Punti");
+		if(Controller.isFedele(c))
+			lblNewLabel4.setVisible(true);
+		else
+			lblNewLabel4.setVisible(false);
 		lblNewLabel4.setForeground(Color.WHITE);
 		lblNewLabel4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		GridBagConstraints gbcLblNewLabel4 = new GridBagConstraints();
@@ -176,34 +184,34 @@ public class Pagamento {
 		panel7.add(verticalStrut10, gbcVerticalStrut10);
 		
 		JButton btnNewButton1 = new JButton("Paga");
-		btnNewButton1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CartaDiCredito cc = new CartaDiCredito(textField.getText(), new Date(2022, 01, 01), "111");
-				if(Controller.paga(cc, costo)) {
-					GestoreMail ge = Controller.getGestoreMail();
-					String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
-					String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
-					Volo v = Controller.getVolo(idVolo);
-					txt += v.toString();
-					for(Posto p : listaPosti)
-						txt += p.toString();
-					txt += "Prenotazione PAGATA";
-					Controller.sendMail(ge, c.getEmail(), sbj, txt);
-					
-					if(fedele) {
-						int punti = 0;
-						for(Posto p : listaPosti) {
-							punti += p.getPunti();
-						}
-						Controller.addPunti(c.getCodCliente(), punti);
-						
-						Date newInfedele = new Date();
-						Controller.updateInfedelta((ClienteFedele) c, newInfedele);
-						
-					}
-				}
-			}
-		});
+//		btnNewButton1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				CartaDiCredito cc = new CartaDiCredito(textField.getText(), new Date(2022, 01, 01), "111");
+//				if(Controller.paga(cc, costo)) {
+//					GestoreMail ge = Controller.getGestoreMail();
+//					//String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
+//					String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
+//					Volo v = Controller.getVolo(idVolo);
+//					txt += v.toString();
+//					for(Posto p : listaPosti)
+//						txt += p.toString();
+//					txt += "Prenotazione PAGATA";
+//					Controller.sendMail(ge, c.getEmail(), sbj, txt);
+//					
+//					if(fedele) {
+//						int punti = 0;
+//						for(Posto p : listaPosti) {
+//							punti += p.getPunti();
+//						}
+//						Controller.addPunti(c.getCodCliente(), punti);
+//						
+//						Date newInfedele = new Date();
+//						Controller.updateInfedelta((ClienteFedele) c, newInfedele);
+//						
+//					}
+//				}
+//			}
+//		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcBtnNewButton1 = new GridBagConstraints();
 		gbcBtnNewButton1.anchor = GridBagConstraints.WEST;
@@ -226,9 +234,34 @@ public class Pagamento {
 		panel6.add(panel8, BorderLayout.SOUTH);
 		panel8.setLayout(new BorderLayout(0, 0));
 		
+		Volo v = Controller.getVolo(idVolo);
+		Date now = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 1);
+		Date tra1 = cal.getTime();
+		cal.add(Calendar.DATE, 1);
+		Date tra2 = cal.getTime();
+		cal.add(Calendar.DATE, 1);
+		Date tra3 = cal.getTime();
+		
+		convertiData(now);
+		
 		JButton btnNewButton2 = new JButton("Paga pi\u00F9 avanti");
 		btnNewButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(! Controller.trovaMail(c.getEmail())) {
+					Controller.insertCliente(c);
+				}
+				
+				Cliente cliente = Controller.getCliente(c.getEmail());
+				
+				int idPrenotazione = -1;
+				
+				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
+					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
+					idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+				}
 				GestoreMail ge = GestoreMail.getInstance();
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
@@ -237,8 +270,8 @@ public class Pagamento {
 				String arrivo = Controller.getDenominazioneAereoporto(v.getDestinazione());
 				txt += v.toString(partenza, arrivo);
 				for(Posto p : listaPosti)
-					txt += p.toString();
-				txt += "Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
+					txt += " " + p.toString();
+				txt += " Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
 				ge.sendMail(c.getEmail(), sbj, txt);
 			}
 		});
@@ -258,6 +291,21 @@ public class Pagamento {
 		panel8.add(btnBack, BorderLayout.WEST);
 		
 		return panel6;
+	}
+	
+	public static Date convertiData(Date data) {
+		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String dataArrivo= dataFormat.format(data);
+		System.out.println(dataArrivo);
+		try {
+			Date nuovaDataP = dataFormat.parse(dataArrivo.toString());
+			System.out.println(nuovaDataP);
+			System.out.println(dataFormat.format(nuovaDataP));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
