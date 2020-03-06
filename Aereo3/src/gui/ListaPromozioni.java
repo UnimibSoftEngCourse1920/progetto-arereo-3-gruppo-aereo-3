@@ -33,7 +33,7 @@ public class ListaPromozioni {
 		
 		Object rows [][] = new Object [promozioni.size()][7];
 		
-		String [] columns = {"ID", "Data Inizio", "Data Fine", "Sconto", "Aeroporto Partenza", "Aeroporto Destinazione", "Fedele"};
+		String [] columns = {"ID", "Data Inizio", "Data Fine", "Sconto", "Aeroporto Partenza", "Aeroporto Arrivo", "Fedele"};
 		
 		int i = 0;
 		
