@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import controller.Controller;
+
 @Entity
 @Table(name="volo")
 public class Volo {
@@ -110,7 +112,8 @@ public class Volo {
 
 	//@Override
 	public String toString(String partenza, String arrivo) {
-		return "Volo [idVolo=" + idVolo + ", destinazione=" + arrivo + ", partenza=" + partenza
+		return "Volo [idVolo=" + idVolo  + ", partenza=" + Controller.getDenominazioneAereoporto(partenza)
+				+ ", destinazione=" + Controller.getDenominazioneAereoporto(arrivo)
 				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", gate=" + gate + "]";
 	}
 

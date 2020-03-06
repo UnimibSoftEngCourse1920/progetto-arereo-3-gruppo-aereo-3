@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -21,7 +23,11 @@ import com.toedter.calendar.JDateChooser;
 import controller.Controller;
 import dataManagment.GestioneAdminDatabase;
 import dataManagment.GestioneVoloDatabase;
+import dominio.Cliente;
+import dominio.Prenotazione;
 import dominio.Volo;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class ModificaAdmin {
 	
@@ -315,6 +321,21 @@ public class ModificaAdmin {
 				String oraArrivo = (String) comboBox2.getSelectedItem();
 				String minutiArrivo = (String) comboBox3.getSelectedItem();
 				Controller.aggiornaVoloAdmin(Integer.parseInt(textField.getText()), oraPartenza, minutiPartenza, textField1.getText(), dateChooser.getDate(), oraArrivo, minutiArrivo, dateChooser1.getDate());
+				
+				GestoreMail ge = GestoreMail.getInstance();
+				List<Prenotazione> pr = Controller.getPrenotazioniPerVolo(v.getIdVolo());
+				if(pr!=null) {
+					List<Cliente> cl = new ArrayList<Cliente>();
+					for(Prenotazione p : pr)
+						cl.add(Controller.getCliente(p.getCodCliente()));
+					
+					v = Controller.getVolo(Integer.parseInt(textField.getText()));
+					String subject = MessaggiPredefiniti.MODIFICA_VOLO_SBJ.getMessaggio() + v.getIdVolo();
+					String content = MessaggiPredefiniti.MODIFICA_VOLO_TXT.getMessaggio() + v.toString(v.getPartenza(), v.getDestinazione());
+					for(Cliente c : cl) {
+						Controller.sendMail(ge, c.getEmail(), subject, content);
+					}
+				}
 			}
 		});
 		btnModifica.setFont(new Font("Tahoma", Font.PLAIN, 20));

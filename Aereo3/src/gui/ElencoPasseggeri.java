@@ -354,14 +354,12 @@ public class ElencoPasseggeri {
 					errore.setText("Errore");
 				}
 				
-				else if (continua) {
-					if (Controller.getCliente(emailInsert.getText()) != null) {
-						if (Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)){
+				else if (continua && Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)) {
 							if (!errore.getText().equals("")) 
-									errore.setText("");
-					}	
+									errore.setText("");	
 							errore.setText("Il cliente ha già una prenotazione per questo volo");
 						}
+						
 					else{
 						if (!errore.getText().equals("")) {
 							errore.setText("");
@@ -382,11 +380,9 @@ public class ElencoPasseggeri {
 						contentPane.repaint();
 						contentPane.revalidate();
 					}
+				
 				}
-				
-				
-			}
-		});
+			});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel.add(btnNewButton, BorderLayout.EAST);
 		

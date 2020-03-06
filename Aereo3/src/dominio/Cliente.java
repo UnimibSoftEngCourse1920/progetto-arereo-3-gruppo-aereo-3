@@ -104,12 +104,12 @@ public class Cliente {
 
 	/******************************************/
 
-	public void paga(Prenotazione prenotazione) {
+	/*public void paga(Prenotazione prenotazione) {
 		//Clark: 
 		//DUBBIO: if saldo carta< del prezzo tot? -> classe carta di cerdito?? || mettere un importo  della carta di default??
 		
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
-	}
+	}*/
 
 	/*****************************************/
 	public void modificaPrenotazione(Prenotazione prenotazione, LocalTime nuovoOrario) {

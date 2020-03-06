@@ -28,7 +28,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return prenotazioni;
 	}
 	
-	public static List<Prenotazione> getPrenotazioniPerVolo(String idVolo){
+	public static List<Prenotazione> getPrenotazioniPerVolo(int idVolo){
 		
 		String jpql = "SELECT p FROM Prenotazione as p WHERE idVolo = " + idVolo;
 		Query query = entityManager.createQuery(jpql);
@@ -108,11 +108,13 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	
 	/*****************BRANCH CLARK************************************/
 
-	public static void pagamentoPrenotazione(Prenotazione prenotazione) {
-
+	public static void pagamentoPrenotazione(int idPrenotazione) {
+		entityManager.getTransaction().begin();
 		String jpql ="UPDATE Prenotazione SET pagato=:pagato WHERE id=:id ";
-		Query query= entityManager.createQuery(jpql).setParameter("pagato", true).setParameter("id", prenotazione.getId());	
+		Query query= entityManager.createQuery(jpql).setParameter("pagato", true).setParameter("id", idPrenotazione);	
 		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
 	}
 	
 	public static boolean trovaCliente(int codCliente, int idVolo) {
