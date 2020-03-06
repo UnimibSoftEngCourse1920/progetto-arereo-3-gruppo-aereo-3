@@ -200,7 +200,14 @@ public class Controller {
 	public static void eliminaPrenotazione(Prenotazione p) {
 		GestionePrenotazioneDatabase.deletePrenotazione(p);
 	}
-
+	
+	public static List<Prenotazione> getPrenotazioniScadute(){
+		return GestionePrenotazioneDatabase.getPrenotazioniScadute();
+	}
+	
+	public static void deletePrenotazione(Prenotazione p) {
+		GestionePrenotazioneDatabase.deletePrenotazione(p);
+	}
 
 	/***************************************************/
 	//GESTIONE PROMOZIONE

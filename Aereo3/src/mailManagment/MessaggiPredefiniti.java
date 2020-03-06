@@ -21,7 +21,10 @@ public enum MessaggiPredefiniti {
 			+ "- Riceverà tutte le ultime promozioni della compagnia via mail"),
 	INFEDELE_RIMOZIONE_SUBJ("Rimozione dal programma fedeltà"),
 	INFEDELE_RIMOZIONE_TXT("Si avvisa il gentile cliente che vista le sua inattività, è stato rimosso dal"
-			+ " programma di fedeltà come da condizioni d\'uso.");
+			+ " programma di fedeltà come da condizioni d\'uso."),
+	PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ("Rimozione scadenza insoluta id. "),
+	PRENOTAZIONESCADUTA_RIMOZIONE_TXT("Si avvisa il cliente che non avendo pagato la prenotazione entro i "
+			+ "termini stabiliti dal regolamento, la sua prenotazione è stata annullata.");
 	
 	private final String messaggio;
 	
