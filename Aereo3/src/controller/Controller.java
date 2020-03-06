@@ -27,6 +27,9 @@ import dominio.Prenotazione;
 import dominio.Promozione;
 import dominio.Volo;
 import gui.Home;
+import mailManagment.GestoreMail;
+import paymentManagment.CartaDiCredito;
+import paymentManagment.GestorePagamento;
 
 public class Controller {
 	private static Log logger= LogFactory.getLog(Controller.class);
@@ -118,6 +121,30 @@ public class Controller {
 		return GestioneClienteDatabase.getClientiFedeli();
 	}
 	
+	public static boolean isFedele(Cliente c) {
+		return GestioneClienteDatabase.isFedele(c);
+	}
+	
+	public static void addPunti(int codiceCliente, int punti) {
+		GestioneClienteDatabase.addPunti(codiceCliente, punti);
+	}
+	
+	public static Cliente getCliente(int id) {
+		return GestioneClienteDatabase.getCliente(id);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		return GestioneClienteDatabase.getClientiInfedeli();
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele) {
+		GestioneClienteDatabase.updateInfedelta(c, newInfedele);
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere(){
+		return GestioneClienteDatabase.getClientiDaRimuovere();
+	}
+	
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/
@@ -178,12 +205,12 @@ public class Controller {
 	/***************************************************/
 	//GESTIONE PROMOZIONE
 	/***************************************************/
-	public static List<Promozione> getPromozioni(){
-		return GestionePromozioneDatabase.getAllPromozioni();
+	public static List<Promozione> getPromozioni(Date now){
+		return GestionePromozioneDatabase.getAllPromozioni(now);
 	}
 	
-	public static void insertPromozione(Date inizio, Date fine, String msg, Volo v) {
-		GestionePromozioneDatabase.insertPromozione(inizio, fine, msg, v);
+	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
+		GestionePromozioneDatabase.insertPromozione(inizio, fine, partenza, arrivo, sconto, perFedele);
 	}
 	
 	public static Promozione getPromozione(int idPromo) {
@@ -258,6 +285,22 @@ public class Controller {
 	
 	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
 		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
+	}
+	
+	/****************************************************/
+	//GESTIONE MAIL
+	public static GestoreMail getGestoreMail() {
+		return GestoreMail.getInstance();
+	}
+	
+	public static void sendMail(GestoreMail ge, String email, String subject, String content) {
+		ge.sendMail(email, subject, content);
+	}
+	
+	/****************************************************/
+	//GESTIONE PAGAMENTO
+	public static boolean paga(CartaDiCredito cc, double importo) {
+		return GestorePagamento.paga(cc, importo);
 	}
 }
 

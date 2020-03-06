@@ -9,6 +9,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -16,9 +18,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.Controller;
+import dominio.Cliente;
+import dominio.ClienteFedele;
+import dominio.Posto;
+import dominio.Volo;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
+import paymentManagment.CartaDiCredito;
+
 public class Pagamento {
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, int idPrenotazione, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -165,12 +176,50 @@ public class Pagamento {
 		panel7.add(verticalStrut10, gbcVerticalStrut10);
 		
 		JButton btnNewButton1 = new JButton("Paga");
+		btnNewButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CartaDiCredito cc = new CartaDiCredito(textField.getText(), new Date(2022, 01, 01), "111");
+				if(Controller.paga(cc, costo)) {
+					GestoreMail ge = Controller.getGestoreMail();
+					String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
+					String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
+					Volo v = Controller.getVolo(idVolo);
+					txt += v.toString();
+					for(Posto p : listaPosti)
+						txt += p.toString();
+					txt += "Prenotazione PAGATA";
+					Controller.sendMail(ge, c.getEmail(), sbj, txt);
+					
+					if(fedele) {
+						int punti = 0;
+						for(Posto p : listaPosti) {
+							punti += p.getPunti();
+						}
+						Controller.addPunti(c.getCodCliente(), punti);
+						
+						Date newInfedele = new Date();
+						Controller.updateInfedelta((ClienteFedele) c, newInfedele);
+						
+					}
+				}
+			}
+		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcBtnNewButton1 = new GridBagConstraints();
 		gbcBtnNewButton1.anchor = GridBagConstraints.WEST;
 		gbcBtnNewButton1.gridx = 0;
 		gbcBtnNewButton1.gridy = 13;
 		panel7.add(btnNewButton1, gbcBtnNewButton1);
+		
+		/*
+		 * Se è fedele dare la possibilità di pagare con punti
+		 * inserire button paga con punti
+		 * renderlo visibile solo se cliente è fedele e se ha abbastanza punti
+		 * copia incolla di "paga" ma senza controlli perchè tanto è fedele
+		 * 
+		 * inserire data di expiry e cvc della carta di credito
+		 * aggiornare parametri in paga
+		 */
 		
 		JPanel panel8 = new JPanel();
 		panel8.setBackground(Color.BLUE);
@@ -180,6 +229,17 @@ public class Pagamento {
 		JButton btnNewButton2 = new JButton("Paga pi\u00F9 avanti");
 		btnNewButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GestoreMail ge = GestoreMail.getInstance();
+				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
+				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
+				Volo v = Controller.getVolo(idVolo);
+				String partenza = Controller.getDenominazioneAereoporto(v.getPartenza());
+				String arrivo = Controller.getDenominazioneAereoporto(v.getDestinazione());
+				txt += v.toString(partenza, arrivo);
+				for(Posto p : listaPosti)
+					txt += p.toString();
+				txt += "Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
+				ge.sendMail(c.getEmail(), sbj, txt);
 			}
 		});
 		btnNewButton2.setFont(new Font("Tahoma", Font.PLAIN, 20));

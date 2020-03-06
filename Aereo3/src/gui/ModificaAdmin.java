@@ -77,11 +77,11 @@ public class ModificaAdmin {
 		textField.setColumns(10);
 		
 		Component verticalStrut4 = Box.createVerticalStrut(20);
-		GridBagConstraints gbcVerticalStrut_4 = new GridBagConstraints();
-		gbcVerticalStrut_4.insets = new Insets(0, 0, 5, 5);
-		gbcVerticalStrut_4.gridx = 1;
-		gbcVerticalStrut_4.gridy = 2;
-		panel.add(verticalStrut4, gbcVerticalStrut_4);
+		GridBagConstraints gbcVerticalStrut4 = new GridBagConstraints();
+		gbcVerticalStrut4.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut4.gridx = 1;
+		gbcVerticalStrut4.gridy = 2;
+		panel.add(verticalStrut4, gbcVerticalStrut4);
 		
 		Component verticalStrut1 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut1 = new GridBagConstraints();

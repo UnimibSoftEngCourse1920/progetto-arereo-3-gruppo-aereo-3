@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -22,6 +23,8 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dominio.ClienteFedele;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class Registrazione {
 	
@@ -230,6 +233,7 @@ public class Registrazione {
 				
 				else{
 				ClienteFedele c = new ClienteFedele();
+				lblNewLabel3.setText("Registrazione andata a buon fine");
 				c.setNome(textField.getText());
 				c.setCognome(textField1.getText());
 				c.setEmail(textField3.getText());
@@ -237,10 +241,18 @@ public class Registrazione {
 				c.setDataDiNascita(dateChooser1.getDate());
 				c.setIndirizzo(textField2.getText());
 				c.setDataIscrizione(now);
+				c.setUltimoBiglietto(now);
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.YEAR, 2);
+				Date infedele = cal.getTime();
+				c.setInfedele(infedele);
 				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();
 				registrationPanel.revalidate();
+				
+				GestoreMail ge = Controller.getGestoreMail();
+				Controller.sendMail(ge, c.getEmail(), MessaggiPredefiniti.FEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.FEDELE_TXT.getMessaggio());
 				}
 			}
 		});

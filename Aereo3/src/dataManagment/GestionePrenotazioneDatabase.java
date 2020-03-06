@@ -2,14 +2,20 @@ package dataManagment;
 
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+
 import javax.persistence.Query;
 
 import dominio.Cliente;
 import dominio.Posto;
 import dominio.Prenotazione;
+import dominio.Volo;
 
 public class GestionePrenotazioneDatabase extends GestioneDatabase {
 
@@ -51,11 +57,18 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, 4);
 		Date expiry = cal.getTime();
-		String jpql = "SELECT p FROM Prenotazione as p JOIN Volo as v ON p.id_volo = v.id_volo  WHERE v.data_partenza = " + expiry.toString();
+		
+		String jpql = "SELECT p FROM Prenotazione as p WHERE p.pagato=0";
 		Query query = entityManager.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
-		return prenotazioni;
+		List<Prenotazione> res = new ArrayList<Prenotazione>();
+		for(Prenotazione p : prenotazioni) {
+			Volo v = GestioneVoloDatabase.getVolo(p.getIdVolo());
+			if(v.getDataPartenza().getDate()==expiry.getDate() && v.getDataPartenza().getMonth()==expiry.getMonth() && v.getDataPartenza().getYear()==expiry.getYear())
+				res.add(p);
+		}
+		return res;
 	}
 	
 	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
@@ -87,7 +100,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql).setParameter("codCliente", codCliente).setParameter("idVolo", idVolo);
 		List <Prenotazione> ris = query.getResultList();
-		System.out.println(ris);
+		//System.out.println(ris);
 		if(ris == null || ris.size() == 0)
 			return false;
 		else 

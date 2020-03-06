@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -18,6 +19,11 @@ import javax.swing.JTextField;
 
 import controller.Controller;
 import dominio.Admin;
+import dominio.Cliente;
+import dominio.ClienteFedele;
+import dominio.Prenotazione;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class AccessoAdmin {
 	static JPanel esegui(JPanel contentPane, JPanel homePanel) {
@@ -203,6 +209,32 @@ public class AccessoAdmin {
 //					System.out.println(Controller.controlloLoginAmministratore(a));
 					contentPane.removeAll();
 					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+					
+					GestoreMail ge = Controller.getGestoreMail();
+					//notifica prenotazioni insolute
+					List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();
+					for(Prenotazione p : prenotazioniInScadenza) {
+						Cliente c = Controller.getCliente(p.getCodCliente());
+						String sbj = MessaggiPredefiniti.SCADENZAPRENOTAZIONE_SUBJ.getMessaggio() + " " + p.getId();
+						Controller.sendMail(ge, c.getEmail(), sbj, MessaggiPredefiniti.SCADENZAPRENOTAZIONE_TXT.getMessaggio());
+					}
+					
+					//rimozione prenotazioni scadute
+					//TO-DO
+					
+					//notifica infedeltà
+					List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();
+					for(ClienteFedele ci : clientiInfedeli) {
+						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_TXT.getMessaggio());
+					}
+						
+					//rimozione infedeli da un anno
+					List<ClienteFedele> clientiDaRimuovere = Controller.getClientiDaRimuovere();
+					for(ClienteFedele ci : clientiDaRimuovere) {
+						Controller.deleteCliente(ci);
+						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_TXT.getMessaggio());
+					}
+						
 					contentPane.repaint();
 					contentPane.revalidate();
 				}

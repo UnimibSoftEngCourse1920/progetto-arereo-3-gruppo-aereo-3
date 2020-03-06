@@ -101,6 +101,14 @@ public class AreaAdmin {
 		menuAdmin.add(verticalStrut9, gbcVerticalStrut9);
 		
 		JButton btnCreaPromozione = new JButton("Crea Promozione");
+		btnCreaPromozione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel5.removeAll();
+				panel5.add(PromozioneAdmin.esegui(panel5));
+				panel5.repaint();
+				panel5.revalidate();
+			}
+		});
 		btnCreaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbcBtnCreaPromozione = new GridBagConstraints();
 		gbcBtnCreaPromozione.anchor = GridBagConstraints.NORTHWEST;

@@ -1,6 +1,7 @@
 package dominio;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ public class Prenotazione {
 	
 	@Column(name="pagato")
 	private boolean pagato;
-	
+
 	@Column(name="prezzo_totale")
 	private double prezzoTotale;
 	
