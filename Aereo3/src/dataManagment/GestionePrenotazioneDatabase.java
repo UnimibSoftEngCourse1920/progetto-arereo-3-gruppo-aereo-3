@@ -71,6 +71,25 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return res;
 	}
 	
+	public static List<Prenotazione> getPrenotazioniScadute(){
+		Date currentDate = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, 3);
+		Date expiry = cal.getTime();
+		
+		String jpql = "SELECT p FROM Prenotazione as p WHERE p.pagato=0";
+		Query query = entityManager.createQuery(jpql);
+		@SuppressWarnings("unchecked")
+		List<Prenotazione> prenotazioni = query.getResultList();
+		List<Prenotazione> res = new ArrayList<Prenotazione>();
+		for(Prenotazione p : prenotazioni) {
+			Volo v = GestioneVoloDatabase.getVolo(p.getIdVolo());
+			if(v.getDataPartenza().getDate()==expiry.getDate() && v.getDataPartenza().getMonth()==expiry.getMonth() && v.getDataPartenza().getYear()==expiry.getYear())
+				res.add(p);
+		}
+		return res;
+	}
+	
 	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
 		String jpql = "SELECT p.id FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql).setParameter("codCliente", c.getCodCliente()).setParameter("idVolo", v);
@@ -100,7 +119,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql).setParameter("codCliente", codCliente).setParameter("idVolo", idVolo);
 		List <Prenotazione> ris = query.getResultList();
-		//System.out.println(ris);
 		if(ris == null || ris.size() == 0)
 			return false;
 		else 

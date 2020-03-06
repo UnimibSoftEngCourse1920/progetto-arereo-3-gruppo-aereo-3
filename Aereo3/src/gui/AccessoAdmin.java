@@ -220,7 +220,13 @@ public class AccessoAdmin {
 					}
 					
 					//rimozione prenotazioni scadute
-					//TO-DO
+					List<Prenotazione> prenotazioniScadute = Controller.getPrenotazioniScadute();
+					for(Prenotazione p : prenotazioniScadute) {
+						Cliente c = Controller.getCliente(p.getCodCliente());
+						String s = MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ.getMessaggio() + p.getId();
+						Controller.sendMail(ge, c.getEmail(), s, MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_TXT.getMessaggio());
+						Controller.deletePrenotazione(p);
+					}
 					
 					//notifica infedeltà
 					List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();

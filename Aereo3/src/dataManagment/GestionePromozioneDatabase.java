@@ -4,10 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
-
-import dominio.Prenotazione;
 import dominio.Promozione;
-import dominio.Volo;
 
 public class GestionePromozioneDatabase extends GestioneDatabase {
 	

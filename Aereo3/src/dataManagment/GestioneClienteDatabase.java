@@ -203,7 +203,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
 		Query query =entityManager.createQuery(jpql).setParameter("email", email);
 		List <Cliente> ris = query.getResultList();
-		if(ris == null || ris.size() == 0)
+		if(ris == null || ris.isEmpty())
 			return false;
 		else
 			return true;
@@ -213,6 +213,9 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
 		Query query = entityManager.createQuery(jpql).setParameter("email", email);
 		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.isEmpty())
+			return null;
+		
 		return ris.get(0);
 	}
 	
@@ -220,9 +223,9 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		String jpql = "SELECT c FROM ClienteFedele as c WHERE c.codCliente=:codice";
 		Query query = entityManager.createQuery(jpql).setParameter("codice", c.getCodCliente());
 		List <Cliente> ris = query.getResultList();
-		if(ris == null || ris.size()==0)
+		if(ris == null || ris.isEmpty())
 			return false;
-		else
+		
 			return true;
 	}
 	

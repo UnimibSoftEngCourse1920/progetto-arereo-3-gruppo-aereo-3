@@ -189,7 +189,7 @@ public class ElencoPasseggeri {
 		
 		JLabel errore = new JLabel("");
 		errore.setForeground(Color.RED);
-		errore.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		errore.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints glcErrore = new GridBagConstraints();
 		glcErrore.anchor = GridBagConstraints.WEST;
 		glcErrore.insets = new Insets(0, 0, 5, 5);
@@ -278,9 +278,7 @@ public class ElencoPasseggeri {
 				ClienteFedele c1 = Controller.login(textField.getText(), passwordField.getText());
 				if(c1 != null) {
 					campi[0].setText(c1.getNome());
-					campi[0].setEditable(false);
 					campi[1].setText(c1.getCognome());
-					campi[1].setEditable(false);
 					emailInsert.setText(c1.getEmail());
 					emailInsert.setEditable(false);
 					dataDiNascita.setDate(c1.getDataDiNascita());
@@ -339,7 +337,7 @@ public class ElencoPasseggeri {
 			public void actionPerformed(ActionEvent e) {
 				boolean continua = true;
 				for (int i = 0; i<campi.length;i++) {
-					if (campi[i].getText().equals("") || emailInsert.getText().equals("") || emailInsert.isValid() == false){
+					if (campi[i].getText().equals("") || emailInsert.getText().equals("") || isValid(emailInsert.getText()) == false){
 						continua=false;
 						if (!errore.getText().equals("")) {
 							errore.setText("");
@@ -356,26 +354,37 @@ public class ElencoPasseggeri {
 					errore.setText("Errore");
 				}
 				
-				else if (continua == true) {
-					if (!errore.getText().equals("")) {
-						errore.setText("");
+				else if (continua) {
+					if (Controller.getCliente(emailInsert.getText()) != null) {
+						if (Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)){
+							if (!errore.getText().equals("")) 
+									errore.setText("");
+					}	
+							errore.setText("Il cliente ha già una prenotazione per questo volo");
+						}
+					else{
+						if (!errore.getText().equals("")) {
+							errore.setText("");
+						}
+						Cliente c = Controller.login(textField.getText(), passwordField.getText());
+						boolean fedele = true;
+						if (c == null) {
+							c  = new Cliente();
+							c.setNome(campi[0].getText());
+							c.setCognome(campi[1].getText());
+							c.setEmail(emailInsert.getText());
+							c.setDataDiNascita(dataDiNascita.getDate());
+							c.setIndirizzo("");
+							fedele = false;
+						}
+						contentPane.removeAll();
+						contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
+						contentPane.repaint();
+						contentPane.revalidate();
 					}
-					Cliente c = Controller.login(textField.getText(), passwordField.getText());
-					boolean fedele = true;
-					if (c == null) {
-						c  = new Cliente();
-						c.setNome(campi[0].getText());
-						c.setCognome(campi[1].getText());
-						c.setEmail(emailInsert.getText());
-						c.setDataDiNascita(dataDiNascita.getDate());
-						c.setIndirizzo("");
-						fedele = false;
-					}
-					contentPane.removeAll();
-					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
-					contentPane.repaint();
-					contentPane.revalidate();
 				}
+				
+				
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
