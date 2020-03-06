@@ -11,7 +11,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -24,12 +27,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import controller.Controller;
+import dataManagment.GestioneClienteDatabase;
 import dominio.Cliente;
+import dominio.ClienteFedele;
 import dominio.Prenotazione;
 import dominio.Volo;
 
 public class AreaUtente {
-	static JPanel esegui(JPanel contentPane, JPanel homePanel, Cliente c) {
+	static JPanel esegui(JPanel contentPane, JPanel homePanel, ClienteFedele c) {
 		JPanel areaUtente = new JPanel ();
 		areaUtente.setBackground(Color.BLUE);
 		contentPane.add(areaUtente, "name_864878817126900");
@@ -337,6 +342,21 @@ public class AreaUtente {
 				gbcHorizontalStrut5.gridy = 1;
 				punti.add(horizontalStrut5, gbcHorizontalStrut5);
 				
+				HashMap<Integer, Integer> puntiMap = Controller.getPuntiFedelta(c.getCodCliente());
+				int tot=0;
+			    
+			    JTable table=new JTable(puntiMap.size()+1,2);
+			    table.setValueAt("Volo", 0, 0);
+		        table.setValueAt("Punti", 0, 1);
+		        int row=1;
+			    for(Map.Entry<Integer,Integer> entry: puntiMap.entrySet()){
+			         table.setValueAt(entry.getKey(), row,0);
+			         table.setValueAt(entry.getValue(), row,1);
+			         tot = tot + entry.getValue();
+			         row++;
+			    }
+			    System.out.println("Totale punti : "+tot);
+				
 				JLabel lblLeTuePrenotazioni = new JLabel("Il tuo saldo punti:");
 				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
 				lblLeTuePrenotazioni.setForeground(Color.WHITE);
@@ -345,6 +365,7 @@ public class AreaUtente {
 				gbcLblLeTuePrenotazioni.gridx = 1;
 				gbcLblLeTuePrenotazioni.gridy = 1;
 				punti.add(lblLeTuePrenotazioni, gbcLblLeTuePrenotazioni);
+				punti.add(table);
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

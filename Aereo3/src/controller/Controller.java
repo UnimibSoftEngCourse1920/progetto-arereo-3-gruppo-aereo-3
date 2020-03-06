@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -143,6 +144,10 @@ public class Controller {
 	
 	public static List<ClienteFedele> getClientiDaRimuovere(){
 		return GestioneClienteDatabase.getClientiDaRimuovere();
+	}
+	
+	public static HashMap<Integer, Integer> getPuntiFedelta(int codCliente){
+		return GestioneClienteDatabase.getPuntiFedelta(codCliente);
 	}
 	
 	/**********************************************************/
