@@ -18,7 +18,7 @@ public class GestionePostoDatabase extends GestioneDatabase {
 	}
 	
 	
-	public static void insertPostiVolo(Volo volo) {
+	public static void insertPostiVolo(Volo volo, double prezzoPosto, int puntiPosto) {
 		
 		List <Posto> listaPosti=new ArrayList<Posto>();
 		
@@ -31,9 +31,9 @@ public class GestionePostoDatabase extends GestioneDatabase {
 				postoDaInserire = new Posto();
 				postoDaInserire.getChiaveComposta().setFile(fila);
 				postoDaInserire.getChiaveComposta().setLettera((char) (65 + j));
-				postoDaInserire.setPrezzo(50.00);
-				postoDaInserire.setPrezzoPunti(500);
-				postoDaInserire.setPunti(50);
+				postoDaInserire.setPrezzo(prezzoPosto);
+				postoDaInserire.setPrezzoPunti(puntiPosto*10);
+				postoDaInserire.setPunti(puntiPosto);
 				postoDaInserire.getChiaveComposta().setIdVolo(volo.getIdVolo());
 				listaPosti.add(postoDaInserire);
 				i++;

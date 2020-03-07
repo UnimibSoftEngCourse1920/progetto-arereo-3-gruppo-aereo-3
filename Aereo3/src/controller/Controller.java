@@ -259,10 +259,10 @@ public class Controller {
 
 	}
 	
-	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {
+	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo, double prezzoPosto, int puntiPosto) {
 		GestioneVoloDatabase.insertVolo(volo, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo );
 
-		GestionePostoDatabase.insertPostiVolo(volo);
+		GestionePostoDatabase.insertPostiVolo(volo, prezzoPosto, puntiPosto);
 	}
 	
 	public static Volo getVoloDiPrenotazione(Prenotazione prenotazione) {
