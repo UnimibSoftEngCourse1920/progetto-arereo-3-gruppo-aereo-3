@@ -296,7 +296,6 @@ public class Home extends JFrame {
 		btnCercaIlTuo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-
 				if (dateChooser.getDate().before(now)) {
 					if (lblNewLabel1 != null)
 						panel2.remove(lblNewLabel1);
