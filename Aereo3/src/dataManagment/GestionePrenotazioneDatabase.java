@@ -53,22 +53,22 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 
 	
 	public static List<Prenotazione> getPrenotazioniInScadenza(){
-		Date currentDate = new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, 4);
-		Date expiry = cal.getTime();
+		Date currentDateScadenza = new Date();
+		Calendar calScadenza = Calendar.getInstance();
+		calScadenza.add(Calendar.DATE, 4);
+		Date expiryInScadenza = calScadenza.getTime();
 		
-		String jpql = "SELECT p FROM Prenotazione as p WHERE p.pagato=0";
-		Query query = entityManager.createQuery(jpql);
+		String jpqlScadenza = "SELECT p FROM Prenotazione as p WHERE p.pagato=0";
+		Query queryScadenza = entityManager.createQuery(jpqlScadenza);
 		@SuppressWarnings("unchecked")
-		List<Prenotazione> prenotazioni = query.getResultList();
-		List<Prenotazione> res = new ArrayList<Prenotazione>();
-		for(Prenotazione p : prenotazioni) {
+		List<Prenotazione> prenotazioniScadenza = queryScadenza.getResultList();
+		List<Prenotazione> resScadenza = new ArrayList<Prenotazione>();
+		for(Prenotazione p : prenotazioniScadenza) {
 			Volo v = GestioneVoloDatabase.getVolo(p.getIdVolo());
-			if(v.getDataPartenza().getDate()==expiry.getDate() && v.getDataPartenza().getMonth()==expiry.getMonth() && v.getDataPartenza().getYear()==expiry.getYear())
-				res.add(p);
+			if(v.getDataPartenza().getDate()==expiryInScadenza.getDate() && v.getDataPartenza().getMonth()==expiryInScadenza.getMonth() && v.getDataPartenza().getYear()==expiryInScadenza.getYear())
+				resScadenza.add(p);
 		}
-		return res;
+		return resScadenza;
 	}
 	
 	public static List<Prenotazione> getPrenotazioniScadute(){

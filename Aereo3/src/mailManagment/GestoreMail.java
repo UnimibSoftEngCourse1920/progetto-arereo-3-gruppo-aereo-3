@@ -31,6 +31,8 @@ public class GestoreMail {
 		mailServerProperties.put("mail.smtp.port", "587");
 		mailServerProperties.put("mail.smtp.auth", "true");
 		mailServerProperties.put("mail.smtp.starttls.enable", "true");
+		//mailServerProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
     }
     
     public static GestoreMail getInstance() {
