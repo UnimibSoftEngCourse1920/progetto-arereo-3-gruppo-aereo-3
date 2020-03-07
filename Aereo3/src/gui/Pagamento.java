@@ -369,9 +369,13 @@ public class Pagamento {
 		cal.add(Calendar.DATE, 1);
 		Date tra3 = cal.getTime();
 		
+		@SuppressWarnings("deprecation")
 		boolean conditionPagaAvanti = dataVolo.getDate() == now.getDate() && dataVolo.getMonth() == now.getMonth() && dataVolo.getYear() == now.getYear();
+		@SuppressWarnings("deprecation")
 		boolean conditionPagaAvanti1 = dataVolo.getDate() == tra1.getDate() && dataVolo.getMonth() == tra1.getMonth() && dataVolo.getYear() == tra1.getYear();
+		@SuppressWarnings("deprecation")
 		boolean conditionPagaAvanti2 = dataVolo.getDate() == tra2.getDate() && dataVolo.getMonth() == tra2.getMonth() && dataVolo.getYear() == tra2.getYear();
+		@SuppressWarnings("deprecation")
 		boolean conditionPagaAvanti3 = dataVolo.getDate() == tra3.getDate() && dataVolo.getMonth() == tra3.getMonth() && dataVolo.getYear() == tra3.getYear();
 		
 		JButton btnNewButton2 = new JButton("Paga pi\u00F9 avanti");

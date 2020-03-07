@@ -187,7 +187,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		HashMap<Integer, Integer> estrattoPunti = new HashMap<Integer, Integer>();
 		int codCliente = cf.getCodCliente();
 		
-		String jpql = "SELECT p FROM Prenotazione as p where p.codCliente=:codCliente";
+		String jpql = "SELECT p FROM Prenotazione as p where p.codCliente=:codCliente and p.pagato=1";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("codCliente", codCliente);
 		List<Prenotazione> prenotazioni = query.getResultList();

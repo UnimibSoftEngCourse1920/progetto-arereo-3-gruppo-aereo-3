@@ -29,6 +29,7 @@ import dominio.Promozione;
 import dominio.Volo;
 import gui.Home;
 import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 import paymentManagment.CartaDiCredito;
 import paymentManagment.GestorePagamento;
 
@@ -38,6 +39,37 @@ public class Controller {
 	//Punto di entrata dell'applicazione
 	public static void main(String [] args) throws ParseException {
 		System.out.println("Main da chiamare all'eseguibile");
+
+		GestoreMail ge = Controller.getGestoreMail();
+		//notifica prenotazioni insolute
+		List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();
+		for(Prenotazione p : prenotazioniInScadenza) {
+			Cliente c = Controller.getCliente(p.getCodCliente());
+			String sbj = MessaggiPredefiniti.SCADENZAPRENOTAZIONE_SUBJ.getMessaggio() + " " + p.getId();
+			Controller.sendMail(ge, c.getEmail(), sbj, MessaggiPredefiniti.SCADENZAPRENOTAZIONE_TXT.getMessaggio());
+		}
+		
+		//rimozione prenotazioni scadute
+		List<Prenotazione> prenotazioniScadute = Controller.getPrenotazioniScadute();
+		for(Prenotazione p : prenotazioniScadute) {
+			Cliente c = Controller.getCliente(p.getCodCliente());
+			String s = MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ.getMessaggio() + p.getId();
+			Controller.sendMail(ge, c.getEmail(), s, MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_TXT.getMessaggio());
+			Controller.deletePrenotazione(p);
+		}
+		
+		//notifica infedeltà
+		List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();
+		for(ClienteFedele ci : clientiInfedeli) {
+			Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_TXT.getMessaggio());
+		}
+			
+		//rimozione infedeli da un anno
+		List<ClienteFedele> clientiDaRimuovere = Controller.getClientiDaRimuovere();
+		for(ClienteFedele ci : clientiDaRimuovere) {
+			Controller.deleteCliente(ci);
+			Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_TXT.getMessaggio());
+		}
 		Home.main(args);
 	}
 
