@@ -21,9 +21,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneClienteDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
@@ -34,6 +38,8 @@ import mailManagment.MessaggiPredefiniti;
 import paymentManagment.CartaDiCredito;
 
 public class Pagamento {
+	
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 	
 	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
 		JPanel panel6 = new JPanel();
@@ -206,15 +212,15 @@ public class Pagamento {
 						Controller.pagamentoPrenotazione(idPrenotazione);
 						Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 					}
-					GestoreMail ge = Controller.getGestoreMail();
-					String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
-					String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
+					GestoreMail gePagamento = Controller.getGestoreMail();
+					String sbjPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
+					String txtPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 					Volo v = Controller.getVolo(idVolo);
-					txt += v.toString();
+					txtPagamento += v.toString();
 					for(Posto p : listaPosti)
-						txt += p.toString();
-					txt += "Prenotazione PAGATA";
-					Controller.sendMail(ge, c.getEmail(), sbj, txt);
+						txtPagamento += p.toString();
+					txtPagamento += "Prenotazione PAGATA";
+					Controller.sendMail(gePagamento, c.getEmail(), sbjPagamento, txtPagamento);
 					
 					if(fedele) {
 						int punti = 0;
@@ -437,7 +443,7 @@ public class Pagamento {
 			System.out.println(dataFormat.format(nuovaDataP));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return null;
 	}
