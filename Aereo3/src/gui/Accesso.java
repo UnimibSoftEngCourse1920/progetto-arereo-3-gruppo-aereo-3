@@ -17,35 +17,37 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dominio.Cliente;
+import dominio.ClienteFedele;
 
 public class Accesso {
 	
 	static JPanel esegui(JPanel contentPane, JPanel homePanel, JPanel registrationPanel) {
 		JPanel logInPanel = new JPanel();
 		logInPanel.setBackground(Color.BLUE);
-		GridBagLayout gbl_logInPanel = new GridBagLayout();
-		gbl_logInPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_logInPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_logInPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_logInPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		logInPanel.setLayout(gbl_logInPanel);
+		GridBagLayout gblLogInPanel = new GridBagLayout();
+		gblLogInPanel.columnWidths = new int[]{0, 0, 0};
+		gblLogInPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblLogInPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gblLogInPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		logInPanel.setLayout(gblLogInPanel);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setForeground(Color.RED);
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 14;
-		logInPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lblNewLabel1 = new JLabel("");
+		lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel1.setForeground(Color.RED);
+		GridBagConstraints gbcLblNewLabel1 = new GridBagConstraints();
+		gbcLblNewLabel1.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel1.insets = new Insets(0, 0, 5, 0);
+		gbcLblNewLabel1.gridx = 1;
+		gbcLblNewLabel1.gridy = 14;
+		logInPanel.add(lblNewLabel1, gbcLblNewLabel1);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_6.gridx = 1;
-		gbc_verticalStrut_6.gridy = 1;
-		logInPanel.add(verticalStrut_6, gbc_verticalStrut_6);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
+		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut6.gridx = 1;
+		gbcVerticalStrut6.gridy = 1;
+		logInPanel.add(verticalStrut6, gbcVerticalStrut6);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
@@ -57,140 +59,140 @@ public class Accesso {
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-		gbc_btnBack.anchor = GridBagConstraints.WEST;
-		gbc_btnBack.insets = new Insets(0, 0, 5, 0);
-		gbc_btnBack.gridx = 1;
-		gbc_btnBack.gridy = 2;
-		logInPanel.add(btnBack, gbc_btnBack);
+		GridBagConstraints gbcBtnBack = new GridBagConstraints();
+		gbcBtnBack.anchor = GridBagConstraints.WEST;
+		gbcBtnBack.insets = new Insets(0, 0, 5, 0);
+		gbcBtnBack.gridx = 1;
+		gbcBtnBack.gridy = 2;
+		logInPanel.add(btnBack, gbcBtnBack);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 0);
-		gbc_lblEmail.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblEmail.gridx = 1;
-		gbc_lblEmail.gridy = 5;
-		logInPanel.add(lblEmail, gbc_lblEmail);
+		GridBagConstraints gbcLblEmail = new GridBagConstraints();
+		gbcLblEmail.insets = new Insets(0, 0, 5, 0);
+		gbcLblEmail.anchor = GridBagConstraints.NORTHWEST;
+		gbcLblEmail.gridx = 1;
+		gbcLblEmail.gridy = 5;
+		logInPanel.add(lblEmail, gbcLblEmail);
 		
 		JTextField textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.anchor = GridBagConstraints.NORTH;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 6;
-		logInPanel.add(textField, gbc_textField);
+		GridBagConstraints gbcTextField = new GridBagConstraints();
+		gbcTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbcTextField.insets = new Insets(0, 0, 5, 0);
+		gbcTextField.anchor = GridBagConstraints.NORTH;
+		gbcTextField.gridx = 1;
+		gbcTextField.gridy = 6;
+		logInPanel.add(textField, gbcTextField);
 		textField.setColumns(10);
 		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
-		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_7.gridx = 1;
-		gbc_verticalStrut_7.gridy = 7;
-		logInPanel.add(verticalStrut_7, gbc_verticalStrut_7);
+		Component verticalStrut7 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut7 = new GridBagConstraints();
+		gbcVerticalStrut7.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut7.gridx = 1;
+		gbcVerticalStrut7.gridy = 7;
+		logInPanel.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 0);
-		gbc_lblPassword.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblPassword.gridx = 1;
-		gbc_lblPassword.gridy = 8;
-		logInPanel.add(lblPassword, gbc_lblPassword);
+		GridBagConstraints gbcLblPassword = new GridBagConstraints();
+		gbcLblPassword.insets = new Insets(0, 0, 5, 0);
+		gbcLblPassword.anchor = GridBagConstraints.NORTHWEST;
+		gbcLblPassword.gridx = 1;
+		gbcLblPassword.gridy = 8;
+		logInPanel.add(lblPassword, gbcLblPassword);
 		
-		JPasswordField textField_1 = new JPasswordField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.anchor = GridBagConstraints.NORTH;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 10;
-		logInPanel.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		JPasswordField textField1 = new JPasswordField();
+		GridBagConstraints gbcTextField1 = new GridBagConstraints();
+		gbcTextField1.insets = new Insets(0, 0, 5, 0);
+		gbcTextField1.fill = GridBagConstraints.HORIZONTAL;
+		gbcTextField1.anchor = GridBagConstraints.NORTH;
+		gbcTextField1.gridx = 1;
+		gbcTextField1.gridy = 10;
+		logInPanel.add(textField1, gbcTextField1);
+		textField1.setColumns(10);
 		
-		Component verticalStrut_8 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
-		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_8.gridx = 1;
-		gbc_verticalStrut_8.gridy = 11;
-		logInPanel.add(verticalStrut_8, gbc_verticalStrut_8);
+		Component verticalStrut8 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut8 = new GridBagConstraints();
+		gbcVerticalStrut8.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut8.gridx = 1;
+		gbcVerticalStrut8.gridy = 11;
+		logInPanel.add(verticalStrut8, gbcVerticalStrut8);
 		
-		JButton btnLogIn_1 = new JButton("LOG IN");
-		btnLogIn_1.addActionListener(new ActionListener() {
+		JButton btnLogIn1 = new JButton("LOG IN");
+		btnLogIn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(textField.getText().equals("") || textField_1.getText().equals("")) {
-					if (lblNewLabel_1.getText() != "")
-						lblNewLabel_1.setText("");
-					lblNewLabel_1.setText("Errore !");
+				if(textField.getText().equals("") || textField1.getText().equals("")) {
+					if ( ! lblNewLabel1.getText().equals(""))
+						lblNewLabel1.setText("");
+					lblNewLabel1.setText("Errore !");
 				}
 				
-				else if (Controller.login(textField.getText(), textField_1.getText()) == null) { //aggiungere errore email non trovata nel database
-					if (lblNewLabel_1.getText() != "")
-						lblNewLabel_1.setText("");
-					lblNewLabel_1.setText("Errore !");
+				else if (Controller.login(textField.getText(), textField1.getText()) == null) { //aggiungere errore email non trovata nel database
+					if (! lblNewLabel1.getText().equals(""))
+						lblNewLabel1.setText("");
+					lblNewLabel1.setText("Errore !");
 				}
 				
 				else{
-					Controller.login(textField.getText(), textField_1.getText());
+					ClienteFedele c = Controller.login(textField.getText(), textField1.getText());
 					contentPane.removeAll();
-					contentPane.add(AreaUtente.esegui(contentPane, homePanel));
+					contentPane.add(AreaUtente.esegui(contentPane, homePanel, c));
 					contentPane.repaint();
 					contentPane.revalidate();
 					}
 				}
 		});
-		btnLogIn_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		GridBagConstraints gbc_btnLogIn_1 = new GridBagConstraints();
-		gbc_btnLogIn_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnLogIn_1.anchor = GridBagConstraints.WEST;
-		gbc_btnLogIn_1.gridx = 1;
-		gbc_btnLogIn_1.gridy = 13;
-		logInPanel.add(btnLogIn_1, gbc_btnLogIn_1);
+		btnLogIn1.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		GridBagConstraints gbcBtnLogIn1 = new GridBagConstraints();
+		gbcBtnLogIn1.insets = new Insets(0, 0, 5, 0);
+		gbcBtnLogIn1.anchor = GridBagConstraints.WEST;
+		gbcBtnLogIn1.gridx = 1;
+		gbcBtnLogIn1.gridy = 13;
+		logInPanel.add(btnLogIn1, gbcBtnLogIn1);
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
-		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_9.gridx = 1;
-		gbc_verticalStrut_9.gridy = 14;
-		logInPanel.add(verticalStrut_9, gbc_verticalStrut_9);
+		Component verticalStrut9 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
+		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut9.gridx = 1;
+		gbcVerticalStrut9.gridy = 14;
+		logInPanel.add(verticalStrut9, gbcVerticalStrut9);
 		
-		Component verticalStrut_12 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_12 = new GridBagConstraints();
-		gbc_verticalStrut_12.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_12.gridx = 1;
-		gbc_verticalStrut_12.gridy = 15;
-		logInPanel.add(verticalStrut_12, gbc_verticalStrut_12);
+		Component verticalStrut12 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut12 = new GridBagConstraints();
+		gbcVerticalStrut12.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut12.gridx = 1;
+		gbcVerticalStrut12.gridy = 15;
+		logInPanel.add(verticalStrut12, gbcVerticalStrut12);
 		
 		JLabel lblNewLabel = new JLabel("Non hai un account?");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 16;
-		logInPanel.add(lblNewLabel, gbc_lblNewLabel);
+		GridBagConstraints gbcLblNewLabel = new GridBagConstraints();
+		gbcLblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbcLblNewLabel.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel.gridx = 1;
+		gbcLblNewLabel.gridy = 16;
+		logInPanel.add(lblNewLabel, gbcLblNewLabel);
 		
 		JLabel lblRegistratiAlProgramma = new JLabel("Registrati al programma fedelt\u00E0");
 		lblRegistratiAlProgramma.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblRegistratiAlProgramma.setForeground(Color.WHITE);
-		GridBagConstraints gbc_lblRegistratiAlProgramma = new GridBagConstraints();
-		gbc_lblRegistratiAlProgramma.anchor = GridBagConstraints.WEST;
-		gbc_lblRegistratiAlProgramma.insets = new Insets(0, 0, 5, 0);
-		gbc_lblRegistratiAlProgramma.gridx = 1;
-		gbc_lblRegistratiAlProgramma.gridy = 17;
-		logInPanel.add(lblRegistratiAlProgramma, gbc_lblRegistratiAlProgramma);
+		GridBagConstraints gbcLblRegistratiAlProgramma = new GridBagConstraints();
+		gbcLblRegistratiAlProgramma.anchor = GridBagConstraints.WEST;
+		gbcLblRegistratiAlProgramma.insets = new Insets(0, 0, 5, 0);
+		gbcLblRegistratiAlProgramma.gridx = 1;
+		gbcLblRegistratiAlProgramma.gridy = 17;
+		logInPanel.add(lblRegistratiAlProgramma, gbcLblRegistratiAlProgramma);
 		
-		Component verticalStrut_10 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_10 = new GridBagConstraints();
-		gbc_verticalStrut_10.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_10.gridx = 1;
-		gbc_verticalStrut_10.gridy = 18;
-		logInPanel.add(verticalStrut_10, gbc_verticalStrut_10);
+		Component verticalStrut10 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut10 = new GridBagConstraints();
+		gbcVerticalStrut10.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut10.gridx = 1;
+		gbcVerticalStrut10.gridy = 18;
+		logInPanel.add(verticalStrut10, gbcVerticalStrut10);
 		
 		JButton btnNewButton = new JButton("Registrazione");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -202,19 +204,19 @@ public class Accesso {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 19;
-		logInPanel.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
+		gbcBtnNewButton.insets = new Insets(0, 0, 5, 0);
+		gbcBtnNewButton.anchor = GridBagConstraints.WEST;
+		gbcBtnNewButton.gridx = 1;
+		gbcBtnNewButton.gridy = 19;
+		logInPanel.add(btnNewButton, gbcBtnNewButton);
 		
-		Component verticalStrut_11 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_11 = new GridBagConstraints();
-		gbc_verticalStrut_11.insets = new Insets(0, 0, 5, 0);
-		gbc_verticalStrut_11.gridx = 1;
-		gbc_verticalStrut_11.gridy = 20;
-		logInPanel.add(verticalStrut_11, gbc_verticalStrut_11);
+		Component verticalStrut11 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut11 = new GridBagConstraints();
+		gbcVerticalStrut11.insets = new Insets(0, 0, 5, 0);
+		gbcVerticalStrut11.gridx = 1;
+		gbcVerticalStrut11.gridy = 20;
+		logInPanel.add(verticalStrut11, gbcVerticalStrut11);
 		
 		return logInPanel;
 		

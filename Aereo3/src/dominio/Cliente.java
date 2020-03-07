@@ -43,7 +43,7 @@ public class Cliente {
 
 	@Column(name = "indirizzo")
 	private String indirizzo;
-	
+
 
 	public int getCodCliente() {
 		return codCliente;
@@ -68,6 +68,7 @@ public class Cliente {
 	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
+
 
 	public void setDataDiNascita(Date dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
@@ -103,12 +104,12 @@ public class Cliente {
 
 	/******************************************/
 
-	public void paga(Prenotazione prenotazione) {
+	/*public void paga(Prenotazione prenotazione) {
 		//Clark: 
 		//DUBBIO: if saldo carta< del prezzo tot? -> classe carta di cerdito?? || mettere un importo  della carta di default??
 		
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
-	}
+	}*/
 
 	/*****************************************/
 	public void modificaPrenotazione(Prenotazione prenotazione, LocalTime nuovoOrario) {

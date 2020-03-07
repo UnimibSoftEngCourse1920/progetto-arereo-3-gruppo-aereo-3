@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import controller.Controller;
+
 @Entity
 @Table(name="volo")
 public class Volo {
@@ -108,28 +110,14 @@ public class Volo {
 	
 
 
-	@Override
-	public String toString() {
-		return "Volo [idVolo=" + idVolo + ", destinazione=" + destinazione + ", partenza=" + partenza
-				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", numeroPosti=" + numeroPosti
-				+ ", gate=" + gate + ", promo=" + promo + "]";
+	//@Override
+	public String toString(String partenza, String arrivo) {
+		return "Volo [idVolo=" + idVolo  + ", partenza=" + Controller.getDenominazioneAereoporto(partenza)
+				+ ", destinazione=" + Controller.getDenominazioneAereoporto(arrivo)
+				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", gate=" + gate + "]";
 	}
 
 	/*****************************************/
-	@Override
-	public boolean equals(Object obj) {
-		Volo v=(Volo) obj;
-		
-		if(!(this.getPartenza().equalsIgnoreCase(v.getPartenza())))
-			return false;
-		
-		if(!(this.getDestinazione().equalsIgnoreCase(v.getDestinazione())))
-			return false;
 
-		if(!(this.getDataPartenza().toString().equalsIgnoreCase(v.getDataPartenza().toString())))
-			return false;
-
-		return true;
-	}
 
 }

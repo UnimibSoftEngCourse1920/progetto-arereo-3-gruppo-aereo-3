@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import dominio.Aereoporto;
 
 public class GestioneAereoportoDatabase extends GestioneDatabase {
-	
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 //	public static void main (String...strings) {
 //		System.out.println(parserCodiceAereoporto("Aereoporto Sofia"));
 //	}
@@ -33,8 +36,8 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	public static String parserAereoporto(String idAereoporto  ) {
 		
 		for(Aereoporto a:listaAereoporti) {
-			if(a.getIdAereoporto().equals(idAereoporto));
-			return a.getDenominazione();
+			if(a.getIdAereoporto().equals(idAereoporto))
+				return a.getDenominazione();
 		}
 		return null;
 	}

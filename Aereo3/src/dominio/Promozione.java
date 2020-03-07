@@ -23,14 +23,17 @@ public class Promozione {
 	@Column(name="data_fine")
 	private Date dataFine;
 	
-	@Column(name="messaggio")
-	private String messaggio;
-	
 	@Column(name="sconto")
 	private double sconto;
 	
-	@Column(name="id_volo")
-	private int idVolo;
+	@Column(name="partenza")
+	private String partenza;
+	
+	@Column(name="destinazione")
+	private String destinazione;
+	
+	@Column(name="fedele")
+	private boolean perFedele;
 
 	public double getSconto() {
 		return sconto;
@@ -55,21 +58,33 @@ public class Promozione {
 	public void setDataFine(Date dataFine) {
 		this.dataFine = dataFine;
 	}
-	
-	public String getMessaggio() {
-		return messaggio;
-	}
-	
-	public void setMessaggio(String messaggio) {
-		this.messaggio = messaggio;
+
+	public String getPartenza() {
+		return partenza;
 	}
 
-	public int getIdVolo() {
-		return idVolo;
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
 	}
 
-	public void setIdVolo(int idVolo) {
-		this.idVolo = idVolo;
+	public String getDestinazione() {
+		return destinazione;
+	}
+
+	public void setDestinazione(String destinazione) {
+		this.destinazione = destinazione;
+	}
+
+	public boolean isPerFedele() {
+		return perFedele;
+	}
+
+	public int getIdPromozione() {
+		return idPromozione;
+	}
+
+	public void setFedele(boolean fedele) {
+		this.perFedele = fedele;
 	}
 	
 }

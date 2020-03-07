@@ -3,67 +3,277 @@ package controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import dataManagment.GestioneAdminDatabase;
 import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneClienteDatabase;
 import dataManagment.GestionePostoDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
+import dataManagment.GestionePromozioneDatabase;
 import dataManagment.GestioneVoloDatabase;
+import dominio.Aereoporto;
 import dominio.Cliente;
+import dominio.ClienteFedele;
 import dominio.Posto;
 import dominio.Prenotazione;
+import dominio.Promozione;
 import dominio.Volo;
 import gui.Home;
+import mailManagment.GestoreMail;
+import paymentManagment.CartaDiCredito;
+import paymentManagment.GestorePagamento;
 
 public class Controller {
+	private static Log logger= LogFactory.getLog(Controller.class);
 
-//Punto di entrata dell'applicazione
-	public static void main(String... args) throws ParseException {
-
+	//Punto di entrata dell'applicazione
+	public static void main(String [] args) throws ParseException {
 		System.out.println("Main da chiamare all'eseguibile");
 		Home.main(args);
-
-//		Per debug
-//		Volo volo=new Volo();
-//		SimpleDateFormat dateformat2= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-//		 String strdate2 = "15-03-2020 12:00:00";
-//		 String ritorno="15-03-2020 12:40:00";
-//		volo.setDataPartenza(dateformat2.parse(strdate2));
-//		volo.setDataArrivo(dateformat2.parse(ritorno));
-//		volo.setGate("B3");	
-//		volo.setDestinazione("NA08");
-//		volo.setPartenza("BS75");
-//		volo.setNumeroPosti(5);
-//		volo.setPromo(null);
-//		insertVolo(volo,"15","30","16","30");
 	}
 
+	
+	//GESTIONE ADMIN
+	/********************************************************/
+	public static boolean controlloLoginAmministratore(String username, String password) {
+
+		return GestioneAdminDatabase.isAmministratore(username,password);
+	}
+
+	public static void aggiornaVoloAdmin(int idVolo, String orarioPartenza, String minutiPartenza, String gate, Date dataPartenza, String orarioArrivo, String minutiArrivo, Date dataArrivo) {
+		
+		GestioneAdminDatabase.aggiornaVolo(idVolo, orarioPartenza, minutiPartenza, gate, dataPartenza, orarioArrivo, minutiArrivo, dataArrivo);
+
+	}
+	
+	/**********************************************************/
+	//GESTIONE CLIENTI
+	
+	/********************************************************/
+	public static Cliente getCliente(String email) {
+		return GestioneClienteDatabase.getCliente(email);
+	}
+	
+	public static boolean trovaMail(String email) {
+		return GestioneClienteDatabase.trovaMail(email);
+	}
+	
+	public static boolean trovaCliente(int cliente, int idVolo) {
+		return GestionePrenotazioneDatabase.trovaCliente(cliente, idVolo);
+	}
+	
+	public static void insertCliente(Cliente cliente) {
+
+		GestioneClienteDatabase.insertCliente(cliente);
+	}
+	
+	public static void insertClienteFedele(ClienteFedele cliente) {
+
+		GestioneClienteDatabase.insertClienteFedele(cliente);
+	}
+	
+	public static void insertListaClienti(ArrayList<Cliente> clienti) {
+		GestioneClienteDatabase.insertClienti(clienti);
+	}
+	
 	public static boolean controlloDisponibilità(Date dataPartenza, String partenza, String destinazione ) throws SQLException, ClassNotFoundException {
 
-		List<Volo> listVoli=GestioneVoloDatabase.getListaVoliAndataORitorno(dataPartenza, partenza, destinazione);
-		
+		List<Volo> listVoli=GestioneVoloDatabase.getListaVoliAndata(dataPartenza, partenza, destinazione);
+
 		if(listVoli.size()==0 || listVoli==null)
 			return false;
-		
+
 		return true;
 
 	}
+	public static ClienteFedele login(String email, String pass) {
+		return GestioneClienteDatabase.login(email, pass);
+	}
 
-	// ritorna lista di voli
-	public static List<Volo> getListaVoli() {
-		return GestioneVoloDatabase.getListaVoliDisponibili();
+	public static Prenotazione loginCliente(int idPrenotazione, String email ) {
+	return GestioneClienteDatabase.loginCliente(idPrenotazione, email);
+	}
+	
 
+	public static void signToLoyalty(String nome, String cognome, String indirizzo,
+			Date date, String psw) {
+		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, psw);
+	}
+
+	public static void deleteCliente(Cliente cliente) {
+		GestioneClienteDatabase.deleteCliente(cliente);
 	}
 	
 	
+	public static List<Cliente> getListaClienti() {
+		return GestioneClienteDatabase.getClienti();
+	}
+
+	public static List<ClienteFedele> getClientiFedeli() {
+		return GestioneClienteDatabase.getClientiFedeli();
+	}
+	
+	public static boolean isFedele(Cliente c) {
+		return GestioneClienteDatabase.isFedele(c);
+	}
+	
+	public static void addPunti(int codiceCliente, int punti) {
+		GestioneClienteDatabase.addPunti(codiceCliente, punti);
+	}
+	
+	public static Cliente getCliente(int id) {
+		return GestioneClienteDatabase.getCliente(id);
+	}
+	
+	public static List<ClienteFedele> getClientiInfedeli() {
+		return GestioneClienteDatabase.getClientiInfedeli();
+	}
+	
+	public static void updateInfedelta(ClienteFedele c, Date newInfedele, Date ultimoBiglietto) {
+		GestioneClienteDatabase.updateInfedelta(c, newInfedele, ultimoBiglietto);
+	}
+	
+	public static List<ClienteFedele> getClientiDaRimuovere(){
+		return GestioneClienteDatabase.getClientiDaRimuovere();
+	}
+	
+	/**********************************************************/
+	// GESTIONE POSTI
+	/*********************************************************/
+	public static List<Posto> getListaPostiDisponibili(int volo) {
+		return GestionePostoDatabase.getListaPostiDisponibili(volo);
+	}
+
+	public static Posto getPosto(char lettera, int fila, int idVolo) {
+		return GestionePostoDatabase.getPosto(lettera, fila, idVolo);
+	}
+	
+	public static void aggiornaPostiPrenotati(List <Posto> listaPosti, int prenotazione){
+		GestionePostoDatabase.aggiornaPostiPrenotati(listaPosti, prenotazione);
+	}
+	
+	public static List<Posto> getPostiPerPrenotazione(int idPrenotazione){
+		return GestionePostoDatabase.getPostiPerPrenotazione(idPrenotazione);
+	}
+	
+	public static int getNumPostiPerPrenotazione(int idPrenotazione) {
+		return GestionePostoDatabase.getNumPostiPerPrenotazione(idPrenotazione);
+	}
+	
+	/********************************************************/
+	//GESTIONE PRENOTAZIONI
+	/****************************************************/
+	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
+		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
+
+	}
+	
+	public static List<Prenotazione> getPrenotazioniPerVolo(int idVolo) {
+		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
+	}
+	
+	public static void insertPrenotazione(Cliente c, int v, List<Posto> posti) {
+		GestionePrenotazioneDatabase.insertPrenotazione(c, v, posti);
+	}
+	
+	public static List<Prenotazione> getPrenotazioniInScadenza(){
+		return GestionePrenotazioneDatabase.getPrenotazioniInScadenza();
+	}
+
+	public static void pagamentoPrenotazione(int prenotazione) {
+		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
+	}
+	
+	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
+		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v, posti);
+	}
+
+
+	public static void eliminaPrenotazione(Prenotazione p) {
+		GestionePrenotazioneDatabase.deletePrenotazione(p);
+	}
+	
+	public static List<Prenotazione> getPrenotazioniScadute(){
+		return GestionePrenotazioneDatabase.getPrenotazioniScadute();
+	}
+	
+	public static void deletePrenotazione(Prenotazione p) {
+		GestionePrenotazioneDatabase.deletePrenotazione(p);
+	}
+
+	/***************************************************/
+	//GESTIONE PROMOZIONE
+	/***************************************************/
+	public static List<Promozione> getPromozioni(Date now){
+		return GestionePromozioneDatabase.getAllPromozioni(now);
+	}
+	
+	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
+		GestionePromozioneDatabase.insertPromozione(inizio, fine, partenza, arrivo, sconto, perFedele);
+	}
+	
+	public static Promozione getPromozione(int idPromo) {
+		return GestionePromozioneDatabase.getPromozione(idPromo);
+	}
+	/***************************************************/
+	//GESTIONE VOLO
+	/************************************************/
+	public static List<Volo> getListaVoli() {
+		return GestioneVoloDatabase.getListaVoliDisponibili();
+	}
+ 
+	public static List<String> getDestinazioniVoliDisponibili() {
+		return GestioneVoloDatabase.getDestinazioniDisponibili();
+	}
+
+	public static Volo getVolo(int idVolo) {
+		return GestioneVoloDatabase.getVolo(idVolo);
+	}
+	
+	public static List<String> getDestinazioniDisponibili(){
+	return GestioneVoloDatabase.getDestinazioniDisponibili();
+	}
+
+	
+	public static List<String> getPartenzeVoliDisponibili() {
+		return GestioneVoloDatabase.getPartenzeDisponibili();
+		
+	}
 
 	public static List<Volo> getInfoVoli(Volo volo) {
 
 		return GestioneVoloDatabase.getListInfo(volo);
 
+	}
+	
+	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {
+		GestioneVoloDatabase.insertVolo(volo, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo );
+
+		GestionePostoDatabase.insertPostiVolo(volo);
+	}
+	
+	public static Volo getVoloDiPrenotazione(Prenotazione prenotazione) {
+		return GestioneVoloDatabase.getVoloDiPrenotazione(prenotazione);
+	}
+
+	public static List<Volo> getListaVoliAndata(Date dataPartenza, String partenza, String destinazione ){
+		return GestioneVoloDatabase.getListaVoliAndata(dataPartenza, partenza, destinazione);
+	}
+	
+	
+	/****************************************************/
+	//GESTIONE AEREOPORTO
+	
+	public static List<String> getDenominazioneAereoporti(){
+		return GestioneAereoportoDatabase.getDenominazioniAereoporti();
 	}
 
 	public static String getDenominazioneAereoporto(String idAereoporto) {
@@ -71,66 +281,33 @@ public class Controller {
 		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
 
 	}
-
-	// ritorna lista di destinazioni
-	public static List<String> getDestinazioniVoliDisponibili() {
-		System.out.println(GestioneVoloDatabase.getDestinazioniDisponibili());
-
-		return GestioneVoloDatabase.getDestinazioniDisponibili();
-	}
-
-	// ritorna lista di partenze
-	public static List<String> getPartenzeVoliDisponibili() {
-		//System.out.println(GestioneVoloDatabase.getPartenzeDisponibili());
-		return GestioneVoloDatabase.getPartenzeDisponibili();
-	}
-
-	// controlla se è amministratore
-
-	public static boolean controlloLoginAmministratore(String username, String password) {
-
-		return GestioneAdminDatabase.isAmministratore(username,password);
-	}
-
-	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {
-		GestioneVoloDatabase.insertVolo(volo, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo );
-
-		GestionePostoDatabase.insertPostiVolo(volo);
-	}
-
-	public static List<Posto> getListaPostiDisponibili(int volo) {
-		return GestionePostoDatabase.getListaPostiDisponibili(volo);
-	}
-
-
-
-	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
-		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
-
-	}
-
-	public static List<Prenotazione> getPrenotazioniPerVolo(String idVolo) {
-		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
-	}
-
-	public static void insertPrenotazione(Cliente c, int v, List<Posto> p) {
-		GestionePrenotazioneDatabase.insertPrenotazione(c, v, p);
-	}
-
-	public static void insertCliente(Cliente cliente) {
-
-		GestioneClienteDatabase.insertCliente(cliente);
-	}
-
-	public static Cliente login(String email, String pass) {
-		return GestioneClienteDatabase.login(email, pass);
-	}
 	
 	public static String parserCodiceAereoporto(String denominazione) {
+		return GestioneAereoportoDatabase.parserCodiceAereoporto(denominazione);
+	}	
 	
-		return  GestioneAereoportoDatabase.parserCodiceAereoporto(denominazione);
-
+	public static String parserAereoporto(String idAereoporto  ) {
+		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
 	}
-
+	
+	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
+		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
+	}
+	
+	/****************************************************/
+	//GESTIONE MAIL
+	public static GestoreMail getGestoreMail() {
+		return GestoreMail.getInstance();
+	}
+	
+	public static void sendMail(GestoreMail ge, String email, String subject, String content) {
+		ge.sendMail(email, subject, content);
+	}
+	
+	/****************************************************/
+	//GESTIONE PAGAMENTO
+	public static boolean paga(CartaDiCredito cc, double importo) {
+		return GestorePagamento.paga(cc, importo);
+	}
 }
 
