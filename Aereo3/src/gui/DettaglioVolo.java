@@ -60,28 +60,28 @@ public class DettaglioVolo {
 			i++;
 		}
 		
-		TableModel model = new DefaultTableModel(rows, columns)
+		TableModel modelVolo = new DefaultTableModel(rows, columns)
 		  {
 		    public boolean isCellEditable(int row, int columns)
 		    {
 		      return false;
 		    }
 		  };
-		JTable table = new JTable(model);
-		table.setPreferredSize(new Dimension(800, 500));
+		JTable tableVolo = new JTable(modelVolo);
+		tableVolo.setPreferredSize(new Dimension(800, 500));
 		
-		JPanel panel6 = new JPanel();
-		panel6.setBounds(100, 100, 894, 717);
-		panel6.setBackground(Color.BLUE);
-		contentPane.add(panel6);
-		panel6.setLayout(new BorderLayout(0, 0));
+		JPanel panel6Volo = new JPanel();
+		panel6Volo.setBounds(100, 100, 894, 717);
+		panel6Volo.setBackground(Color.BLUE);
+		contentPane.add(panel6Volo);
+		panel6Volo.setLayout(new BorderLayout(0, 0));
 	
 		
-		JPanel panel8 = new JPanel();
-		panel8.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel8.setBackground(Color.BLUE);
-		panel6.add(panel8, BorderLayout.SOUTH);
-		panel8.setLayout(new BorderLayout(0, 0));
+		JPanel panel8Volo = new JPanel();
+		panel8Volo.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel8Volo.setBackground(Color.BLUE);
+		panel6Volo.add(panel8Volo, BorderLayout.SOUTH);
+		panel8Volo.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
@@ -93,7 +93,7 @@ public class DettaglioVolo {
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel8.add(btnBack, BorderLayout.WEST);
+		panel8Volo.add(btnBack, BorderLayout.WEST);
 		
 		JComboBox comboBox = new JComboBox();
 		for(Volo v : listaVoli) {
@@ -104,7 +104,7 @@ public class DettaglioVolo {
 			comboBox.addItem(stringa.toString());
 			System.out.println(stringa.toString());
 		}
-		panel8.add(comboBox, BorderLayout.CENTER);
+		panel8Volo.add(comboBox, BorderLayout.CENTER);
 		
 		JButton btnContinua = new JButton("Continua");
 		btnContinua.addActionListener(new ActionListener() {
@@ -113,21 +113,21 @@ public class DettaglioVolo {
 					String[] params = v.split(", ");
 					int idVolo = Integer.parseInt(params[0]);
 					contentPane.removeAll();
-					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel6, idVolo, modifica));
+					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel6Volo, idVolo, modifica));
 					contentPane.repaint();
 					contentPane.revalidate();
 			}
 		});
 		btnContinua.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		panel8.add(btnContinua, BorderLayout.EAST);
+		panel8Volo.add(btnContinua, BorderLayout.EAST);
 		
 		JPanel panel9 = new JPanel();
 		panel9.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel9.setBackground(Color.BLUE);
-		panel6.add(panel9, BorderLayout.CENTER);
+		panel6Volo.add(panel9, BorderLayout.CENTER);
 		panel9.setLayout(new BorderLayout(0, 0));
 		
-		panel9.add(new JScrollPane(table));
+		panel9.add(new JScrollPane(tableVolo));
 		
 		JPanel panel = new JPanel();
 		panel.setForeground(Color.WHITE);
@@ -139,6 +139,6 @@ public class DettaglioVolo {
 		lblSelezionaVolo.setForeground(Color.WHITE);
 		panel.add(lblSelezionaVolo);
 
-	return panel6;
+	return panel6Volo;
 	}
 }

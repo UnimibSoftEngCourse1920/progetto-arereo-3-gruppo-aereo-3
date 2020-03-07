@@ -13,16 +13,21 @@ import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import controller.Controller;
 import dominio.Prenotazione;
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
+	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
 		Query query = entityManager.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Volo> voli = query.getResultList();
+		
+			
 		return voli;
 	}
 	
@@ -93,7 +98,6 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 	}
 	
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 
 	
 	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
@@ -154,18 +158,41 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 					
 		
 		List <Volo> risultato=new ArrayList<Volo>();
-		Date dataP=new Date();
-		SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yy HH:mm");
-		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//		Date dataP=new Date();
+		SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yy");
+		SimpleDateFormat dTFormat=new SimpleDateFormat(" HH:mm");
+//		dTFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-		String dataPartenzaDaPrenotare= dateFormat.format(dataPartenza).substring(0, 8);
+		String dataPartenzaDaPrenotare= dateFormat.format(dataPartenza);
 		for(Volo volo: lista) {
-			String dataDaConfrontare=dateFormat.format(volo.getDataPartenza()).substring(0, 8);
-			if(dataDaConfrontare.equalsIgnoreCase(dataPartenzaDaPrenotare))
-				risultato.add(volo);
+			String dataDaConfrontare=dateFormat.format(volo.getDataPartenza());
+			
+			if(dataDaConfrontare.equalsIgnoreCase(dataPartenzaDaPrenotare)) {
+//				String data= dTFormat.format(volo.getDataPartenza());
+//				Date nData=null;
+//				try {
+//					 nData=dTFormat.parse(data);
+//				} catch (ParseException e) {
+//					logger.error(e);
+//				}
+//				
+//				volo.setDataPartenza(nData);
+//				
+//				data= dTFormat.format(volo.getDataArrivo());
+//				try {
+//					 nData=dTFormat.parse(data);
+//				} catch (ParseException e) {
+//					logger.error(e);
+//				}
+//				
+//				volo.setDataArrivo(nData);
+//				
+			risultato.add(volo);
+			}
 			System.out.println(volo.toString());
 		}
-		
+
 		return risultato;
 		
 		

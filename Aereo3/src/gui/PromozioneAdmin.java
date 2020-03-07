@@ -8,11 +8,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,6 +22,8 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dataManagment.GestioneAereoportoDatabase;
+import dominio.Aereoporto;
 import dominio.ClienteFedele;
 import dominio.Promozione;
 import dominio.Volo;
@@ -134,14 +138,18 @@ public class PromozioneAdmin {
 		bcdPartenza.gridy = 10;
 		panel1.add(partenza, bcdPartenza);
 		
-		JTextField partenzaField = new JTextField();
-		GridBagConstraints gbcPartenzaField = new GridBagConstraints();
-		gbcPartenzaField.fill = GridBagConstraints.HORIZONTAL;
-		gbcPartenzaField.insets = new Insets(0, 0, 5, 5);
-		gbcPartenzaField.gridx = 0;
-		gbcPartenzaField.gridy = 11;
-		panel1.add(partenzaField, gbcPartenzaField);
-		partenzaField.setColumns(10);
+		JComboBox partenzaCombo = new JComboBox();
+		List <Aereoporto> aeroporti = GestioneAereoportoDatabase.getListaAereoporti();
+		for (Aereoporto a : aeroporti) {
+			String aerPar = Controller.getDenominazioneAereoporto(a.getIdAereoporto());
+			partenzaCombo.addItem(aerPar);
+		}
+		GridBagConstraints gbcPartenzaCombo = new GridBagConstraints();
+		gbcPartenzaCombo.insets = new Insets(0, 0, 5, 5);
+		gbcPartenzaCombo.anchor = GridBagConstraints.WEST;
+		gbcPartenzaCombo.gridx = 0;
+		gbcPartenzaCombo.gridy = 11;
+		panel1.add(partenzaCombo, gbcPartenzaCombo);
 		
 		JLabel destinazione = new JLabel("Destinazione");
 		destinazione.setForeground(Color.WHITE);
@@ -153,14 +161,18 @@ public class PromozioneAdmin {
 		gbcDestinazione.gridy = 12;
 		panel1.add(destinazione, gbcDestinazione);
 		
-		JTextField destinazioneField = new JTextField();
-		GridBagConstraints gbcDestinazioneField = new GridBagConstraints();
-		gbcDestinazioneField.fill = GridBagConstraints.HORIZONTAL;
-		gbcDestinazioneField.insets = new Insets(0, 0, 5, 5);
-		gbcDestinazioneField.gridx = 0;
-		gbcDestinazioneField.gridy = 13;
-		panel1.add(destinazioneField, gbcDestinazioneField);
-		partenzaField.setColumns(10);
+		JComboBox destinazioneCombo = new JComboBox();
+		for (Aereoporto a : aeroporti) {
+			String aerPar = Controller.getDenominazioneAereoporto(a.getIdAereoporto());
+			destinazioneCombo.addItem(aerPar);
+		}
+		GridBagConstraints gbcDestAer = new GridBagConstraints();
+		gbcDestAer.insets = new Insets(0, 0, 5, 5);
+		gbcDestAer.anchor = GridBagConstraints.WEST;
+		gbcDestAer.gridx = 0;
+		gbcDestAer.gridy = 13;
+		panel1.add(destinazioneCombo, gbcDestAer);
+		
 		
 		JCheckBox chckbxSonoUnCliente = new JCheckBox("Solo per Cliente Fedele");
 		chckbxSonoUnCliente.addActionListener(new ActionListener() {
@@ -177,25 +189,58 @@ public class PromozioneAdmin {
 		gbcChckbxSonoUnCliente.gridy = 14;
 		panel1.add(chckbxSonoUnCliente, gbcChckbxSonoUnCliente);
 		
+		JLabel erroreLbl = new JLabel("");
+		erroreLbl.setForeground(Color.RED);
+		erroreLbl.setFont(new Font ("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcErrore = new GridBagConstraints();
+		gbcErrore.insets = new Insets(0, 0, 5, 5);
+		gbcErrore.anchor = GridBagConstraints.WEST;
+		gbcErrore.gridx = 0;
+		gbcErrore.gridy = 16;
+		panel1.add(erroreLbl, gbcErrore);
+		
+		
 		JButton btnCreaPromozione = new JButton("Crea Promozione");
 		btnCreaPromozione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(chckbxSonoUnCliente.isSelected()) 
-					Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), partenzaField.getText(), destinazioneField.getText(), Double.parseDouble(scontoField.getText()), true);
-				else
-					Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), partenzaField.getText(), destinazioneField.getText(), Double.parseDouble(scontoField.getText()), false);
+				
+				if(partenzaCombo.getSelectedItem().equals(destinazioneCombo.getSelectedItem())) {
+					if (! erroreLbl.getText().equals(""))
+						erroreLbl.setText("");
+					erroreLbl.setText("Gli Aeroporti Coincidono");
+				}
+				
+				else if(dateChooser1.getDate().before(new Date()) || dateChooser2.getDate().before(new Date()) || dateChooser2.getDate().before(dateChooser1.getDate())) {
+					if (! erroreLbl.getText().equals(""))
+						erroreLbl.setText("");
+					erroreLbl.setText("Errore nella data");
+				}
+				
+				else if(Integer.parseInt(scontoField.getText())<=0 || Integer.parseInt(scontoField.getText())>=100) {
+					if (! erroreLbl.getText().equals(""))
+						erroreLbl.setText("");
+					erroreLbl.setText("Sconto non valido");
+				}
+				
+				else{
+					
+					if(chckbxSonoUnCliente.isSelected()) 
+						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAereoporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAereoporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), true);
+					else
+						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAereoporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAereoporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), false);
 				
 				GestoreMail ge = Controller.getGestoreMail();
 				List<ClienteFedele> clientiFedeli = Controller.getClientiFedeli();
 				String txt = "Nuova promozione dal " + ListaPromozioni.convertiData(dateChooser1.getDate())
 						+ " al " + ListaPromozioni.convertiData(dateChooser2.getDate())
-						+ " per i voli da " + partenzaField.getText()
-						+ " a " + destinazioneField.getText()
+						+ " per i voli da " + (String) partenzaCombo.getSelectedItem()
+						+ " a " + (String) destinazioneCombo.getSelectedItem()
 						+ " con uno sconto del " + scontoField.getText() + "%"
 						+ ". Affrettati a comprare un biglietto con la nuova promozione prima che finiscano!";
 				for(ClienteFedele c : clientiFedeli) {
 					Controller.sendMail(ge, c.getEmail(), MessaggiPredefiniti.NUOVAPROMOZIONE_SUBJ.getMessaggio(), txt);
 				}
+			}
 			}
 		});
 		btnCreaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 20));

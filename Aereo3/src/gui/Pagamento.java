@@ -74,15 +74,7 @@ public class Pagamento {
 		gbcHorizontalStrut.gridy = 0;
 		panel7.add(horizonatlStrut, gbcHorizontalStrut);
 		
-//		JLabel labelPrenotazione = new JLabel("Il tuo id Prenotazione è: " + Integer.toString(idPrenotazione));
-//		labelPrenotazione.setForeground(Color.WHITE);
-//		labelPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 25));
-//		GridBagConstraints gbcLabelPrenotazione = new GridBagConstraints();
-//		gbcLabelPrenotazione.anchor = GridBagConstraints.WEST;
-//		gbcLabelPrenotazione.insets = new Insets(0, 0, 5, 0);
-//		gbcLabelPrenotazione.gridx = 2;
-//		gbcLabelPrenotazione.gridy = 0;
-//		panel7.add(labelPrenotazione, gbcLabelPrenotazione);
+
 		
 		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();

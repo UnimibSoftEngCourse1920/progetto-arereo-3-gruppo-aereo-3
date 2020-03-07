@@ -42,7 +42,7 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 		return null;
 	}
 	public static String parserCodiceAereoporto(String denominazione) {
-		String jpql = "SELECT DISTINCT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
+		String jpql = "SELECT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
 		Query query = entityManager.createQuery(jpql);	
 		query.setParameter("campoDenominazione", denominazione);
 		
