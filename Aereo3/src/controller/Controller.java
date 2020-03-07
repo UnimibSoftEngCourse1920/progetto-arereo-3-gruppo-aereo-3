@@ -212,6 +212,7 @@ public class Controller {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
 	}
+
 	
 	public static List<Prenotazione> getPrenotazioniPerVolo(int idVolo) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
@@ -251,6 +252,10 @@ public class Controller {
 	/***************************************************/
 	public static List<Promozione> getPromozioni(Date now){
 		return GestionePromozioneDatabase.getAllPromozioni(now);
+	}
+	
+	public static int applyPromozione(int codPromo, Volo v, int prezzoTot ) {
+	return  GestionePromozioneDatabase.applyPromozione(codPromo, v, prezzoTot);
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
