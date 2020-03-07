@@ -39,10 +39,18 @@ public class ClienteFedele extends Cliente {
 	private Date dataDiNascita;
 	
 
+	public String getPassword() {
+		return psw;
+}
+	
 	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
 
+	public void setPassword(String psw) {
+		this.psw = psw;
+	}
+		
 	public void setDataDiNascita(Date dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
 	}

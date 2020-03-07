@@ -39,6 +39,10 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 
 	public static void aggiornaVolo(int idVolo, String orarioPartenza, String minutiPartenza, String gate, Date dataPartenza, String orarioArrivo, String minutiArrivo, Date dataArrivo) {
 		Volo voloDaAggiornare = GestioneVoloDatabase.getVolo(idVolo);
+
+		Date nuovaData=null;
+		SimpleDateFormat dateformat=new SimpleDateFormat("dd-MM-yy HH:mm");
+
 		SimpleDateFormat dFormat=new SimpleDateFormat("dd-MM-yyyy");
 		dFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -54,6 +58,14 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		} catch (ParseException e) {
 			logger.error(e);
 		}
+		
+		SimpleDateFormat dateformat_1 = new SimpleDateFormat("dd-MM-yy HH:mm");
+		
+		StringBuilder str_1 = new StringBuilder();
+		String data_1 = dateformat_1.format(dataArrivo);
+		
+		str_1.append(data_1.substring(0,11)).append(orarioArrivo).append(":").append(minutiArrivo);
+		System.out.println("dataDest "+str_1.toString());
 
 		Date dataA=null;
 
@@ -62,6 +74,7 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		} catch (ParseException e) {
 			logger.error(e);
 		}
+		
 		entityManager.getTransaction().begin();
 		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData , gate=:gate, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo ";
 		Query query = entityManager.createQuery(jpql);
@@ -73,7 +86,6 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 		query.executeUpdate();
 		entityManager.getTransaction().commit();
 		entityManager.clear();
-
 
 	}
 
