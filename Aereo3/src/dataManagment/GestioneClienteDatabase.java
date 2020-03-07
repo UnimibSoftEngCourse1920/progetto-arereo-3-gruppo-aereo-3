@@ -65,11 +65,11 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		//Date date = format.parse("2020-03-03");
 		 
 		//signToLoyalty("ALEFEDELE", "FIOREFEDELE", "via dellavia 22", date , "ale@fedele.com", "fedelissimo");
-		//addPunti(ale2, 3000);
+		//addPunti(79, 3000);
 		//Cliente ale4 = entityManager.find(Cliente.class, 24);
 		//deleteCliente(ale4);
 		
-		HashMap<Integer, Integer> puntiMap = getPuntiFedelta(12);
+		HashMap<Integer, Integer> puntiMap = getPuntiFedelta(79);
 		Iterator it = puntiMap.entrySet().iterator();
 		int tot=0;
 	    while (it.hasNext()) {
@@ -140,7 +140,6 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		cf.setPunti(0);
 		cf.setDataIscrizione(new Date());
 
-		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cf);
 		entityManager.getTransaction().commit();
@@ -193,7 +192,6 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		query.setParameter("codCliente", codCliente);
 		List<Prenotazione> prenotazioni = query.getResultList();
 		
-		System.out.println("Lista voli per cliente con id "+codCliente);
 		for(Prenotazione p : prenotazioni)
 		{
 			estrattoPunti.put(p.getIdVolo(), p.getPuntiTotali());

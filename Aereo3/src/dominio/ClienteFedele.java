@@ -41,8 +41,8 @@ public class ClienteFedele extends Cliente {
 
 	public String getPassword() {
 		return psw;
-	}
-		
+}
+	
 	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
