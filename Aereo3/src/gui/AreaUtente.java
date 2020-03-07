@@ -28,6 +28,7 @@ import javax.swing.table.TableModel;
 
 import controller.Controller;
 import dataManagment.GestioneClienteDatabase;
+import dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Prenotazione;
@@ -333,57 +334,52 @@ public class AreaUtente {
 		btnSaldoPunti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
-				JPanel punti = new JPanel();
-				punti.setBackground(Color.BLUE);
-				panel.add(punti, "name_866024865084500");
-				GridBagLayout gblPunti = new GridBagLayout();
-				gblPunti.columnWidths = new int[]{0, 0, 0};
-				gblPunti.rowHeights = new int[]{0, 0, 0};
-				gblPunti.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				gblPunti.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				punti.setLayout(gblPunti);
-				
-				Component verticalStrut15 = Box.createVerticalStrut(20);
-				GridBagConstraints gbcVerticalStrut15 = new GridBagConstraints();
-				gbcVerticalStrut15.insets = new Insets(0, 0, 5, 0);
-				gbcVerticalStrut15.gridx = 1;
-				gbcVerticalStrut15.gridy = 0;
-				punti.add(verticalStrut15, gbcVerticalStrut15);
-				
-				Component horizontalStrut5 = Box.createHorizontalStrut(20);
-				GridBagConstraints gbcHorizontalStrut5 = new GridBagConstraints();
-				gbcHorizontalStrut5.insets = new Insets(0, 0, 0, 5);
-				gbcHorizontalStrut5.gridx = 0;
-				gbcHorizontalStrut5.gridy = 1;
-				punti.add(horizontalStrut5, gbcHorizontalStrut5);
+
+				JPanel saldoPunti = new JPanel();
+				saldoPunti.setBounds(100, 100, 894, 717);
+				saldoPunti.setBackground(Color.BLUE);
+				panel.add(saldoPunti);
+				saldoPunti.setLayout(new BorderLayout(0, 0));
 				
 				HashMap<Integer, Integer> puntiMap = Controller.getPuntiFedelta(c.getCodCliente());
 				int tot=0;
-			    
-			    JTable table=new JTable(puntiMap.size()+1,2);
-			    table.setValueAt("Volo", 0, 0);
-		        table.setValueAt("Punti", 0, 1);
-		        int row=1;
+				
+				Object rows [][] = new Object[puntiMap.size()][4];
+				String [] columns = {"Volo", "Partenza", "Destinazione", "Punti"};
+				
+				JTable table=new JTable(rows,columns);
+		        int row=0;
 			    for(Map.Entry<Integer,Integer> entry: puntiMap.entrySet()){
-			         table.setValueAt(entry.getKey(), row,0);
-			         table.setValueAt(entry.getValue(), row,1);
-			         tot = tot + entry.getValue();
+			         rows[row][0] = entry.getKey();
+			         Volo v = Controller.getVolo(entry.getKey());
+			         rows[row][1] = Controller.getDenominazioneAereoporto(v.getPartenza());
+			         rows[row][2] = Controller.getDenominazioneAereoporto(v.getDestinazione());
+			         rows[row][3] = entry.getValue();
+			         tot += entry.getValue();
 			         row++;
 			    }
-			    System.out.println("Totale punti : "+tot);
+			    
+			    TableModel model = new DefaultTableModel(rows, columns)
+				  {
+				    public boolean isCellEditable(int row, int columns)
+				    {
+				      return false;
+				    }
+				  };
+				JTable table1 = new JTable(model);
+				table.setPreferredSize(new Dimension(800, 500));
 				
-				JLabel lblLeTuePrenotazioni = new JLabel("Il tuo saldo punti:");
+				saldoPunti.add(new JScrollPane(table), BorderLayout.CENTER);
+				
+				JLabel lblLeTuePrenotazioni = new JLabel("Il tuo saldo punti: "+tot);
 				lblLeTuePrenotazioni.setFont(new Font("Tahoma", Font.PLAIN, 28));
 				lblLeTuePrenotazioni.setForeground(Color.WHITE);
-				GridBagConstraints gbcLblLeTuePrenotazioni = new GridBagConstraints();
-				gbcLblLeTuePrenotazioni.anchor = GridBagConstraints.WEST;
-				gbcLblLeTuePrenotazioni.gridx = 1;
-				gbcLblLeTuePrenotazioni.gridy = 1;
-				punti.add(lblLeTuePrenotazioni, gbcLblLeTuePrenotazioni);
-				punti.add(table);
-				contentPane.repaint();
-				contentPane.revalidate();
-			}
+				saldoPunti.add(lblLeTuePrenotazioni, BorderLayout.NORTH);
+				
+				panel.add(saldoPunti);
+				panel.repaint();
+				panel.revalidate();
+				}
 		});
 		btnSaldoPunti.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		GridBagConstraints gbcBtnSaldoPunti = new GridBagConstraints();

@@ -266,6 +266,44 @@ public class VoloAdmin {
 	panel6.add(textField5, gbcTextField5);
 	textField5.setColumns(10);
 	
+	JLabel lblPrezzoPosto = new JLabel("Prezzo per posto");
+	lblPrezzoPosto.setForeground(Color.WHITE);
+	lblPrezzoPosto.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	GridBagConstraints gbcLblPrezzoPosto = new GridBagConstraints();
+	gbcLblPrezzoPosto.anchor = GridBagConstraints.WEST;
+	gbcLblPrezzoPosto.insets = new Insets(0, 0, 5, 0);
+	gbcLblPrezzoPosto.gridx = 2;
+	gbcLblPrezzoPosto.gridy = 19;
+	panel6.add(lblPrezzoPosto, gbcLblPrezzoPosto);
+	
+	JTextField textField6 = new JTextField();
+	GridBagConstraints gbcTextField6 = new GridBagConstraints();
+	gbcTextField6.insets = new Insets(0, 0, 5, 0);
+	gbcTextField6.fill = GridBagConstraints.HORIZONTAL;
+	gbcTextField6.gridx = 2;
+	gbcTextField6.gridy = 20;
+	panel6.add(textField6, gbcTextField6);
+	textField6.setColumns(10);
+	
+	JLabel lblPuntiPosto = new JLabel("Punti per posto");
+	lblPuntiPosto.setForeground(Color.WHITE);
+	lblPuntiPosto.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	GridBagConstraints gbcLblPuntiPosto = new GridBagConstraints();
+	gbcLblPuntiPosto.anchor = GridBagConstraints.WEST;
+	gbcLblPuntiPosto.insets = new Insets(0, 0, 5, 0);
+	gbcLblPuntiPosto.gridx = 3;
+	gbcLblPuntiPosto.gridy = 19;
+	panel6.add(lblPuntiPosto, gbcLblPuntiPosto);
+	
+	JTextField textField7 = new JTextField();
+	GridBagConstraints gbcTextField7 = new GridBagConstraints();
+	gbcTextField7.insets = new Insets(0, 0, 5, 0);
+	gbcTextField7.fill = GridBagConstraints.HORIZONTAL;
+	gbcTextField7.gridx = 3;
+	gbcTextField7.gridy = 20;
+	panel6.add(textField7, gbcTextField7);
+	textField6.setColumns(10);
+	
 	JButton btnAggiungiVolo = new JButton("Aggiungi Volo");
 	btnAggiungiVolo.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -280,7 +318,7 @@ public class VoloAdmin {
 			String minutiPartenza = (String) comboBox4.getSelectedItem();
 			String oraArrivo = (String) comboBox5.getSelectedItem();
 			String minutiArrivo = (String) comboBox6.getSelectedItem();
-			Controller.insertVolo(v, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo);
+			Controller.insertVolo(v, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo, Double.parseDouble(textField6.getText()), Integer.parseInt(textField7.getText()));
 		}
 	});
 	btnAggiungiVolo.setFont(new Font("Tahoma", Font.PLAIN, 20));
