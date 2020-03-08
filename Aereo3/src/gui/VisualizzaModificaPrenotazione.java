@@ -26,7 +26,10 @@ import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
+import dominio.Prenotazione;
 import dominio.Volo;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class VisualizzaModificaPrenotazione {
 	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione) {
@@ -218,6 +221,39 @@ public class VisualizzaModificaPrenotazione {
 		gbcBtnModifica.gridx = 0;
 		gbcBtnModifica.gridy = 17;
 		panel6.add(btnModifica, gbcBtnModifica);
+		
+		JLabel lblPrenotazioneEliminata = new JLabel("");
+		lblPrenotazioneEliminata.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPrenotazioneEliminata.setForeground(Color.WHITE);
+		GridBagConstraints gbcLblPrenotazioneEliminata = new GridBagConstraints();
+		gbcLblPrenotazioneEliminata.insets = new Insets(0, 0, 5, 0);
+		gbcLblPrenotazioneEliminata.anchor = GridBagConstraints.WEST;
+		gbcLblPrenotazioneEliminata.gridx = 2;
+		gbcLblPrenotazioneEliminata.gridy = 17;
+		panel6.add(lblPrenotazioneEliminata, gbcLblPrenotazioneEliminata);
+		
+		JButton btnElimina = new JButton("Elimina");
+		btnElimina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Prenotazione pren = Controller.getPrenotazionePerId(oldIdPrenotazione);
+				Controller.deletePrenotazione(pren);
+				if(Controller.isFedele(c) && pren.isPagato())
+					Controller.addPunti(c.getCodCliente(), - pren.getPuntiTotali());
+				btnModifica.setEnabled(false);
+				lblPrenotazioneEliminata.setText("Prenotazione eliminata con successo");
+				GestoreMail ge = Controller.getGestoreMail();
+				String sbj = MessaggiPredefiniti.PRENOTAZIONE_ELIMINATA_SBJ.getMessaggio() + pren.getId();
+				String cnt = MessaggiPredefiniti.PRENOTAZIONE_ELIMINATA_TXT.getMessaggio();
+				Controller.sendMail(ge, c.getEmail(), sbj, cnt);
+			}
+		});
+		btnElimina.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcBtnElimina = new GridBagConstraints();
+		gbcBtnElimina.insets = new Insets(0, 0, 5, 0);
+		gbcBtnElimina.anchor = GridBagConstraints.WEST;
+		gbcBtnElimina.gridx = 1;
+		gbcBtnElimina.gridy = 17;
+		panel6.add(btnElimina, gbcBtnElimina);
 		
 		Component verticalStrut14 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut14 = new GridBagConstraints();

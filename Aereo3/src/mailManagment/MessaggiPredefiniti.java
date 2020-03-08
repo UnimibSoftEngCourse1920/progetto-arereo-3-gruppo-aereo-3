@@ -26,7 +26,10 @@ public enum MessaggiPredefiniti {
 			+ " programma di fedeltà come da condizioni d\'uso."),
 	PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ("Rimozione scadenza insoluta id. "),
 	PRENOTAZIONESCADUTA_RIMOZIONE_TXT("Si avvisa il cliente che non avendo pagato la prenotazione entro i "
-			+ "termini stabiliti dal regolamento, la sua prenotazione è stata annullata.");
+			+ "termini stabiliti dal regolamento, la sua prenotazione è stata annullata."),
+	PRENOTAZIONE_ELIMINATA_SBJ("Cancellazione prenotazione id. "),
+	PRENOTAZIONE_ELIMINATA_TXT("Si avvisa il gentile cliente che la prenotazione è stata cancellata con successo. "
+			+ "Non c\'è possibilità di rimborso e in caso avesse pagato, i punti a lei aggiunti saranno decurtati.");
 	
 	private final String messaggio;
 	

@@ -233,11 +233,6 @@ public class Controller {
 	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
 		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v, posti);
 	}
-
-
-	public static void eliminaPrenotazione(Prenotazione p) {
-		GestionePrenotazioneDatabase.deletePrenotazione(p);
-	}
 	
 	public static List<Prenotazione> getPrenotazioniScadute(){
 		return GestionePrenotazioneDatabase.getPrenotazioniScadute();
@@ -245,6 +240,10 @@ public class Controller {
 	
 	public static void deletePrenotazione(Prenotazione p) {
 		GestionePrenotazioneDatabase.deletePrenotazione(p);
+	}
+	
+	public static Prenotazione getPrenotazionePerId(int id) {
+		return GestionePrenotazioneDatabase.getPrenotazionePerId(id);
 	}
 
 	/***************************************************/

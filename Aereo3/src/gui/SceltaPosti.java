@@ -196,7 +196,7 @@ public class SceltaPosti {
 					contentPane.repaint();
 					contentPane.revalidate();
 					if(modifica)
-						Controller.eliminaPrenotazione(GestionePrenotazioneDatabase.getPrenotazioneId(oldP));
+						Controller.deletePrenotazione(Controller.getPrenotazionePerId(oldP));
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 28));

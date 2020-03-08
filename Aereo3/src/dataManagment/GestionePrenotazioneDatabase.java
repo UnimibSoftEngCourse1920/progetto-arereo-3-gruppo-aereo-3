@@ -127,7 +127,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 			return true;
 	}
 	
-	public static Prenotazione getPrenotazioneId(int id) {
+	public static Prenotazione getPrenotazionePerId(int id) {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.id =: id";
 		Query query = entityManager.createQuery(jpql).setParameter("id", id);
 		@SuppressWarnings("unchecked")

@@ -354,35 +354,35 @@ public class ElencoPasseggeri {
 					errore.setText("Errore");
 				}
 				
-				else if (continua && Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)) {
+				else if (continua && Controller.getCliente(emailInsert.getText())!= null && Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)) {
 							if (!errore.getText().equals("")) 
 									errore.setText("");	
 							errore.setText("Il cliente ha già una prenotazione per questo volo");
-						}
-						
-					else{
-						if (!errore.getText().equals("")) {
-							errore.setText("");
-						}
-						Cliente c = Controller.login(textField.getText(), passwordField.getText());
-						boolean fedele = true;
-						if (c == null) {
-							c  = new Cliente();
-							c.setNome(campi[0].getText());
-							c.setCognome(campi[1].getText());
-							c.setEmail(emailInsert.getText());
-							c.setDataDiNascita(dataDiNascita.getDate());
-							c.setIndirizzo("");
-							fedele = false;
-						}
-						contentPane.removeAll();
-						contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
-						contentPane.repaint();
-						contentPane.revalidate();
-					}
-				
 				}
-			});
+						
+				else {
+					if (!errore.getText().equals("")) {
+						errore.setText("");
+					}
+					Cliente c = Controller.login(textField.getText(), passwordField.getText());
+					boolean fedele = true;
+					if (c == null) {
+						c  = new Cliente();
+						c.setNome(campi[0].getText());
+						c.setCognome(campi[1].getText());
+						c.setEmail(emailInsert.getText());
+						c.setDataDiNascita(dataDiNascita.getDate());
+						c.setIndirizzo("");
+						fedele = false;
+					}
+					contentPane.removeAll();
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
+					contentPane.repaint();
+					contentPane.revalidate();
+				}
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel.add(btnNewButton, BorderLayout.EAST);
 		
