@@ -309,6 +309,9 @@ public class Controller {
 		return GestioneVoloDatabase.getListaVoliAndata(dataPartenza, partenza, destinazione);
 	}
 	
+	public static String convertiData(Date data) {
+		return GestioneVoloDatabase.convertiData(data);
+	}
 	
 	/****************************************************/
 	//GESTIONE AEREOPORTO

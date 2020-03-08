@@ -169,25 +169,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 			String dataDaConfrontare=dateFormat.format(volo.getDataPartenza());
 			
 			if(dataDaConfrontare.equalsIgnoreCase(dataPartenzaDaPrenotare)) {
-//				String data= dTFormat.format(volo.getDataPartenza());
-//				Date nData=null;
-//				try {
-//					 nData=dTFormat.parse(data);
-//				} catch (ParseException e) {
-//					logger.error(e);
-//				}
-//				
-//				volo.setDataPartenza(nData);
-//				
-//				data= dTFormat.format(volo.getDataArrivo());
-//				try {
-//					 nData=dTFormat.parse(data);
-//				} catch (ParseException e) {
-//					logger.error(e);
-//				}
-//				
-//				volo.setDataArrivo(nData);
-//				
+
 			risultato.add(volo);
 			}
 			System.out.println(volo.toString());
@@ -220,6 +202,17 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 			System.out.println(lista);
 			return lista;
 		}
+		
+		
+		public static String convertiData(Date data) {
+			SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+			dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+			String dataStringa= dtFormat.format(data);
+			return dataStringa;
+		}
+
+
+
 	
 }
 

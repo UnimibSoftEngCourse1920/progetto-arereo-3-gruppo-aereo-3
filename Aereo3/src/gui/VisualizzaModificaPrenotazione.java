@@ -110,7 +110,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut8.gridy = 5;
 		panel6.add(verticalStrut8, gbcVerticalStrut8);
 		
-		JLabel lblDataPartenza = new JLabel("Data Partenza: " + convertiData(dataPartenza));
+		JLabel lblDataPartenza = new JLabel("Data Partenza: " + Controller.convertiData(dataPartenza));
 		lblDataPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDataPartenza.setForeground(Color.WHITE);
 		GridBagConstraints gbcLblDataPartenza = new GridBagConstraints();
@@ -127,7 +127,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut9.gridy = 7;
 		panel6.add(verticalStrut9, gbcVerticalStrut9);
 		
-		JLabel lblNewLabel2 = new JLabel("Data Arrivo: " + convertiData(dataArrivo));
+		JLabel lblNewLabel2 = new JLabel("Data Arrivo: " + Controller.convertiData(dataArrivo));
 		lblNewLabel2.setForeground(Color.WHITE);
 		lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel2 = new GridBagConstraints();
@@ -320,10 +320,5 @@ public class VisualizzaModificaPrenotazione {
 		return panel6;
 	}
 	
-	public static String convertiData(Date data) {
-		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		String dataStringa= dtFormat.format(data);
-		return dataStringa;
-	}
+
 }
