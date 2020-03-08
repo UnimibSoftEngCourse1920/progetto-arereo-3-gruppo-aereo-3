@@ -53,22 +53,6 @@ public class VisualizzaModificaPrenotazione {
 		gbcLblLaTuaPrenotazione.gridy = 0;
 		panel6.add(lblLaTuaPrenotazione, gbcLblLaTuaPrenotazione);
 		
-		JLabel lblStatoPrenotazione = new JLabel("");
-		lblStatoPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbcLblStatoPrenotazione = new GridBagConstraints();
-		gbcLblStatoPrenotazione.insets = new Insets(0, 0, 5, 0);
-		gbcLblStatoPrenotazione.anchor = GridBagConstraints.WEST;
-		gbcLblStatoPrenotazione.gridx = 2;
-		gbcLblStatoPrenotazione.gridy = 0;
-		if(Controller.getPrenotazionePerId(oldIdPrenotazione).isPagato()) {
-			lblStatoPrenotazione.setForeground(Color.WHITE);
-			lblStatoPrenotazione.setText("STATO: PAGATA");
-		} else {
-			lblStatoPrenotazione.setForeground(Color.RED);
-			lblStatoPrenotazione.setText("STATO: NON PAGATA");
-		}
-		panel6.add(lblStatoPrenotazione, gbcLblStatoPrenotazione);
-		
 		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
 		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
@@ -218,6 +202,41 @@ public class VisualizzaModificaPrenotazione {
 		panel6.add(verticalStrut13, gbcVerticalStrut13);
 		
 		//aggiungere il button per pagare se la prenotazione non è stata pagata (stesso if della label di stato)
+		JButton btnPaga = new JButton("Paga");
+		btnPaga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Prenotazione prenotata = Controller.getPrenotazionePerId(oldIdPrenotazione);
+				contentPane.removeAll();
+				contentPane.add(Pagamento.esegui(contentPane, prenotata.getPrezzoTotale(), prenotata.getPrezzoPuntiTotale(), panel6, c, idVolo, Controller.getPostiPerPrenotazione(oldIdPrenotazione), Controller.isFedele(c)));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnPaga.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcBtnPaga = new GridBagConstraints();
+		gbcBtnPaga.insets = new Insets(0, 0, 5, 0);
+		gbcBtnPaga.anchor = GridBagConstraints.WEST;
+		gbcBtnPaga.gridx = 2;
+		gbcBtnPaga.gridy = 1;
+		panel6.add(btnPaga, gbcBtnPaga);
+		
+		JLabel lblStatoPrenotazione = new JLabel("");
+		lblStatoPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblStatoPrenotazione = new GridBagConstraints();
+		gbcLblStatoPrenotazione.insets = new Insets(0, 0, 5, 0);
+		gbcLblStatoPrenotazione.anchor = GridBagConstraints.WEST;
+		gbcLblStatoPrenotazione.gridx = 2;
+		gbcLblStatoPrenotazione.gridy = 0;
+		if(Controller.getPrenotazionePerId(oldIdPrenotazione).isPagato()) {
+			lblStatoPrenotazione.setForeground(Color.WHITE);
+			lblStatoPrenotazione.setText("STATO: PAGATA");
+			btnPaga.setVisible(false);
+		} else {
+			lblStatoPrenotazione.setForeground(Color.RED);
+			lblStatoPrenotazione.setText("STATO: NON PAGATA");
+			btnPaga.setVisible(true);
+		}
+		panel6.add(lblStatoPrenotazione, gbcLblStatoPrenotazione);
 		
 		JButton btnModifica = new JButton("Modifica");
 		btnModifica.addActionListener(new ActionListener() {
