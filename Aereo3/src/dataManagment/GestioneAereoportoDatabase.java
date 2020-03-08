@@ -18,6 +18,17 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	
 	static List<Aereoporto> listaAereoporti= getListaAereoporti();
 	
+
+	public static void insertAereoporto (Aereoporto a) {
+
+		if(!(entityManager.getTransaction().isActive()))
+			entityManager.getTransaction().begin();
+
+		entityManager.persist(a);
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+
+	}
 	
 	public static List<Aereoporto> getListaAereoporti(){
 	String jpql = "SELECT DISTINCT a FROM Aereoporto as a";

@@ -338,6 +338,10 @@ public class Controller {
 		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
 	}
 	
+	public static void inserAereoporto(Aereoporto a) {
+		GestioneAereoportoDatabase.insertAereoporto(a);
+	}
+	
 	/****************************************************/
 	//GESTIONE MAIL
 	public static GestoreMail getGestoreMail() {
