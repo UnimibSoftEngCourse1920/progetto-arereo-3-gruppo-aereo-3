@@ -122,9 +122,10 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		String jpql= "SELECT p FROM Cliente as c, Prenotazione as p WHERE p.codCliente=c.codCliente AND c.email=:email AND p.id=:idP";
 		Query query = entityManager.createQuery(jpql).setParameter("email", email).setParameter("idP", idPrenotazione);
 		List <Prenotazione> lista= query.getResultList();
-		return lista.get(0);
-		
-		
+		if(lista == null || lista.isEmpty())
+			return null;
+		else
+			return lista.get(0);
 	}
 
 	public static ClienteFedele signToLoyalty(String nome, String cognome,

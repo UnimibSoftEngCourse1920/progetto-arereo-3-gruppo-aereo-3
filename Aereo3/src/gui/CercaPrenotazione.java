@@ -87,23 +87,39 @@ public class CercaPrenotazione {
 		gbcVerticalStrut1.gridy = 10;
 		prenotazione.add(verticalStrut1, gbcVerticalStrut1);
 		
+		JLabel lblErrPren = new JLabel("");
+		lblErrPren.setForeground(Color.RED);
+		lblErrPren.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblErrPren = new GridBagConstraints();
+		gbcLblErrPren.anchor = GridBagConstraints.WEST;
+		gbcLblErrPren.insets = new Insets(0, 0, 5, 5);
+		gbcLblErrPren.gridx = 1;
+		gbcLblErrPren.gridy = 11;
+		prenotazione.add(lblErrPren, gbcLblErrPren);
+		
 		JButton btnCerca = new JButton("Cerca !");
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Prenotazione p = Controller.loginCliente(Integer.parseInt(textField1.getText()), textField.getText());
-				Cliente c = Controller.getCliente(textField.getText());
-				int idVolo = p.getIdVolo();
-				System.out.println(Controller.getPostiPerPrenotazione(p.getId()));
-				Volo v = Controller.getVolo(p.getIdVolo());
-				String partenza = v.getPartenza();
-				String arrivo = v.getDestinazione();
-				int value = Controller.getPostiPerPrenotazione(p.getId()).size();
-				Date dataPartenza = v.getDataPartenza();
-				Date dataArrivo = v.getDataArrivo();
-				contentPane.removeAll();
-				contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, idVolo, c, p.getId()));
-				contentPane.repaint();
-				contentPane.revalidate();
+				if(p == null) {
+					lblErrPren.setText("Email o ID prenotazione non corretti!");
+				} else {
+					lblErrPren.setText("");
+					Cliente c = Controller.getCliente(textField.getText());
+					int idVolo = p.getIdVolo();
+					System.out.println(Controller.getPostiPerPrenotazione(p.getId()));
+					Volo v = Controller.getVolo(p.getIdVolo());
+					String partenza = v.getPartenza();
+					String arrivo = v.getDestinazione();
+					int value = Controller.getPostiPerPrenotazione(p.getId()).size();
+					Date dataPartenza = v.getDataPartenza();
+					Date dataArrivo = v.getDataArrivo();
+					contentPane.removeAll();
+					contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, idVolo, c, p.getId()));
+					contentPane.repaint();
+					contentPane.revalidate();
+
+				}
 			}
 		});
 		btnCerca.setFont(new Font("Tahoma", Font.PLAIN, 30));
