@@ -208,7 +208,7 @@ public class Pagamento {
 					String sbjPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 					String txtPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 					Volo v = Controller.getVolo(idVolo);
-					txtPagamento += v.toString();
+					txtPagamento += v.toString(v.getPartenza(), v.getDestinazione());
 					for(Posto p : listaPosti)
 						txtPagamento += p.toString();
 					txtPagamento += "Prenotazione PAGATA";
@@ -301,9 +301,9 @@ public class Pagamento {
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 				Volo v = Controller.getVolo(idVolo);
-				txt += v.toString();
+				txt += v.toString(v.getPartenza(), v.getDestinazione());
 				for(Posto p : listaPosti)
-					txt += p.toString();
+					txt += " " + p.toString();
 				txt += "Prenotazione PAGATA";
 				Controller.sendMail(ge, c.getEmail(), sbj, txt);
 				
@@ -403,7 +403,7 @@ public class Pagamento {
 				txt += v.toString(partenza, arrivo);
 				for(Posto p : listaPosti)
 					txt += " " + p.toString();
-				txt += " Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
+				txt += ". Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
 				ge.sendMail(c.getEmail(), sbj, txt);
 			}
 		});
