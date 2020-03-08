@@ -41,7 +41,7 @@ public class Pagamento {
 	
 	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele, JPanel homePanel, boolean modifica) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -188,19 +188,24 @@ public class Pagamento {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CartaDiCredito cc = new CartaDiCredito(textField.getText(), dateChooser.getDate(), textFieldCvv.getText());
+				
+				int idPrenotazione = -1;
+
 				if(Controller.paga(cc, costo)) {
 					System.out.print("Errore");
+					
+					if(modifica == false) {
 					if(! Controller.trovaMail(c.getEmail())) {
 						Controller.insertCliente(c);
 					}
 					
-					Cliente cliente = Controller.getCliente(c.getEmail());
+//					Cliente cliente = Controller.getCliente(c.getEmail());
 					
-					int idPrenotazione = -1;
-					
-					if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
-						Controller.insertPrenotazione(cliente, idVolo, listaPosti);
-						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					if(! Controller.trovaCliente(c.getCodCliente(), idVolo)) {
+						Controller.insertPrenotazione(c, idVolo, listaPosti);
+					}
+					}
+						idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
 						Controller.pagamentoPrenotazione(idPrenotazione);
 						Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 					}
@@ -228,8 +233,12 @@ public class Pagamento {
 						Controller.updateInfedelta((ClienteFedele) c, newInfedele, ultimoBiglietto);
 						
 					}
+					
+					contentPane.removeAll();
+					contentPane.add(LastPage.esegui(contentPane, homePanel));
+					contentPane.repaint();
+					contentPane.revalidate();
 				}
-			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
