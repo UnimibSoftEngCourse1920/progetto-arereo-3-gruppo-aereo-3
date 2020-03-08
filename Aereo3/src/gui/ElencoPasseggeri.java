@@ -32,7 +32,7 @@ import dominio.Volo;
 
 public class ElencoPasseggeri {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo, boolean modifica) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo, boolean modifica, JPanel homePanel) {
 		JPanel panel8 = new JPanel();
 		panel8.setBackground(Color.BLUE);
 		contentPane.add(panel8, "name_1158551504937600");
@@ -376,7 +376,7 @@ public class ElencoPasseggeri {
 						fedele = false;
 					}
 					contentPane.removeAll();
-					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele, homePanel));
 					contentPane.repaint();
 					contentPane.revalidate();
 				}

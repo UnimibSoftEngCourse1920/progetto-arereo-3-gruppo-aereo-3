@@ -32,7 +32,7 @@ import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
 
 public class VisualizzaModificaPrenotazione {
-	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione) {
+	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione, JPanel homePanel) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_58028579602300");
@@ -206,8 +206,9 @@ public class VisualizzaModificaPrenotazione {
 		btnPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Prenotazione prenotata = Controller.getPrenotazionePerId(oldIdPrenotazione);
+				boolean modifica = true;
 				contentPane.removeAll();
-				contentPane.add(Pagamento.esegui(contentPane, prenotata.getPrezzoTotale(), prenotata.getPrezzoPuntiTotale(), panel6, c, idVolo, Controller.getPostiPerPrenotazione(oldIdPrenotazione), Controller.isFedele(c)));
+				contentPane.add(Pagamento.esegui(contentPane, prenotata.getPrezzoTotale(), prenotata.getPrezzoPuntiTotale(), panel6, c, idVolo, Controller.getPostiPerPrenotazione(oldIdPrenotazione), Controller.isFedele(c), homePanel, modifica));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
@@ -246,7 +247,7 @@ public class VisualizzaModificaPrenotazione {
 				int newIdVolo = Integer.parseInt(params[0]);
 				boolean fedele = Controller.isFedele(c);
 				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione, fedele));
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione, fedele, homePanel));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
@@ -261,7 +262,7 @@ public class VisualizzaModificaPrenotazione {
 		
 		JLabel lblPrenotazioneEliminata = new JLabel("");
 		lblPrenotazioneEliminata.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPrenotazioneEliminata.setForeground(Color.WHITE);
+		lblPrenotazioneEliminata.setForeground(Color.GREEN);
 		GridBagConstraints gbcLblPrenotazioneEliminata = new GridBagConstraints();
 		gbcLblPrenotazioneEliminata.insets = new Insets(0, 0, 5, 0);
 		gbcLblPrenotazioneEliminata.anchor = GridBagConstraints.WEST;
@@ -312,14 +313,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut16.gridx = 0;
 		gbcVerticalStrut16.gridy = 20;
 		panel6.add(verticalStrut16, gbcVerticalStrut16);
-		
-		Component verticalStrut17 = Box.createVerticalStrut(20);
-		GridBagConstraints gbcVerticalStrut17 = new GridBagConstraints();
-		gbcVerticalStrut17.insets = new Insets(0, 0, 5, 0);
-		gbcVerticalStrut17.gridx = 0;
-		gbcVerticalStrut17.gridy = 21;
-		panel6.add(verticalStrut17, gbcVerticalStrut17);
-		
+
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -333,7 +327,7 @@ public class VisualizzaModificaPrenotazione {
 		GridBagConstraints gbcBtnBack = new GridBagConstraints();
 		gbcBtnBack.anchor = GridBagConstraints.WEST;
 		gbcBtnBack.gridx = 0;
-		gbcBtnBack.gridy = 22;
+		gbcBtnBack.gridy = 21;
 		panel6.add(btnBack, gbcBtnBack);
 		
 		return panel6;

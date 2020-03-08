@@ -63,6 +63,15 @@ public class Home extends JFrame {
 	private JPanel panel5;
 	private JButton btnVisualizzamodificaPrenotazione;
 	private boolean modifica;
+	private JPanel lastPage;
+	private JPanel panel_1;
+	private JLabel lblGraziePerAver;
+	private Component horizontalStrut;
+	private Component horizontalStrut_1;
+	private Component horizontalStrut_2;
+	private Component horizontalStrut_3;
+	private JPanel panel_2;
+	private JButton btnTornaAllaHome;
 
 
 	/**

@@ -34,7 +34,7 @@ import java.awt.Image;
 
 public class SceltaPosti {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c, boolean modifica, int oldP, boolean fedele) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c, boolean modifica, int oldP, boolean fedele, JPanel homePanel) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
 		posti.setBackground(Color.BLUE);
@@ -190,9 +190,9 @@ public class SceltaPosti {
 						listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 						}
 					System.out.println(listaPosti);
-					//portati dietro cliente
+					boolean modifica = false;
 					contentPane.removeAll();
-					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, c, idVolo, listaPosti, fedele));
+					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, c, idVolo, listaPosti, fedele, homePanel, modifica));
 					contentPane.repaint();
 					contentPane.revalidate();
 					if(modifica)

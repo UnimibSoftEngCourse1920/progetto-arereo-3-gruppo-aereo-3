@@ -113,7 +113,7 @@ public class DettaglioVolo {
 					String[] params = v.split(", ");
 					int idVolo = Integer.parseInt(params[0]);
 					contentPane.removeAll();
-					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel6Volo, idVolo, modifica));
+					contentPane.add(ElencoPasseggeri.esegui(contentPane, value, panel6Volo, idVolo, modifica, homePanel));
 					contentPane.repaint();
 					contentPane.revalidate();
 			}

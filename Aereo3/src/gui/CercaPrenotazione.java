@@ -114,7 +114,7 @@ public class CercaPrenotazione {
 					Date dataPartenza = v.getDataPartenza();
 					Date dataArrivo = v.getDataArrivo();
 					contentPane.removeAll();
-					contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, idVolo, c, p.getId()));
+					contentPane.add(VisualizzaModificaPrenotazione.esegui(contentPane, prenotazione, partenza, arrivo, dataPartenza, dataArrivo, modifica, value, idVolo, c, p.getId(), homePanel));
 					contentPane.repaint();
 					contentPane.revalidate();
 
