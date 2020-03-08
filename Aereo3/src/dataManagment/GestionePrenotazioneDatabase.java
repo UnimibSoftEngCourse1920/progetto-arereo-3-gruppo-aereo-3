@@ -134,6 +134,17 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni.get(0);
 	}
-
+	
+	
+	public static int getSovrapprezzo(int idOld, int costoNuovo) {
+		Prenotazione p= getPrenotazionePerId(idOld);
+		int sovrapprezzo=(int) (costoNuovo-p.getPrezzoTotale());
+		int nuovoPrezzo=0;
+		if(sovrapprezzo>0) 
+			nuovoPrezzo= (int) (sovrapprezzo+p.getPrezzoTotale());
+			
+		return nuovoPrezzo;
+		
+	}
 		
 }
