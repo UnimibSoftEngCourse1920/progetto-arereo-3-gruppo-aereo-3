@@ -53,6 +53,22 @@ public class VisualizzaModificaPrenotazione {
 		gbcLblLaTuaPrenotazione.gridy = 0;
 		panel6.add(lblLaTuaPrenotazione, gbcLblLaTuaPrenotazione);
 		
+		JLabel lblStatoPrenotazione = new JLabel("");
+		lblStatoPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblStatoPrenotazione = new GridBagConstraints();
+		gbcLblStatoPrenotazione.insets = new Insets(0, 0, 5, 0);
+		gbcLblStatoPrenotazione.anchor = GridBagConstraints.WEST;
+		gbcLblStatoPrenotazione.gridx = 2;
+		gbcLblStatoPrenotazione.gridy = 0;
+		if(Controller.getPrenotazionePerId(oldIdPrenotazione).isPagato()) {
+			lblStatoPrenotazione.setForeground(Color.WHITE);
+			lblStatoPrenotazione.setText("STATO: PAGATA");
+		} else {
+			lblStatoPrenotazione.setForeground(Color.RED);
+			lblStatoPrenotazione.setText("STATO: NON PAGATA");
+		}
+		panel6.add(lblStatoPrenotazione, gbcLblStatoPrenotazione);
+		
 		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
 		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
@@ -200,6 +216,8 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut13.gridx = 0;
 		gbcVerticalStrut13.gridy = 16;
 		panel6.add(verticalStrut13, gbcVerticalStrut13);
+		
+		//aggiungere il button per pagare se la prenotazione non è stata pagata (stesso if della label di stato)
 		
 		JButton btnModifica = new JButton("Modifica");
 		btnModifica.addActionListener(new ActionListener() {
