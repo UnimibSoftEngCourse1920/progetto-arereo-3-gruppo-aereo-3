@@ -50,12 +50,18 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 	}
 	
 	public static String parserAereoporto(String idAereoporto  ) {
-		
+		if (listaAereoporti != null) {
 		for(Aereoporto a:listaAereoporti) {
 			if(a.getIdAereoporto().equals(idAereoporto))
 				return a.getDenominazione();
 		}
-		return null;
+	}
+			listaAereoporti = getListaAereoporti();
+			for(Aereoporto a:listaAereoporti) {
+				if(a.getIdAereoporto().equals(idAereoporto))
+					return a.getDenominazione();
+		}
+			return null;
 	}
 	public static String parserCodiceAereoporto(String denominazione) {
 		String jpql = "SELECT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
