@@ -114,6 +114,40 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 	}
+	
+	public static void modificaPrezzoPosti(List<Posto>listaPosti, double prezzo) {
+		String jpql = null;
+		Query query = null;
+		entityManager.getTransaction().begin();
+		for(Posto p: listaPosti) {
+			jpql="UPDATE Posto SET prezzo=:prezzo WHERE fila=:fila and lettera=:lettera and chiaveComposta.idVolo=:idVolo";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("prezzo", prezzo);
+			query.setParameter("fila", p.getChiaveComposta().getFila());
+			query.setParameter("lettera", p.getChiaveComposta().getLettera());
+			query.setParameter("idVolo", p.getChiaveComposta().getIdVolo());
+			query.executeUpdate();
+		}
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+	}
+	
+	public static void modificaPuntiPosti(List<Posto>listaPosti, int punti) {
+		String jpql = null;
+		Query query = null;
+		entityManager.getTransaction().begin();
+		for(Posto p: listaPosti) {
+			jpql="UPDATE Posto SET punti=:punti WHERE fila=:fila and lettera=:lettera and chiaveComposta.idVolo=:idVolo";
+			query=entityManager.createQuery(jpql);
+			query.setParameter("punti", punti);
+			query.setParameter("fila", p.getChiaveComposta().getFila());
+			query.setParameter("lettera", p.getChiaveComposta().getLettera());
+			query.setParameter("idVolo", p.getChiaveComposta().getIdVolo());
+			query.executeUpdate();
+		}
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+	}
 //	public static void  aggiornaPostiPrenotati(List <Posto> listaPostiDaAggiornare) {
 //		
 //		

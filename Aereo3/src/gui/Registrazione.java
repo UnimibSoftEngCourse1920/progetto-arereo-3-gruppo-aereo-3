@@ -237,6 +237,9 @@ public class Registrazione {
 				Cliente cli = Controller.getCliente(textField3.getText());
 				if(cli != null) {
 					c = Controller.signToLoyalty(cli, textField2.getText(), passwordField.getText());
+					textField.setText(c.getNome());
+					textField1.setText(c.getCognome());
+					dateChooser1.setDate(c.getDataDiNascita());
 				} else {
 					c = new ClienteFedele();
 					c.setNome(textField.getText());

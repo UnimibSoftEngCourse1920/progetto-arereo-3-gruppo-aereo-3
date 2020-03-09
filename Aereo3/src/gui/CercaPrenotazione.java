@@ -92,8 +92,8 @@ public class CercaPrenotazione {
 		GridBagConstraints gbcLblErrPren = new GridBagConstraints();
 		gbcLblErrPren.anchor = GridBagConstraints.WEST;
 		gbcLblErrPren.insets = new Insets(0, 0, 5, 5);
-		gbcLblErrPren.gridx = 1;
-		gbcLblErrPren.gridy = 11;
+		gbcLblErrPren.gridx = 0;
+		gbcLblErrPren.gridy = 12;
 		prenotazione.add(lblErrPren, gbcLblErrPren);
 		
 		JButton btnCerca = new JButton("Cerca !");

@@ -157,6 +157,10 @@ public class Controller {
 	// GESTIONE POSTI
 	/*********************************************************/
 	
+	public static void modificaPrezzoPosti(List<Posto>listaPosti, double prezzo) {
+		GestionePostoDatabase.modificaPrezzoPosti(listaPosti, prezzo);
+	}
+	
 	public static List<Posto> getListaPostiDisponibili(int volo) {
 		return GestionePostoDatabase.getListaPostiDisponibili(volo);
 	}
@@ -175,6 +179,10 @@ public class Controller {
 	
 	public static int getNumPostiPerPrenotazione(int idPrenotazione) {
 		return GestionePostoDatabase.getNumPostiPerPrenotazione(idPrenotazione);
+	}
+	
+	public static void modificaPuntiPosti(List<Posto>listaPosti, int punti) {
+		GestionePostoDatabase.modificaPuntiPosti(listaPosti, punti);
 	}
 	
 	/********************************************************/
@@ -231,7 +239,7 @@ public class Controller {
 		return GestionePromozioneDatabase.getAllPromozioni(now);
 	}
 	
-	public static int applyPromozione(int codPromo, Volo v, int prezzoTot ) {
+	public static double applyPromozione(int codPromo, Volo v, double prezzoTot) {
 	return  GestionePromozioneDatabase.applyPromozione(codPromo, v, prezzoTot);
 	}
 	

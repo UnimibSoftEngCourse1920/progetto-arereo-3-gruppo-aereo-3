@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import controller.Controller;
 import dominio.Prenotazione;
 import dominio.Promozione;
 import dominio.Volo;
@@ -42,7 +43,7 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	
 	
 	
-	public static int  applyPromozione(int codPromo,Volo v, int prezzoTot) {
+	public static double  applyPromozione(int codPromo,Volo v, double prezzoTot) {
 		
 		String jpql="SELECT p FROM Promozione as p WHERE p.idPromozione=:id";
 		Query query=entityManager.createQuery(jpql).setParameter("id", codPromo);
@@ -57,10 +58,9 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		String jpql2="SELECT p.sconto FROM Promozione as p WHERE p.idPromozione=:id ";
 		Query query2=entityManager.createQuery(jpql2).setParameter("id", codPromo);
 		@SuppressWarnings("unchecked")
-		List<Integer> listaSconto= query2.getResultList();
-		int sconto= listaSconto.get(0);
-		int newPrezzo= prezzoTot*(100-sconto)/100;
-	
+		List<Double> listaSconto= query2.getResultList();
+		double sconto= listaSconto.get(0);
+		double newPrezzo= prezzoTot*(100-sconto)/100;
 		return newPrezzo;
 	}
 }

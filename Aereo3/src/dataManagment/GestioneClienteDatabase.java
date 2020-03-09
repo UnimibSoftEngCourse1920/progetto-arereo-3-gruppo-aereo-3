@@ -130,9 +130,10 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 			String indirizzo, String pwd) {
 		
 		String jpql = "INSERT INTO cliente_fedele (cod_cliente, password, punti, data_iscrizione, data_ultimo_biglietto, infedele, indirizzo)"
-				+ " VALUES (?, '?', 0, '?', '?', '?', '?')";
+				+ " VALUES (?1, ?2, 0, ?3, ?4, ?5, ?6)";
 		Query query = entityManager.createNativeQuery(jpql);
 		query.setParameter(1, c.getCodCliente());
+		System.out.println(jpql.toString());
 		query.setParameter(2, pwd);
 		query.setParameter(3, new Date());
 		query.setParameter(4, new Date());

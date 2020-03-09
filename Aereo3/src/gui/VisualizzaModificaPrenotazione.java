@@ -26,6 +26,7 @@ import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
+import dominio.Posto;
 import dominio.Prenotazione;
 import dominio.Volo;
 import mailManagment.GestoreMail;
@@ -266,8 +267,8 @@ public class VisualizzaModificaPrenotazione {
 		GridBagConstraints gbcLblPrenotazioneEliminata = new GridBagConstraints();
 		gbcLblPrenotazioneEliminata.insets = new Insets(0, 0, 5, 0);
 		gbcLblPrenotazioneEliminata.anchor = GridBagConstraints.WEST;
-		gbcLblPrenotazioneEliminata.gridx = 2;
-		gbcLblPrenotazioneEliminata.gridy = 17;
+		gbcLblPrenotazioneEliminata.gridx =0;
+		gbcLblPrenotazioneEliminata.gridy = 19;
 		panel6.add(lblPrenotazioneEliminata, gbcLblPrenotazioneEliminata);
 		
 		JButton btnElimina = new JButton("Elimina");
@@ -278,6 +279,8 @@ public class VisualizzaModificaPrenotazione {
 				if(Controller.isFedele(c) && pren.isPagato())
 					Controller.addPunti(c.getCodCliente(), - pren.getPuntiTotali());
 				btnModifica.setEnabled(false);
+				btnElimina.setEnabled(false);
+				btnPaga.setEnabled(false);
 				lblPrenotazioneEliminata.setText("Prenotazione eliminata con successo");
 				GestoreMail ge = Controller.getGestoreMail();
 				String sbj = MessaggiPredefiniti.PRENOTAZIONE_ELIMINATA_SBJ.getMessaggio() + pren.getId();

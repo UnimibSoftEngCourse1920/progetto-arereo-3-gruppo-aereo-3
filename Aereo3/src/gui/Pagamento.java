@@ -29,9 +29,11 @@ import com.toedter.calendar.JDateChooser;
 import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
 import dataManagment.GestioneClienteDatabase;
+import dataManagment.GestionePromozioneDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
+import dominio.Promozione;
 import dominio.Volo;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
@@ -197,15 +199,15 @@ public class Pagamento {
 					if(modifica == false) {
 					if(! Controller.trovaMail(c.getEmail())) {
 						Controller.insertCliente(c);
-					}
+						}
+					} 
+					Cliente cliente = Controller.getCliente(c.getEmail());
 					
-//					Cliente cliente = Controller.getCliente(c.getEmail());
-					
-					if(! Controller.trovaCliente(c.getCodCliente(), idVolo)) {
-						Controller.insertPrenotazione(c, idVolo, listaPosti);
-					}
-					}
-						idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
+					if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
+							
+							Controller.insertPrenotazione(cliente, idVolo, listaPosti);
+						
+						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
 						Controller.pagamentoPrenotazione(idPrenotazione);
 						Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 					}
@@ -217,7 +219,7 @@ public class Pagamento {
 					for(Posto p : listaPosti)
 						txtPagamento += p.toString();
 					txtPagamento += "Prenotazione PAGATA";
-					Controller.sendMail(gePagamento, c.getEmail(), sbjPagamento, txtPagamento);
+					Controller.sendMail(gePagamento, cliente.getEmail(), sbjPagamento, txtPagamento);
 					
 					if(fedele) {
 						int punti = 0;
@@ -230,7 +232,7 @@ public class Pagamento {
 						Calendar cal = Calendar.getInstance();
 						cal.add(Calendar.YEAR, 2);
 						Date newInfedele = cal.getTime();
-						Controller.updateInfedelta((ClienteFedele) c, newInfedele, ultimoBiglietto);
+						Controller.updateInfedelta((ClienteFedele) cliente, newInfedele, ultimoBiglietto);
 						
 					}
 					
@@ -238,7 +240,8 @@ public class Pagamento {
 					contentPane.add(LastPage.esegui(contentPane, homePanel));
 					contentPane.repaint();
 					contentPane.revalidate();
-				}
+				}   }
+				
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
@@ -300,7 +303,9 @@ public class Pagamento {
 		
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Controller.modificaPuntiPosti(listaPosti, 0);
+				for(Posto p : listaPosti)
+					p.setPunti(0);
 				Controller.insertPrenotazione(c, idVolo, listaPosti);
 				int idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
 				Controller.pagamentoPrenotazione(idPrenotazione);
@@ -401,6 +406,7 @@ public class Pagamento {
 				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
 					idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					System.out.println(""+idPrenotazione);
 					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 				}
 				GestoreMail ge = GestoreMail.getInstance();
@@ -461,6 +467,23 @@ public class Pagamento {
 		textField_1.setColumns(10);
 		
 		JButton btnNewButton_1 = new JButton("CHECK");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Promozione promo = Controller.getPromozione(Integer.parseInt(textField_1.getText()));
+				if(promo != null) {
+					if(fedele || ! promo.isPerFedele()) {
+					double prezzoFinale = Controller.applyPromozione(Integer.parseInt(textField_1.getText()), v, costo);
+					if(prezzoFinale != 0) {
+						Controller.modificaPrezzoPosti(listaPosti, prezzoFinale/listaPosti.size());
+						for(Posto p : listaPosti)
+							p.setPrezzo(prezzoFinale/listaPosti.size());
+						lblNewLabel3.setText(prezzoFinale + "$ (-" + promo.getSconto() + "%)");
+						btnNewButton2.setEnabled(false);
+						}
+					}
+				}
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;

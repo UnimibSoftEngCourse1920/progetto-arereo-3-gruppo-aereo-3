@@ -34,7 +34,7 @@ public class Prenotazione {
 	
 	@Column(name="cod_cliente")
 	private int codCliente;
-	
+
 	@Column(name="id_volo")
 	private int idVolo;
 	
