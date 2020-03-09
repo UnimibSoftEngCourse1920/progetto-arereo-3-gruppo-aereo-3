@@ -229,7 +229,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcLblStatoPrenotazione.gridx = 2;
 		gbcLblStatoPrenotazione.gridy = 0;
 		if(Controller.getPrenotazionePerId(oldIdPrenotazione).isPagato()) {
-			lblStatoPrenotazione.setForeground(Color.WHITE);
+			lblStatoPrenotazione.setForeground(Color.GREEN);
 			lblStatoPrenotazione.setText("STATO: PAGATA");
 			btnPaga.setVisible(false);
 		} else {
@@ -289,8 +289,8 @@ public class VisualizzaModificaPrenotazione {
 		GridBagConstraints gbcBtnElimina = new GridBagConstraints();
 		gbcBtnElimina.insets = new Insets(0, 0, 5, 0);
 		gbcBtnElimina.anchor = GridBagConstraints.WEST;
-		gbcBtnElimina.gridx = 1;
-		gbcBtnElimina.gridy = 17;
+		gbcBtnElimina.gridx = 0;
+		gbcBtnElimina.gridy = 18;
 		panel6.add(btnElimina, gbcBtnElimina);
 		
 		Component verticalStrut14 = Box.createVerticalStrut(20);
