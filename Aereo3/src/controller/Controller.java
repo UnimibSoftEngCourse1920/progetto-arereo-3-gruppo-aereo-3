@@ -73,9 +73,10 @@ public class Controller {
 		Home.main(args);
 	}
 
-	
+	/*********************************************************/
 	//GESTIONE ADMIN
 	/********************************************************/
+	
 	public static boolean controlloLoginAmministratore(String username, String password) {
 
 		return GestioneAdminDatabase.isAmministratore(username,password);
@@ -89,8 +90,8 @@ public class Controller {
 	
 	/**********************************************************/
 	//GESTIONE CLIENTI
+	/*********************************************************/
 	
-	/********************************************************/
 	public static Cliente getCliente(String email) {
 		return GestioneClienteDatabase.getCliente(email);
 	}
@@ -185,6 +186,7 @@ public class Controller {
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/
+	
 	public static List<Posto> getListaPostiDisponibili(int volo) {
 		return GestionePostoDatabase.getListaPostiDisponibili(volo);
 	}
@@ -207,7 +209,8 @@ public class Controller {
 	
 	/********************************************************/
 	//GESTIONE PRENOTAZIONI
-	/****************************************************/
+	/*******************************************************/
+	
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
@@ -245,10 +248,15 @@ public class Controller {
 	public static Prenotazione getPrenotazionePerId(int id) {
 		return GestionePrenotazioneDatabase.getPrenotazionePerId(id);
 	}
+	
+	public static int getSovrapprezzo(int idOld, int costoNuovo) {
+		return GestionePrenotazioneDatabase.getSovrapprezzo(idOld, costoNuovo);
+	}
 
-	/***************************************************/
+	/****************************************************/
 	//GESTIONE PROMOZIONE
 	/***************************************************/
+	
 	public static List<Promozione> getPromozioni(Date now){
 		return GestionePromozioneDatabase.getAllPromozioni(now);
 	}
@@ -264,9 +272,11 @@ public class Controller {
 	public static Promozione getPromozione(int idPromo) {
 		return GestionePromozioneDatabase.getPromozione(idPromo);
 	}
+	
 	/***************************************************/
 	//GESTIONE VOLO
-	/************************************************/
+	/**************************************************/
+	
 	public static List<Volo> getListaVoli() {
 		return GestioneVoloDatabase.getListaVoliDisponibili();
 	}
@@ -315,6 +325,7 @@ public class Controller {
 	
 	/****************************************************/
 	//GESTIONE AEREOPORTO
+	/***************************************************/
 	
 	public static List<String> getDenominazioneAereoporti(){
 		return GestioneAereoportoDatabase.getDenominazioniAereoporti();
@@ -338,12 +349,15 @@ public class Controller {
 		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
 	}
 	
+	/**Inserisce l'aereoporto nel DB**/
 	public static void inserAereoporto(Aereoporto a) {
 		GestioneAereoportoDatabase.insertAereoporto(a);
 	}
 	
 	/****************************************************/
 	//GESTIONE MAIL
+	/***************************************************/
+	
 	public static GestoreMail getGestoreMail() {
 		return GestoreMail.getInstance();
 	}
@@ -354,8 +368,12 @@ public class Controller {
 	
 	/****************************************************/
 	//GESTIONE PAGAMENTO
+	/***************************************************/
+	
 	public static boolean paga(CartaDiCredito cc, double importo) {
 		return GestorePagamento.paga(cc, importo);
 	}
+	
+	
 }
 

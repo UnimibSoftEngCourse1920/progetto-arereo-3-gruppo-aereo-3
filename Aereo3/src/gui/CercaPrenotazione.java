@@ -34,7 +34,6 @@ public class CercaPrenotazione {
 		prenotazione.setLayout(gblPrenotazione);
 		
 		boolean modifica = true;
-		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 30));
