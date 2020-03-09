@@ -188,30 +188,23 @@ public class AccessoAdmin {
 		gbcBtnNewButton.gridy = 11;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Admin a = new Admin();
-//				a.setUsername(textField.getText());
-//				a.setPassword(passwordField.getText());
 				if(passwordField.getText().equals("") || textField.getText().equals("")) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
-					lblNewLabel.setText("Errore !");
+					lblNewLabel.setText("Campo vuoto!");
 				}
 				
 				else if(Controller.controlloLoginAmministratore(textField.getText(),passwordField.getText()) == false) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
-					lblNewLabel.setText("Errore !");
-					//System.out.println(Controller.controlloLoginAmministratore(a));
+					lblNewLabel.setText("Credenziali non valide!");
 				}
 				
 				else {
-//					Controller.controlloLoginAmministratore(a);
-//					System.out.println(Controller.controlloLoginAmministratore(a));
 					contentPane.removeAll();
 					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
-//					
+					
 					GestoreMail ge = Controller.getGestoreMail();
-					//notifica prenotazioni insolute
 					List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();
 					for(Prenotazione p : prenotazioniInScadenza) {
 						Cliente c = Controller.getCliente(p.getCodCliente());
@@ -219,7 +212,6 @@ public class AccessoAdmin {
 						Controller.sendMail(ge, c.getEmail(), sbj, MessaggiPredefiniti.SCADENZAPRENOTAZIONE_TXT.getMessaggio());
 					}
 					
-					//rimozione prenotazioni scadute
 					List<Prenotazione> prenotazioniScadute = Controller.getPrenotazioniScadute();
 					for(Prenotazione p : prenotazioniScadute) {
 						Cliente c = Controller.getCliente(p.getCodCliente());
@@ -228,13 +220,11 @@ public class AccessoAdmin {
 						Controller.deletePrenotazione(p);
 					}
 					
-					//notifica infedeltà
 					List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();
 					for(ClienteFedele ci : clientiInfedeli) {
 						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_TXT.getMessaggio());
 					}
-						
-					//rimozione infedeli da un anno
+					
 					List<ClienteFedele> clientiDaRimuovere = Controller.getClientiDaRimuovere();
 					for(ClienteFedele ci : clientiDaRimuovere) {
 						Controller.deleteCliente(ci);
