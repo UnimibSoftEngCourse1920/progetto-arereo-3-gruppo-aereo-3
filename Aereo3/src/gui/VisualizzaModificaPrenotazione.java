@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -9,10 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -20,19 +17,15 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.toedter.calendar.JDateChooser;
-
 import controller.Controller;
-import dataManagment.GestioneAereoportoDatabase;
-import dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
-import dominio.Posto;
 import dominio.Prenotazione;
 import dominio.Volo;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
 
 public class VisualizzaModificaPrenotazione {
+	@SuppressWarnings("unchecked")
 	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione, JPanel homePanel) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
@@ -178,6 +171,7 @@ public class VisualizzaModificaPrenotazione {
 		
 		List <Volo> listaVoli = Controller.getPartenzaDestinazione(partenza1, arrivo1);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox nuovoVolo = new JComboBox();
 		GridBagConstraints gbcNuovoVolo = new GridBagConstraints();
 		gbcNuovoVolo.fill = GridBagConstraints.HORIZONTAL;
@@ -202,7 +196,6 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut13.gridy = 16;
 		panel6.add(verticalStrut13, gbcVerticalStrut13);
 		
-		//aggiungere il button per pagare se la prenotazione non è stata pagata (stesso if della label di stato)
 		JButton btnPaga = new JButton("Paga");
 		btnPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

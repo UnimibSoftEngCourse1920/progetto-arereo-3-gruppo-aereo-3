@@ -25,13 +25,12 @@ import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
 import dominio.Aereoporto;
 import dominio.ClienteFedele;
-import dominio.Promozione;
-import dominio.Volo;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
 
 public class PromozioneAdmin {
 	
+	@SuppressWarnings("unchecked")
 	static JPanel esegui(JPanel contentPane) {
 		JPanel panel1 = new JPanel();
 		panel1.setBackground(Color.BLUE);
@@ -138,6 +137,7 @@ public class PromozioneAdmin {
 		bcdPartenza.gridy = 10;
 		panel1.add(partenza, bcdPartenza);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox partenzaCombo = new JComboBox();
 		List <Aereoporto> aeroporti = GestioneAereoportoDatabase.getListaAereoporti();
 		for (Aereoporto a : aeroporti) {
@@ -161,6 +161,7 @@ public class PromozioneAdmin {
 		gbcDestinazione.gridy = 12;
 		panel1.add(destinazione, gbcDestinazione);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox destinazioneCombo = new JComboBox();
 		for (Aereoporto a : aeroporti) {
 			String aerPar = Controller.getDenominazioneAereoporto(a.getIdAereoporto());
@@ -175,10 +176,7 @@ public class PromozioneAdmin {
 		
 		
 		JCheckBox chckbxSonoUnCliente = new JCheckBox("Solo per Cliente Fedele");
-		chckbxSonoUnCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		chckbxSonoUnCliente.setBackground(Color.BLUE);
 		chckbxSonoUnCliente.setForeground(Color.WHITE);
 		chckbxSonoUnCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -223,7 +221,9 @@ public class PromozioneAdmin {
 				}
 				
 				else{
-					
+					if (! erroreLbl.getText().equals(""))
+						erroreLbl.setText("");
+					erroreLbl.setText("Promozione inserita!");
 					if(chckbxSonoUnCliente.isSelected()) 
 						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAereoporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAereoporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), true);
 					else

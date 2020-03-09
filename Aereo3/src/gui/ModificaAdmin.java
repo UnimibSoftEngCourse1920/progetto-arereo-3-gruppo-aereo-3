@@ -21,8 +21,6 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dataManagment.GestioneAdminDatabase;
-import dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
 import dominio.Prenotazione;
 import dominio.Volo;
@@ -30,7 +28,8 @@ import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
 
 public class ModificaAdmin {
-	
+
+	@SuppressWarnings("unchecked")
 	static JPanel esegui(JPanel contentPane) {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "name_865661938656900");
@@ -113,16 +112,17 @@ public class ModificaAdmin {
 		gbcLblNewLabel.gridy = 4;
 		panel.add(lblNewLabel, gbcLblNewLabel);
 		
-		JLabel lblNewLabel1 = new JLabel("Minuti Partenza");
-		lblNewLabel1.setForeground(Color.WHITE);
-		lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JLabel lblNewLabel7 = new JLabel("Minuti Partenza");
+		lblNewLabel7.setForeground(Color.WHITE);
+		lblNewLabel7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel1 = new GridBagConstraints();
 		gbcLblNewLabel1.anchor = GridBagConstraints.WEST;
 		gbcLblNewLabel1.insets = new Insets(0, 0, 5, 5);
 		gbcLblNewLabel1.gridx = 1;
 		gbcLblNewLabel1.gridy = 4;
-		panel.add(lblNewLabel1, gbcLblNewLabel1);
+		panel.add(lblNewLabel7, gbcLblNewLabel1);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();
 		for(int i = 0; i<24; i++) {
 			String value;
@@ -141,6 +141,7 @@ public class ModificaAdmin {
 		gbcComboBox.gridy = 5;
 		panel.add(comboBox, gbcComboBox);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox comboBox1 = new JComboBox();
 		for(int i = 0; i<60; i++) {
 			String value;
@@ -193,6 +194,7 @@ public class ModificaAdmin {
 		gbcLblMinutiArrivo.gridy = 7;
 		panel.add(lblMinutiArrivo, gbcLblMinutiArrivo);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox comboBox2 = new JComboBox();
 		for(int i = 0; i<24; i++) {
 			String value;
@@ -211,6 +213,7 @@ public class ModificaAdmin {
 		gbcComboBox2.gridy = 8;
 		panel.add(comboBox2, gbcComboBox2);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox comboBox3 = new JComboBox();
 		for(int i = 0; i<60; i++) {
 			String value;
@@ -312,9 +315,20 @@ public class ModificaAdmin {
 		gbcVerticalStrut11.gridy = 18;
 		panel.add(verticalStrut11, gbcVerticalStrut11);
 
+		JLabel lblNewLabel71 = new JLabel("");
+		lblNewLabel71.setForeground(Color.RED);
+		lblNewLabel71.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblNewLabel11 = new GridBagConstraints();
+		gbcLblNewLabel11.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel11.insets = new Insets(0, 0, 5, 5);
+		gbcLblNewLabel11.gridx = 0;
+		gbcLblNewLabel11.gridy = 20;
+		panel.add(lblNewLabel71, gbcLblNewLabel11);
 		JButton btnModifica = new JButton("Modifica");
 		btnModifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				lblNewLabel71.setText("Volo modificato!");
 				Volo v = Controller.getVolo(Integer.parseInt(textField.getText()));
 				String oraPartenza = (String) comboBox.getSelectedItem(); 
 				String minutiPartenza = (String) comboBox1.getSelectedItem();
@@ -335,9 +349,15 @@ public class ModificaAdmin {
 					for(Cliente c : cl) {
 						Controller.sendMail(ge, c.getEmail(), subject, content);
 					}
+					
+					
+					
 				}
 			}
 		});
+		
+	
+		
 		btnModifica.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcBtnModifica = new GridBagConstraints();
 		gbcBtnModifica.anchor = GridBagConstraints.WEST;

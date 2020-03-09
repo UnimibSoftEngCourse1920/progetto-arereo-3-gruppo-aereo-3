@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,26 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePostoDatabase;
-import dataManagment.GestionePrenotazioneDatabase;
 import dominio.Cliente;
 import dominio.Posto;
-import dominio.Prenotazione;
-import dominio.Volo;
-
-import javax.swing.ImageIcon;
-import java.awt.Image;
 
 public class SceltaPosti {
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	static JPanel esegui(JPanel contentPane, int value, JPanel panel8, int idVolo, Cliente c, boolean modifica, int oldP, boolean fedele, JPanel homePanel) {
 		JPanel posti = new JPanel();
 		posti.setBounds(100, 100, 894, 717);
@@ -86,8 +77,8 @@ public class SceltaPosti {
 		panel.add(btnNewButton, BorderLayout.WEST);
 		
 		JLabel [] etichette = new JLabel[value*3];
+		@SuppressWarnings("rawtypes")
 		JComboBox [] box = new JComboBox[value*2];
-		//Posto [] listaPosti = new Posto[value];
 		GridBagConstraints [] format = new GridBagConstraints[15];
 		
 		int u = 0;
@@ -136,28 +127,7 @@ public class SceltaPosti {
 			h++;
 			z++;
 			
-//			etichette[u] = new JLabel("Fila");
-//			etichette[u].setForeground(Color.WHITE);
-//			etichette[u].setFont(new Font("Tahoma", Font.PLAIN, 20));
-//			format[z] = new GridBagConstraints();
-//			format[z].anchor = GridBagConstraints.WEST;
-//			format[z].insets = new Insets(0, 0, 5, 5);
-//			format[z].gridx = k;
-//			format[z].gridy = y;
-//			sceltaPostiPanel.add(etichette[u], format[z]);
-//			y++;
-//			u++;
-//			z++;
-			
-//			box[h] = new JComboBox();
-//			format[z] = new GridBagConstraints();
-//			format[z].fill = GridBagConstraints.HORIZONTAL;
-//			format[z].gridx = k;
-//			format[z].gridy = y;
-//			sceltaPostiPanel.add(box[h], format[z]);
-//			h++;
-//			y++;
-//			z++;
+
 		}
 		
 		
@@ -177,13 +147,7 @@ public class SceltaPosti {
 					double costo = 0;
 					int costoPunti = 0;
 					for(int i = 0; i<value; i++) {
-						/*String s = (String)box[i].getSelectedItem();
-						String[] ss = s.split(", ");
-						
-						char fila = ss[0].charAt(ss[0].length()-1);
-						Integer numero = Integer.parseInt(ss[0].substring(0, ss[0].length()-1));
-						int valore = numero.valueOf(numero);*/
-						
+				
 						Posto p = (Posto)box[i].getSelectedItem();
 						costo = costo + p.getPrezzo();
 						costoPunti = costoPunti + p.getPrezzoPunti();

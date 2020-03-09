@@ -1,9 +1,17 @@
 package dataManagment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.sun.istack.logging.Logger;
 
 import controller.Controller;
 import dominio.Prenotazione;
@@ -11,6 +19,9 @@ import dominio.Promozione;
 import dominio.Volo;
 
 public class GestionePromozioneDatabase extends GestioneDatabase {
+		
+	
+	private static Log logger=LogFactory.getLog(GestionePrenotazioneDatabase.class);
 	
 	public static List<Promozione> getAllPromozioni(Date now){
 		String jpql = "SELECT p FROM Promozione as p WHERE p.dataFine>:now";
@@ -21,9 +32,17 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
+		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+		
 		Promozione p = new Promozione();
-		p.setDataInizio(inizio);
-		p.setDataFine(fine);
+		try {
+			p.setDataInizio(dtFormat.parse(Controller.convertiData(inizio)));
+			p.setDataFine(dtFormat.parse(Controller.convertiData(fine)));
+		} catch (ParseException e) {
+			logger.error(e);
+		}
+		
 		p.setSconto(sconto);
 		p.setPartenza(partenza);
 		p.setDestinazione(arrivo);
@@ -32,6 +51,7 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		entityManager.persist(p);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
+		
 	}
 	
 	public static Promozione getPromozione(int codPromo){

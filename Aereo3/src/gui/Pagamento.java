@@ -28,8 +28,6 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePromozioneDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
