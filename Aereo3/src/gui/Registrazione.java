@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dominio.Cliente;
 import dominio.ClienteFedele;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
@@ -232,21 +233,27 @@ public class Registrazione {
 				}
 				
 				else{
-				ClienteFedele c = new ClienteFedele();
+				ClienteFedele c = null;
+				Cliente cli = Controller.getCliente(textField3.getText());
+				if(cli != null) {
+					c = Controller.signToLoyalty(cli, textField2.getText(), passwordField.getText());
+				} else {
+					c = new ClienteFedele();
+					c.setNome(textField.getText());
+					c.setCognome(textField1.getText());
+					c.setEmail(textField3.getText());
+					c.setPsw(passwordField.getText());
+					c.setDataDiNascita(dateChooser1.getDate());
+					c.setIndirizzo(textField2.getText());
+					c.setDataIscrizione(now);
+					c.setUltimoBiglietto(now);
+					Calendar cal = Calendar.getInstance();
+					cal.add(Calendar.YEAR, 2);
+					Date infedele = cal.getTime();
+					c.setInfedele(infedele);
+					Controller.insertClienteFedele(c);
+				}
 				lblNewLabel3.setText("Registrazione andata a buon fine");
-				c.setNome(textField.getText());
-				c.setCognome(textField1.getText());
-				c.setEmail(textField3.getText());
-				c.setPsw(passwordField.getText());
-				c.setDataDiNascita(dateChooser1.getDate());
-				c.setIndirizzo(textField2.getText());
-				c.setDataIscrizione(now);
-				c.setUltimoBiglietto(now);
-				Calendar cal = Calendar.getInstance();
-				cal.add(Calendar.YEAR, 2);
-				Date infedele = cal.getTime();
-				c.setInfedele(infedele);
-				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();
 				registrationPanel.revalidate();

@@ -108,9 +108,8 @@ public class Controller {
 	}
 	
 
-	public static void signToLoyalty(String nome, String cognome, String indirizzo,
-			Date date, String psw) {
-		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, psw);
+	public static ClienteFedele signToLoyalty(Cliente c, String indirizzo, String pwd) {
+		return GestioneClienteDatabase.signToLoyalty(c,	indirizzo, pwd);
 	}
 
 	public static void deleteCliente(Cliente cliente) {

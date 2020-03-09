@@ -30,13 +30,11 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		cliente.setEmail("ale4@gmail.com");
 		cliente.setCognome("ciccio");
 		cliente.setDataDiNascita(new Date());
-		cliente.setIndirizzo("ciaociao");
 		cliente.setNome("alex");
 
 		cliente2.setEmail("test367@llfefe.com");
 		cliente2.setCognome("ciccio");
 		cliente2.setDataDiNascita(new Date());
-		cliente2.setIndirizzo("ciaociao");
 		cliente2.setNome("alex");
 
 		clienti.add(cliente);
@@ -128,26 +126,29 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 			return lista.get(0);
 	}
 
-	public static ClienteFedele signToLoyalty(String nome, String cognome,
-			String indirizzo, Date date, String pwd) {
-
-		ClienteFedele cf = new ClienteFedele();
-
-		cf.setNome(nome);
-		cf.setCognome(cognome);
-		cf.setDataDiNascita(date);
-		cf.setIndirizzo(indirizzo);
-		cf.setPsw(pwd);
-		cf.setPunti(0);
-		cf.setDataIscrizione(new Date());
-
+	public static ClienteFedele signToLoyalty(Cliente c, 
+			String indirizzo, String pwd) {
+		
+		String jpql = "INSERT INTO cliente_fedele (cod_cliente, password, punti, data_iscrizione, data_ultimo_biglietto, infedele, indirizzo)"
+				+ " VALUES (?, '?', 0, '?', '?', '?', '?')";
+		Query query = entityManager.createNativeQuery(jpql);
+		query.setParameter(1, c.getCodCliente());
+		query.setParameter(2, pwd);
+		query.setParameter(3, new Date());
+		query.setParameter(4, new Date());
+		query.setParameter(6, indirizzo);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 2);
+		Date infedele = cal.getTime();
+		query.setParameter(5, infedele);
+		
 		entityManager.getTransaction().begin();
-		entityManager.persist(cf);
+		query.executeUpdate();
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 		
 		System.out.println("Cliente registrato al programma Fedeltà!");
-		return cf;
+		return GestioneClienteDatabase.login(c.getEmail(), pwd);
 	}
 
 	public static void addPunti(int codiceCliente, int punti) {

@@ -372,7 +372,6 @@ public class ElencoPasseggeri {
 						c.setCognome(campi[1].getText());
 						c.setEmail(emailInsert.getText());
 						c.setDataDiNascita(dataDiNascita.getDate());
-						c.setIndirizzo("");
 						fedele = false;
 					}
 					contentPane.removeAll();

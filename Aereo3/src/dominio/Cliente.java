@@ -41,9 +41,6 @@ public class Cliente {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "indirizzo")
-	private String indirizzo;
-
 
 	public int getCodCliente() {
 		return codCliente;
@@ -81,15 +78,6 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-	
 	
 
 	/*****************************************/
