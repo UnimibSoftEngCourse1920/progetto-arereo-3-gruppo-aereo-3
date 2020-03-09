@@ -16,7 +16,7 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 //	}
 	
 	
-	static List<Aereoporto> listaAereoporti= getListaAereoporti();
+	private static List<Aereoporto> listaAereoporti= null;
 	
 
 	public static void insertAereoporto (Aereoporto a) {
@@ -25,16 +25,21 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 			entityManager.getTransaction().begin();
 
 		entityManager.persist(a);
+		listaAereoporti.add(a);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 
 	}
 	
 	public static List<Aereoporto> getListaAereoporti(){
-	String jpql = "SELECT DISTINCT a FROM Aereoporto as a";
-	Query query = entityManager.createQuery(jpql);
-	List<Aereoporto> listaAereoporti = query.getResultList();
-	return listaAereoporti;
+		if(listaAereoporti==null) {
+		String jpql = "SELECT DISTINCT a FROM Aereoporto as a";
+		Query query = entityManager.createQuery(jpql);
+		List<Aereoporto> listaAereoporti = query.getResultList();
+		return listaAereoporti;
+	}
+		else
+			return listaAereoporti;
 	}
 	
 	public static List <String> getDenominazioniAereoporti(){

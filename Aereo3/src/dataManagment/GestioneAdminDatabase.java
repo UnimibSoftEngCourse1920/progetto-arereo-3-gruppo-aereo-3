@@ -16,12 +16,6 @@ import dominio.Volo;
 
 public class GestioneAdminDatabase extends GestioneDatabase{
 	private static Log logger=LogFactory.getLog(GestioneAdminDatabase.class);
-	//	Per debug
-	//	public static void main(String[] args) {
-	//		System.out.println(isAmministratore("admin", "ciao"));
-	//		
-	//	}
-
 
 
 	public static boolean isAmministratore(String username, String psw){
