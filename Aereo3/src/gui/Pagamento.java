@@ -431,6 +431,43 @@ public class Pagamento {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel8.add(btnBack, BorderLayout.WEST);
 		
+
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.BLUE);
+		panel6.add(panel, BorderLayout.EAST);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
+		JLabel lblNewLabel = new JLabel("Inserisci codice promozione");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JTextField textField_1 = new JTextField();
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_1.anchor = GridBagConstraints.WEST;
+		gbc_textField_1.gridx = 0;
+		gbc_textField_1.gridy = 1;
+		panel.add(textField_1, gbc_textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("CHECK");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton_1.gridx = 0;
+		gbc_btnNewButton_1.gridy = 2;
+		panel.add(btnNewButton_1, gbc_btnNewButton_1);
+		
 		return panel6;
 	}
 	
