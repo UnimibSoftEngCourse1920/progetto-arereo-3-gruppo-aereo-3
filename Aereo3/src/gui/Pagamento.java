@@ -184,9 +184,20 @@ public class Pagamento {
 		gbcVerticalStrut8.gridy = 7;
 		panel7.add(verticalStrut8, gbcVerticalStrut8);
 		
+		JLabel erroreCarta = new JLabel("");
+		erroreCarta.setForeground(Color.RED);
+		erroreCarta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcErroreCarta = new GridBagConstraints();
+		gbcErroreCarta.insets = new Insets(0, 0, 5, 5);
+		gbcErroreCarta.anchor = GridBagConstraints.WEST;
+		gbcErroreCarta.gridx = 0;
+		gbcErroreCarta.gridy = 9;
+		panel7.add(erroreCarta, gbcErroreCarta);
+		
 		JButton btnNewButton = new JButton("Paga");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				CartaDiCredito cc = new CartaDiCredito(textField.getText(), dateChooser.getDate(), textFieldCvv.getText());
 				
 				int idPrenotazione = -1;
@@ -238,7 +249,13 @@ public class Pagamento {
 					contentPane.add(LastPage.esegui(contentPane, homePanel));
 					contentPane.repaint();
 					contentPane.revalidate();
-				}   }
+				}   
+				else{
+					if (! erroreCarta.getText().equals(""))
+						erroreCarta.setText("");
+					erroreCarta.setText("Dati non validi !");
+					}
+				}
 				
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -249,12 +266,12 @@ public class Pagamento {
 		gbcBtnNewButton.gridy = 8;
 		panel7.add(btnNewButton, gbcBtnNewButton);
 		
-		Component verticalStrut9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
-		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 0);
-		gbcVerticalStrut9.gridx = 0;
-		gbcVerticalStrut9.gridy = 9;
-		panel7.add(verticalStrut9, gbcVerticalStrut9);
+//		Component verticalStrut9 = Box.createVerticalStrut(20);
+//		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
+//		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 0);
+//		gbcVerticalStrut9.gridx = 0;
+//		gbcVerticalStrut9.gridy = 9;
+//		panel7.add(verticalStrut9, gbcVerticalStrut9);
 		
 		JLabel lblNewLabel4 = new JLabel("Costo in Punti");
 		if(fedele)
@@ -440,10 +457,10 @@ public class Pagamento {
 		panel.setBackground(Color.BLUE);
 		panel6.add(panel, BorderLayout.EAST);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblNewLabel = new JLabel("Inserisci codice promozione");
@@ -464,9 +481,24 @@ public class Pagamento {
 		panel.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
+		JLabel errorePromo = new JLabel("");
+		errorePromo.setForeground(Color.RED);
+		errorePromo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcErrorePromo = new GridBagConstraints();
+		gbcErrorePromo.anchor = GridBagConstraints.WEST;
+		gbcErrorePromo.insets = new Insets(0, 0, 5, 0);
+		gbcErrorePromo.gridx = 0;
+		gbcErrorePromo.gridy = 3;
+		panel.add(errorePromo, gbcErrorePromo);
+		
 		JButton btnNewButton_1 = new JButton("CHECK");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(notValidPromo(textField_1.getText()) || Controller.getPromozione(Integer.parseInt(textField_1.getText())) == null) {
+					errorePromo.setText("Codice promo non valido !");
+				}
+				
+				else {
 				Promozione promo = Controller.getPromozione(Integer.parseInt(textField_1.getText()));
 				if(promo != null) {
 					if(fedele || ! promo.isPerFedele()) {
@@ -477,6 +509,7 @@ public class Pagamento {
 							p.setPrezzo(prezzoFinale/listaPosti.size());
 						lblNewLabel3.setText(prezzoFinale + "$ (-" + promo.getSconto() + "%)");
 						btnNewButton2.setEnabled(false);
+					}
 						}
 					}
 				}
@@ -490,6 +523,14 @@ public class Pagamento {
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		return panel6;
+	}
+	
+	public static boolean notValidPromo(String codPromo) {
+		boolean valore = false;
+		if (codPromo.length()>1 || codPromo.equals("") || codPromo.charAt(0)<0 || codPromo.charAt(0)>9)
+			valore = true;
+		
+		return valore;
 	}
 	
 	public static Date convertiData(Date data) {
