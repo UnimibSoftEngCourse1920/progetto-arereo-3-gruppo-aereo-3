@@ -3,21 +3,18 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
-import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -28,7 +25,6 @@ import com.toedter.calendar.JDateChooser;
 import controller.Controller;
 import dominio.Cliente;
 import dominio.ClienteFedele;
-import dominio.Volo;
 
 public class ElencoPasseggeri {
 	
@@ -356,15 +352,25 @@ public class ElencoPasseggeri {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean continua = true;
-				for (int i = 0; i<campi.length;i++) {
-					if (campi[i].getText().equals("") || emailInsert.getText().equals("") || isValid(emailInsert.getText()) == false){
+				for (int i = 0; i<campi.length-1 && continua==true;i++) {
+					if (notValidFormato(campi[i].getText(), campi[i+1].getText()) || emailInsert.getText().equals("")){
 						continua=false;
-						errore.setText("Campo vuoto");
+						if(!errore.getText().equals(""))
+							errore.setText("");
+						errore.setText("Campi errati");
 					}
 				}
 				
-				if(dataDiNascita.getDate().after(now)) {
+				if (!isValid(emailInsert.getText()) && continua){
 					continua=false;
+					if(!errore.getText().equals(""))
+						errore.setText("");
+					errore.setText("email non valida");
+				}
+				else if(dataDiNascita.getDate().after(now) && continua) {
+					continua=false;
+					if(!errore.getText().equals(""))
+						errore.setText("");
 					errore.setText("Data non valida");
 				}
 				
@@ -374,7 +380,7 @@ public class ElencoPasseggeri {
 							errore.setText("Il cliente ha già una prenotazione per questo volo");
 				}
 						
-				else {
+				else if(continua) {
 					if (!errore.getText().equals("")) {
 						errore.setText("");
 					}
@@ -403,11 +409,28 @@ public class ElencoPasseggeri {
 		return panel8;
 	}
 	
+	
+	public static boolean notValidFormato(String nome, String cognome) {
+		boolean risultato=false;
+		String nome1= nome.toUpperCase();
+		String cognome1=cognome.toUpperCase();
+		
+		for(int i =0; i<nome1.length() && risultato==false; i++) {
+			if(nome1.charAt(i)<'A' ||  nome1.charAt(i)>'Z')
+				risultato=true;
+		}
+		
+		for(int i =0; i<cognome1.length() && risultato==false; i++) {
+			if((cognome1.charAt(i)!=32 &&  cognome1.charAt(i)!='\'' ) && (cognome1.charAt(i)<'A' ||  cognome1.charAt(i)>'Z'))
+				risultato=true;
+		}
+		
+		
+		return risultato;
+	}
+	
 	public static boolean isValid(String email) {
-		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
-                "[a-zA-Z0-9_+&*-]+)*@" + 
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
-                "A-Z]{2,7}$"; 
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ "[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$"; 
                   
 		Pattern pat = Pattern.compile(emailRegex); 
 		if (email == null) 
