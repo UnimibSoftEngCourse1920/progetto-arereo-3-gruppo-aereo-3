@@ -205,24 +205,28 @@ public class PromozioneAdmin {
 				if(partenzaCombo.getSelectedItem().equals(destinazioneCombo.getSelectedItem())) {
 					if (! erroreLbl.getText().equals(""))
 						erroreLbl.setText("");
+					erroreLbl.setForeground(Color.RED);
 					erroreLbl.setText("Gli Aeroporti Coincidono");
 				}
 				
 				else if(dateChooser1.getDate().before(new Date()) || dateChooser2.getDate().before(new Date()) || dateChooser2.getDate().before(dateChooser1.getDate())) {
 					if (! erroreLbl.getText().equals(""))
 						erroreLbl.setText("");
+					erroreLbl.setForeground(Color.RED);
 					erroreLbl.setText("Errore nella data");
 				}
 				
 				else if(Integer.parseInt(scontoField.getText())<=0 || Integer.parseInt(scontoField.getText())>=100) {
 					if (! erroreLbl.getText().equals(""))
 						erroreLbl.setText("");
+					erroreLbl.setForeground(Color.RED);
 					erroreLbl.setText("Sconto non valido");
 				}
 				
 				else{
 					if (! erroreLbl.getText().equals(""))
 						erroreLbl.setText("");
+					erroreLbl.setForeground(Color.GREEN);
 					erroreLbl.setText("Promozione inserita!");
 					if(chckbxSonoUnCliente.isSelected()) 
 						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAereoporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAereoporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), true);
@@ -231,14 +235,16 @@ public class PromozioneAdmin {
 				
 				GestoreMail ge = Controller.getGestoreMail();
 				List<ClienteFedele> clientiFedeli = Controller.getClientiFedeli();
+				String sbj = MessaggiPredefiniti.NUOVAPROMOZIONE_SUBJ.getMessaggio() + " ";
 				String txt = "Nuova promozione dal " + ListaPromozioni.convertiData(dateChooser1.getDate())
 						+ " al " + ListaPromozioni.convertiData(dateChooser2.getDate())
 						+ " per i voli da " + (String) partenzaCombo.getSelectedItem()
 						+ " a " + (String) destinazioneCombo.getSelectedItem()
 						+ " con uno sconto del " + scontoField.getText() + "%"
+						+ ". Controlla il codice promo dalla lista delle prenotazioni attive"
 						+ ". Affrettati a comprare un biglietto con la nuova promozione prima che finiscano!";
 				for(ClienteFedele c : clientiFedeli) {
-					Controller.sendMail(ge, c.getEmail(), MessaggiPredefiniti.NUOVAPROMOZIONE_SUBJ.getMessaggio(), txt);
+					Controller.sendMail(ge, c.getEmail(), sbj, txt);
 				}
 			}
 			}

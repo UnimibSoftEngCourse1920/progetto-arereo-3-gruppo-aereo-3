@@ -90,13 +90,11 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return res;
 	}
 	
-	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
-		String jpql = "SELECT p.id FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
+	public static Prenotazione getIdPrenotazione(Cliente c, int v) {
+		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql).setParameter("codCliente", c.getCodCliente()).setParameter("idVolo", v);
-		List<Integer>prenotazione = query.getResultList();
-		Integer value = prenotazione.get(0);
-		int risultato = value.intValue();
-		return risultato;
+		List<Prenotazione>prenotazione = query.getResultList();
+		return prenotazione.get(0);
 	}
 	
 	public static void deletePrenotazione(Prenotazione p) {

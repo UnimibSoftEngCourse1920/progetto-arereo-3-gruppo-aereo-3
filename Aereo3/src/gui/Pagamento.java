@@ -31,6 +31,7 @@ import dataManagment.GestioneAereoportoDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
+import dominio.Prenotazione;
 import dominio.Promozione;
 import dominio.Volo;
 import mailManagment.GestoreMail;
@@ -203,7 +204,6 @@ public class Pagamento {
 				int idPrenotazione = -1;
 
 				if(Controller.paga(cc, costo)) {
-					System.out.print("Errore");
 					
 					if(modifica == false) {
 					if(! Controller.trovaMail(c.getEmail())) {
@@ -216,10 +216,13 @@ public class Pagamento {
 							
 							Controller.insertPrenotazione(cliente, idVolo, listaPosti);
 						
-						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-						Controller.pagamentoPrenotazione(idPrenotazione);
+						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo).getId();
 						Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+					} else {
+						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo).getId();
 					}
+
+					Controller.pagamentoPrenotazione(idPrenotazione);
 					GestoreMail gePagamento = Controller.getGestoreMail();
 					String sbjPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 					String txtPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
@@ -321,11 +324,20 @@ public class Pagamento {
 				Controller.modificaPuntiPosti(listaPosti, 0);
 				for(Posto p : listaPosti)
 					p.setPunti(0);
-				Controller.insertPrenotazione(c, idVolo, listaPosti);
-				int idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
-				Controller.pagamentoPrenotazione(idPrenotazione);
-				Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 				
+				int idPrenotazione = -1;
+				Prenotazione pren = null;
+				if(! Controller.trovaCliente(c.getCodCliente(), idVolo)) {
+					Controller.insertPrenotazione(c, idVolo, listaPosti);
+					pren = Controller.getIdPrenotazione(c, idVolo);
+					idPrenotazione = pren.getId();
+					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+				} else {
+					pren = Controller.getIdPrenotazione(c, idVolo);
+					idPrenotazione = pren.getId();
+				}
+
+				Controller.pagamentoPrenotazione(idPrenotazione);
 				GestoreMail ge = Controller.getGestoreMail();
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
@@ -343,6 +355,11 @@ public class Pagamento {
 				cal.add(Calendar.YEAR, 2);
 				Date newInfedele = cal.getTime();
 				Controller.updateInfedelta((ClienteFedele) c, newInfedele, ultimoBiglietto);
+				
+				contentPane.removeAll();
+				contentPane.add(LastPage.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
 					
 			}
 		});
@@ -417,23 +434,30 @@ public class Pagamento {
 				Cliente cliente = Controller.getCliente(c.getEmail());
 				
 				int idPrenotazione = -1;
-				
+				Prenotazione pren = null;
 				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
-					idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					pren = Controller.getIdPrenotazione(cliente, idVolo);
+					idPrenotazione = pren.getId();
 					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+				} else {
+					pren = Controller.getIdPrenotazione(cliente, idVolo);
+					idPrenotazione = pren.getId();
 				}
 				GestoreMail ge = GestoreMail.getInstance();
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
-				Volo v = Controller.getVolo(idVolo);
-				String partenza = Controller.getDenominazioneAereoporto(v.getPartenza());
-				String arrivo = Controller.getDenominazioneAereoporto(v.getDestinazione());
-				txt += v.toString(partenza, arrivo);
+				Volo v = Controller.getVolo(pren.getIdVolo());
+				txt += v.toString(v.getPartenza(), v.getDestinazione());
 				for(Posto p : listaPosti)
 					txt += " " + p.toString();
 				txt += ". Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
 				ge.sendMail(c.getEmail(), sbj, txt);
+				
+				contentPane.removeAll();
+				contentPane.add(LastPage.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnNewButton2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -525,11 +549,14 @@ public class Pagamento {
 	}
 	
 	public static boolean notValidPromo(String codPromo) {
-		boolean valore = false;
-		if (codPromo.length()>1 || codPromo.equals("") || codPromo.charAt(0)<0 || codPromo.charAt(0)>9)
-			valore = true;
+		if (codPromo.equals(""))
+			return true;
+		for(int i=0; i>codPromo.length(); i++) {
+			if(codPromo.charAt(0)<0 || codPromo.charAt(0)>9)
+				return true;
+		}
 		
-		return valore;
+		return false;
 	}
 	
 	public static Date convertiData(Date data) {

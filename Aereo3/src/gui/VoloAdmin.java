@@ -345,19 +345,23 @@ public class VoloAdmin {
 			public void actionPerformed(ActionEvent e) {
 
 				if (dateChooser1.getDate().after(dateChooser2.getDate())) {
-						lblNewLabel1.setText("Date errate");
+					lblNewLabel1.setForeground(Color.RED);
+					lblNewLabel1.setText("Date errate");
 
 
 				}else if (comboBox.getSelectedItem().equals(comboBox1.getSelectedItem())) {
-						lblNewLabel1.setText("Attenzione, gli aeroporti coincidono !");
+					lblNewLabel1.setForeground(Color.RED);	
+					lblNewLabel1.setText("Attenzione, gli aeroporti coincidono !");
 
 					}
 					else if (Integer.parseInt(textField5.getText())<=0) {
-							lblNewLabel1.setText("Attenzione, gli aeroporti coincidono !");
+						lblNewLabel1.setForeground(Color.RED);
+						lblNewLabel1.setText("Attenzione, gli aeroporti coincidono !");
 
 
 					}else if (textField4.getText().length()!=2) {
-							lblNewLabel1.setText("Il gate deve essere solo di 2 caratteri");
+						lblNewLabel1.setForeground(Color.RED);
+						lblNewLabel1.setText("Il gate deve essere solo di 2 caratteri");
 
 					}
 					else {
@@ -375,7 +379,9 @@ public class VoloAdmin {
 						String oraArrivo = (String) comboBox5.getSelectedItem();
 						String minutiArrivo = (String) comboBox6.getSelectedItem();
 						Controller.insertVolo(v, oraPartenza, minutiPartenza, oraArrivo, minutiArrivo, Double.parseDouble(textField6.getText()), Integer.parseInt(textField7.getText()));
+						
 
+						lblNewLabel1.setForeground(Color.GREEN);
 						lblNewLabel1.setText("Volo inserito!");
 
 					}

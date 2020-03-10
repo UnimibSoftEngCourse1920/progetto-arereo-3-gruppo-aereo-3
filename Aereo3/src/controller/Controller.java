@@ -211,8 +211,8 @@ public class Controller {
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
 	}
 	
-	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
-		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v, posti);
+	public static Prenotazione getIdPrenotazione(Cliente c, int v) {
+		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v);
 	}
 	
 	public static List<Prenotazione> getPrenotazioniScadute(){
