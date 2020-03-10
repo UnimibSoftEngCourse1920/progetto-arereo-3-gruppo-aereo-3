@@ -551,8 +551,8 @@ public class Pagamento {
 	public static boolean notValidPromo(String codPromo) {
 		if (codPromo.equals(""))
 			return true;
-		for(int i=0; i>codPromo.length(); i++) {
-			if(codPromo.charAt(0)<0 || codPromo.charAt(0)>9)
+		for(int i=0; i<codPromo.length(); i++) {
+			if(codPromo.charAt(i)<0 || codPromo.charAt(i)>9)
 				return true;
 		}
 		
