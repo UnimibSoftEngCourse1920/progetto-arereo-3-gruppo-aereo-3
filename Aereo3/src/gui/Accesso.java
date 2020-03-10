@@ -131,7 +131,7 @@ public class Accesso {
 					lblNewLabel1.setText("Errore, campo vuoto !");
 				}
 				
-				else if(isValid(textField.getText())) {
+				else if(!isValid(textField.getText())) {
 					if ( ! lblNewLabel1.getText().equals(""))
 						lblNewLabel1.setText("");
 					lblNewLabel1.setText("Errore, email non valide!");
