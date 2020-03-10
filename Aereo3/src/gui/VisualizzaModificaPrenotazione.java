@@ -200,9 +200,8 @@ public class VisualizzaModificaPrenotazione {
 		btnPaga.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Prenotazione prenotata = Controller.getPrenotazionePerId(oldIdPrenotazione);
-				boolean modifica = true;
 				contentPane.removeAll();
-				contentPane.add(Pagamento.esegui(contentPane, prenotata.getPrezzoTotale(), prenotata.getPrezzoPuntiTotale(), panel6, c, idVolo, Controller.getPostiPerPrenotazione(oldIdPrenotazione), Controller.isFedele(c), homePanel, modifica));
+				contentPane.add(Pagamento.esegui(contentPane, prenotata.getPrezzoTotale(), prenotata.getPrezzoPuntiTotale(), panel6, c, idVolo, Controller.getPostiPerPrenotazione(oldIdPrenotazione), Controller.isFedele(c), homePanel, modifica, oldIdPrenotazione));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}

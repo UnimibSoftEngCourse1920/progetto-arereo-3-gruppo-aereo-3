@@ -42,7 +42,7 @@ public class Pagamento {
 	
 	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele, JPanel homePanel, boolean modifica) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele, JPanel homePanel, boolean modifica,int oldP) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -112,6 +112,11 @@ public class Pagamento {
 		panel7.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblNumeroDiCarta = new JLabel("Numero di carta");
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			lblNumeroDiCarta.setVisible(false);
+		}
+		}
 		lblNumeroDiCarta.setForeground(Color.WHITE);
 		lblNumeroDiCarta.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcLblNumeroDiCarta = new GridBagConstraints();
@@ -122,6 +127,11 @@ public class Pagamento {
 		panel7.add(lblNumeroDiCarta, gbcLblNumeroDiCarta);
 		
 		JTextField textField = new JTextField();
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			textField.setVisible(false);
+		}
+		}
 		GridBagConstraints gbcTextField = new GridBagConstraints();
 		gbcTextField.insets = new Insets(0, 0, 5, 0);
 		gbcTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -131,6 +141,11 @@ public class Pagamento {
 		textField.setColumns(10);
 		
 		JLabel lblScadenzaCarta = new JLabel("Data scadenza");
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			lblScadenzaCarta.setVisible(false);
+		}
+		}
 		lblScadenzaCarta.setForeground(Color.WHITE);
 		lblScadenzaCarta.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcLblScadenzaDiCarta = new GridBagConstraints();
@@ -144,6 +159,11 @@ public class Pagamento {
 		Date now = new Date();
 		
 		JDateChooser dateChooser = new JDateChooser();
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			dateChooser.setVisible(false);
+		}
+		}
 		dateChooser.setDate(now);
 		GridBagConstraints gbcDateChooser = new GridBagConstraints();
 		gbcDateChooser.insets = new Insets(0, 0, 5, 5);
@@ -160,6 +180,11 @@ public class Pagamento {
 		panel7.add(horizontalStrut, gbcHorizontalStrut1);
 		
 		JLabel cvv = new JLabel("CVV");
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			cvv.setVisible(false);
+		}
+		}
 		cvv.setForeground(Color.WHITE);
 		cvv.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcCvv = new GridBagConstraints();
@@ -170,6 +195,10 @@ public class Pagamento {
 		panel7.add(cvv, gbcCvv);
 		
 		JTextField textFieldCvv = new JTextField();
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			textFieldCvv.setVisible(false);
+		}}
 		GridBagConstraints gbcTextFieldCvv = new GridBagConstraints();
 		gbcTextFieldCvv.insets = new Insets(0, 0, 5, 0);
 		gbcTextFieldCvv.fill = GridBagConstraints.HORIZONTAL;
@@ -247,7 +276,8 @@ public class Pagamento {
 						Controller.updateInfedelta((ClienteFedele) cliente, newInfedele, ultimoBiglietto);
 						
 					}
-					
+					if(modifica)
+						Controller.deletePrenotazione(Controller.getPrenotazionePerId(oldP));
 					contentPane.removeAll();
 					contentPane.add(LastPage.esegui(contentPane, homePanel));
 					contentPane.repaint();

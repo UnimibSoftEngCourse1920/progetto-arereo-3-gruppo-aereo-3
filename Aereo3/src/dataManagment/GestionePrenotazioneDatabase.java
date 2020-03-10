@@ -134,13 +134,14 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 	
 	
-	public static int getSovrapprezzo(int idOld, int costoNuovo) {
+	public static double getSovrapprezzo(int idOld, double costoNuovo) {
 		Prenotazione p= getPrenotazionePerId(idOld);
-		int sovrapprezzo=(int) (costoNuovo-p.getPrezzoTotale());
-		int nuovoPrezzo=0;
+		double sovrapprezzo= costoNuovo-p.getPrezzoTotale();
+		double nuovoPrezzo=0;
 		if(sovrapprezzo>0) 
-			nuovoPrezzo= (int) (sovrapprezzo+p.getPrezzoTotale());
-			
+			nuovoPrezzo= sovrapprezzo;
+		else 
+			nuovoPrezzo=10;
 		return nuovoPrezzo;
 		
 	}

@@ -268,7 +268,6 @@ public class ElencoPasseggeri {
 		panel10.add(verticalStrut3, gbcVerticalStrut3);
 		
 		JLabel messAccesso = new JLabel("");
-		messAccesso.setVisible(false);
 		messAccesso.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		messAccesso.setForeground(Color.RED);
 		GridBagConstraints gbcMessAccesso = new GridBagConstraints();
@@ -293,6 +292,9 @@ public class ElencoPasseggeri {
 				}
 				
 				else if(c1 != null) {
+					if(messAccesso.getText().equals(""))
+						messAccesso.setText("");
+					messAccesso.setText("Login avvenuto");
 					campi[0].setText(c1.getNome());
 					campi[1].setText(c1.getCognome());
 					emailInsert.setText(c1.getEmail());

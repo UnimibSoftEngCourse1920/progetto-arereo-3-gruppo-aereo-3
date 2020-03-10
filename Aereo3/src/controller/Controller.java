@@ -189,6 +189,11 @@ public class Controller {
 	//GESTIONE PRENOTAZIONI
 	/*******************************************************/
 	
+//	public static int getSovrapprezzoPunti() {
+//		
+//	}
+	
+	
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
@@ -227,7 +232,7 @@ public class Controller {
 		return GestionePrenotazioneDatabase.getPrenotazionePerId(id);
 	}
 	
-	public static int getSovrapprezzo(int idOld, int costoNuovo) {
+	public static double getSovrapprezzo(int idOld, double costoNuovo) {
 		return GestionePrenotazioneDatabase.getSovrapprezzo(idOld, costoNuovo);
 	}
 
