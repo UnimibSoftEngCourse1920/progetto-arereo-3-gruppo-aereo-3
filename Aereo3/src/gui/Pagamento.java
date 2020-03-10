@@ -421,7 +421,6 @@ public class Pagamento {
 				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
 					idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-					System.out.println(""+idPrenotazione);
 					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
 				}
 				GestoreMail ge = GestoreMail.getInstance();

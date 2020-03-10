@@ -133,7 +133,11 @@ public class CercaPrenotazione {
 							lblErrPren.setText("");
 						lblErrPren.setText("Email o ID errati!");
 					}
-					else {
+					else if(Controller.getVolo(p.getIdVolo()).getDataPartenza().compareTo(new Date()) < 0){
+						if(! lblErrPren.getText().equals(""))
+							lblErrPren.setText("");
+						lblErrPren.setText("Prenotazione scaduta");
+					} else {
 					lblErrPren.setText("");
 					Cliente c = Controller.getCliente(textField.getText());
 					int idVolo = p.getIdVolo();

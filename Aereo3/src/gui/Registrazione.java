@@ -213,7 +213,7 @@ public class Registrazione {
 		registrationPanel.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblNewLabel3 = new JLabel("");
-		lblNewLabel3.setForeground(Color.RED);
+		lblNewLabel3.setForeground(Color.GREEN);
 		lblNewLabel3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel3 = new GridBagConstraints();
 		gbcLblNewLabel3.anchor = GridBagConstraints.WEST;
