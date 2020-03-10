@@ -154,7 +154,6 @@ public class SceltaPosti {
 						listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 						}
 					System.out.println(listaPosti);
-					boolean modifica = false;
 					contentPane.removeAll();
 					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, c, idVolo, listaPosti, fedele, homePanel, modifica));
 					contentPane.repaint();
