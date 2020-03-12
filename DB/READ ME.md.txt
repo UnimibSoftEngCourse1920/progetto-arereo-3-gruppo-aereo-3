@@ -1,6 +1,0 @@
-Per importare le tabelle:
-1- Aprire localhost con il proprio root
-2- Creare un database
-3- Andare su Server, Data Import, selezionare Import From Self-Contained-File (Mettere un file alla volta)
-4- Su Default Target Schema, selezionare il database appena creato (vedi punto 2)
-5- Cliccare su Start Import 
