@@ -20,7 +20,7 @@ import dataManagment.GestionePostoDatabase;
 import dataManagment.GestionePrenotazioneDatabase;
 import dataManagment.GestionePromozioneDatabase;
 import dataManagment.GestioneVoloDatabase;
-import dominio.Aereoporto;
+import dominio.Aeroporto;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
@@ -307,25 +307,25 @@ public class Controller {
 	}
 	
 	/****************************************************/
-	//GESTIONE AEREOPORTO
+	//GESTIONE AEROPORTO
 	/***************************************************/
 	
-	public static List<String> getDenominazioneAereoporti(){
-		return GestioneAereoportoDatabase.getDenominazioniAereoporti();
+	public static List<String> getDenominazioneAeroporti(){
+		return GestioneAereoportoDatabase.getDenominazioniAeroporti();
 	}
 
-	public static String getDenominazioneAereoporto(String idAereoporto) {
+	public static String getDenominazioneAeroporto(String idAereoporto) {
 
-		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
+		return GestioneAereoportoDatabase.parserAeroporto(idAereoporto);
 
 	}
 	
-	public static String parserCodiceAereoporto(String denominazione) {
-		return GestioneAereoportoDatabase.parserCodiceAereoporto(denominazione);
+	public static String parserCodiceAeroporto(String denominazione) {
+		return GestioneAereoportoDatabase.parserCodiceAeroporto(denominazione);
 	}	
 	
-	public static String parserAereoporto(String idAereoporto  ) {
-		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
+	public static String parserAeroporto(String idAereoporto  ) {
+		return GestioneAereoportoDatabase.parserAeroporto(idAereoporto);
 	}
 	
 	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
@@ -333,8 +333,8 @@ public class Controller {
 	}
 	
 	/**Inserisce l'aereoporto nel DB**/
-	public static void inserAereoporto(Aereoporto a) {
-		GestioneAereoportoDatabase.insertAereoporto(a);
+	public static void insertAeroporto(Aeroporto a) {
+		GestioneAereoportoDatabase.insertAeroporto(a);
 	}
 	
 	/****************************************************/

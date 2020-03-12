@@ -49,7 +49,7 @@ public class VoloAdmin {
 		gbcLblPartenza.gridy = 1;
 		panel6.add(lblPartenza, gbcLblPartenza);
 
-		List <String> aeroportiDisponibili = Controller.getDenominazioneAereoporti();
+		List <String> aeroportiDisponibili = Controller.getDenominazioneAeroporti();
 
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();

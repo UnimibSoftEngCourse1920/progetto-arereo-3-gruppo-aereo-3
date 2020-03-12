@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="aereoporto")
-public class Aereoporto {
+public class Aeroporto {
 @Id
 @Column(name="id_aereoporto")
 private String idAereoporto;

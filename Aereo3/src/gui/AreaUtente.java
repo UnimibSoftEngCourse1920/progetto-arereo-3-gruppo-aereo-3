@@ -239,7 +239,7 @@ public class AreaUtente {
 				contentPane.repaint();
 				contentPane.revalidate();
 				
-				JLabel lblPasswordCliente = new JLabel(c.getPsw());
+				JLabel lblPasswordCliente = new JLabel(c.getPassword());
 				lblPasswordCliente.setFont(new Font("Tahoma", Font.PLAIN, 28));
 				lblPasswordCliente.setForeground(Color.WHITE);
 				GridBagConstraints gbcLblPasswordCliente = new GridBagConstraints();
@@ -352,8 +352,8 @@ public class AreaUtente {
 			    for(Map.Entry<Integer,Integer> entry: puntiMap.entrySet()){
 			         rows[row][0] = entry.getKey();
 			         Volo v = Controller.getVolo(entry.getKey());
-			         rows[row][1] = Controller.getDenominazioneAereoporto(v.getPartenza());
-			         rows[row][2] = Controller.getDenominazioneAereoporto(v.getDestinazione());
+			         rows[row][1] = Controller.getDenominazioneAeroporto(v.getPartenza());
+			         rows[row][2] = Controller.getDenominazioneAeroporto(v.getDestinazione());
 			         rows[row][3] = entry.getValue();
 			         tot += entry.getValue();
 			         row++;

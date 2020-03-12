@@ -54,7 +54,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut6.gridy = 1;
 		panel6.add(verticalStrut6, gbcVerticalStrut6);
 		
-		JLabel lblPartenza = new JLabel("Partenza: " + Controller.parserAereoporto(partenza));
+		JLabel lblPartenza = new JLabel("Partenza: " + Controller.parserAeroporto(partenza));
 		lblPartenza.setForeground(Color.WHITE);
 		lblPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblPartenza = new GridBagConstraints();
@@ -71,7 +71,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut7.gridy = 3;
 		panel6.add(verticalStrut7, gbcVerticalStrut7);
 		
-		JLabel lblDestinazione = new JLabel("Destinazione: " + Controller.parserAereoporto(arrivo));
+		JLabel lblDestinazione = new JLabel("Destinazione: " + Controller.parserAeroporto(arrivo));
 		lblDestinazione.setForeground(Color.WHITE);
 		lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblDestinazione = new GridBagConstraints();
@@ -166,8 +166,8 @@ public class VisualizzaModificaPrenotazione {
 		gbcLblNuovaData.gridy = 14;
 		panel6.add(lblNuovaData, gbcLblNuovaData);
 		
-		String partenza1 = Controller.parserAereoporto(partenza);
-		String arrivo1 = Controller.parserAereoporto(arrivo);
+		String partenza1 = Controller.parserAeroporto(partenza);
+		String arrivo1 = Controller.parserAeroporto(arrivo);
 		
 		List <Volo> listaVoli = Controller.getPartenzaDestinazione(partenza1, arrivo1);
 		

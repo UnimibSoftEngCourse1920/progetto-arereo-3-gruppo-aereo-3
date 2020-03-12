@@ -256,7 +256,7 @@ public class Registrazione {
 					c.setNome(textField.getText());
 					c.setCognome(textField1.getText());
 					c.setEmail(textField3.getText());
-					c.setPsw(passwordField.getText());
+					c.setPassword(passwordField.getText());
 					try {
 						c.setDataDiNascita(dtFormat.parse(Controller.convertiData(dateChooser1.getDate())));
 						c.setDataIscrizione(dtFormat.parse(Controller.convertiData(now)));

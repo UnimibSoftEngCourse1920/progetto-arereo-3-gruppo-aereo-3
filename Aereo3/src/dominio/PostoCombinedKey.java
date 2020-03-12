@@ -9,17 +9,12 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class PostoCombinedKey implements Serializable {
-	
-	
-
 
 	@Column(name = "fila")
 	private int fila;
 
 	@Column(name = "id_volo")
 	private int idVolo;
-
-
 
 	@Column(name = "lettera")
 	private char lettera;

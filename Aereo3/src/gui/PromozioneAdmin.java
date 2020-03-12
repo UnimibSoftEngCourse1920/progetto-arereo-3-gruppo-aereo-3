@@ -23,7 +23,7 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
 import dataManagment.GestioneAereoportoDatabase;
-import dominio.Aereoporto;
+import dominio.Aeroporto;
 import dominio.ClienteFedele;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
@@ -139,9 +139,9 @@ public class PromozioneAdmin {
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox partenzaCombo = new JComboBox();
-		List <Aereoporto> aeroporti = GestioneAereoportoDatabase.getListaAereoporti();
-		for (Aereoporto a : aeroporti) {
-			String aerPar = Controller.getDenominazioneAereoporto(a.getIdAereoporto());
+		List <Aeroporto> aeroporti = GestioneAereoportoDatabase.getListaAereoporti();
+		for (Aeroporto a : aeroporti) {
+			String aerPar = Controller.getDenominazioneAeroporto(a.getIdAereoporto());
 			partenzaCombo.addItem(aerPar);
 		}
 		GridBagConstraints gbcPartenzaCombo = new GridBagConstraints();
@@ -163,8 +163,8 @@ public class PromozioneAdmin {
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox destinazioneCombo = new JComboBox();
-		for (Aereoporto a : aeroporti) {
-			String aerPar = Controller.getDenominazioneAereoporto(a.getIdAereoporto());
+		for (Aeroporto a : aeroporti) {
+			String aerPar = Controller.getDenominazioneAeroporto(a.getIdAereoporto());
 			destinazioneCombo.addItem(aerPar);
 		}
 		GridBagConstraints gbcDestAer = new GridBagConstraints();
@@ -229,9 +229,9 @@ public class PromozioneAdmin {
 					erroreLbl.setForeground(Color.GREEN);
 					erroreLbl.setText("Promozione inserita!");
 					if(chckbxSonoUnCliente.isSelected()) 
-						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAereoporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAereoporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), true);
+						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAeroporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAeroporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), true);
 					else
-						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAereoporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAereoporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), false);
+						Controller.insertPromozione(dateChooser1.getDate(), dateChooser2.getDate(), Controller.parserCodiceAeroporto((String) partenzaCombo.getSelectedItem()), Controller.parserCodiceAeroporto((String) destinazioneCombo.getSelectedItem()), Double.parseDouble(scontoField.getText()), false);
 				
 				GestoreMail ge = Controller.getGestoreMail();
 				List<ClienteFedele> clientiFedeli = Controller.getClientiFedeli();
