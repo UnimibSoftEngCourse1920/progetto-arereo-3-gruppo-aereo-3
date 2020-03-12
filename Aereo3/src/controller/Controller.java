@@ -30,13 +30,12 @@ import dominio.Volo;
 import gui.Home;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
-import paymentManagment.CartaDiCredito;
-import paymentManagment.GestorePagamento;
+import paymentManagement.CartaDiCredito;
+import paymentManagement.GestorePagamento;
 
 public class Controller {
 	private static Log logger= LogFactory.getLog(Controller.class);
-
-	//Punto di entrata dell'applicazione
+	
 	public static void main(String [] args) throws ParseException {
 		System.out.println("Main da chiamare all'eseguibile");
 
@@ -185,11 +184,6 @@ public class Controller {
 	//GESTIONE PRENOTAZIONI
 	/*******************************************************/
 	
-//	public static int getSovrapprezzoPunti() {
-//		
-//	}
-	
-	
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
@@ -235,6 +229,10 @@ public class Controller {
 	/****************************************************/
 	//GESTIONE PROMOZIONE
 	/***************************************************/
+	
+	public static void deletePromozione() {
+		GestionePromozioneDatabase.deletePromozioni();
+	}
 	
 	public static List<Promozione> getPromozioni(Date now){
 		return GestionePromozioneDatabase.getAllPromozioni(now);

@@ -23,12 +23,22 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	
 	private static Log logger=LogFactory.getLog(GestionePrenotazioneDatabase.class);
 	
+	private static Date dataP = new Date();
+	
 	public static List<Promozione> getAllPromozioni(Date now){
 		String jpql = "SELECT p FROM Promozione as p WHERE p.dataFine>:now";
 		Query query = entityManager.createQuery(jpql).setParameter("now", now);
 		@SuppressWarnings("unchecked")
 		List<Promozione> promozioni = query.getResultList();
 		return promozioni;
+	}
+	
+	public static void deletePromozioni(){
+		String jpql = "DELETE FROM PROMOZIONE WHERE dataFine<:now";
+		Query query = entityManager.createQuery(jpql).setParameter("now", dataP);
+		query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {

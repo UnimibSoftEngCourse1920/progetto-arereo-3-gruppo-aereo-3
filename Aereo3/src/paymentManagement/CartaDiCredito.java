@@ -1,4 +1,4 @@
-package paymentManagment;
+package paymentManagement;
 
 import java.util.Date;
 

@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dataManagement.GestionePromozioneDatabase;
 import dominio.Admin;
 import dominio.Cliente;
 import dominio.ClienteFedele;
@@ -203,6 +204,8 @@ public class AccessoAdmin {
 				else {
 					contentPane.removeAll();
 					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+					
+					
 					
 					GestoreMail ge = Controller.getGestoreMail();
 					List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();

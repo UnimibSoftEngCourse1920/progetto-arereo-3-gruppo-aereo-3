@@ -43,7 +43,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	public static List<String> getDestinazioniDisponibili(){
 				
 	
-		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
+		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aeroporto a WHERE v.destinazione=a.idAeroporto ";
 		Query query = entityManager.createQuery(jpql);
 
 		@SuppressWarnings("unchecked")
@@ -56,7 +56,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	public static List<String> getPartenzeDisponibili(){
 		
 		
-		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.partenza=a.idAereoporto ";
+		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aeroporto a WHERE v.partenza=a.idAeroporto ";
 		Query query = entityManager.createQuery(jpql);
 		List<String> partenze = query.getResultList();
 		
@@ -174,7 +174,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	}	
 	
 		public static List<Volo> getVoloPartenzaDestinazione(String partenza, String destinazione) {
-			String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
+			String jpqlDestinazione = "SELECT v FROM Volo as v, Aeroporto as a WHERE  v.destinazione=a.idAeroporto and a.denominazione=:destinazione";
 			String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
 			Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
 			Query queryPartenza= entityManager.createQuery(jpqlPartenza);

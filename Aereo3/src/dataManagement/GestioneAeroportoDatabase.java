@@ -11,9 +11,6 @@ import dominio.Aeroporto;
 
 public class GestioneAeroportoDatabase extends GestioneDatabase {
 	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
-//	public static void main (String...strings) {
-//		System.out.println(parserCodiceAereoporto("Aereoporto Sofia"));
-//	}
 	
 	
 	private static List<Aeroporto> listaAeroporti= null;
@@ -33,7 +30,7 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	
 	public static List<Aeroporto> getListaAeroporti(){
 		if(listaAeroporti==null) {
-		String jpql = "SELECT DISTINCT a FROM Aereoporto as a";
+		String jpql = "SELECT DISTINCT a FROM Aeroporto as a";
 		Query query = entityManager.createQuery(jpql);
 		List<Aeroporto> listaAereoporti = query.getResultList();
 		return listaAereoporti;
@@ -43,7 +40,7 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	}
 	
 	public static List <String> getDenominazioniAeroporti(){
-		String jpql= "SELECT DISTINCT a.denominazione FROM Aereoporto as a";
+		String jpql= "SELECT DISTINCT a.denominazione FROM Aeroporto as a";
 		Query query= entityManager.createQuery(jpql);
 		List<String> listaNomiAereoporti= query.getResultList();
 		return listaNomiAereoporti;
@@ -65,7 +62,7 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	}
 	
 	public static String parserCodiceAeroporto(String denominazione) {
-		String jpql = "SELECT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
+		String jpql = "SELECT  a.idAereoporto FROM Aeroporto a WHERE a.denominazione=:campoDenominazione";
 		Query query = entityManager.createQuery(jpql);	
 		query.setParameter("campoDenominazione", denominazione);
 		

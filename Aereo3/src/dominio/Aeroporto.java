@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="aereoporto")
+@Table(name="aeroporto")
 public class Aeroporto {
 @Id
-@Column(name="id_aereoporto")
-private String idAereoporto;
+@Column(name="id_aeroporto")
+private String idAeroporto;
 
 @Column(name="denominazione")
 private String denominazione;
@@ -19,7 +19,7 @@ private String denominazione;
 private String paese;
 
 public String getIdAereoporto() {
-	return idAereoporto;
+	return idAeroporto;
 }
 
 public String getDenominazione() {

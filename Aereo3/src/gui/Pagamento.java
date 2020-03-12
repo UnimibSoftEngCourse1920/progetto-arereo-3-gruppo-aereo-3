@@ -36,7 +36,7 @@ import dominio.Promozione;
 import dominio.Volo;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
-import paymentManagment.CartaDiCredito;
+import paymentManagement.CartaDiCredito;
 
 public class Pagamento {
 	
