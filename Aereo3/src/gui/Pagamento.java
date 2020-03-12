@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dataManagment.GestioneAereoportoDatabase;
+import dataManagement.GestioneAeroportoDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
@@ -40,7 +40,7 @@ import paymentManagment.CartaDiCredito;
 
 public class Pagamento {
 	
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
 	
 	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele, JPanel homePanel, boolean modifica,int oldP) {
 		JPanel panel6 = new JPanel();

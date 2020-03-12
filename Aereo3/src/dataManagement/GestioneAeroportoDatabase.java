@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import java.util.List;
 
@@ -9,14 +9,14 @@ import org.apache.commons.logging.LogFactory;
 
 import dominio.Aeroporto;
 
-public class GestioneAereoportoDatabase extends GestioneDatabase {
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+public class GestioneAeroportoDatabase extends GestioneDatabase {
+	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
 //	public static void main (String...strings) {
 //		System.out.println(parserCodiceAereoporto("Aereoporto Sofia"));
 //	}
 	
 	
-	private static List<Aeroporto> listaAereoporti= null;
+	private static List<Aeroporto> listaAeroporti= null;
 	
 
 	public static void insertAeroporto (Aeroporto a) {
@@ -25,21 +25,21 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 			entityManager.getTransaction().begin();
 
 		entityManager.persist(a);
-		listaAereoporti.add(a);
+		listaAeroporti.add(a);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 
 	}
 	
-	public static List<Aeroporto> getListaAereoporti(){
-		if(listaAereoporti==null) {
+	public static List<Aeroporto> getListaAeroporti(){
+		if(listaAeroporti==null) {
 		String jpql = "SELECT DISTINCT a FROM Aereoporto as a";
 		Query query = entityManager.createQuery(jpql);
 		List<Aeroporto> listaAereoporti = query.getResultList();
 		return listaAereoporti;
 	}
 		else
-			return listaAereoporti;
+			return listaAeroporti;
 	}
 	
 	public static List <String> getDenominazioniAeroporti(){
@@ -49,20 +49,21 @@ public class GestioneAereoportoDatabase extends GestioneDatabase {
 		return listaNomiAereoporti;
 	}
 	
-	public static String parserAeroporto(String idAereoporto  ) {
-		if (listaAereoporti != null) {
-		for(Aeroporto a:listaAereoporti) {
-			if(a.getIdAereoporto().equals(idAereoporto))
+	public static String parserAeroporto(String idAeroporto  ) {
+		if (listaAeroporti != null) {
+		for(Aeroporto a:listaAeroporti) {
+			if(a.getIdAereoporto().equals(idAeroporto))
 				return a.getDenominazione();
 		}
 	}
-			listaAereoporti = getListaAereoporti();
-			for(Aeroporto a:listaAereoporti) {
-				if(a.getIdAereoporto().equals(idAereoporto))
+			listaAeroporti = getListaAeroporti();
+			for(Aeroporto a:listaAeroporti) {
+				if(a.getIdAereoporto().equals(idAeroporto))
 					return a.getDenominazione();
 		}
 			return null;
 	}
+	
 	public static String parserCodiceAeroporto(String denominazione) {
 		String jpql = "SELECT  a.idAereoporto FROM Aereoporto a WHERE a.denominazione=:campoDenominazione";
 		Query query = entityManager.createQuery(jpql);	

@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,6 @@ import dominio.Volo;
 
 public class GestionePostoDatabase extends GestioneDatabase {
 
-	public static void main(String...strings) {
-		System.out.println(getPosto('A', 1, 1));
-		
-		
-	}
-	
-	
 	public static void insertPostiVolo(Volo volo, double prezzoPosto, int puntiPosto) {
 		
 		List <Posto> listaPosti=new ArrayList<Posto>();
@@ -49,8 +42,6 @@ public class GestionePostoDatabase extends GestioneDatabase {
 
 		for(Posto posto:listaPosti) {
 		entityManager.persist(posto);
-//		entityManager.close();	
-//		entityManager.getTransaction().rollback();
 		}
 		entityManager.getTransaction().commit();
 		entityManager.clear();
@@ -74,7 +65,6 @@ public class GestionePostoDatabase extends GestioneDatabase {
 	}
 	
 	public static List <Posto> getListaPostiDisponibili(int idVolo){
-		
 		String jpql = "SELECT p FROM Posto as p  WHERE p.chiaveComposta.idVolo=:id  and p.idPrenotazione=NULL";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("id", idVolo);
@@ -148,9 +138,5 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 	}
-//	public static void  aggiornaPostiPrenotati(List <Posto> listaPostiDaAggiornare) {
-//		
-//		
-//	}
 	
 }

@@ -13,13 +13,13 @@ import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import dataManagment.GestioneAdminDatabase;
-import dataManagment.GestioneAereoportoDatabase;
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePostoDatabase;
-import dataManagment.GestionePrenotazioneDatabase;
-import dataManagment.GestionePromozioneDatabase;
-import dataManagment.GestioneVoloDatabase;
+import dataManagement.GestioneAdminDatabase;
+import dataManagement.GestioneAeroportoDatabase;
+import dataManagement.GestioneClienteDatabase;
+import dataManagement.GestionePostoDatabase;
+import dataManagement.GestionePrenotazioneDatabase;
+import dataManagement.GestionePromozioneDatabase;
+import dataManagement.GestioneVoloDatabase;
 import dominio.Aeroporto;
 import dominio.Cliente;
 import dominio.ClienteFedele;
@@ -83,10 +83,6 @@ public class Controller {
 	public static void insertClienteFedele(ClienteFedele cliente) {
 
 		GestioneClienteDatabase.insertClienteFedele(cliente);
-	}
-	
-	public static void insertListaClienti(ArrayList<Cliente> clienti) {
-		GestioneClienteDatabase.insertClienti(clienti);
 	}
 	
 	public static boolean controlloDisponibilità(Date dataPartenza, String partenza, String destinazione ) throws SQLException, ClassNotFoundException {
@@ -311,21 +307,21 @@ public class Controller {
 	/***************************************************/
 	
 	public static List<String> getDenominazioneAeroporti(){
-		return GestioneAereoportoDatabase.getDenominazioniAeroporti();
+		return GestioneAeroportoDatabase.getDenominazioniAeroporti();
 	}
 
 	public static String getDenominazioneAeroporto(String idAereoporto) {
 
-		return GestioneAereoportoDatabase.parserAeroporto(idAereoporto);
+		return GestioneAeroportoDatabase.parserAeroporto(idAereoporto);
 
 	}
 	
 	public static String parserCodiceAeroporto(String denominazione) {
-		return GestioneAereoportoDatabase.parserCodiceAeroporto(denominazione);
+		return GestioneAeroportoDatabase.parserCodiceAeroporto(denominazione);
 	}	
 	
 	public static String parserAeroporto(String idAereoporto  ) {
-		return GestioneAereoportoDatabase.parserAeroporto(idAereoporto);
+		return GestioneAeroportoDatabase.parserAeroporto(idAereoporto);
 	}
 	
 	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
@@ -334,7 +330,7 @@ public class Controller {
 	
 	/**Inserisce l'aereoporto nel DB**/
 	public static void insertAeroporto(Aeroporto a) {
-		GestioneAereoportoDatabase.insertAeroporto(a);
+		GestioneAeroportoDatabase.insertAeroporto(a);
 	}
 	
 	/****************************************************/

@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,7 +18,7 @@ import dominio.Prenotazione;
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
 
 	
 	public static List <Volo> getListaVoliDisponibili(){
@@ -31,9 +31,6 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		return voli;
 	}
 	
-	
-	
-	
 	public static Volo getVolo(int idVolo) {
 		String jpqlVolo = "SELECT v FROM Volo as v WHERE v.idVolo=:idVolo";
 		Query queryVolo = entityManager.createQuery(jpqlVolo);
@@ -42,7 +39,6 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		List <Volo> v = queryVolo.getResultList();
 		return v.get(0);
 	}
-	
 	
 	public static List<String> getDestinazioniDisponibili(){
 				
@@ -97,11 +93,8 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		return listaInfoVoli;
 		
 	}
-	
 
-	
-	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
-			String minutiArrivo) {	
+	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {	
 		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		dataFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 		StringBuilder data= new StringBuilder();
@@ -128,9 +121,9 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		}
 		volo.setDataArrivo(nuovaDataA);
 		
-		String  denominazione= GestioneAereoportoDatabase.parserCodiceAeroporto(volo.getDestinazione());
+		String  denominazione= GestioneAeroportoDatabase.parserCodiceAeroporto(volo.getDestinazione());
 		volo.setDestinazione(denominazione);
-		denominazione=GestioneAereoportoDatabase.parserCodiceAeroporto(volo.getPartenza());
+		denominazione=GestioneAeroportoDatabase.parserCodiceAeroporto(volo.getPartenza());
 		volo.setPartenza(denominazione);
 		
 		

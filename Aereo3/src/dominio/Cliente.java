@@ -13,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePrenotazioneDatabase;
+import dataManagement.GestioneClienteDatabase;
+import dataManagement.GestionePrenotazioneDatabase;
 
 import javax.persistence.InheritanceType;
 

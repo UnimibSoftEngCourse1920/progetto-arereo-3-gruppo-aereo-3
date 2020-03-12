@@ -27,8 +27,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import controller.Controller;
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestioneVoloDatabase;
+import dataManagement.GestioneClienteDatabase;
+import dataManagement.GestioneVoloDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Prenotazione;

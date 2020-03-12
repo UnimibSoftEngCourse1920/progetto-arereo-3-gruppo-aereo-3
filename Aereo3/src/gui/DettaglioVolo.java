@@ -31,7 +31,7 @@ import javax.swing.table.TableModel;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dataManagment.GestioneVoloDatabase;
+import dataManagement.GestioneVoloDatabase;
 import dominio.Volo;
 
 public class DettaglioVolo {

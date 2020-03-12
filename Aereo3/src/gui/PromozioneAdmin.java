@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dataManagment.GestioneAereoportoDatabase;
+import dataManagement.GestioneAeroportoDatabase;
 import dominio.Aeroporto;
 import dominio.ClienteFedele;
 import mailManagment.GestoreMail;
@@ -139,7 +139,7 @@ public class PromozioneAdmin {
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox partenzaCombo = new JComboBox();
-		List <Aeroporto> aeroporti = GestioneAereoportoDatabase.getListaAereoporti();
+		List <Aeroporto> aeroporti = GestioneAeroportoDatabase.getListaAeroporti();
 		for (Aeroporto a : aeroporti) {
 			String aerPar = Controller.getDenominazioneAeroporto(a.getIdAereoporto());
 			partenzaCombo.addItem(aerPar);

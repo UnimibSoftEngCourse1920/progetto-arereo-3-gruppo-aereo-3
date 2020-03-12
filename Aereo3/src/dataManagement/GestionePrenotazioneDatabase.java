@@ -1,6 +1,4 @@
-package dataManagment;
-
-
+package dataManagement;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -38,7 +36,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 
 	public static void insertPrenotazione(Cliente c, int v, List<Posto> posti) {
-		
 		Prenotazione p = new Prenotazione();
 		p.setPagato(false);
 		p.setCodCliente(c.getCodCliente());
@@ -51,7 +48,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		entityManager.clear();
 	}
 
-	
 	public static List<Prenotazione> getPrenotazioniInScadenza(){
 		Date currentDateScadenza = new Date();
 		Calendar calScadenza = Calendar.getInstance();
@@ -103,8 +99,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 	}
-	
-	/*****************BRANCH CLARK************************************/
 
 	public static void pagamentoPrenotazione(int idPrenotazione) {
 		entityManager.getTransaction().begin();

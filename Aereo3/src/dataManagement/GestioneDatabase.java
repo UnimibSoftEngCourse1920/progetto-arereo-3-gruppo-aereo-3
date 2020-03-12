@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

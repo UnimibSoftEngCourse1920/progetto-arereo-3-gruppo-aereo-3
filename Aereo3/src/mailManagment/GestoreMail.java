@@ -12,10 +12,10 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import dataManagment.GestioneAereoportoDatabase;
+import dataManagement.GestioneAeroportoDatabase;
 
 public class GestoreMail {
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
 
 	final private String username = "aereo3project@gmail.com";
     final private String psw = "ProgettoAereo3!";

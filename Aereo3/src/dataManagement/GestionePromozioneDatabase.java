@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,7 +63,7 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	
 	
 	
-	public static double  applyPromozione(int codPromo,Volo v, double prezzoTot) {
+	public static double applyPromozione(int codPromo,Volo v, double prezzoTot) {
 		
 		String jpql="SELECT p FROM Promozione as p WHERE p.idPromozione=:id";
 		Query query=entityManager.createQuery(jpql).setParameter("id", codPromo);

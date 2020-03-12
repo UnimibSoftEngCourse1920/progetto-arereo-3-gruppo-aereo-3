@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
