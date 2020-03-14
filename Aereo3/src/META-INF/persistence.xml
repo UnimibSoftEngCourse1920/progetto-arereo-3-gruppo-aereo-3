@@ -9,7 +9,7 @@
 		<class>dominio.Promozione</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://compagniaaerea3.c6xwpw8kwlvm.us-east-2.rds.amazonaws.com:3306/compagniaaerea"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://compagniaaerea3.c6xwpw8kwlvm.us-east-2.rds.amazonaws.com:3306/compagniaaerea?serverTimezone=CET"/>
 			<property name="javax.persistence.jdbc.password" value="progettoaereo3"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 		</properties>
