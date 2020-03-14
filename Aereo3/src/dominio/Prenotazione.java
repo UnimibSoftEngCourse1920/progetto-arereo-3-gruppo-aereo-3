@@ -1,6 +1,8 @@
+
 package dominio;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,16 +22,41 @@ public class Prenotazione {
 	private int id;
 	
 	@Transient
-	private List <Posto> listaBiglietti;
+	private List<Posto> listaBiglietti;
 	
 	@Column(name="pagato")
 	private boolean pagato;
-	
+
 	@Column(name="prezzo_totale")
 	private double prezzoTotale;
 	
-	@Transient
+	@Column(name="punti_totali")
 	private int puntiTotali;
+	
+	@Column(name="cod_cliente")
+	private int codCliente;
+
+	@Column(name="id_volo")
+	private int idVolo;
+	
+	@Column(name="prezzo_punti_totali")
+	private int prezzoPuntiTotale;
+	
+	public int getCodCliente() {
+		return codCliente;
+	}
+
+	public void setCodCliente(int codCliente) {
+		this.codCliente = codCliente;
+	}
+
+	public int getIdVolo() {
+		return idVolo;
+	}
+
+	public void setIdVolo(int idVolo) {
+		this.idVolo = idVolo;
+	}
 	
 	public int getId() {
 		return id;
@@ -40,6 +67,15 @@ public class Prenotazione {
 	}
 	public void setListaBiglietti(List<Posto> listaBiglietti) {
 		this.listaBiglietti = listaBiglietti;
+		this.prezzoTotale = 0.0;
+		this.puntiTotali = 0;
+		this.prezzoPuntiTotale = 0;
+		
+		for(Posto p : listaBiglietti) {
+			this.prezzoTotale += p.getPrezzo();
+			this.puntiTotali += p.getPunti();
+			this.prezzoPuntiTotale += p.getPrezzoPunti();
+		}
 	}
 	
 	
@@ -54,21 +90,13 @@ public class Prenotazione {
 	public double getPrezzoTotale() {
 		return prezzoTotale;
 	}
-	public void setPrezzoTotale(double prezzoTotale) {
-		this.prezzoTotale = prezzoTotale;
-	}
-	
 	
 	public int getPuntiTotali() {
 		return puntiTotali;
 	}
-	public void setPuntiTotali(int puntiTotali) {
-		this.puntiTotali = puntiTotali;
-	}
 	
-	/*************************************/
-	public void notify (String scadenza, List<Cliente> listaCliente) {
-		
+	public int getPrezzoPuntiTotale() {
+		return this.prezzoPuntiTotale;
 	}
 
 }

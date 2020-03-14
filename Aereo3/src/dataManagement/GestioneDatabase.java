@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,4 +9,8 @@ abstract class GestioneDatabase {
 	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDB");
 	static EntityManager entityManager = factory.createEntityManager();			
 	
+	static void flushAndClear() {
+	    entityManager.flush();
+	    entityManager.clear();
+	}
 }

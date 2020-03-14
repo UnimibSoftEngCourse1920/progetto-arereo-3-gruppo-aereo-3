@@ -3,10 +3,9 @@ package dominio;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,26 +13,21 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePrenotazioneDatabase;
+import dataManagement.GestioneClienteDatabase;
+import dataManagement.GestionePrenotazioneDatabase;
 
 import javax.persistence.InheritanceType;
-import javax.persistence.DiscriminatorType;
+
 
 @Entity
 @Table(name = "cliente")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name="fedele",
-    discriminatorType=DiscriminatorType.STRING
-)
-@DiscriminatorValue(value="0")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "cod_cliente")
-	private int codCliente;
+	protected int codCliente;
 
 	@Column(name = "nome")
 	private String nome;
@@ -42,39 +36,14 @@ public class Cliente {
 	private String cognome;
 
 	@Column(name = "data_di_nascita")
-	private LocalDate dataDiNascita;
+	private Date dataDiNascita;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "indirizzo")
-	private String indirizzo;
-	
-	//data in cui il cliente è diventato infedele (dopo due anni che non acquista biglietti)
-	@Column(name = "infedele")
-	private LocalDate infedele;
-	
-	@Column(name = "password")
-	private String password;
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	public int getCodCliente() {
 		return codCliente;
-	}
-
-	public LocalDate getInfedele() {
-		return infedele;
-	}
-
-	public void setInfedele(LocalDate infedele) {
-		this.infedele = infedele;
 	}
 
 	public String getNome() {
@@ -93,12 +62,13 @@ public class Cliente {
 		this.cognome = cognome;
 	}
 
-	public LocalDate getDataDiNascita() {
+	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
 
-	public void setDataDiNascita(LocalDate localDate) {
-		this.dataDiNascita = localDate;
+
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
 	}
 
 	public String getEmail() {
@@ -108,15 +78,6 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-	
 	
 
 	/*****************************************/
@@ -131,12 +92,12 @@ public class Cliente {
 
 	/******************************************/
 
-	public void paga(Prenotazione prenotazione) {
+	/*public void paga(Prenotazione prenotazione) {
 		//Clark: 
 		//DUBBIO: if saldo carta< del prezzo tot? -> classe carta di cerdito?? || mettere un importo  della carta di default??
 		
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
-	}
+	}*/
 
 	/*****************************************/
 	public void modificaPrenotazione(Prenotazione prenotazione, LocalTime nuovoOrario) {

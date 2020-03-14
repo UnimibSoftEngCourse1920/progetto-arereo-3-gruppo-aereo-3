@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import controller.Controller;
+
 @Entity
 @Table(name="volo")
 public class Volo {
@@ -40,10 +42,6 @@ public class Volo {
 	@Column(name="gate")
 	private String gate;
 	
-	@Transient
-	private Promozione promo;
-
-
 	public int getIdVolo() {
 		return idVolo;
 	}
@@ -96,40 +94,11 @@ public class Volo {
 		this.gate = gate;
 	}
 	
-	public Promozione getPromo() {
-		return promo;
-	}
-
-	public void setPromo(Promozione promo) {
-		this.promo = promo;
-	}
-	
-	
-	
-
-
-	@Override
-	public String toString() {
-		return "Volo [idVolo=" + idVolo + ", destinazione=" + destinazione + ", partenza=" + partenza
-				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", numeroPosti=" + numeroPosti
-				+ ", gate=" + gate + ", promo=" + promo + "]";
-	}
-
-	/*****************************************/
-	@Override
-	public boolean equals(Object obj) {
-		Volo v=(Volo) obj;
-		
-		if(!(this.getPartenza().equalsIgnoreCase(v.getPartenza())))
-			return false;
-		
-		if(!(this.getDestinazione().equalsIgnoreCase(v.getDestinazione())))
-			return false;
-
-		if(!(this.getDataPartenza().toString().equalsIgnoreCase(v.getDataPartenza().toString())))
-			return false;
-
-		return true;
+	//@Override
+	public String toString(String partenza, String arrivo) {
+		return "Volo [idVolo=" + idVolo  + ", partenza=" + Controller.getDenominazioneAeroporto(partenza)
+				+ ", destinazione=" + Controller.getDenominazioneAeroporto(arrivo)
+				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", gate=" + gate + "]";
 	}
 
 }

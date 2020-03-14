@@ -9,9 +9,6 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class PostoCombinedKey implements Serializable {
-	
-	
-
 
 	@Column(name = "fila")
 	private int fila;
@@ -19,13 +16,15 @@ public class PostoCombinedKey implements Serializable {
 	@Column(name = "id_volo")
 	private int idVolo;
 
-
-
 	@Column(name = "lettera")
 	private char lettera;
 
 	public int setIdVolo(int idVolo) {
 		return this.idVolo = idVolo;
+	}
+
+	public int getIdVolo() {
+		return idVolo;
 	}
 
 	public int getFila() {
@@ -70,4 +69,10 @@ public class PostoCombinedKey implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "" + fila + lettera;
+	}
+	
 }

@@ -1,82 +1,70 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dominio.Volo;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JRadioButton;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.border.LineBorder;
-import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import javax.swing.JPasswordField;
-import javax.swing.JSpinner;
-import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JSlider;
 
+
+@SuppressWarnings("serial")
 public class Home extends JFrame {
 	
 	//Dichiarazione variabili;
+	private static Log logger=LogFactory.getLog(Home.class);
 
 	private JPanel contentPane;
 	private JPanel homePanel;
-	private JPanel panel_1;
-	private JPanel panel_3;
+	private JPanel panel1;
+	private JPanel panel3;
 	private JLabel lblAirPj;
-	private JPanel panel_4;
+	private JPanel panel4;
 	private JButton btnLogIn;
-	private JPanel panel_2;
-	private JRadioButton rdbtnSoloAndata;
-	private JRadioButton rdbtnAndataERitorno;
+	private JPanel panel2;
 	private JLabel lblAeroportoDiPartenza;
 	private JComboBox comboBox;
 	private JLabel lblAeroportoDiArrivo;
-	private JComboBox comboBox_1;
-	private JComboBox comboBox_2;
+	private JComboBox comboBox1;
+	private JComboBox comboBox2;
 	private JLabel lblDataDiPartenza;
-	private JLabel lblNewLabel_1;
-	private JLabel lblDataDiRitorno;
+	private JLabel lblNewLabel1;
 	private JDateChooser dateChooser;
-	private JDateChooser dateChooser_1;
 	private Date now = new Date(); 
 	private JPanel registrationPanel;
-	private boolean andataRitorno;
 	private JLabel lblNewLabel;
-	private JPanel panel_8;
-	private JPanel panel_9;
-	private JPanel posti;
-	private JPanel sceltaPostiPanel;
-	private JLabel lblScegliereIPosti;
-	private Component verticalStrut_6;
-	private JComboBox comboBox_3;
 	private JPanel panel;
 	private JButton btnAreaAdmin;
+	private JPanel panel5;
+	private JButton btnVisualizzamodificaPrenotazione;
+	private boolean modifica;
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -88,7 +76,7 @@ public class Home extends JFrame {
 					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error(e);
 				}
 			}
 		});
@@ -111,30 +99,32 @@ public class Home extends JFrame {
 		contentPane.add(homePanel, "name_358108283923800");
 		homePanel.setLayout(new BorderLayout(0, 0));
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(Color.BLUE);
-		homePanel.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		modifica = false;
 		
-		panel_3 = new JPanel();
-		panel_3.setBackground(Color.BLUE);
-		panel_1.add(panel_3, BorderLayout.WEST);
+		panel1 = new JPanel();
+		panel1.setBackground(Color.BLUE);
+		homePanel.add(panel1, BorderLayout.NORTH);
+		panel1.setLayout(new BorderLayout(0, 0));
+		
+		panel3 = new JPanel();
+		panel3.setBackground(Color.BLUE);
+		panel1.add(panel3, BorderLayout.WEST);
 		
 		lblAirPj = new JLabel("AIR PJ 3");
 		lblAirPj.setBackground(Color.BLUE);
 		lblAirPj.setForeground(Color.WHITE);
 		lblAirPj.setFont(new Font("Tw Cen MT", Font.PLAIN, 50));
-		panel_3.add(lblAirPj);
+		panel3.add(lblAirPj);
 		
-		panel_4 = new JPanel();
-		panel_4.setBackground(Color.BLUE);
-		panel_1.add(panel_4, BorderLayout.EAST);
+		panel4 = new JPanel();
+		panel4.setBackground(Color.BLUE);
+		panel1.add(panel4, BorderLayout.EAST);
 		
 		btnLogIn = new JButton("LOG IN");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(lblNewLabel_1 != null) {
-					panel_2.remove(lblNewLabel_1);
+				if(lblNewLabel1 != null) {
+					panel2.remove(lblNewLabel1);
 				}
 				contentPane.removeAll();
 				contentPane.add(Accesso.esegui(contentPane, homePanel, registrationPanel));
@@ -143,11 +133,11 @@ public class Home extends JFrame {
 			}
 		});
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		panel_4.add(btnLogIn);
+		panel4.add(btnLogIn);
 		
 		panel = new JPanel();
 		panel.setBackground(Color.BLUE);
-		panel_1.add(panel, BorderLayout.CENTER);
+		panel1.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		btnAreaAdmin = new JButton("Area Admin");
@@ -162,308 +152,260 @@ public class Home extends JFrame {
 		btnAreaAdmin.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		panel.add(btnAreaAdmin);
 		
-		panel_2 = new JPanel();
-		panel_2.setBackground(Color.BLUE);
-		homePanel.add(panel_2, BorderLayout.CENTER);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_2.setLayout(gbl_panel_2);
+		panel2 = new JPanel();
+		panel2.setBackground(Color.BLUE);
+		homePanel.add(panel2, BorderLayout.CENTER);
+		GridBagLayout gblPanel_2 = new GridBagLayout();
+		gblPanel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblPanel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblPanel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gblPanel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel2.setLayout(gblPanel_2);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
-		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut.gridx = 1;
-		gbc_verticalStrut.gridy = 0;
-		panel_2.add(verticalStrut, gbc_verticalStrut);
+		GridBagConstraints gbcVerticalStrut = new GridBagConstraints();
+		gbcVerticalStrut.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut.gridx = 1;
+		gbcVerticalStrut.gridy = 0;
+		panel2.add(verticalStrut, gbcVerticalStrut);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
-		gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_1.gridx = 3;
-		gbc_verticalStrut_1.gridy = 0;
-		panel_2.add(verticalStrut_1, gbc_verticalStrut_1);
+		Component verticalStrut1 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut1 = new GridBagConstraints();
+		gbcVerticalStrut1.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut1.gridx = 3;
+		gbcVerticalStrut1.gridy = 0;
+		panel2.add(verticalStrut1, gbcVerticalStrut1);
 		
-		rdbtnSoloAndata = new JRadioButton("Solo Andata");
-		rdbtnSoloAndata.setForeground(Color.WHITE);
-		rdbtnSoloAndata.setBackground(Color.BLUE);
-		rdbtnSoloAndata.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_rdbtnSoloAndata = new GridBagConstraints();
-		gbc_rdbtnSoloAndata.anchor = GridBagConstraints.WEST;
-		gbc_rdbtnSoloAndata.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnSoloAndata.gridx = 1;
-		gbc_rdbtnSoloAndata.gridy = 1;
-		rdbtnSoloAndata.setSelected(true);
-		rdbtnSoloAndata.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(lblNewLabel_1 != null)
-					panel_2.remove(lblNewLabel_1);;
-				andataRitorno = false;
-				lblDataDiRitorno.setVisible(false);
-				dateChooser_1.setVisible(false);
-				panel_2.revalidate();
-				panel_2.repaint();
-				}
-		});
-		panel_2.add(rdbtnSoloAndata, gbc_rdbtnSoloAndata);
+		Component verticalStrut2 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut2 = new GridBagConstraints();
+		gbcVerticalStrut2.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut2.gridx = 1;
+		gbcVerticalStrut2.gridy = 2;
+		panel2.add(verticalStrut2, gbcVerticalStrut2);
 		
-		rdbtnAndataERitorno = new JRadioButton("Andata e Ritorno");
-		rdbtnAndataERitorno.setForeground(Color.WHITE);
-		rdbtnAndataERitorno.setBackground(Color.BLUE);
-		rdbtnAndataERitorno.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_rdbtnAndataERitorno = new GridBagConstraints();
-		gbc_rdbtnAndataERitorno.anchor = GridBagConstraints.NORTHWEST;
-		gbc_rdbtnAndataERitorno.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnAndataERitorno.gridx = 3;
-		gbc_rdbtnAndataERitorno.gridy = 1;
-		rdbtnAndataERitorno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(lblNewLabel_1 != null)
-					panel_2.remove(lblNewLabel_1);
-				andataRitorno=true;
-				lblDataDiRitorno.setVisible(true);
-				dateChooser_1.setVisible(true);
-				panel_2.revalidate();
-				panel_2.repaint();
-				}
-		});
-		panel_2.add(rdbtnAndataERitorno, gbc_rdbtnAndataERitorno);
-		
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(rdbtnSoloAndata);
-		bg.add(rdbtnAndataERitorno);
-		
-		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_2 = new GridBagConstraints();
-		gbc_verticalStrut_2.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_2.gridx = 1;
-		gbc_verticalStrut_2.gridy = 2;
-		panel_2.add(verticalStrut_2, gbc_verticalStrut_2);
-		
-		Component verticalStrut_4 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_4 = new GridBagConstraints();
-		gbc_verticalStrut_4.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_4.gridx = 3;
-		gbc_verticalStrut_4.gridy = 2;
-		panel_2.add(verticalStrut_4, gbc_verticalStrut_4);
+		Component verticalStrut4 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut4 = new GridBagConstraints();
+		gbcVerticalStrut4.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut4.gridx = 3;
+		gbcVerticalStrut4.gridy = 2;
+		panel2.add(verticalStrut4, gbcVerticalStrut4);
 		
 		lblNewLabel = new JLabel("Numero Passeggeri:");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 3;
-		panel_2.add(lblNewLabel, gbc_lblNewLabel);
+		GridBagConstraints gbcLblNewLabel = new GridBagConstraints();
+		gbcLblNewLabel.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbcLblNewLabel.gridx = 1;
+		gbcLblNewLabel.gridy = 3;
+		panel2.add(lblNewLabel, gbcLblNewLabel);
 		
-		comboBox_2 = new JComboBox();
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 3;
-		gbc_comboBox_2.gridy = 3;
+		comboBox2 = new JComboBox();
+		GridBagConstraints gbcComboBox2 = new GridBagConstraints();
+		gbcComboBox2.insets = new Insets(0, 0, 5, 5);
+		gbcComboBox2.fill = GridBagConstraints.HORIZONTAL;
+		gbcComboBox2.gridx = 3;
+		gbcComboBox2.gridy = 3;
 		for(int i = 1;i<4;i++) {
 			Integer valore = i;
-			comboBox_2.addItem(valore);
+			comboBox2.addItem(valore);
 			}
-		//int value = comboBox_2.getItemCount();
-		panel_2.add(comboBox_2, gbc_comboBox_2);
+		panel2.add(comboBox2, gbcComboBox2);
 		
 		lblAeroportoDiPartenza = new JLabel("Aeroporto di Partenza:");
 		lblAeroportoDiPartenza.setForeground(Color.WHITE);
 		lblAeroportoDiPartenza.setBackground(Color.WHITE);
 		lblAeroportoDiPartenza.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblAeroportoDiPartenza = new GridBagConstraints();
-		gbc_lblAeroportoDiPartenza.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblAeroportoDiPartenza.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAeroportoDiPartenza.gridx = 1;
-		gbc_lblAeroportoDiPartenza.gridy = 5;
-		panel_2.add(lblAeroportoDiPartenza, gbc_lblAeroportoDiPartenza);
+		GridBagConstraints gbcLblAeroportoDiPartenza = new GridBagConstraints();
+		gbcLblAeroportoDiPartenza.anchor = GridBagConstraints.NORTHWEST;
+		gbcLblAeroportoDiPartenza.insets = new Insets(0, 0, 5, 5);
+		gbcLblAeroportoDiPartenza.gridx = 1;
+		gbcLblAeroportoDiPartenza.gridy = 5;
+		panel2.add(lblAeroportoDiPartenza, gbcLblAeroportoDiPartenza);
 		
 		List <String> listaVoli = Controller.getPartenzeVoliDisponibili();
 		
 		comboBox = new JComboBox();
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox.gridx = 3;
-		gbc_comboBox.gridy = 5;
+		GridBagConstraints gbcComboBox = new GridBagConstraints();
+		gbcComboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbcComboBox.insets = new Insets(0, 0, 5, 5);
+		gbcComboBox.gridx = 3;
+		gbcComboBox.gridy = 5;
 		for(String v : listaVoli) {
 			comboBox.addItem(v);
 		}
-		panel_2.add(comboBox, gbc_comboBox);
+		panel2.add(comboBox, gbcComboBox);
 		
-		Component verticalStrut_3 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_3 = new GridBagConstraints();
-		gbc_verticalStrut_3.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_3.gridx = 1;
-		gbc_verticalStrut_3.gridy = 6;
-		panel_2.add(verticalStrut_3, gbc_verticalStrut_3);
+		Component verticalStrut3 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut3 = new GridBagConstraints();
+		gbcVerticalStrut3.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut3.gridx = 1;
+		gbcVerticalStrut3.gridy = 6;
+		panel2.add(verticalStrut3, gbcVerticalStrut3);
 		
-		Component verticalStrut_5 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_5 = new GridBagConstraints();
-		gbc_verticalStrut_5.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_5.gridx = 3;
-		gbc_verticalStrut_5.gridy = 6;
-		panel_2.add(verticalStrut_5, gbc_verticalStrut_5);
+		Component verticalStrut5 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut5 = new GridBagConstraints();
+		gbcVerticalStrut5.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut5.gridx = 3;
+		gbcVerticalStrut5.gridy = 6;
+		panel2.add(verticalStrut5, gbcVerticalStrut5);
 		
 		lblAeroportoDiArrivo = new JLabel("Aeroporto di Arrivo:");
 		lblAeroportoDiArrivo.setForeground(Color.WHITE);
 		lblAeroportoDiArrivo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblAeroportoDiArrivo = new GridBagConstraints();
-		gbc_lblAeroportoDiArrivo.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblAeroportoDiArrivo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAeroportoDiArrivo.gridx = 1;
-		gbc_lblAeroportoDiArrivo.gridy = 8;
-		panel_2.add(lblAeroportoDiArrivo, gbc_lblAeroportoDiArrivo);
+		GridBagConstraints gbcLblAeroportoDiArrivo = new GridBagConstraints();
+		gbcLblAeroportoDiArrivo.anchor = GridBagConstraints.NORTHWEST;
+		gbcLblAeroportoDiArrivo.insets = new Insets(0, 0, 5, 5);
+		gbcLblAeroportoDiArrivo.gridx = 1;
+		gbcLblAeroportoDiArrivo.gridy = 8;
+		panel2.add(lblAeroportoDiArrivo, gbcLblAeroportoDiArrivo);
 		
 		List <String> listaDestinazioni = Controller.getDestinazioniVoliDisponibili();
 		
-		comboBox_1 = new JComboBox();
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_1.gridx = 3;
-		gbc_comboBox_1.gridy = 8;
+		comboBox1 = new JComboBox();
+		GridBagConstraints gbcComboBox1 = new GridBagConstraints();
+		gbcComboBox1.fill = GridBagConstraints.HORIZONTAL;
+		gbcComboBox1.insets = new Insets(0, 0, 5, 5);
+		gbcComboBox1.gridx = 3;
+		gbcComboBox1.gridy = 8;
 		for(String v : listaDestinazioni) {
-			comboBox_1.addItem(v);
+			comboBox1.addItem(v);
 		}
-		panel_2.add(comboBox_1, gbc_comboBox_1);
+		panel2.add(comboBox1, gbcComboBox1);
 		
 		lblDataDiPartenza = new JLabel("Data di Partenza:");
 		lblDataDiPartenza.setForeground(Color.WHITE);
 		lblDataDiPartenza.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblDataDiPartenza = new GridBagConstraints();
-		gbc_lblDataDiPartenza.anchor = GridBagConstraints.WEST;
-		gbc_lblDataDiPartenza.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDataDiPartenza.gridx = 1;
-		gbc_lblDataDiPartenza.gridy = 10;
-		panel_2.add(lblDataDiPartenza, gbc_lblDataDiPartenza);
+		GridBagConstraints gbcLblDataDiPartenza = new GridBagConstraints();
+		gbcLblDataDiPartenza.anchor = GridBagConstraints.WEST;
+		gbcLblDataDiPartenza.insets = new Insets(0, 0, 5, 5);
+		gbcLblDataDiPartenza.gridx = 1;
+		gbcLblDataDiPartenza.gridy = 10;
+		panel2.add(lblDataDiPartenza, gbcLblDataDiPartenza);
 		
 		dateChooser = new JDateChooser();
 		dateChooser.setDate(now);
-		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
-		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
-		gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
-		gbc_dateChooser.gridx = 3;
-		gbc_dateChooser.gridy = 10;
-		panel_2.add(dateChooser, gbc_dateChooser);
+		GridBagConstraints gbcDateChooser = new GridBagConstraints();
+		gbcDateChooser.insets = new Insets(0, 0, 5, 5);
+		gbcDateChooser.fill = GridBagConstraints.HORIZONTAL;
+		gbcDateChooser.gridx = 3;
+		gbcDateChooser.gridy = 10;
+		panel2.add(dateChooser, gbcDateChooser);
 		
-		lblDataDiRitorno = new JLabel("Data di Ritorno:");
-		lblDataDiRitorno.setForeground(Color.WHITE);
-		lblDataDiRitorno.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblDataDiRitorno = new GridBagConstraints();
-		gbc_lblDataDiRitorno.anchor = GridBagConstraints.WEST;
-		gbc_lblDataDiRitorno.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDataDiRitorno.gridx = 1;
-		gbc_lblDataDiRitorno.gridy = 11;
-		panel_2.add(lblDataDiRitorno, gbc_lblDataDiRitorno);
-		
-		dateChooser_1 = new JDateChooser();
-		dateChooser_1.setDate(now);
-		GridBagConstraints gbc_dateChooser_1 = new GridBagConstraints();
-		gbc_dateChooser_1.insets = new Insets(0, 0, 5, 5);
-		gbc_dateChooser_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_dateChooser_1.gridx = 3;
-		gbc_dateChooser_1.gridy = 11;
-		panel_2.add(dateChooser_1, gbc_dateChooser_1);
-		
-		//Creazione volo:
-		/******************************************************/
-		
-		Volo volo = new Volo();
-		volo.setDestinazione(lblAeroportoDiArrivo.getText());
-		volo.setPartenza(lblAeroportoDiPartenza.getText());
-		volo.setDataArrivo( dateChooser_1.getDate());
-		volo.setDataPartenza( dateChooser.getDate());
-		Controller.controlloDisponibilità(volo);
-		
-		
-		/****************************************************/
-		
-		lblDataDiRitorno.setVisible(false);
-		dateChooser_1.setVisible(false);
-		
-		JButton btnCercaIlTuo_1 = new JButton("Cerca il tuo volo !");
-		btnCercaIlTuo_1.addActionListener(new ActionListener() {
+		JButton btnCercaIlTuo1 = new JButton("Cerca il tuo volo !");
+		btnCercaIlTuo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedItem().equals(comboBox_1.getSelectedItem())) {
-					if (lblNewLabel_1 != null)
-						panel_2.remove(lblNewLabel_1);
-					
-					lblNewLabel_1 = new JLabel("Attenzione, gli aeroporti coincidono !");
-					lblNewLabel_1.setForeground(Color.RED);
-					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-					GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-					gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-					gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-					gbc_lblNewLabel_1.gridx = 3;
-					gbc_lblNewLabel_1.gridy = 12;
-					panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-				}
-				else if(dateChooser_1.isVisible() == true && dateChooser.getDate().compareTo(dateChooser_1.getDate()) == 1) {
-					
-					if (lblNewLabel_1 != null)
-						panel_2.remove(lblNewLabel_1);
-					
-						lblNewLabel_1 = new JLabel("Attenzione, le date sono errate !");
-						lblNewLabel_1.setForeground(Color.RED);
-						lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-						GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-						gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-						gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-						gbc_lblNewLabel_1.gridx = 3;
-						gbc_lblNewLabel_1.gridy = 12;
-						panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-					}
 				
+				if (dateChooser.getDate().before(now)) {
+					if (lblNewLabel1 != null)
+						panel2.remove(lblNewLabel1);
+					
+					lblNewLabel1 = new JLabel("Data errata !");
+					lblNewLabel1.setForeground(Color.RED);
+					lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+					GridBagConstraints gbcLblNewLabel1 = new GridBagConstraints();
+					gbcLblNewLabel1.anchor = GridBagConstraints.WEST;
+					gbcLblNewLabel1.insets = new Insets(0, 0, 5, 5);
+					gbcLblNewLabel1.gridx = 3;
+					gbcLblNewLabel1.gridy = 12;
+					panel2.add(lblNewLabel1, gbcLblNewLabel1);
+				}
+				else if(comboBox.getSelectedItem().equals(comboBox1.getSelectedItem())) {
+					if (lblNewLabel1 != null)
+						panel2.remove(lblNewLabel1);
+					
+					lblNewLabel1 = new JLabel("Attenzione, gli aeroporti coincidono !");
+					lblNewLabel1.setForeground(Color.RED);
+					lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+					GridBagConstraints gbcLblNewLabel1 = new GridBagConstraints();
+					gbcLblNewLabel1.anchor = GridBagConstraints.WEST;
+					gbcLblNewLabel1.insets = new Insets(0, 0, 5, 5);
+					gbcLblNewLabel1.gridx = 3;
+					gbcLblNewLabel1.gridy = 12;
+					panel2.add(lblNewLabel1, gbcLblNewLabel1);
+				}
 				
 				else {
 					
-					if (lblNewLabel_1 != null)
-						panel_2.remove(lblNewLabel_1);
+					if (lblNewLabel1 != null)
+						panel2.remove(lblNewLabel1);
 					
-					System.out.println(comboBox_2.getSelectedItem());
-					Integer value_1 = (Integer)comboBox_2.getSelectedItem();
-					int value = value_1.intValue();
-					contentPane.removeAll();
-					contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, volo, andataRitorno, value));
-					contentPane.repaint();
-					contentPane.revalidate();
+					System.out.println(comboBox2.getSelectedItem());
+					Integer value1 = (Integer)comboBox2.getSelectedItem();
+					int value = value1.intValue();
+					
+					Date dataPartenza= dateChooser.getDate();
+					String partenza= (String)comboBox.getSelectedItem();
+					String destinazione= (String) comboBox1.getSelectedItem();
+					try {
+						if(Controller.controlloDisponibilità(dataPartenza, partenza, destinazione)) {
+						contentPane.removeAll();
+						contentPane.add(DettaglioVolo.esegui(contentPane, homePanel, value, comboBox.getSelectedItem().toString(), comboBox1.getSelectedItem().toString(), dateChooser.getDate(), modifica));
+						contentPane.repaint();
+						contentPane.revalidate();
+						}
+						else {
+							if (lblNewLabel1 != null)
+								panel2.remove(lblNewLabel1);
+							lblNewLabel1 = new JLabel("Volo inesistente !");
+							lblNewLabel1.setForeground(Color.RED);
+							lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+							GridBagConstraints gbcLblNewLabel1 = new GridBagConstraints();
+							gbcLblNewLabel1.anchor = GridBagConstraints.WEST;
+							gbcLblNewLabel1.insets = new Insets(0, 0, 5, 5);
+							gbcLblNewLabel1.gridx = 3;
+							gbcLblNewLabel1.gridy = 12;
+							panel2.add(lblNewLabel1, gbcLblNewLabel1);
+						}
+					} catch (ClassNotFoundException | SQLException e1) {
+							logger.error(e1);	
+							}
 				}
 				
 		
-				panel_2.revalidate();
-				panel_2.repaint();
+				panel2.revalidate();
+				panel2.repaint();
 			}
 		});
-		btnCercaIlTuo_1.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		GridBagConstraints gbc_btnCercaIlTuo_1 = new GridBagConstraints();
-		gbc_btnCercaIlTuo_1.anchor = GridBagConstraints.WEST;
-		gbc_btnCercaIlTuo_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCercaIlTuo_1.gridx = 1;
-		gbc_btnCercaIlTuo_1.gridy = 12;
-		panel_2.add(btnCercaIlTuo_1, gbc_btnCercaIlTuo_1);
+		btnCercaIlTuo1.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		GridBagConstraints gbcBtnCercaIlTuo1 = new GridBagConstraints();
+		gbcBtnCercaIlTuo1.anchor = GridBagConstraints.WEST;
+		gbcBtnCercaIlTuo1.insets = new Insets(0, 0, 5, 5);
+		gbcBtnCercaIlTuo1.gridx = 1;
+		gbcBtnCercaIlTuo1.gridy = 12;
+		panel2.add(btnCercaIlTuo1, gbcBtnCercaIlTuo1);
 		
-		//Nuova interfaccia
+		panel5 = new JPanel();
+		panel5.setBackground(Color.BLUE);
+		homePanel.add(panel5, BorderLayout.SOUTH);
+		panel5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		panel_8 = new JPanel();
-		panel_8.setBackground(Color.BLUE);
-		contentPane.add(panel_8, "name_1158551504937600");
-		panel_8.setLayout(new BorderLayout(0, 0));
+		btnVisualizzamodificaPrenotazione = new JButton("Visualizza/Modifica Prenotazione");
+		btnVisualizzamodificaPrenotazione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(CercaPrenotazione.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnVisualizzamodificaPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel5.add(btnVisualizzamodificaPrenotazione);
 		
-		panel_9 = new JPanel();
-		panel_9.setBackground(Color.BLUE);
-		panel_8.add(panel_9, BorderLayout.WEST);
-		GridBagLayout gbl_panel_9 = new GridBagLayout();
-		gbl_panel_9.columnWidths = new int[]{0};
-		gbl_panel_9.rowHeights = new int[]{0};
-		gbl_panel_9.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_panel_9.rowWeights = new double[]{Double.MIN_VALUE};
-		panel_9.setLayout(gbl_panel_9);
-	}
+		JButton btnPromozioni = new JButton("Visualizza Promozioni");
+		btnPromozioni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				contentPane.add(ListaPromozioni.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnPromozioni.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel5.add(btnPromozioni);
+		
+		//Nuovo panel
+	}		
+		
 }
 

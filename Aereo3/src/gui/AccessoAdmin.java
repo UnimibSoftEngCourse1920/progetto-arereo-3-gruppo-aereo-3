@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -17,7 +18,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import dataManagement.GestionePromozioneDatabase;
 import dominio.Admin;
+import dominio.Cliente;
+import dominio.ClienteFedele;
+import dominio.Prenotazione;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class AccessoAdmin {
 	static JPanel esegui(JPanel contentPane, JPanel homePanel) {
@@ -25,205 +32,229 @@ public class AccessoAdmin {
 		adminLogIn.setBounds(100, 100, 894, 717);
 		adminLogIn.setBackground(Color.BLUE);
 		contentPane.add(adminLogIn, "name_1062736859150500");
-		GridBagLayout gbl_adminLogIn = new GridBagLayout();
-		gbl_adminLogIn.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_adminLogIn.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_adminLogIn.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_adminLogIn.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		adminLogIn.setLayout(gbl_adminLogIn);
+		GridBagLayout gblAdminLogIn = new GridBagLayout();
+		gblAdminLogIn.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblAdminLogIn.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gblAdminLogIn.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gblAdminLogIn.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		adminLogIn.setLayout(gblAdminLogIn);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 12;
-		adminLogIn.add(lblNewLabel, gbc_lblNewLabel);
+		GridBagConstraints gbcLblNewLabel = new GridBagConstraints();
+		gbcLblNewLabel.anchor = GridBagConstraints.WEST;
+		gbcLblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbcLblNewLabel.gridx = 1;
+		gbcLblNewLabel.gridy = 12;
+		adminLogIn.add(lblNewLabel, gbcLblNewLabel);
 		
-		Component verticalStrut_6 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_6 = new GridBagConstraints();
-		gbc_verticalStrut_6.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_6.gridx = 1;
-		gbc_verticalStrut_6.gridy = 0;
-		adminLogIn.add(verticalStrut_6, gbc_verticalStrut_6);
+		Component verticalStrut6 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
+		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut6.gridx = 1;
+		gbcVerticalStrut6.gridy = 0;
+		adminLogIn.add(verticalStrut6, gbcVerticalStrut6);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut = new GridBagConstraints();
-		gbc_horizontalStrut.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut.gridx = 0;
-		gbc_horizontalStrut.gridy = 1;
-		adminLogIn.add(horizontalStrut, gbc_horizontalStrut);
+		GridBagConstraints gbcHorizontalStrut = new GridBagConstraints();
+		gbcHorizontalStrut.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut.gridx = 0;
+		gbcHorizontalStrut.gridy = 1;
+		adminLogIn.add(horizontalStrut, gbcHorizontalStrut);
 		
 		JLabel lblInserireLeCredenziali = new JLabel("Inserire le credenziali:");
 		lblInserireLeCredenziali.setForeground(Color.WHITE);
 		lblInserireLeCredenziali.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblInserireLeCredenziali = new GridBagConstraints();
-		gbc_lblInserireLeCredenziali.insets = new Insets(0, 0, 5, 5);
-		gbc_lblInserireLeCredenziali.anchor = GridBagConstraints.WEST;
-		gbc_lblInserireLeCredenziali.gridx = 1;
-		gbc_lblInserireLeCredenziali.gridy = 1;
-		adminLogIn.add(lblInserireLeCredenziali, gbc_lblInserireLeCredenziali);
+		GridBagConstraints gbcLblInserireLeCredenziali = new GridBagConstraints();
+		gbcLblInserireLeCredenziali.insets = new Insets(0, 0, 5, 5);
+		gbcLblInserireLeCredenziali.anchor = GridBagConstraints.WEST;
+		gbcLblInserireLeCredenziali.gridx = 1;
+		gbcLblInserireLeCredenziali.gridy = 1;
+		adminLogIn.add(lblInserireLeCredenziali, gbcLblInserireLeCredenziali);
 		
-		Component verticalStrut_11 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_11 = new GridBagConstraints();
-		gbc_verticalStrut_11.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_11.gridx = 1;
-		gbc_verticalStrut_11.gridy = 2;
-		adminLogIn.add(verticalStrut_11, gbc_verticalStrut_11);
+		Component verticalStrut11 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut11 = new GridBagConstraints();
+		gbcVerticalStrut11.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut11.gridx = 1;
+		gbcVerticalStrut11.gridy = 2;
+		adminLogIn.add(verticalStrut11, gbcVerticalStrut11);
 		
-		Component verticalStrut_10 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_10 = new GridBagConstraints();
-		gbc_verticalStrut_10.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_10.gridx = 1;
-		gbc_verticalStrut_10.gridy = 3;
-		adminLogIn.add(verticalStrut_10, gbc_verticalStrut_10);
+		Component verticalStrut10 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut10 = new GridBagConstraints();
+		gbcVerticalStrut10.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut10.gridx = 1;
+		gbcVerticalStrut10.gridy = 3;
+		adminLogIn.add(verticalStrut10, gbcVerticalStrut10);
 		
-		Component verticalStrut_9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_9 = new GridBagConstraints();
-		gbc_verticalStrut_9.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_9.gridx = 1;
-		gbc_verticalStrut_9.gridy = 4;
-		adminLogIn.add(verticalStrut_9, gbc_verticalStrut_9);
+		Component verticalStrut9 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
+		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut9.gridx = 1;
+		gbcVerticalStrut9.gridy = 4;
+		adminLogIn.add(verticalStrut9, gbcVerticalStrut9);
 		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_2 = new GridBagConstraints();
-		gbc_horizontalStrut_2.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_2.gridx = 0;
-		gbc_horizontalStrut_2.gridy = 5;
-		adminLogIn.add(horizontalStrut_2, gbc_horizontalStrut_2);
+		Component horizontalStrut2 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut2 = new GridBagConstraints();
+		gbcHorizontalStrut2.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut2.gridx = 0;
+		gbcHorizontalStrut2.gridy = 5;
+		adminLogIn.add(horizontalStrut2, gbcHorizontalStrut2);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 1;
-		gbc_lblEmail.gridy = 5;
-		adminLogIn.add(lblEmail, gbc_lblEmail);
+		GridBagConstraints gbcLblEmail = new GridBagConstraints();
+		gbcLblEmail.anchor = GridBagConstraints.WEST;
+		gbcLblEmail.insets = new Insets(0, 0, 5, 5);
+		gbcLblEmail.gridx = 1;
+		gbcLblEmail.gridy = 5;
+		adminLogIn.add(lblEmail, gbcLblEmail);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_1 = new GridBagConstraints();
-		gbc_horizontalStrut_1.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_1.gridx = 0;
-		gbc_horizontalStrut_1.gridy = 6;
-		adminLogIn.add(horizontalStrut_1, gbc_horizontalStrut_1);
+		Component horizontalStrut1 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut1 = new GridBagConstraints();
+		gbcHorizontalStrut1.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut1.gridx = 0;
+		gbcHorizontalStrut1.gridy = 6;
+		adminLogIn.add(horizontalStrut1, gbcHorizontalStrut1);
 		
 		JTextField textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 6;
-		adminLogIn.add(textField, gbc_textField);
+		GridBagConstraints gbcTextField = new GridBagConstraints();
+		gbcTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbcTextField.insets = new Insets(0, 0, 5, 5);
+		gbcTextField.gridx = 1;
+		gbcTextField.gridy = 6;
+		adminLogIn.add(textField, gbcTextField);
 		textField.setColumns(10);
 		
-		Component verticalStrut_8 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_8 = new GridBagConstraints();
-		gbc_verticalStrut_8.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_8.gridx = 1;
-		gbc_verticalStrut_8.gridy = 7;
-		adminLogIn.add(verticalStrut_8, gbc_verticalStrut_8);
+		Component verticalStrut8 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut8 = new GridBagConstraints();
+		gbcVerticalStrut8.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut8.gridx = 1;
+		gbcVerticalStrut8.gridy = 7;
+		adminLogIn.add(verticalStrut8, gbcVerticalStrut8);
 		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_3 = new GridBagConstraints();
-		gbc_horizontalStrut_3.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_3.gridx = 0;
-		gbc_horizontalStrut_3.gridy = 8;
-		adminLogIn.add(horizontalStrut_3, gbc_horizontalStrut_3);
+		Component horizontalStrut3 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut3 = new GridBagConstraints();
+		gbcHorizontalStrut3.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut3.gridx = 0;
+		gbcHorizontalStrut3.gridy = 8;
+		adminLogIn.add(horizontalStrut3, gbcHorizontalStrut3);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblPassword.setForeground(Color.WHITE);
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.anchor = GridBagConstraints.WEST;
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.gridx = 1;
-		gbc_lblPassword.gridy = 8;
-		adminLogIn.add(lblPassword, gbc_lblPassword);
+		GridBagConstraints gbcLblPassword = new GridBagConstraints();
+		gbcLblPassword.anchor = GridBagConstraints.WEST;
+		gbcLblPassword.insets = new Insets(0, 0, 5, 5);
+		gbcLblPassword.gridx = 1;
+		gbcLblPassword.gridy = 8;
+		adminLogIn.add(lblPassword, gbcLblPassword);
 		
-		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_5 = new GridBagConstraints();
-		gbc_horizontalStrut_5.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_5.gridx = 0;
-		gbc_horizontalStrut_5.gridy = 9;
-		adminLogIn.add(horizontalStrut_5, gbc_horizontalStrut_5);
+		Component horizontalStrut5 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut5 = new GridBagConstraints();
+		gbcHorizontalStrut5.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut5.gridx = 0;
+		gbcHorizontalStrut5.gridy = 9;
+		adminLogIn.add(horizontalStrut5, gbcHorizontalStrut5);
 		
 		JPasswordField passwordField = new JPasswordField();
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 1;
-		gbc_passwordField.gridy = 9;
-		adminLogIn.add(passwordField, gbc_passwordField);
+		GridBagConstraints gbcPasswordField = new GridBagConstraints();
+		gbcPasswordField.insets = new Insets(0, 0, 5, 5);
+		gbcPasswordField.fill = GridBagConstraints.HORIZONTAL;
+		gbcPasswordField.gridx = 1;
+		gbcPasswordField.gridy = 9;
+		adminLogIn.add(passwordField, gbcPasswordField);
 		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_7 = new GridBagConstraints();
-		gbc_verticalStrut_7.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_7.gridx = 1;
-		gbc_verticalStrut_7.gridy = 10;
-		adminLogIn.add(verticalStrut_7, gbc_verticalStrut_7);
+		Component verticalStrut7 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut7 = new GridBagConstraints();
+		gbcVerticalStrut7.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut7.gridx = 1;
+		gbcVerticalStrut7.gridy = 10;
+		adminLogIn.add(verticalStrut7, gbcVerticalStrut7);
 		
-		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_7 = new GridBagConstraints();
-		gbc_horizontalStrut_7.insets = new Insets(0, 0, 5, 5);
-		gbc_horizontalStrut_7.gridx = 0;
-		gbc_horizontalStrut_7.gridy = 11;
-		adminLogIn.add(horizontalStrut_7, gbc_horizontalStrut_7);
+		Component horizontalStrut7 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut7 = new GridBagConstraints();
+		gbcHorizontalStrut7.insets = new Insets(0, 0, 5, 5);
+		gbcHorizontalStrut7.gridx = 0;
+		gbcHorizontalStrut7.gridy = 11;
+		adminLogIn.add(horizontalStrut7, gbcHorizontalStrut7);
 		
 		JButton btnNewButton = new JButton("Accedi !");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 11;
+		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
+		gbcBtnNewButton.anchor = GridBagConstraints.WEST;
+		gbcBtnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbcBtnNewButton.gridx = 1;
+		gbcBtnNewButton.gridy = 11;
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Admin a = new Admin();
-//				a.setUsername(textField.getText());
-//				a.setPassword(passwordField.getText());
 				if(passwordField.getText().equals("") || textField.getText().equals("")) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
-					lblNewLabel.setText("Errore !");
+					lblNewLabel.setText("Campo vuoto!");
 				}
 				
 				else if(Controller.controlloLoginAmministratore(textField.getText(),passwordField.getText()) == false) {
 					if (!lblNewLabel.getText().equals(""))
 						lblNewLabel.setText("");
-					lblNewLabel.setText("Errore !");
-//					System.out.println(Controller.controlloLoginAmministratore(a));
+					lblNewLabel.setText("Credenziali non valide!");
 				}
 				
 				else {
-//					Controller.controlloLoginAmministratore(a);
-//					System.out.println(Controller.controlloLoginAmministratore(a));
 					contentPane.removeAll();
 					contentPane.add(AreaAdmin.esegui(contentPane, homePanel));
+					
+					
+					
+					GestoreMail ge = Controller.getGestoreMail();
+					List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();
+					for(Prenotazione p : prenotazioniInScadenza) {
+						Cliente c = Controller.getCliente(p.getCodCliente());
+						String sbj = MessaggiPredefiniti.SCADENZAPRENOTAZIONE_SUBJ.getMessaggio() + " " + p.getId();
+						Controller.sendMail(ge, c.getEmail(), sbj, MessaggiPredefiniti.SCADENZAPRENOTAZIONE_TXT.getMessaggio());
+					}
+					
+					List<Prenotazione> prenotazioniScadute = Controller.getPrenotazioniScadute();
+					for(Prenotazione p : prenotazioniScadute) {
+						Cliente c = Controller.getCliente(p.getCodCliente());
+						String s = MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ.getMessaggio() + p.getId();
+						Controller.sendMail(ge, c.getEmail(), s, MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_TXT.getMessaggio());
+						Controller.deletePrenotazione(p);
+					}
+					
+					List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();
+					for(ClienteFedele ci : clientiInfedeli) {
+						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_TXT.getMessaggio());
+					}
+					
+					List<ClienteFedele> clientiDaRimuovere = Controller.getClientiDaRimuovere();
+					for(ClienteFedele ci : clientiDaRimuovere) {
+						Controller.deleteCliente(ci);
+						Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_TXT.getMessaggio());
+					}
+						
 					contentPane.repaint();
 					contentPane.revalidate();
 				}
 			}
 		});
-		adminLogIn.add(btnNewButton, gbc_btnNewButton);
+		adminLogIn.add(btnNewButton, gbcBtnNewButton);
 		
-		Component verticalStrut_13 = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut_13 = new GridBagConstraints();
-		gbc_verticalStrut_13.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut_13.gridx = 1;
-		gbc_verticalStrut_13.gridy = 13;
-		adminLogIn.add(verticalStrut_13, gbc_verticalStrut_13);
+		Component verticalStrut13 = Box.createVerticalStrut(20);
+		GridBagConstraints gbcVerticalStrut13 = new GridBagConstraints();
+		gbcVerticalStrut13.insets = new Insets(0, 0, 5, 5);
+		gbcVerticalStrut13.gridx = 1;
+		gbcVerticalStrut13.gridy = 13;
+		adminLogIn.add(verticalStrut13, gbcVerticalStrut13);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-		gbc_btnBack.anchor = GridBagConstraints.WEST;
-		gbc_btnBack.insets = new Insets(0, 0, 5, 5);
-		gbc_btnBack.gridx = 1;
-		gbc_btnBack.gridy = 14;
+		GridBagConstraints gbcBtnBack = new GridBagConstraints();
+		gbcBtnBack.anchor = GridBagConstraints.WEST;
+		gbcBtnBack.insets = new Insets(0, 0, 5, 5);
+		gbcBtnBack.gridx = 1;
+		gbcBtnBack.gridy = 14;
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.removeAll();
@@ -232,14 +263,14 @@ public class AccessoAdmin {
 				contentPane.revalidate();
 				}
 		});
-		adminLogIn.add(btnBack, gbc_btnBack);
+		adminLogIn.add(btnBack, gbcBtnBack);
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
-		GridBagConstraints gbc_horizontalStrut_4 = new GridBagConstraints();
-		gbc_horizontalStrut_4.insets = new Insets(0, 0, 0, 5);
-		gbc_horizontalStrut_4.gridx = 0;
-		gbc_horizontalStrut_4.gridy = 15;
-		adminLogIn.add(horizontalStrut_4, gbc_horizontalStrut_4);
+		Component horizontalStrut4 = Box.createHorizontalStrut(20);
+		GridBagConstraints gbcHorizontalStrut4 = new GridBagConstraints();
+		gbcHorizontalStrut4.insets = new Insets(0, 0, 0, 5);
+		gbcHorizontalStrut4.gridx = 0;
+		gbcHorizontalStrut4.gridy = 15;
+		adminLogIn.add(horizontalStrut4, gbcHorizontalStrut4);
 		
 		return adminLogIn;
 	}
