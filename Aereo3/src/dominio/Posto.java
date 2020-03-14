@@ -26,16 +26,9 @@ public class Posto {
 	@Column(name="prezzo_punti")
 	private int prezzoPunti;
 	
-	
-	
-	
-	
 	public PostoCombinedKey getChiaveComposta() {
 		return chiaveComposta;
 	}
-	
-	
-	
 	
 	public double getPrezzo() {
 		return prezzo;
@@ -44,7 +37,6 @@ public class Posto {
 		this.prezzo = prezzo;
 	}
 	
-	
 	public int getPunti() {
 	
 		return punti;
@@ -52,7 +44,6 @@ public class Posto {
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-	
 	
 	public int getPrezzoPunti() {
 		return prezzoPunti;
@@ -65,7 +56,4 @@ public class Posto {
 		return chiaveComposta + ", prezzo= " + prezzo + ", punti= " + punti + ", prezzoPunti= " + prezzoPunti;
 	}
 	
-	
-	
-
 }

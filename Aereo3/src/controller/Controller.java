@@ -13,14 +13,14 @@ import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import dataManagment.GestioneAdminDatabase;
-import dataManagment.GestioneAereoportoDatabase;
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePostoDatabase;
-import dataManagment.GestionePrenotazioneDatabase;
-import dataManagment.GestionePromozioneDatabase;
-import dataManagment.GestioneVoloDatabase;
-import dominio.Aereoporto;
+import dataManagement.GestioneAdminDatabase;
+import dataManagement.GestioneAeroportoDatabase;
+import dataManagement.GestioneClienteDatabase;
+import dataManagement.GestionePostoDatabase;
+import dataManagement.GestionePrenotazioneDatabase;
+import dataManagement.GestionePromozioneDatabase;
+import dataManagement.GestioneVoloDatabase;
+import dominio.Aeroporto;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
@@ -30,52 +30,23 @@ import dominio.Volo;
 import gui.Home;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
-import paymentManagment.CartaDiCredito;
-import paymentManagment.GestorePagamento;
+import paymentManagement.CartaDiCredito;
+import paymentManagement.GestorePagamento;
 
 public class Controller {
 	private static Log logger= LogFactory.getLog(Controller.class);
-
-	//Punto di entrata dell'applicazione
+	
 	public static void main(String [] args) throws ParseException {
 		System.out.println("Main da chiamare all'eseguibile");
 
-		GestoreMail ge = Controller.getGestoreMail();
-		//notifica prenotazioni insolute
-		List<Prenotazione> prenotazioniInScadenza = Controller.getPrenotazioniInScadenza();
-		for(Prenotazione p : prenotazioniInScadenza) {
-			Cliente c = Controller.getCliente(p.getCodCliente());
-			String sbj = MessaggiPredefiniti.SCADENZAPRENOTAZIONE_SUBJ.getMessaggio() + " " + p.getId();
-			Controller.sendMail(ge, c.getEmail(), sbj, MessaggiPredefiniti.SCADENZAPRENOTAZIONE_TXT.getMessaggio());
-		}
-		
-		//rimozione prenotazioni scadute
-		List<Prenotazione> prenotazioniScadute = Controller.getPrenotazioniScadute();
-		for(Prenotazione p : prenotazioniScadute) {
-			Cliente c = Controller.getCliente(p.getCodCliente());
-			String s = MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_SUBJ.getMessaggio() + p.getId();
-			Controller.sendMail(ge, c.getEmail(), s, MessaggiPredefiniti.PRENOTAZIONESCADUTA_RIMOZIONE_TXT.getMessaggio());
-			Controller.deletePrenotazione(p);
-		}
-		
-		//notifica infedeltà
-		List<ClienteFedele> clientiInfedeli = Controller.getClientiInfedeli();
-		for(ClienteFedele ci : clientiInfedeli) {
-			Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_TXT.getMessaggio());
-		}
-			
-		//rimozione infedeli da un anno
-		List<ClienteFedele> clientiDaRimuovere = Controller.getClientiDaRimuovere();
-		for(ClienteFedele ci : clientiDaRimuovere) {
-			Controller.deleteCliente(ci);
-			Controller.sendMail(ge, ci.getEmail(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_SUBJ.getMessaggio(), MessaggiPredefiniti.INFEDELE_RIMOZIONE_TXT.getMessaggio());
-		}
+
 		Home.main(args);
 	}
 
-	
+	/*********************************************************/
 	//GESTIONE ADMIN
 	/********************************************************/
+	
 	public static boolean controlloLoginAmministratore(String username, String password) {
 
 		return GestioneAdminDatabase.isAmministratore(username,password);
@@ -89,8 +60,8 @@ public class Controller {
 	
 	/**********************************************************/
 	//GESTIONE CLIENTI
+	/*********************************************************/
 	
-	/********************************************************/
 	public static Cliente getCliente(String email) {
 		return GestioneClienteDatabase.getCliente(email);
 	}
@@ -113,10 +84,6 @@ public class Controller {
 		GestioneClienteDatabase.insertClienteFedele(cliente);
 	}
 	
-	public static void insertListaClienti(ArrayList<Cliente> clienti) {
-		GestioneClienteDatabase.insertClienti(clienti);
-	}
-	
 	public static boolean controlloDisponibilità(Date dataPartenza, String partenza, String destinazione ) throws SQLException, ClassNotFoundException {
 
 		List<Volo> listVoli=GestioneVoloDatabase.getListaVoliAndata(dataPartenza, partenza, destinazione);
@@ -136,9 +103,8 @@ public class Controller {
 	}
 	
 
-	public static void signToLoyalty(String nome, String cognome, String indirizzo,
-			Date date, String psw) {
-		GestioneClienteDatabase.signToLoyalty(nome, cognome, indirizzo, date, psw);
+	public static ClienteFedele signToLoyalty(Cliente c, String indirizzo, String pwd) {
+		return GestioneClienteDatabase.signToLoyalty(c,	indirizzo, pwd);
 	}
 
 	public static void deleteCliente(Cliente cliente) {
@@ -185,6 +151,11 @@ public class Controller {
 	/**********************************************************/
 	// GESTIONE POSTI
 	/*********************************************************/
+	
+	public static void modificaPrezzoPosti(List<Posto>listaPosti, double prezzo) {
+		GestionePostoDatabase.modificaPrezzoPosti(listaPosti, prezzo);
+	}
+	
 	public static List<Posto> getListaPostiDisponibili(int volo) {
 		return GestionePostoDatabase.getListaPostiDisponibili(volo);
 	}
@@ -205,13 +176,19 @@ public class Controller {
 		return GestionePostoDatabase.getNumPostiPerPrenotazione(idPrenotazione);
 	}
 	
+	public static void modificaPuntiPosti(List<Posto>listaPosti, int punti) {
+		GestionePostoDatabase.modificaPuntiPosti(listaPosti, punti);
+	}
+	
 	/********************************************************/
 	//GESTIONE PRENOTAZIONI
-	/****************************************************/
+	/*******************************************************/
+	
 	public static List<Prenotazione> getPrenotazionePerCliente(int codCliente) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerCliente(codCliente);
 
 	}
+
 	
 	public static List<Prenotazione> getPrenotazioniPerVolo(int idVolo) {
 		return GestionePrenotazioneDatabase.getPrenotazioniPerVolo(idVolo);
@@ -229,13 +206,8 @@ public class Controller {
 		GestionePrenotazioneDatabase.pagamentoPrenotazione(prenotazione);
 	}
 	
-	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
-		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v, posti);
-	}
-
-
-	public static void eliminaPrenotazione(Prenotazione p) {
-		GestionePrenotazioneDatabase.deletePrenotazione(p);
+	public static Prenotazione getIdPrenotazione(Cliente c, int v) {
+		return GestionePrenotazioneDatabase.getIdPrenotazione(c, v);
 	}
 	
 	public static List<Prenotazione> getPrenotazioniScadute(){
@@ -245,12 +217,29 @@ public class Controller {
 	public static void deletePrenotazione(Prenotazione p) {
 		GestionePrenotazioneDatabase.deletePrenotazione(p);
 	}
+	
+	public static Prenotazione getPrenotazionePerId(int id) {
+		return GestionePrenotazioneDatabase.getPrenotazionePerId(id);
+	}
+	
+	public static double getSovrapprezzo(int idOld, double costoNuovo) {
+		return GestionePrenotazioneDatabase.getSovrapprezzo(idOld, costoNuovo);
+	}
 
-	/***************************************************/
+	/****************************************************/
 	//GESTIONE PROMOZIONE
 	/***************************************************/
+	
+	public static void deletePromozione() {
+		GestionePromozioneDatabase.deletePromozioni();
+	}
+	
 	public static List<Promozione> getPromozioni(Date now){
 		return GestionePromozioneDatabase.getAllPromozioni(now);
+	}
+	
+	public static double applyPromozione(int codPromo, Volo v, double prezzoTot) {
+	return  GestionePromozioneDatabase.applyPromozione(codPromo, v, prezzoTot);
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
@@ -260,9 +249,11 @@ public class Controller {
 	public static Promozione getPromozione(int idPromo) {
 		return GestionePromozioneDatabase.getPromozione(idPromo);
 	}
+	
 	/***************************************************/
 	//GESTIONE VOLO
-	/************************************************/
+	/**************************************************/
+	
 	public static List<Volo> getListaVoli() {
 		return GestioneVoloDatabase.getListaVoliDisponibili();
 	}
@@ -305,34 +296,45 @@ public class Controller {
 		return GestioneVoloDatabase.getListaVoliAndata(dataPartenza, partenza, destinazione);
 	}
 	
+	public static String convertiData(Date data) {
+		return GestioneVoloDatabase.convertiData(data);
+	}
 	
 	/****************************************************/
-	//GESTIONE AEREOPORTO
+	//GESTIONE AEROPORTO
+	/***************************************************/
 	
-	public static List<String> getDenominazioneAereoporti(){
-		return GestioneAereoportoDatabase.getDenominazioniAereoporti();
+	public static List<String> getDenominazioneAeroporti(){
+		return GestioneAeroportoDatabase.getDenominazioniAeroporti();
 	}
 
-	public static String getDenominazioneAereoporto(String idAereoporto) {
+	public static String getDenominazioneAeroporto(String idAereoporto) {
 
-		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
+		return GestioneAeroportoDatabase.parserAeroporto(idAereoporto);
 
 	}
 	
-	public static String parserCodiceAereoporto(String denominazione) {
-		return GestioneAereoportoDatabase.parserCodiceAereoporto(denominazione);
+	public static String parserCodiceAeroporto(String denominazione) {
+		return GestioneAeroportoDatabase.parserCodiceAeroporto(denominazione);
 	}	
 	
-	public static String parserAereoporto(String idAereoporto  ) {
-		return GestioneAereoportoDatabase.parserAereoporto(idAereoporto);
+	public static String parserAeroporto(String idAereoporto  ) {
+		return GestioneAeroportoDatabase.parserAeroporto(idAereoporto);
 	}
 	
 	public static List<Volo> getPartenzaDestinazione(String partenza1, String arrivo1){
 		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
 	}
 	
+	/**Inserisce l'aereoporto nel DB**/
+	public static void insertAeroporto(Aeroporto a) {
+		GestioneAeroportoDatabase.insertAeroporto(a);
+	}
+	
 	/****************************************************/
 	//GESTIONE MAIL
+	/***************************************************/
+	
 	public static GestoreMail getGestoreMail() {
 		return GestoreMail.getInstance();
 	}
@@ -343,8 +345,12 @@ public class Controller {
 	
 	/****************************************************/
 	//GESTIONE PAGAMENTO
+	/***************************************************/
+	
 	public static boolean paga(CartaDiCredito cc, double importo) {
 		return GestorePagamento.paga(cc, importo);
 	}
+	
+	
 }
 

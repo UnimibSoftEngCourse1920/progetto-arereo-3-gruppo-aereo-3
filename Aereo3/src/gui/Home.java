@@ -300,7 +300,7 @@ public class Home extends JFrame {
 					if (lblNewLabel1 != null)
 						panel2.remove(lblNewLabel1);
 					
-					lblNewLabel1 = new JLabel("Data errate !");
+					lblNewLabel1 = new JLabel("Data errata !");
 					lblNewLabel1.setForeground(Color.RED);
 					lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 					GridBagConstraints gbcLblNewLabel1 = new GridBagConstraints();

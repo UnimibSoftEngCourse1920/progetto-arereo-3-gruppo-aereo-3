@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,21 +13,23 @@ import javax.persistence.Query;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import controller.Controller;
 import dominio.Prenotazione;
 import dominio.Volo;
 
 public class GestioneVoloDatabase extends GestioneDatabase {
+	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
+
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
 		Query query = entityManager.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Volo> voli = query.getResultList();
+		
+			
 		return voli;
 	}
-	
-	
-	
 	
 	public static Volo getVolo(int idVolo) {
 		String jpqlVolo = "SELECT v FROM Volo as v WHERE v.idVolo=:idVolo";
@@ -38,11 +40,10 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		return v.get(0);
 	}
 	
-	
 	public static List<String> getDestinazioniDisponibili(){
 				
 	
-		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.destinazione=a.idAereoporto ";
+		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aeroporto a WHERE v.destinazione=a.idAeroporto ";
 		Query query = entityManager.createQuery(jpql);
 
 		@SuppressWarnings("unchecked")
@@ -55,7 +56,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	public static List<String> getPartenzeDisponibili(){
 		
 		
-		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aereoporto a WHERE v.partenza=a.idAereoporto ";
+		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aeroporto a WHERE v.partenza=a.idAeroporto ";
 		Query query = entityManager.createQuery(jpql);
 		List<String> partenze = query.getResultList();
 		
@@ -92,12 +93,8 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		return listaInfoVoli;
 		
 	}
-	
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
 
-	
-	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo,
-			String minutiArrivo) {	
+	public static void insertVolo(Volo volo, String oraPartenza, String minutiPartenza, String oraArrivo, String minutiArrivo) {	
 		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		dataFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 		StringBuilder data= new StringBuilder();
@@ -124,9 +121,9 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		}
 		volo.setDataArrivo(nuovaDataA);
 		
-		String  denominazione= GestioneAereoportoDatabase.parserCodiceAereoporto(volo.getDestinazione());
+		String  denominazione= GestioneAeroportoDatabase.parserCodiceAeroporto(volo.getDestinazione());
 		volo.setDestinazione(denominazione);
-		denominazione=GestioneAereoportoDatabase.parserCodiceAereoporto(volo.getPartenza());
+		denominazione=GestioneAeroportoDatabase.parserCodiceAeroporto(volo.getPartenza());
 		volo.setPartenza(denominazione);
 		
 		
@@ -154,25 +151,30 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 					
 		
 		List <Volo> risultato=new ArrayList<Volo>();
-		Date dataP=new Date();
-		SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yy HH:mm");
-		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//		Date dataP=new Date();
+		SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yy");
+		SimpleDateFormat dTFormat=new SimpleDateFormat(" HH:mm");
+//		dTFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-		String dataPartenzaDaPrenotare= dateFormat.format(dataPartenza).substring(0, 8);
+		String dataPartenzaDaPrenotare= dateFormat.format(dataPartenza);
 		for(Volo volo: lista) {
-			String dataDaConfrontare=dateFormat.format(volo.getDataPartenza()).substring(0, 8);
-			if(dataDaConfrontare.equalsIgnoreCase(dataPartenzaDaPrenotare))
-				risultato.add(volo);
+			String dataDaConfrontare=dateFormat.format(volo.getDataPartenza());
+			
+			if(dataDaConfrontare.equalsIgnoreCase(dataPartenzaDaPrenotare)) {
+
+			risultato.add(volo);
+			}
 			System.out.println(volo.toString());
 		}
-		
+
 		return risultato;
 		
 		
 	}	
 	
 		public static List<Volo> getVoloPartenzaDestinazione(String partenza, String destinazione) {
-			String jpqlDestinazione = "SELECT v FROM Volo as v, Aereoporto as a WHERE  v.destinazione=a.idAereoporto and a.denominazione=:destinazione";
+			String jpqlDestinazione = "SELECT v FROM Volo as v, Aeroporto as a WHERE  v.destinazione=a.idAeroporto and a.denominazione=:destinazione";
 			String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
 			Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
 			Query queryPartenza= entityManager.createQuery(jpqlPartenza);
@@ -193,6 +195,17 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 			System.out.println(lista);
 			return lista;
 		}
+		
+		
+		public static String convertiData(Date data) {
+			SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+			dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+			String dataStringa= dtFormat.format(data);
+			return dataStringa;
+		}
+
+
+
 	
 }
 

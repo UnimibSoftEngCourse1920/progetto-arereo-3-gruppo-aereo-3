@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -127,13 +128,19 @@ public class Accesso {
 				if(textField.getText().equals("") || textField1.getText().equals("")) {
 					if ( ! lblNewLabel1.getText().equals(""))
 						lblNewLabel1.setText("");
-					lblNewLabel1.setText("Errore !");
+					lblNewLabel1.setText("Errore, campo vuoto !");
+				}
+				
+				else if(!isValid(textField.getText())) {
+					if ( ! lblNewLabel1.getText().equals(""))
+						lblNewLabel1.setText("");
+					lblNewLabel1.setText("Errore, email non valide!");
 				}
 				
 				else if (Controller.login(textField.getText(), textField1.getText()) == null) { //aggiungere errore email non trovata nel database
 					if (! lblNewLabel1.getText().equals(""))
 						lblNewLabel1.setText("");
-					lblNewLabel1.setText("Errore !");
+					lblNewLabel1.setText("Credenziali non valide");
 				}
 				
 				else{
@@ -221,5 +228,18 @@ public class Accesso {
 		return logInPanel;
 		
 	}
+	
+	public static boolean isValid(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+	            "[a-zA-Z0-9_+&*-]+)*@" + 
+	            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+	            "A-Z]{2,7}$"; 
+	              
+		Pattern pat = Pattern.compile(emailRegex); 
+		if (email == null) 
+			return false; 
+		
+		return pat.matcher(email).matches();
+		}
 
 }

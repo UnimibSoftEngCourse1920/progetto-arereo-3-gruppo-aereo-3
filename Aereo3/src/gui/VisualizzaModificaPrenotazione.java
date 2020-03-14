@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -9,10 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -20,16 +17,16 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.toedter.calendar.JDateChooser;
-
 import controller.Controller;
-import dataManagment.GestioneAereoportoDatabase;
-import dataManagment.GestioneVoloDatabase;
 import dominio.Cliente;
+import dominio.Prenotazione;
 import dominio.Volo;
+import mailManagment.GestoreMail;
+import mailManagment.MessaggiPredefiniti;
 
 public class VisualizzaModificaPrenotazione {
-	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione) {
+	@SuppressWarnings("unchecked")
+	static JPanel esegui(JPanel contentPane, JPanel prenotazione, String partenza, String arrivo, Date dataPartenza, Date dataArrivo, boolean modifica, int value, int idVolo, Cliente c, int oldIdPrenotazione, JPanel homePanel) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_58028579602300");
@@ -57,7 +54,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut6.gridy = 1;
 		panel6.add(verticalStrut6, gbcVerticalStrut6);
 		
-		JLabel lblPartenza = new JLabel("Partenza: " + Controller.parserAereoporto(partenza));
+		JLabel lblPartenza = new JLabel("Partenza: " + Controller.parserAeroporto(partenza));
 		lblPartenza.setForeground(Color.WHITE);
 		lblPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblPartenza = new GridBagConstraints();
@@ -74,7 +71,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut7.gridy = 3;
 		panel6.add(verticalStrut7, gbcVerticalStrut7);
 		
-		JLabel lblDestinazione = new JLabel("Destinazione: " + Controller.parserAereoporto(arrivo));
+		JLabel lblDestinazione = new JLabel("Destinazione: " + Controller.parserAeroporto(arrivo));
 		lblDestinazione.setForeground(Color.WHITE);
 		lblDestinazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblDestinazione = new GridBagConstraints();
@@ -91,7 +88,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut8.gridy = 5;
 		panel6.add(verticalStrut8, gbcVerticalStrut8);
 		
-		JLabel lblDataPartenza = new JLabel("Data Partenza: " + convertiData(dataPartenza));
+		JLabel lblDataPartenza = new JLabel("Data Partenza: " + Controller.convertiData(dataPartenza));
 		lblDataPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDataPartenza.setForeground(Color.WHITE);
 		GridBagConstraints gbcLblDataPartenza = new GridBagConstraints();
@@ -108,7 +105,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut9.gridy = 7;
 		panel6.add(verticalStrut9, gbcVerticalStrut9);
 		
-		JLabel lblNewLabel2 = new JLabel("Data Arrivo: " + convertiData(dataArrivo));
+		JLabel lblNewLabel2 = new JLabel("Data Arrivo: " + Controller.convertiData(dataArrivo));
 		lblNewLabel2.setForeground(Color.WHITE);
 		lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel2 = new GridBagConstraints();
@@ -169,11 +166,12 @@ public class VisualizzaModificaPrenotazione {
 		gbcLblNuovaData.gridy = 14;
 		panel6.add(lblNuovaData, gbcLblNuovaData);
 		
-		String partenza1 = Controller.parserAereoporto(partenza);
-		String arrivo1 = Controller.parserAereoporto(arrivo);
+		String partenza1 = Controller.parserAeroporto(partenza);
+		String arrivo1 = Controller.parserAeroporto(arrivo);
 		
 		List <Volo> listaVoli = Controller.getPartenzaDestinazione(partenza1, arrivo1);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox nuovoVolo = new JComboBox();
 		GridBagConstraints gbcNuovoVolo = new GridBagConstraints();
 		gbcNuovoVolo.fill = GridBagConstraints.HORIZONTAL;
@@ -198,6 +196,42 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut13.gridy = 16;
 		panel6.add(verticalStrut13, gbcVerticalStrut13);
 		
+		JButton btnPaga = new JButton("Paga");
+		btnPaga.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Prenotazione prenotata = Controller.getPrenotazionePerId(oldIdPrenotazione);
+				contentPane.removeAll();
+				contentPane.add(Pagamento.esegui(contentPane, prenotata.getPrezzoTotale(), prenotata.getPrezzoPuntiTotale(), panel6, c, idVolo, Controller.getPostiPerPrenotazione(oldIdPrenotazione), Controller.isFedele(c), homePanel, modifica, oldIdPrenotazione));
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		btnPaga.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcBtnPaga = new GridBagConstraints();
+		gbcBtnPaga.insets = new Insets(0, 0, 5, 0);
+		gbcBtnPaga.anchor = GridBagConstraints.WEST;
+		gbcBtnPaga.gridx = 2;
+		gbcBtnPaga.gridy = 1;
+		panel6.add(btnPaga, gbcBtnPaga);
+		
+		JLabel lblStatoPrenotazione = new JLabel("");
+		lblStatoPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcLblStatoPrenotazione = new GridBagConstraints();
+		gbcLblStatoPrenotazione.insets = new Insets(0, 0, 5, 0);
+		gbcLblStatoPrenotazione.anchor = GridBagConstraints.WEST;
+		gbcLblStatoPrenotazione.gridx = 2;
+		gbcLblStatoPrenotazione.gridy = 0;
+		if(Controller.getPrenotazionePerId(oldIdPrenotazione).isPagato()) {
+			lblStatoPrenotazione.setForeground(Color.GREEN);
+			lblStatoPrenotazione.setText("STATO: PAGATA");
+			btnPaga.setVisible(false);
+		} else {
+			lblStatoPrenotazione.setForeground(Color.RED);
+			lblStatoPrenotazione.setText("STATO: NON PAGATA");
+			btnPaga.setVisible(true);
+		}
+		panel6.add(lblStatoPrenotazione, gbcLblStatoPrenotazione);
+		
 		JButton btnModifica = new JButton("Modifica");
 		btnModifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -206,7 +240,7 @@ public class VisualizzaModificaPrenotazione {
 				int newIdVolo = Integer.parseInt(params[0]);
 				boolean fedele = Controller.isFedele(c);
 				contentPane.removeAll();
-				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione, fedele));
+				contentPane.add(SceltaPosti.esegui(contentPane, value, panel6, newIdVolo, c, modifica, oldIdPrenotazione, fedele, homePanel));
 				contentPane.repaint();
 				contentPane.revalidate();
 			}
@@ -218,6 +252,41 @@ public class VisualizzaModificaPrenotazione {
 		gbcBtnModifica.gridx = 0;
 		gbcBtnModifica.gridy = 17;
 		panel6.add(btnModifica, gbcBtnModifica);
+		
+		JLabel lblPrenotazioneEliminata = new JLabel("");
+		lblPrenotazioneEliminata.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPrenotazioneEliminata.setForeground(Color.GREEN);
+		GridBagConstraints gbcLblPrenotazioneEliminata = new GridBagConstraints();
+		gbcLblPrenotazioneEliminata.insets = new Insets(0, 0, 5, 0);
+		gbcLblPrenotazioneEliminata.anchor = GridBagConstraints.WEST;
+		gbcLblPrenotazioneEliminata.gridx =0;
+		gbcLblPrenotazioneEliminata.gridy = 19;
+		panel6.add(lblPrenotazioneEliminata, gbcLblPrenotazioneEliminata);
+		
+		JButton btnElimina = new JButton("Elimina");
+		btnElimina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Prenotazione pren = Controller.getPrenotazionePerId(oldIdPrenotazione);
+				Controller.deletePrenotazione(pren);
+				if(Controller.isFedele(c) && pren.isPagato())
+					Controller.addPunti(c.getCodCliente(), - pren.getPuntiTotali());
+				btnModifica.setEnabled(false);
+				btnElimina.setEnabled(false);
+				btnPaga.setEnabled(false);
+				lblPrenotazioneEliminata.setText("Prenotazione eliminata con successo");
+				GestoreMail ge = Controller.getGestoreMail();
+				String sbj = MessaggiPredefiniti.PRENOTAZIONE_ELIMINATA_SBJ.getMessaggio() + pren.getId();
+				String cnt = MessaggiPredefiniti.PRENOTAZIONE_ELIMINATA_TXT.getMessaggio();
+				Controller.sendMail(ge, c.getEmail(), sbj, cnt);
+			}
+		});
+		btnElimina.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcBtnElimina = new GridBagConstraints();
+		gbcBtnElimina.insets = new Insets(0, 0, 5, 0);
+		gbcBtnElimina.anchor = GridBagConstraints.WEST;
+		gbcBtnElimina.gridx = 0;
+		gbcBtnElimina.gridy = 18;
+		panel6.add(btnElimina, gbcBtnElimina);
 		
 		Component verticalStrut14 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut14 = new GridBagConstraints();
@@ -239,14 +308,7 @@ public class VisualizzaModificaPrenotazione {
 		gbcVerticalStrut16.gridx = 0;
 		gbcVerticalStrut16.gridy = 20;
 		panel6.add(verticalStrut16, gbcVerticalStrut16);
-		
-		Component verticalStrut17 = Box.createVerticalStrut(20);
-		GridBagConstraints gbcVerticalStrut17 = new GridBagConstraints();
-		gbcVerticalStrut17.insets = new Insets(0, 0, 5, 0);
-		gbcVerticalStrut17.gridx = 0;
-		gbcVerticalStrut17.gridy = 21;
-		panel6.add(verticalStrut17, gbcVerticalStrut17);
-		
+
 		JButton btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -260,16 +322,11 @@ public class VisualizzaModificaPrenotazione {
 		GridBagConstraints gbcBtnBack = new GridBagConstraints();
 		gbcBtnBack.anchor = GridBagConstraints.WEST;
 		gbcBtnBack.gridx = 0;
-		gbcBtnBack.gridy = 22;
+		gbcBtnBack.gridy = 21;
 		panel6.add(btnBack, gbcBtnBack);
 		
 		return panel6;
 	}
 	
-	public static String convertiData(Date data) {
-		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
-		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		String dataStringa= dtFormat.format(data);
-		return dataStringa;
-	}
+
 }

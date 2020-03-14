@@ -1,6 +1,4 @@
-package dataManagment;
-
-
+package dataManagement;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -38,7 +36,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	}
 
 	public static void insertPrenotazione(Cliente c, int v, List<Posto> posti) {
-		
 		Prenotazione p = new Prenotazione();
 		p.setPagato(false);
 		p.setCodCliente(c.getCodCliente());
@@ -51,7 +48,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		entityManager.clear();
 	}
 
-	
 	public static List<Prenotazione> getPrenotazioniInScadenza(){
 		Date currentDateScadenza = new Date();
 		Calendar calScadenza = Calendar.getInstance();
@@ -90,13 +86,11 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		return res;
 	}
 	
-	public static int getIdPrenotazione(Cliente c, int v, List<Posto> posti) {
-		String jpql = "SELECT p.id FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
+	public static Prenotazione getIdPrenotazione(Cliente c, int v) {
+		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
 		Query query = entityManager.createQuery(jpql).setParameter("codCliente", c.getCodCliente()).setParameter("idVolo", v);
-		List<Integer>prenotazione = query.getResultList();
-		Integer value = prenotazione.get(0);
-		int risultato = value.intValue();
-		return risultato;
+		List<Prenotazione>prenotazione = query.getResultList();
+		return prenotazione.get(0);
 	}
 	
 	public static void deletePrenotazione(Prenotazione p) {
@@ -105,8 +99,6 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 	}
-	
-	/*****************BRANCH CLARK************************************/
 
 	public static void pagamentoPrenotazione(int idPrenotazione) {
 		entityManager.getTransaction().begin();
@@ -127,13 +119,25 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 			return true;
 	}
 	
-	public static Prenotazione getPrenotazioneId(int id) {
+	public static Prenotazione getPrenotazionePerId(int id) {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.id =: id";
 		Query query = entityManager.createQuery(jpql).setParameter("id", id);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni.get(0);
 	}
-
+	
+	
+	public static double getSovrapprezzo(int idOld, double costoNuovo) {
+		Prenotazione p= getPrenotazionePerId(idOld);
+		double sovrapprezzo= costoNuovo-p.getPrezzoTotale();
+		double nuovoPrezzo=0;
+		if(sovrapprezzo>0) 
+			nuovoPrezzo= sovrapprezzo;
+		else 
+			nuovoPrezzo=10;
+		return nuovoPrezzo;
+		
+	}
 		
 }

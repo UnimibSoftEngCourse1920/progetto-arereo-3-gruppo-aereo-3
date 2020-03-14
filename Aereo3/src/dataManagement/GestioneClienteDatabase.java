@@ -1,4 +1,4 @@
-package dataManagment;
+package dataManagement;
 
 
 import java.text.DateFormat;
@@ -21,65 +21,6 @@ import dominio.Prenotazione;
 
 public class GestioneClienteDatabase extends GestioneDatabase {
 
-
-	public static void main(String[] args) throws ParseException {
-		ArrayList <Cliente> clienti = new ArrayList<Cliente>();
-
-		Cliente cliente = new Cliente();
-		Cliente cliente2 = new Cliente();
-		cliente.setEmail("ale4@gmail.com");
-		cliente.setCognome("ciccio");
-		cliente.setDataDiNascita(new Date());
-		cliente.setIndirizzo("ciaociao");
-		cliente.setNome("alex");
-
-		cliente2.setEmail("test367@llfefe.com");
-		cliente2.setCognome("ciccio");
-		cliente2.setDataDiNascita(new Date());
-		cliente2.setIndirizzo("ciaociao");
-		cliente2.setNome("alex");
-
-		clienti.add(cliente);
-		clienti.add(cliente2);
-		
-		//insertCliente(cliente);
-
-		List<Cliente> listaClienti = getClienti();
-		List<ClienteFedele> clientiFedeli = getClientiFedeli();
-
-		for (Cliente c : listaClienti) {
-			System.out.println("Codice Cliente : " + c.getCodCliente());
-		}
-		for (ClienteFedele c : clientiFedeli) {
-			System.out.println("Codice Cliente Fedele : " + c.getCodCliente());
-		}
-		
-		ClienteFedele ale2 = login("ale@gmail.com", "testpwd");
-		if(ale2 != null)
-			System.out.println("User with id "+ale2.getCodCliente()+" has logged in!");
-		else {
-			System.out.println("Incorrect Login data");
-		}
-		
-		//DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		//Date date = format.parse("2020-03-03");
-		 
-		//signToLoyalty("ALEFEDELE", "FIOREFEDELE", "via dellavia 22", date , "ale@fedele.com", "fedelissimo");
-		//addPunti(79, 3000);
-		//Cliente ale4 = entityManager.find(Cliente.class, 24);
-		//deleteCliente(ale4);
-		
-		HashMap<Integer, Integer> puntiMap = getPuntiFedelta(79);
-		Iterator it = puntiMap.entrySet().iterator();
-		int tot=0;
-	    while (it.hasNext()) {
-	        Map.Entry pair = (Map.Entry)it.next();
-	        tot = tot + (Integer) pair.getValue();
-	        System.out.println("Volo "+pair.getKey() + " ha fornito " + pair.getValue()+ " punti");
-	    }
-	    System.out.println("Punti totali del cliente : "+tot);
-	}
-
 	public static void insertCliente(Cliente cliente) {
 		entityManager.getTransaction().begin();
 		entityManager.persist(cliente);
@@ -97,16 +38,6 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		System.out.println("Record Successfully Inserted In The Database");
 	}
 
-	public static void insertClienti(ArrayList<Cliente> clienti) {
-		entityManager.getTransaction().begin();
-		for (Cliente c : clienti) {
-			entityManager.persist(c);
-		}
-		entityManager.getTransaction().commit();
-		entityManager.clear();
-	}
-
-
 	public static ClienteFedele login(String email, String pwd) {
 		String jpql = "SELECT c FROM ClienteFedele as c where c.email=:email and c.psw=:pwd";
 		Query query = entityManager.createQuery(jpql);
@@ -118,35 +49,39 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		return null;
 	}
 	
-	public static Prenotazione loginCliente(int idPrenotazione, String email ) {
+	public static Prenotazione loginCliente(int idPrenotazione, String email) {
 		String jpql= "SELECT p FROM Cliente as c, Prenotazione as p WHERE p.codCliente=c.codCliente AND c.email=:email AND p.id=:idP";
 		Query query = entityManager.createQuery(jpql).setParameter("email", email).setParameter("idP", idPrenotazione);
 		List <Prenotazione> lista= query.getResultList();
-		return lista.get(0);
-		
-		
+		if(lista == null || lista.isEmpty())
+			return null;
+		else
+			return lista.get(0);
 	}
 
-	public static ClienteFedele signToLoyalty(String nome, String cognome,
-			String indirizzo, Date date, String pwd) {
-
-		ClienteFedele cf = new ClienteFedele();
-
-		cf.setNome(nome);
-		cf.setCognome(cognome);
-		cf.setDataDiNascita(date);
-		cf.setIndirizzo(indirizzo);
-		cf.setPsw(pwd);
-		cf.setPunti(0);
-		cf.setDataIscrizione(new Date());
-
+	public static ClienteFedele signToLoyalty(Cliente c, String indirizzo, String pwd) {
+		
+		String jpql = "INSERT INTO cliente_fedele (cod_cliente, password, punti, data_iscrizione, data_ultimo_biglietto, infedele, indirizzo)"
+				+ " VALUES (?1, ?2, 0, ?3, ?4, ?5, ?6)";
+		Query query = entityManager.createNativeQuery(jpql);
+		query.setParameter(1, c.getCodCliente());
+		System.out.println(jpql.toString());
+		query.setParameter(2, pwd);
+		query.setParameter(3, new Date());
+		query.setParameter(4, new Date());
+		query.setParameter(6, indirizzo);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 2);
+		Date infedele = cal.getTime();
+		query.setParameter(5, infedele);
+		
 		entityManager.getTransaction().begin();
-		entityManager.persist(cf);
+		query.executeUpdate();
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 		
 		System.out.println("Cliente registrato al programma Fedeltà!");
-		return cf;
+		return GestioneClienteDatabase.login(c.getEmail(), pwd);
 	}
 
 	public static void addPunti(int codiceCliente, int punti) {
@@ -159,7 +94,6 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	}
 
 	public static void deleteCliente(Cliente cliente) {
-		
 		entityManager.getTransaction().begin();
 		entityManager.remove(cliente);
 		entityManager.getTransaction().commit();
@@ -180,7 +114,6 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		return clientiFedeli;
 	}
 	
-
 	public static HashMap<Integer, Integer> getPuntiFedelta(int codiceCliente) {
 		
 		ClienteFedele cf = entityManager.find(ClienteFedele.class, codiceCliente);

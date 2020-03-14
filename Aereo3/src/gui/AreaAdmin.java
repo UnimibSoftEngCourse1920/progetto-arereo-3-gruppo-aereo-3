@@ -124,15 +124,6 @@ public class AreaAdmin {
 		gbcVerticalStrut10.gridy = 6;
 		menuAdmin.add(verticalStrut10, gbcVerticalStrut10);
 		
-		JButton btnEliminaPromozione = new JButton("Elimina Promozione");
-		btnEliminaPromozione.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		GridBagConstraints gbcBtnEliminaPromozione = new GridBagConstraints();
-		gbcBtnEliminaPromozione.anchor = GridBagConstraints.NORTHWEST;
-		gbcBtnEliminaPromozione.insets = new Insets(0, 0, 5, 5);
-		gbcBtnEliminaPromozione.gridx = 0;
-		gbcBtnEliminaPromozione.gridy = 7;
-		menuAdmin.add(btnEliminaPromozione, gbcBtnEliminaPromozione);
-		
 		Component verticalStrut11 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut11 = new GridBagConstraints();
 		gbcVerticalStrut11.insets = new Insets(0, 0, 5, 5);

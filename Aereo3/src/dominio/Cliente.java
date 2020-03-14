@@ -13,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
-import dataManagment.GestioneClienteDatabase;
-import dataManagment.GestionePrenotazioneDatabase;
+import dataManagement.GestioneClienteDatabase;
+import dataManagement.GestionePrenotazioneDatabase;
 
 import javax.persistence.InheritanceType;
 
@@ -40,9 +40,6 @@ public class Cliente {
 
 	@Column(name = "email")
 	private String email;
-
-	@Column(name = "indirizzo")
-	private String indirizzo;
 
 
 	public int getCodCliente() {
@@ -81,15 +78,6 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getIndirizzo() {
-		return indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-	
 	
 
 	/*****************************************/

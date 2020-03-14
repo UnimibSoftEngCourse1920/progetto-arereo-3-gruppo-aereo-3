@@ -42,10 +42,6 @@ public class Volo {
 	@Column(name="gate")
 	private String gate;
 	
-	@Transient
-	private Promozione promo;
-
-
 	public int getIdVolo() {
 		return idVolo;
 	}
@@ -98,26 +94,11 @@ public class Volo {
 		this.gate = gate;
 	}
 	
-	public Promozione getPromo() {
-		return promo;
-	}
-
-	public void setPromo(Promozione promo) {
-		this.promo = promo;
-	}
-	
-	
-	
-
-
 	//@Override
 	public String toString(String partenza, String arrivo) {
-		return "Volo [idVolo=" + idVolo  + ", partenza=" + Controller.getDenominazioneAereoporto(partenza)
-				+ ", destinazione=" + Controller.getDenominazioneAereoporto(arrivo)
+		return "Volo [idVolo=" + idVolo  + ", partenza=" + Controller.getDenominazioneAeroporto(partenza)
+				+ ", destinazione=" + Controller.getDenominazioneAeroporto(arrivo)
 				+ ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo + ", gate=" + gate + "]";
 	}
-
-	/*****************************************/
-
 
 }

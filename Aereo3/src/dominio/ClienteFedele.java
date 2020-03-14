@@ -34,27 +34,15 @@ public class ClienteFedele extends Cliente {
 	
 	@Column(name = "password")
 	private String psw;
-	
-	@Column(name = "data_di_nascita")
-	private Date dataDiNascita;
-	
-
-	public String getPassword() {
-		return psw;
-}
-	
-	public Date getDataDiNascita() {
-		return dataDiNascita;
-	}
 
 	public void setPassword(String psw) {
 		this.psw = psw;
 	}
-		
-	public void setDataDiNascita(Date dataDiNascita) {
-		this.dataDiNascita = dataDiNascita;
+	
+	public String getPassword() {
+		return psw;
 	}
-
+	
 	public Date getInfedele() {
 		return infedele;
 	}
@@ -65,14 +53,6 @@ public class ClienteFedele extends Cliente {
 
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
-	}
-
-	public String getPsw() {
-		return psw;
-	}
-
-	public void setPsw(String psw) {
-		this.psw = psw;
 	}
 
 	public void setInfedele(Date infedele) {
@@ -101,8 +81,7 @@ public class ClienteFedele extends Cliente {
 	}
 
 	public Date getUltimoBiglietto() {
-		// da sistemare
-		return null;
+		return ultimoBiglietto;
 
 	}
 }

@@ -3,21 +3,18 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
-import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -28,11 +25,10 @@ import com.toedter.calendar.JDateChooser;
 import controller.Controller;
 import dominio.Cliente;
 import dominio.ClienteFedele;
-import dominio.Volo;
 
 public class ElencoPasseggeri {
 	
-	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo, boolean modifica) {
+	static JPanel esegui(JPanel contentPane, int value, JPanel panel_6, int idVolo, boolean modifica, JPanel homePanel) {
 		JPanel panel8 = new JPanel();
 		panel8.setBackground(Color.BLUE);
 		contentPane.add(panel8, "name_1158551504937600");
@@ -271,12 +267,34 @@ public class ElencoPasseggeri {
 		gbcVerticalStrut3.gridy = 7;
 		panel10.add(verticalStrut3, gbcVerticalStrut3);
 		
+		JLabel messAccesso = new JLabel("");
+		messAccesso.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		messAccesso.setForeground(Color.RED);
+		GridBagConstraints gbcMessAccesso = new GridBagConstraints();
+		gbcMessAccesso.anchor = GridBagConstraints.WEST;
+		gbcMessAccesso.insets = new Insets(0, 0, 5, 5);
+		gbcMessAccesso.gridx = 0;
+		gbcMessAccesso.gridy = 9;
+		panel10.add(messAccesso, gbcMessAccesso);
+		
 		JButton btnNewButton1 = new JButton("LOGIN");
 		btnNewButton1.setVisible(false);
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteFedele c1 = Controller.login(textField.getText(), passwordField.getText());
-				if(c1 != null) {
+				
+				if(textField.getText().equals("") || passwordField.getText().equals("")) {
+					messAccesso.setText("Campi vuoti !");
+				}
+				
+				else if(c1 == null) {
+					messAccesso.setText("Credenziali errate !");
+				}
+				
+				else if(c1 != null) {
+					if(messAccesso.getText().equals(""))
+						messAccesso.setText("");
+					messAccesso.setText("Login avvenuto");
 					campi[0].setText(c1.getNome());
 					campi[1].setText(c1.getCognome());
 					emailInsert.setText(c1.getEmail());
@@ -336,53 +354,56 @@ public class ElencoPasseggeri {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean continua = true;
-				for (int i = 0; i<campi.length;i++) {
-					if (campi[i].getText().equals("") || emailInsert.getText().equals("") || isValid(emailInsert.getText()) == false){
+				for (int i = 0; i<campi.length-1 && continua==true;i++) {
+					if (notValidFormato(campi[i].getText(), campi[i+1].getText()) || emailInsert.getText().equals("")){
 						continua=false;
-						if (!errore.getText().equals("")) {
+						if(!errore.getText().equals(""))
 							errore.setText("");
-						}
-						errore.setText("Errore");
+						errore.setText("Campi errati");
 					}
 				}
 				
-				if(dataDiNascita.getDate().after(now)) {
+				if (!isValid(emailInsert.getText()) && continua){
 					continua=false;
-					if (!errore.getText().equals("")) {
+					if(!errore.getText().equals(""))
 						errore.setText("");
-					}
-					errore.setText("Errore");
+					errore.setText("email non valida");
+				}
+				else if(dataDiNascita.getDate().after(now) && continua) {
+					continua=false;
+					if(!errore.getText().equals(""))
+						errore.setText("");
+					errore.setText("Data non valida");
 				}
 				
-				else if (continua && Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)) {
+				else if (continua && Controller.getCliente(emailInsert.getText())!= null && Controller.trovaCliente(Controller.getCliente(emailInsert.getText()).getCodCliente(), idVolo)) {
 							if (!errore.getText().equals("")) 
 									errore.setText("");	
 							errore.setText("Il cliente ha già una prenotazione per questo volo");
-						}
-						
-					else{
-						if (!errore.getText().equals("")) {
-							errore.setText("");
-						}
-						Cliente c = Controller.login(textField.getText(), passwordField.getText());
-						boolean fedele = true;
-						if (c == null) {
-							c  = new Cliente();
-							c.setNome(campi[0].getText());
-							c.setCognome(campi[1].getText());
-							c.setEmail(emailInsert.getText());
-							c.setDataDiNascita(dataDiNascita.getDate());
-							c.setIndirizzo("");
-							fedele = false;
-						}
-						contentPane.removeAll();
-						contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele));
-						contentPane.repaint();
-						contentPane.revalidate();
-					}
-				
 				}
-			});
+						
+				else if(continua) {
+					if (!errore.getText().equals("")) {
+						errore.setText("");
+					}
+					Cliente c = Controller.login(textField.getText(), passwordField.getText());
+					boolean fedele = true;
+					if (c == null) {
+						c  = new Cliente();
+						c.setNome(campi[0].getText());
+						c.setCognome(campi[1].getText());
+						c.setEmail(emailInsert.getText());
+						c.setDataDiNascita(dataDiNascita.getDate());
+						fedele = false;
+					}
+					contentPane.removeAll();
+					contentPane.add(SceltaPosti.esegui(contentPane, value, panel8, idVolo, c, modifica, oldP, fedele, homePanel));
+					contentPane.repaint();
+					contentPane.revalidate();
+				}
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel.add(btnNewButton, BorderLayout.EAST);
 		
@@ -390,11 +411,28 @@ public class ElencoPasseggeri {
 		return panel8;
 	}
 	
+	
+	public static boolean notValidFormato(String nome, String cognome) {
+		boolean risultato=false;
+		String nome1= nome.toUpperCase();
+		String cognome1=cognome.toUpperCase();
+		
+		for(int i =0; i<nome1.length() && risultato==false; i++) {
+			if(nome1.charAt(i)<'A' ||  nome1.charAt(i)>'Z')
+				risultato=true;
+		}
+		
+		for(int i =0; i<cognome1.length() && risultato==false; i++) {
+			if((cognome1.charAt(i)!=32 &&  cognome1.charAt(i)!='\'' ) && (cognome1.charAt(i)<'A' ||  cognome1.charAt(i)>'Z'))
+				risultato=true;
+		}
+		
+		
+		return risultato;
+	}
+	
 	public static boolean isValid(String email) {
-		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
-                "[a-zA-Z0-9_+&*-]+)*@" + 
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
-                "A-Z]{2,7}$"; 
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ "[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$"; 
                   
 		Pattern pat = Pattern.compile(emailRegex); 
 		if (email == null) 

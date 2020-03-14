@@ -27,21 +27,22 @@ import org.apache.commons.logging.LogFactory;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import dataManagment.GestioneAereoportoDatabase;
-import dataManagment.GestioneClienteDatabase;
+import dataManagement.GestioneAeroportoDatabase;
 import dominio.Cliente;
 import dominio.ClienteFedele;
 import dominio.Posto;
+import dominio.Prenotazione;
+import dominio.Promozione;
 import dominio.Volo;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
-import paymentManagment.CartaDiCredito;
+import paymentManagement.CartaDiCredito;
 
 public class Pagamento {
 	
-	private static Log logger=LogFactory.getLog(GestioneAereoportoDatabase.class);
+	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
 	
-	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele) {
+	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele, JPanel homePanel, boolean modifica,int oldP) {
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -74,15 +75,7 @@ public class Pagamento {
 		gbcHorizontalStrut.gridy = 0;
 		panel7.add(horizonatlStrut, gbcHorizontalStrut);
 		
-//		JLabel labelPrenotazione = new JLabel("Il tuo id Prenotazione è: " + Integer.toString(idPrenotazione));
-//		labelPrenotazione.setForeground(Color.WHITE);
-//		labelPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 25));
-//		GridBagConstraints gbcLabelPrenotazione = new GridBagConstraints();
-//		gbcLabelPrenotazione.anchor = GridBagConstraints.WEST;
-//		gbcLabelPrenotazione.insets = new Insets(0, 0, 5, 0);
-//		gbcLabelPrenotazione.gridx = 2;
-//		gbcLabelPrenotazione.gridy = 0;
-//		panel7.add(labelPrenotazione, gbcLabelPrenotazione);
+
 		
 		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
@@ -119,6 +112,11 @@ public class Pagamento {
 		panel7.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblNumeroDiCarta = new JLabel("Numero di carta");
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			lblNumeroDiCarta.setVisible(false);
+		}
+		}
 		lblNumeroDiCarta.setForeground(Color.WHITE);
 		lblNumeroDiCarta.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcLblNumeroDiCarta = new GridBagConstraints();
@@ -129,6 +127,11 @@ public class Pagamento {
 		panel7.add(lblNumeroDiCarta, gbcLblNumeroDiCarta);
 		
 		JTextField textField = new JTextField();
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			textField.setVisible(false);
+		}
+		}
 		GridBagConstraints gbcTextField = new GridBagConstraints();
 		gbcTextField.insets = new Insets(0, 0, 5, 0);
 		gbcTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -138,6 +141,11 @@ public class Pagamento {
 		textField.setColumns(10);
 		
 		JLabel lblScadenzaCarta = new JLabel("Data scadenza");
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			lblScadenzaCarta.setVisible(false);
+		}
+		}
 		lblScadenzaCarta.setForeground(Color.WHITE);
 		lblScadenzaCarta.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcLblScadenzaDiCarta = new GridBagConstraints();
@@ -151,6 +159,11 @@ public class Pagamento {
 		Date now = new Date();
 		
 		JDateChooser dateChooser = new JDateChooser();
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			dateChooser.setVisible(false);
+		}
+		}
 		dateChooser.setDate(now);
 		GridBagConstraints gbcDateChooser = new GridBagConstraints();
 		gbcDateChooser.insets = new Insets(0, 0, 5, 5);
@@ -167,6 +180,11 @@ public class Pagamento {
 		panel7.add(horizontalStrut, gbcHorizontalStrut1);
 		
 		JLabel cvv = new JLabel("CVV");
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			cvv.setVisible(false);
+		}
+		}
 		cvv.setForeground(Color.WHITE);
 		cvv.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcCvv = new GridBagConstraints();
@@ -177,6 +195,10 @@ public class Pagamento {
 		panel7.add(cvv, gbcCvv);
 		
 		JTextField textFieldCvv = new JTextField();
+		if(modifica) {
+		if(Controller.getSovrapprezzo(oldP, costo)==0){
+			textFieldCvv.setVisible(false);
+		}}
 		GridBagConstraints gbcTextFieldCvv = new GridBagConstraints();
 		gbcTextFieldCvv.insets = new Insets(0, 0, 5, 0);
 		gbcTextFieldCvv.fill = GridBagConstraints.HORIZONTAL;
@@ -192,35 +214,53 @@ public class Pagamento {
 		gbcVerticalStrut8.gridy = 7;
 		panel7.add(verticalStrut8, gbcVerticalStrut8);
 		
+		JLabel erroreCarta = new JLabel("");
+		erroreCarta.setForeground(Color.RED);
+		erroreCarta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcErroreCarta = new GridBagConstraints();
+		gbcErroreCarta.insets = new Insets(0, 0, 5, 5);
+		gbcErroreCarta.anchor = GridBagConstraints.WEST;
+		gbcErroreCarta.gridx = 0;
+		gbcErroreCarta.gridy = 9;
+		panel7.add(erroreCarta, gbcErroreCarta);
+		
 		JButton btnNewButton = new JButton("Paga");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				CartaDiCredito cc = new CartaDiCredito(textField.getText(), dateChooser.getDate(), textFieldCvv.getText());
+				
+				int idPrenotazione = -1;
+
 				if(Controller.paga(cc, costo)) {
-					System.out.print("Errore");
+					
+					if(modifica == false) {
 					if(! Controller.trovaMail(c.getEmail())) {
 						Controller.insertCliente(c);
-					}
-					
+						}
+					} 
 					Cliente cliente = Controller.getCliente(c.getEmail());
 					
-					int idPrenotazione = -1;
-					
 					if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
-						Controller.insertPrenotazione(cliente, idVolo, listaPosti);
-						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
-						Controller.pagamentoPrenotazione(idPrenotazione);
+							
+							Controller.insertPrenotazione(cliente, idVolo, listaPosti);
+						
+						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo).getId();
 						Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+					} else {
+						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo).getId();
 					}
+
+					Controller.pagamentoPrenotazione(idPrenotazione);
 					GestoreMail gePagamento = Controller.getGestoreMail();
 					String sbjPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 					String txtPagamento = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 					Volo v = Controller.getVolo(idVolo);
-					txtPagamento += v.toString();
+					txtPagamento += v.toString(v.getPartenza(), v.getDestinazione());
 					for(Posto p : listaPosti)
 						txtPagamento += p.toString();
 					txtPagamento += "Prenotazione PAGATA";
-					Controller.sendMail(gePagamento, c.getEmail(), sbjPagamento, txtPagamento);
+					Controller.sendMail(gePagamento, cliente.getEmail(), sbjPagamento, txtPagamento);
 					
 					if(fedele) {
 						int punti = 0;
@@ -233,11 +273,23 @@ public class Pagamento {
 						Calendar cal = Calendar.getInstance();
 						cal.add(Calendar.YEAR, 2);
 						Date newInfedele = cal.getTime();
-						Controller.updateInfedelta((ClienteFedele) c, newInfedele, ultimoBiglietto);
+						Controller.updateInfedelta((ClienteFedele) cliente, newInfedele, ultimoBiglietto);
 						
 					}
+					if(modifica)
+						Controller.deletePrenotazione(Controller.getPrenotazionePerId(oldP));
+					contentPane.removeAll();
+					contentPane.add(LastPage.esegui(contentPane, homePanel));
+					contentPane.repaint();
+					contentPane.revalidate();
+				}   
+				else{
+					if (! erroreCarta.getText().equals(""))
+						erroreCarta.setText("");
+					erroreCarta.setText("Dati non validi !");
+					}
 				}
-			}
+				
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
@@ -247,12 +299,12 @@ public class Pagamento {
 		gbcBtnNewButton.gridy = 8;
 		panel7.add(btnNewButton, gbcBtnNewButton);
 		
-		Component verticalStrut9 = Box.createVerticalStrut(20);
-		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
-		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 0);
-		gbcVerticalStrut9.gridx = 0;
-		gbcVerticalStrut9.gridy = 9;
-		panel7.add(verticalStrut9, gbcVerticalStrut9);
+//		Component verticalStrut9 = Box.createVerticalStrut(20);
+//		GridBagConstraints gbcVerticalStrut9 = new GridBagConstraints();
+//		gbcVerticalStrut9.insets = new Insets(0, 0, 5, 0);
+//		gbcVerticalStrut9.gridx = 0;
+//		gbcVerticalStrut9.gridy = 9;
+//		panel7.add(verticalStrut9, gbcVerticalStrut9);
 		
 		JLabel lblNewLabel4 = new JLabel("Costo in Punti");
 		if(fedele)
@@ -299,19 +351,30 @@ public class Pagamento {
 		
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controller.modificaPuntiPosti(listaPosti, 0);
+				for(Posto p : listaPosti)
+					p.setPunti(0);
 				
-				Controller.insertPrenotazione(c, idVolo, listaPosti);
-				int idPrenotazione = Controller.getIdPrenotazione(c, idVolo, listaPosti);
+				int idPrenotazione = -1;
+				Prenotazione pren = null;
+				if(! Controller.trovaCliente(c.getCodCliente(), idVolo)) {
+					Controller.insertPrenotazione(c, idVolo, listaPosti);
+					pren = Controller.getIdPrenotazione(c, idVolo);
+					idPrenotazione = pren.getId();
+					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+				} else {
+					pren = Controller.getIdPrenotazione(c, idVolo);
+					idPrenotazione = pren.getId();
+				}
+
 				Controller.pagamentoPrenotazione(idPrenotazione);
-				Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
-				
 				GestoreMail ge = Controller.getGestoreMail();
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
 				Volo v = Controller.getVolo(idVolo);
-				txt += v.toString();
+				txt += v.toString(v.getPartenza(), v.getDestinazione());
 				for(Posto p : listaPosti)
-					txt += p.toString();
+					txt += " " + p.toString();
 				txt += "Prenotazione PAGATA";
 				Controller.sendMail(ge, c.getEmail(), sbj, txt);
 				
@@ -322,6 +385,11 @@ public class Pagamento {
 				cal.add(Calendar.YEAR, 2);
 				Date newInfedele = cal.getTime();
 				Controller.updateInfedelta((ClienteFedele) c, newInfedele, ultimoBiglietto);
+				
+				contentPane.removeAll();
+				contentPane.add(LastPage.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
 					
 			}
 		});
@@ -396,23 +464,30 @@ public class Pagamento {
 				Cliente cliente = Controller.getCliente(c.getEmail());
 				
 				int idPrenotazione = -1;
-				
+				Prenotazione pren = null;
 				if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 					Controller.insertPrenotazione(cliente, idVolo, listaPosti);
-					idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo, listaPosti);
+					pren = Controller.getIdPrenotazione(cliente, idVolo);
+					idPrenotazione = pren.getId();
 					Controller.aggiornaPostiPrenotati(listaPosti, idPrenotazione);
+				} else {
+					pren = Controller.getIdPrenotazione(cliente, idVolo);
+					idPrenotazione = pren.getId();
 				}
 				GestoreMail ge = GestoreMail.getInstance();
 				String sbj = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_SUBJ.getMessaggio() + idPrenotazione;
 				String txt = MessaggiPredefiniti.RESOCONTOPRENOTAZIONE_TXT.getMessaggio();
-				Volo v = Controller.getVolo(idVolo);
-				String partenza = Controller.getDenominazioneAereoporto(v.getPartenza());
-				String arrivo = Controller.getDenominazioneAereoporto(v.getDestinazione());
-				txt += v.toString(partenza, arrivo);
+				Volo v = Controller.getVolo(pren.getIdVolo());
+				txt += v.toString(v.getPartenza(), v.getDestinazione());
 				for(Posto p : listaPosti)
 					txt += " " + p.toString();
-				txt += " Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
+				txt += ". Si ricorda che la prenotazione NON è pagata;\n il pagamento va effettuato 3 giorni prima della partenza";
 				ge.sendMail(c.getEmail(), sbj, txt);
+				
+				contentPane.removeAll();
+				contentPane.add(LastPage.esegui(contentPane, homePanel));
+				contentPane.repaint();
+				contentPane.revalidate();
 			}
 		});
 		btnNewButton2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -430,7 +505,88 @@ public class Pagamento {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel8.add(btnBack, BorderLayout.WEST);
 		
+
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.BLUE);
+		panel6.add(panel, BorderLayout.EAST);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
+		JLabel lblNewLabel = new JLabel("Inserisci codice promozione");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JTextField textField_1 = new JTextField();
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_1.anchor = GridBagConstraints.WEST;
+		gbc_textField_1.gridx = 0;
+		gbc_textField_1.gridy = 1;
+		panel.add(textField_1, gbc_textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel errorePromo = new JLabel("");
+		errorePromo.setForeground(Color.RED);
+		errorePromo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbcErrorePromo = new GridBagConstraints();
+		gbcErrorePromo.anchor = GridBagConstraints.WEST;
+		gbcErrorePromo.insets = new Insets(0, 0, 5, 0);
+		gbcErrorePromo.gridx = 0;
+		gbcErrorePromo.gridy = 3;
+		panel.add(errorePromo, gbcErrorePromo);
+		
+		JButton btnNewButton_1 = new JButton("CHECK");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(notValidPromo(textField_1.getText()) || Controller.getPromozione(Integer.parseInt(textField_1.getText())) == null) {
+					errorePromo.setText("Codice promo non valido !");
+				}
+				
+				else {
+				Promozione promo = Controller.getPromozione(Integer.parseInt(textField_1.getText()));
+				if(promo != null) {
+					if(fedele || ! promo.isPerFedele()) {
+					double prezzoFinale = Controller.applyPromozione(Integer.parseInt(textField_1.getText()), v, costo);
+					if(prezzoFinale != 0) {
+						Controller.modificaPrezzoPosti(listaPosti, prezzoFinale/listaPosti.size());
+						for(Posto p : listaPosti)
+							p.setPrezzo(prezzoFinale/listaPosti.size());
+						lblNewLabel3.setText(prezzoFinale + "$ (-" + promo.getSconto() + "%)");
+						btnNewButton2.setEnabled(false);
+					}
+						}
+					}
+				}
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton_1.gridx = 0;
+		gbc_btnNewButton_1.gridy = 2;
+		panel.add(btnNewButton_1, gbc_btnNewButton_1);
+		
 		return panel6;
+	}
+	
+	public static boolean notValidPromo(String codPromo) {
+		if (codPromo.equals(""))
+			return true;
+		for(int i=0; i<codPromo.length(); i++) {
+			if(codPromo.charAt(i)<0 || codPromo.charAt(i)>9)
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public static Date convertiData(Date data) {

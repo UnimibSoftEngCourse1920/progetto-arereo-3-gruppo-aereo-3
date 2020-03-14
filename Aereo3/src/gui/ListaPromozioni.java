@@ -42,8 +42,8 @@ public class ListaPromozioni {
 			rows[i][1] = convertiData(p.getDataInizio());
 			rows[i][2] = convertiData(p.getDataFine());
 			rows[i][3] = p.getSconto()+"%";
-			rows[i][4] = p.getPartenza();
-			rows[i][5] = p.getDestinazione();
+			rows[i][4] = Controller.parserAeroporto(p.getPartenza());
+			rows[i][5] = Controller.parserAeroporto(p.getDestinazione());
 			if(p.isPerFedele())
 				rows[i][6] = "Si";
 			else

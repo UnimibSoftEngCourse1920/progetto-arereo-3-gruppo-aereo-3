@@ -8,8 +8,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import javax.swing.Box;
@@ -19,15 +22,21 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
+import dominio.Cliente;
 import dominio.ClienteFedele;
 import mailManagment.GestoreMail;
 import mailManagment.MessaggiPredefiniti;
 
 public class Registrazione {
 	
+	private static Log logger= LogFactory.getLog(Registrazione.class);
+
 	static JPanel esegui(JPanel contentPane, JPanel logInPanel) {
 		JPanel registrationPanel = new JPanel();
 		registrationPanel.setBackground(Color.BLUE);
@@ -204,7 +213,7 @@ public class Registrazione {
 		registrationPanel.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblNewLabel3 = new JLabel("");
-		lblNewLabel3.setForeground(Color.RED);
+		lblNewLabel3.setForeground(Color.GREEN);
 		lblNewLabel3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel3 = new GridBagConstraints();
 		gbcLblNewLabel3.anchor = GridBagConstraints.WEST;
@@ -232,21 +241,38 @@ public class Registrazione {
 				}
 				
 				else{
-				ClienteFedele c = new ClienteFedele();
+				ClienteFedele c = null;
+				Cliente cli = Controller.getCliente(textField3.getText());
+				if(cli != null) {
+					c = Controller.signToLoyalty(cli, textField2.getText(), passwordField.getText());
+					textField.setText(c.getNome());
+					textField1.setText(c.getCognome());
+					dateChooser1.setDate(c.getDataDiNascita());
+				} else {
+					SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+					dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+					
+					c = new ClienteFedele();
+					c.setNome(textField.getText());
+					c.setCognome(textField1.getText());
+					c.setEmail(textField3.getText());
+					c.setPassword(passwordField.getText());
+					try {
+						c.setDataDiNascita(dtFormat.parse(Controller.convertiData(dateChooser1.getDate())));
+						c.setDataIscrizione(dtFormat.parse(Controller.convertiData(now)));
+						c.setUltimoBiglietto(dtFormat.parse(Controller.convertiData(now)));
+						Calendar cal = Calendar.getInstance();
+						cal.add(Calendar.YEAR, 2);
+						Date infedele = cal.getTime();
+						c.setInfedele(dtFormat.parse(Controller.convertiData(infedele)));
+					} catch (ParseException e1) {
+						logger.error(e1);
+					}
+					c.setIndirizzo(textField2.getText());
+					
+					Controller.insertClienteFedele(c);
+				}
 				lblNewLabel3.setText("Registrazione andata a buon fine");
-				c.setNome(textField.getText());
-				c.setCognome(textField1.getText());
-				c.setEmail(textField3.getText());
-				c.setPsw(passwordField.getText());
-				c.setDataDiNascita(dateChooser1.getDate());
-				c.setIndirizzo(textField2.getText());
-				c.setDataIscrizione(now);
-				c.setUltimoBiglietto(now);
-				Calendar cal = Calendar.getInstance();
-				cal.add(Calendar.YEAR, 2);
-				Date infedele = cal.getTime();
-				c.setInfedele(infedele);
-				Controller.insertClienteFedele(c);
 				registrationPanel.add(AreaUtente.esegui(contentPane, registrationPanel, c));
 				registrationPanel.repaint();
 				registrationPanel.revalidate();
