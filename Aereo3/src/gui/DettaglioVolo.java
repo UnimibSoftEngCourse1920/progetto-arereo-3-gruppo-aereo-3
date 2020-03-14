@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,12 @@ public class DettaglioVolo {
 //		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
 
 		//List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
-		List <Volo> listaVoli = Controller.getListaVoliAndata(data, partenza, arrivo);
+		List <Volo> listaVoliTot =  Controller.getListaVoliAndata(data, partenza, arrivo);
+		List <Volo> listaVoli = new ArrayList<Volo>();
+		for (Volo v : listaVoliTot) {
+			if (Controller.getListaPostiDisponibili(v.getIdVolo()).size() >= value)
+				listaVoli.add(v);
+		}
 		
 		Object rows [][] = new Object [listaVoli.size()][5];
 		
@@ -107,6 +113,8 @@ public class DettaglioVolo {
 		panel8Volo.add(comboBox, BorderLayout.CENTER);
 		
 		JButton btnContinua = new JButton("Continua");
+		if (listaVoli.size() == 0)
+			btnContinua.setEnabled(false);
 		btnContinua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					String v = (String) comboBox.getSelectedItem();

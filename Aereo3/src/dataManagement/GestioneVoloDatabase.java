@@ -175,7 +175,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	
 		public static List<Volo> getVoloPartenzaDestinazione(String partenza, String destinazione) {
 			String jpqlDestinazione = "SELECT v FROM Volo as v, Aeroporto as a WHERE  v.destinazione=a.idAeroporto and a.denominazione=:destinazione";
-			String jpqlPartenza="SELECT v FROM Volo as v, Aereoporto as a WHERE v.partenza=a.idAereoporto and a.denominazione=:partenza";
+			String jpqlPartenza="SELECT v FROM Volo as v, Aeroporto as a WHERE v.partenza=a.idAeroporto and a.denominazione=:partenza";
 			Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
 			Query queryPartenza= entityManager.createQuery(jpqlPartenza);
 			queryPartenza.setParameter("partenza", partenza);
