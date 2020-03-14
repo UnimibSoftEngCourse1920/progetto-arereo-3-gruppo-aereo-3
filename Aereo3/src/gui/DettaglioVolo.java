@@ -61,8 +61,10 @@ public class DettaglioVolo {
 			rows[i][0] = v.getIdVolo();
 			rows[i][1] = Controller.getDenominazioneAeroporto(v.getPartenza());
 			rows[i][2] = Controller.getDenominazioneAeroporto(v.getDestinazione());
-			rows[i][3] = Controller.convertiData(v.getDataPartenza());
-			rows[i][4] = Controller.convertiData(v.getDataArrivo());
+			rows[i][3] = v.getDataPartenza();
+//					Controller.convertiData(v.getDataPartenza());
+			rows[i][4] = v.getDataArrivo();
+//				Controller.convertiData(v.getDataArrivo());
 			i++;
 		}
 		

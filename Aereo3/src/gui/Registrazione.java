@@ -213,7 +213,7 @@ public class Registrazione {
 		registrationPanel.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblNewLabel3 = new JLabel("");
-		lblNewLabel3.setForeground(Color.GREEN);
+		lblNewLabel3.setForeground(Color.RED);
 		lblNewLabel3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel3 = new GridBagConstraints();
 		gbcLblNewLabel3.anchor = GridBagConstraints.WEST;
@@ -250,24 +250,24 @@ public class Registrazione {
 					dateChooser1.setDate(c.getDataDiNascita());
 				} else {
 					SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
-					dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+//					dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 					
 					c = new ClienteFedele();
 					c.setNome(textField.getText());
 					c.setCognome(textField1.getText());
 					c.setEmail(textField3.getText());
 					c.setPassword(passwordField.getText());
-					try {
-						c.setDataDiNascita(dtFormat.parse(Controller.convertiData(dateChooser1.getDate())));
-						c.setDataIscrizione(dtFormat.parse(Controller.convertiData(now)));
-						c.setUltimoBiglietto(dtFormat.parse(Controller.convertiData(now)));
-						Calendar cal = Calendar.getInstance();
-						cal.add(Calendar.YEAR, 2);
-						Date infedele = cal.getTime();
-						c.setInfedele(dtFormat.parse(Controller.convertiData(infedele)));
-					} catch (ParseException e1) {
-						logger.error(e1);
-					}
+					c.setDataDiNascita(dateChooser1.getDate());
+//						(dtFormat.parse(Controller.convertiData(dateChooser1.getDate())));
+					c.setDataIscrizione(now);
+//						(dtFormat.parse(Controller.convertiData(now)));
+					c.setUltimoBiglietto(now);
+//						(dtFormat.parse(Controller.convertiData(now)));
+					Calendar cal = Calendar.getInstance();
+					cal.add(Calendar.YEAR, 2);
+					Date infedele = cal.getTime();
+					c.setInfedele(infedele);
+//						(dtFormat.parse(Controller.convertiData(infedele)));
 					c.setIndirizzo(textField2.getText());
 					
 					Controller.insertClienteFedele(c);
