@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -72,9 +73,9 @@ public class AreaUtente {
 				datiPersonali.setBackground(Color.BLUE);
 				panel.add(datiPersonali, "name_865661938656900");
 				GridBagLayout gblDatiPersonali = new GridBagLayout();
-				gblDatiPersonali.columnWidths = new int[]{0, 0, 0};
+				gblDatiPersonali.columnWidths = new int[]{0, 0, 0,0,0,0,0};
 				gblDatiPersonali.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-				gblDatiPersonali.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				gblDatiPersonali.columnWeights = new double[]{0.0, 0.0,0.0,0.0,0.0,0.0, Double.MIN_VALUE};
 				gblDatiPersonali.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				datiPersonali.setLayout(gblDatiPersonali);
 				
@@ -247,6 +248,44 @@ public class AreaUtente {
 				gbcLblPasswordCliente.gridx = 3;
 				gbcLblPasswordCliente.gridy = 9;
 				datiPersonali.add(lblPasswordCliente, gbcLblPasswordCliente);
+				
+				Component verticalStrut15 = Box.createVerticalStrut(20);
+				GridBagConstraints gbcVerticalStrut15 = new GridBagConstraints();
+				gbcVerticalStrut15.insets = new Insets(0, 0, 5, 0);
+				gbcVerticalStrut15.gridx = 1;
+				gbcVerticalStrut15.gridy = 10;
+				datiPersonali.add(verticalStrut15, gbcVerticalStrut15);
+				
+				Component horizontalStrut5 = Box.createHorizontalStrut(20);
+				GridBagConstraints gbcHorizontalStrut5 = new GridBagConstraints();
+				gbcHorizontalStrut5.insets = new Insets(0, 0, 0, 5);
+				gbcHorizontalStrut5.gridx = 0;
+				gbcHorizontalStrut5.gridy = 11;
+				datiPersonali.add(horizontalStrut5, gbcHorizontalStrut5);
+				
+				JLabel lblDataDiNascita= new JLabel("Data di nascita: ");
+				lblDataDiNascita.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				lblDataDiNascita.setForeground(Color.WHITE);
+				GridBagConstraints gbcLblData= new GridBagConstraints();
+				gbcLblData.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblData.gridx = 1;
+				gbcLblData.gridy = 11;
+				datiPersonali.add(lblDataDiNascita, gbcLblData);
+				contentPane.repaint();
+				contentPane.revalidate();
+				
+				
+				SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
+				JLabel lblDataDiNascita1= new JLabel(dFormat.format(c.getDataDiNascita()));
+				lblDataDiNascita1.setFont(new Font("Tahoma", Font.PLAIN, 28));
+				lblDataDiNascita1.setForeground(Color.WHITE);
+				GridBagConstraints gbcLblData1= new GridBagConstraints();
+				gbcLblData1.anchor = GridBagConstraints.NORTHWEST;
+				gbcLblData1.gridx = 3;
+				gbcLblData1.gridy = 11;
+				datiPersonali.add(lblDataDiNascita1, gbcLblData1);
+				contentPane.repaint();
+				contentPane.revalidate();
 				
 				contentPane.repaint();
 				contentPane.revalidate();

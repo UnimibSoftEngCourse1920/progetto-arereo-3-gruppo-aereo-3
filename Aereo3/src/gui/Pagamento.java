@@ -41,8 +41,11 @@ import paymentManagement.CartaDiCredito;
 public class Pagamento {
 	
 	private static Log logger=LogFactory.getLog(GestioneAeroportoDatabase.class);
-	
+	private static double prezzoFinale;
 	static JPanel esegui(JPanel contentPane, double costo, int costoPunti, JPanel posti, Cliente c, int idVolo, List<Posto> listaPosti, boolean fedele, JPanel homePanel, boolean modifica,int oldP) {
+		prezzoFinale=costo;
+		
+		
 		JPanel panel6 = new JPanel();
 		panel6.setBackground(Color.BLUE);
 		contentPane.add(panel6, "name_1494837157713800");
@@ -241,6 +244,8 @@ public class Pagamento {
 					
 					if(! Controller.trovaCliente(cliente.getCodCliente(), idVolo)) {
 							
+							for (Posto p:listaPosti)
+								p.setPrezzo(prezzoFinale/listaPosti.size());
 							Controller.insertPrenotazione(cliente, idVolo, listaPosti);
 						
 						idPrenotazione = Controller.getIdPrenotazione(cliente, idVolo).getId();
@@ -553,13 +558,16 @@ public class Pagamento {
 				Promozione promo = Controller.getPromozione(Integer.parseInt(textField_1.getText()));
 				if(promo != null) {
 					if(fedele || ! promo.isPerFedele()) {
-					double prezzoFinale = Controller.applyPromozione(Integer.parseInt(textField_1.getText()), v, costo);
+						prezzoFinale = Controller.applyPromozione(Integer.parseInt(textField_1.getText()), v, costo);
 					if(prezzoFinale != 0) {
-						Controller.modificaPrezzoPosti(listaPosti, prezzoFinale/listaPosti.size());
-						for(Posto p : listaPosti)
-							p.setPrezzo(prezzoFinale/listaPosti.size());
+						//Controller.modificaPrezzoPosti(listaPosti, prezzoFinale/listaPosti.size());
+//						for(Posto p : listaPosti)
+//							p.setPrezzo(prezzoFinale/listaPosti.size());
 						lblNewLabel3.setText(prezzoFinale + "$ (-" + promo.getSconto() + "%)");
 						btnNewButton2.setEnabled(false);
+					}
+					else {
+						errorePromo.setText("Codice promo non valido!");
 					}
 						}
 					}
@@ -580,7 +588,7 @@ public class Pagamento {
 		if (codPromo.equals(""))
 			return true;
 		for(int i=0; i<codPromo.length(); i++) {
-			if(codPromo.charAt(i)<0 || codPromo.charAt(i)>9)
+			if(codPromo.charAt(i)<'0' || codPromo.charAt(i)>'9')
 				return true;
 		}
 		

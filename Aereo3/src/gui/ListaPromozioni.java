@@ -36,11 +36,12 @@ public class ListaPromozioni {
 		String [] columns = {"ID", "Data Inizio", "Data Fine", "Sconto", "Aeroporto Partenza", "Aeroporto Arrivo", "Fedele"};
 		
 		int i = 0;
-		
+		SimpleDateFormat dFormat= new SimpleDateFormat("dd-MM-yyyy");
+
 		for(Promozione p : promozioni) {
 			rows[i][0] = p.getIdPromozione();
-			rows[i][1] = p.getDataInizio();
-			rows[i][2] = p.getDataFine();
+			rows[i][1] = dFormat.format(p.getDataInizio());
+			rows[i][2] = dFormat.format(p.getDataFine());
 			rows[i][3] = p.getSconto()+"%";
 			rows[i][4] = Controller.parserAeroporto(p.getPartenza());
 			rows[i][5] = Controller.parserAeroporto(p.getDestinazione());

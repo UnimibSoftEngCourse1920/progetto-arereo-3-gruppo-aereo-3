@@ -59,6 +59,8 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	public static Promozione getPromozione(int codPromo){
 		String jpql = "SELECT p FROM Promozione as p WHERE idPromozione = :cp";
 		Query query = entityManagerCET.createQuery(jpql).setParameter("cp", codPromo);
+		if(query.getResultList()==null || query.getResultList().isEmpty())
+			return null;
 		Promozione promo = (Promozione) query.getResultList().get(0);
 		return promo;
 	}
@@ -74,7 +76,8 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		
 		Promozione p=listaP.get(0);
 	
-		if(p==null||!(v.getPartenza().equals(p.getPartenza())) || !( v.getDestinazione().equals(p.getDestinazione()))|| v.getDataPartenza().before(p.getDataInizio()) )		
+		if(p==null||!(v.getPartenza().equals(p.getPartenza())) || !( v.getDestinazione().equals(p.getDestinazione()))
+			      || v.getDataPartenza().before(p.getDataInizio()) || v.getDataPartenza().after(p.getDataFine()) )		
 				return 0;	
 
 		String jpql2="SELECT p.sconto FROM Promozione as p WHERE p.idPromozione=:id ";
@@ -83,6 +86,15 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		List<Double> listaSconto= query2.getResultList();
 		double sconto= listaSconto.get(0);
 		double newPrezzo= prezzoTot*(100-sconto)/100;
-		return newPrezzo;
+		return round(newPrezzo,2);
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
 	}
 }
