@@ -1,4 +1,5 @@
-Istruzioni per eseguire il programma :
+# Istruzioni per eseguire il programma :
+
 
 -   Scaricare il jar 'AereoProject.jar'
 -   Eseguire il programma da linea di comando : java -jar
@@ -42,3 +43,17 @@ il tutto. Se la procedura è andata a buon fine, si riceverà una mail con
 la conferma, e si potrà accedere alla propria area utente nella quale è
 possibile vedere i propri dati, le proprie prenotazioni e l'estratto dei
 punti.
+
+
+Alcuni dei voli disponibili:
+-Bergamo-->Cagliari, 1/06/20 
+-Lamezia-Terme -->Pisa, 2/06/20
+-Milano Malpensa-->Bari 6/06/20
+-Milano Malpensa-->Brindisi 6/06/20
+-Milano Malpensa-->Cagliari 25/10/20
+-Milano Malpensa-->Cagliari 06/06/20
+
+
+
+
+
