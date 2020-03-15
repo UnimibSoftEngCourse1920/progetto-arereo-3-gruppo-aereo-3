@@ -38,12 +38,7 @@ import dominio.Volo;
 public class DettaglioVolo {
 	
 	static JPanel esegui(JPanel contentPane, JPanel homePanel, int value, String partenza, String arrivo, Date data, boolean modifica) {
-		
-		//TODO: Metodo controller per prendere i voli
-//		String destinazione=Controller.parserCodiceAereoporto(volo.getDestinazione());
-//		String partenza=Controller.parserCodiceAereoporto(volo.getPartenza());
-
-		//List <Volo> listaVoli = GestioneVoloDatabase.getListaVoliAndataORitorno(volo.getDataPartenza(), partenza, destinazione);
+	
 		List <Volo> listaVoliTot =  Controller.getListaVoliAndata(data, partenza, arrivo);
 		List <Volo> listaVoli = new ArrayList<Volo>();
 		for (Volo v : listaVoliTot) {
@@ -62,9 +57,7 @@ public class DettaglioVolo {
 			rows[i][1] = Controller.getDenominazioneAeroporto(v.getPartenza());
 			rows[i][2] = Controller.getDenominazioneAeroporto(v.getDestinazione());
 			rows[i][3] = v.getDataPartenza();
-//					Controller.convertiData(v.getDataPartenza());
 			rows[i][4] = v.getDataArrivo();
-//				Controller.convertiData(v.getDataArrivo());
 			i++;
 		}
 		

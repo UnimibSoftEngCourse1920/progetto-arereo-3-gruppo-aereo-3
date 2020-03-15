@@ -250,7 +250,6 @@ public class Registrazione {
 					dateChooser1.setDate(c.getDataDiNascita());
 				} else {
 					SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
-//					dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 					
 					c = new ClienteFedele();
 					c.setNome(textField.getText());
@@ -258,16 +257,12 @@ public class Registrazione {
 					c.setEmail(textField3.getText());
 					c.setPassword(passwordField.getText());
 					c.setDataDiNascita(dateChooser1.getDate());
-//						(dtFormat.parse(Controller.convertiData(dateChooser1.getDate())));
 					c.setDataIscrizione(now);
-//						(dtFormat.parse(Controller.convertiData(now)));
 					c.setUltimoBiglietto(now);
-//						(dtFormat.parse(Controller.convertiData(now)));
 					Calendar cal = Calendar.getInstance();
 					cal.add(Calendar.YEAR, 2);
 					Date infedele = cal.getTime();
 					c.setInfedele(infedele);
-//						(dtFormat.parse(Controller.convertiData(infedele)));
 					c.setIndirizzo(textField2.getText());
 					
 					Controller.insertClienteFedele(c);

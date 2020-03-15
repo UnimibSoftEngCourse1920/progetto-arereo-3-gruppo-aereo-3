@@ -42,15 +42,9 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
-//		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm");
-//		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-		
 		Promozione p = new Promozione();
 		p.setDataInizio(inizio);
-//			(dtFormat.parse(Controller.convertiData(inizio)));
 		p.setDataFine(fine);
-//			(dtFormat.parse(Controller.convertiData(fine)));
-		
 		p.setSconto(sconto);
 		p.setPartenza(partenza);
 		p.setDestinazione(arrivo);

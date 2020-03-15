@@ -242,9 +242,7 @@ public class PromozioneAdmin {
 				List<ClienteFedele> clientiFedeli = Controller.getClientiFedeli();
 				String sbj = MessaggiPredefiniti.NUOVAPROMOZIONE_SUBJ.getMessaggio() + " ";
 				String txt = "Nuova promozione dal " + dateChooser1.getDate()
-//				Controller.convertiData(dateChooser1.getDate())
 						+ " al " + dateChooser2.getDate()
-//						Controller.convertiData(dateChooser2.getDate())
 						+ " per i voli da " + (String) partenzaCombo.getSelectedItem()
 						+ " a " + (String) destinazioneCombo.getSelectedItem()
 						+ " con uno sconto del " + scontoField.getText() + "%"

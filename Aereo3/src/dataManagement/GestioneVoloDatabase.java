@@ -151,12 +151,8 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 					
 		
 		List <Volo> risultato=new ArrayList<Volo>();
-//		Date dataP=new Date();
 		SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yy");
 		SimpleDateFormat dTFormat=new SimpleDateFormat(" HH:mm");
-//		dTFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//		dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-
 		String dataPartenzaDaPrenotare= dateFormat.format(dataPartenza);
 		for(Volo volo: lista) {
 			String dataDaConfrontare=dateFormat.format(volo.getDataPartenza());

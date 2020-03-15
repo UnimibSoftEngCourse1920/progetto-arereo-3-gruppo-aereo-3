@@ -40,9 +40,7 @@ public class ListaPromozioni {
 		for(Promozione p : promozioni) {
 			rows[i][0] = p.getIdPromozione();
 			rows[i][1] = p.getDataInizio();
-//					convertiData(p.getDataInizio());
 			rows[i][2] = p.getDataFine();
-//				convertiData(p.getDataFine());
 			rows[i][3] = p.getSconto()+"%";
 			rows[i][4] = Controller.parserAeroporto(p.getPartenza());
 			rows[i][5] = Controller.parserAeroporto(p.getDestinazione());
@@ -97,12 +95,5 @@ public class ListaPromozioni {
 		
 		return panel6;
 	}
-	
-//	public static String convertiData(Date data) {
-//		SimpleDateFormat dtFormat=new SimpleDateFormat("dd-MM-yyyy");
-//		dtFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//		String dataStringa= dtFormat.format(data);
-//		return dataStringa;
-//	}
 
 }

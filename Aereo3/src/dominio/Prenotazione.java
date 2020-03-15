@@ -14,9 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="prenotazione")
 public class Prenotazione {
-
-	//TODO Controllare se è da cambiare la classe o il database, manca punti totali
-	// qui manca id della prenotazione, le classi devono essere la copia (o con elementi in più) del database
+	
 	@Id
 	@Column(name="id_prenotazione")
 	private int id;

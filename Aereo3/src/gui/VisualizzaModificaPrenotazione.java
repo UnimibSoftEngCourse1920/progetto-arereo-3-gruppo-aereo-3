@@ -90,7 +90,6 @@ public class VisualizzaModificaPrenotazione {
 		panel6.add(verticalStrut8, gbcVerticalStrut8);
 		
 		JLabel lblDataPartenza = new JLabel("Data Partenza: " + dataPartenza);
-//		Controller.convertiData(dataPartenza));
 		lblDataPartenza.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDataPartenza.setForeground(Color.WHITE);
 		GridBagConstraints gbcLblDataPartenza = new GridBagConstraints();
@@ -108,7 +107,6 @@ public class VisualizzaModificaPrenotazione {
 		panel6.add(verticalStrut9, gbcVerticalStrut9);
 		
 		JLabel lblNewLabel2 = new JLabel("Data Arrivo: " + dataArrivo);
-//		Controller.convertiData(dataArrivo));
 		lblNewLabel2.setForeground(Color.WHITE);
 		lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbcLblNewLabel2 = new GridBagConstraints();

@@ -36,7 +36,7 @@ import controller.Controller;
 @SuppressWarnings("serial")
 public class Home extends JFrame {
 	
-	//Dichiarazione variabili;
+	
 	private static Log logger=LogFactory.getLog(Home.class);
 
 	private JPanel contentPane;
@@ -403,8 +403,6 @@ public class Home extends JFrame {
 		});
 		btnPromozioni.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel5.add(btnPromozioni);
-		
-		//Nuovo panel
 	}		
 		
 }

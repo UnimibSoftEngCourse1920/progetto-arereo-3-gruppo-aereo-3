@@ -28,11 +28,9 @@ public class Volo {
 	@Column(name="partenza")
 	private String partenza;
 	
-	//Clark: cambiati i tipi in Date
 	@Column(name="data_partenza")
 	private Date dataPartenza;
 	
-	//Clark: cambiato in data di ritorno
 	@Column(name="data_arrivo")
 	private Date dataArrivo;
 	
