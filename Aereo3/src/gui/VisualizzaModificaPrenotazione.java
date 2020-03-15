@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -171,7 +172,13 @@ public class VisualizzaModificaPrenotazione {
 		String partenza1 = Controller.parserAeroporto(partenza);
 		String arrivo1 = Controller.parserAeroporto(arrivo);
 		
-		List <Volo> listaVoli = Controller.getPartenzaDestinazione(partenza1, arrivo1);
+		List <Volo> listaVoliTot = Controller.getPartenzaDestinazione(partenza1, arrivo1);
+		List <Volo> listaVoli = new ArrayList<Volo>();
+		
+		for (Volo v : listaVoliTot) {
+ 		 if (Controller.getListaPostiDisponibili(v.getIdVolo()).size() >= value)
+ 			 listaVoli.add(v);
+		}
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox nuovoVolo = new JComboBox();
@@ -234,7 +241,21 @@ public class VisualizzaModificaPrenotazione {
 		}
 		panel6.add(lblStatoPrenotazione, gbcLblStatoPrenotazione);
 		
+		JLabel lblPrenotazioneEliminata = new JLabel("");
+		lblPrenotazioneEliminata.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPrenotazioneEliminata.setForeground(Color.RED);
+		GridBagConstraints gbcLblPrenotazioneEliminata = new GridBagConstraints();
+		gbcLblPrenotazioneEliminata.insets = new Insets(0, 0, 5, 0);
+		gbcLblPrenotazioneEliminata.anchor = GridBagConstraints.WEST;
+		gbcLblPrenotazioneEliminata.gridx =0;
+		gbcLblPrenotazioneEliminata.gridy = 19;
+		panel6.add(lblPrenotazioneEliminata, gbcLblPrenotazioneEliminata);
+		
 		JButton btnModifica = new JButton("Modifica");
+		if(listaVoli.size() == 0) {
+			btnModifica.setEnabled(false);
+			lblPrenotazioneEliminata.setText("Voli non disponibili !");
+		}
 		btnModifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String v = (String) nuovoVolo.getSelectedItem();
@@ -254,16 +275,6 @@ public class VisualizzaModificaPrenotazione {
 		gbcBtnModifica.gridx = 0;
 		gbcBtnModifica.gridy = 17;
 		panel6.add(btnModifica, gbcBtnModifica);
-		
-		JLabel lblPrenotazioneEliminata = new JLabel("");
-		lblPrenotazioneEliminata.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPrenotazioneEliminata.setForeground(Color.GREEN);
-		GridBagConstraints gbcLblPrenotazioneEliminata = new GridBagConstraints();
-		gbcLblPrenotazioneEliminata.insets = new Insets(0, 0, 5, 0);
-		gbcLblPrenotazioneEliminata.anchor = GridBagConstraints.WEST;
-		gbcLblPrenotazioneEliminata.gridx =0;
-		gbcLblPrenotazioneEliminata.gridy = 19;
-		panel6.add(lblPrenotazioneEliminata, gbcLblPrenotazioneEliminata);
 		
 		JButton btnElimina = new JButton("Elimina");
 		btnElimina.addActionListener(new ActionListener() {
