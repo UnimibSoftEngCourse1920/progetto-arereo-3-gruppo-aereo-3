@@ -2,8 +2,7 @@
 
 
 -   Scaricare il jar 'AereoProject.jar'
--   Eseguire il programma da linea di comando : java -jar
-    AereoProject.jar
+-   Eseguire il programma cliccandoci sopra due volte.
 
 Prenotazione Volo: Per prenotare un volo è necessario ricercarlo nella
 Home dell'applicazione, selezionando anche il numero dei posti che si
@@ -59,6 +58,11 @@ Alcuni dei voli disponibili:
 -Milano Malpensa-->Cagliari 06/06/20
 
 
+Credenziali admin:
+
+username: admin 
+
+password: admin
 
 
 
