@@ -16,22 +16,11 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	private static List<Aeroporto> listaAeroporti= null;
 	
 
-	public static void insertAeroporto (Aeroporto a) {
-
-		if(!(entityManager.getTransaction().isActive()))
-			entityManager.getTransaction().begin();
-
-		entityManager.persist(a);
-		listaAeroporti.add(a);
-		entityManager.getTransaction().commit();
-		entityManager.clear();
-
-	}
 	
 	public static List<Aeroporto> getListaAeroporti(){
 		if(listaAeroporti==null) {
 		String jpql = "SELECT DISTINCT a FROM Aeroporto as a";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerGMT.createQuery(jpql);
 		List<Aeroporto> listaAereoporti = query.getResultList();
 		return listaAereoporti;
 	}
@@ -41,7 +30,7 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	
 	public static List <String> getDenominazioniAeroporti(){
 		String jpql= "SELECT DISTINCT a.denominazione FROM Aeroporto as a";
-		Query query= entityManager.createQuery(jpql);
+		Query query= entityManagerGMT.createQuery(jpql);
 		List<String> listaNomiAereoporti= query.getResultList();
 		return listaNomiAereoporti;
 	}
@@ -63,7 +52,7 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	
 	public static String parserCodiceAeroporto(String denominazione) {
 		String jpql = "SELECT  a.idAeroporto FROM Aeroporto a WHERE a.denominazione=:campoDenominazione";
-		Query query = entityManager.createQuery(jpql);	
+		Query query = entityManagerGMT.createQuery(jpql);	
 		query.setParameter("campoDenominazione", denominazione);
 		
 		List <String> risultato=query.getResultList();

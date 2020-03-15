@@ -21,7 +21,7 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 	public static boolean isAmministratore(String username, String psw){
 
 		String jpql = "SELECT a FROM Admin as a where a.username=:username and a.psw=:psw";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerGMT.createQuery(jpql);
 		query.setParameter("username", username);
 		query.setParameter("psw", psw);
 		@SuppressWarnings("unchecked")
@@ -69,17 +69,17 @@ public class GestioneAdminDatabase extends GestioneDatabase{
 			logger.error(e);
 		}
 		
-		entityManager.getTransaction().begin();
+		entityManagerGMT.getTransaction().begin();
 		String jpql = "UPDATE Volo SET dataPartenza=:nuovaData , gate=:gate, dataArrivo=:nuovaData_1 WHERE idVolo=:idVolo ";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerGMT.createQuery(jpql);
 		query.setParameter("nuovaData", dataP);
 		query.setParameter("nuovaData_1", dataA);
 		query.setParameter("idVolo", idVolo);
 		query.setParameter("gate", gate);
 
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 
 	}
 

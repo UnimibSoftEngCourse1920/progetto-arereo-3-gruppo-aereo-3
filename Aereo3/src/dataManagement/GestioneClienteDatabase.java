@@ -22,25 +22,25 @@ import dominio.Prenotazione;
 public class GestioneClienteDatabase extends GestioneDatabase {
 
 	public static void insertCliente(Cliente cliente) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(cliente);
-		entityManager.getTransaction().commit();
+		entityManagerGMT.getTransaction().begin();
+		entityManagerGMT.persist(cliente);
+		entityManagerGMT.getTransaction().commit();
 
-		entityManager.clear();
+		entityManagerGMT.clear();
 	}
 	
 	public static void insertClienteFedele(ClienteFedele cliente) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(cliente);
-		entityManager.getTransaction().commit();
+		entityManagerGMT.getTransaction().begin();
+		entityManagerGMT.persist(cliente);
+		entityManagerGMT.getTransaction().commit();
 
-		entityManager.clear();
+		entityManagerGMT.clear();
 		System.out.println("Record Successfully Inserted In The Database");
 	}
 
 	public static ClienteFedele login(String email, String pwd) {
 		String jpql = "SELECT c FROM ClienteFedele as c where c.email=:email and c.psw=:pwd";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		query.setParameter("email", email);
 		query.setParameter("pwd", pwd);
 		List<ClienteFedele> clientiFedeli = query.getResultList();
@@ -51,7 +51,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	
 	public static Prenotazione loginCliente(int idPrenotazione, String email) {
 		String jpql= "SELECT p FROM Cliente as c, Prenotazione as p WHERE p.codCliente=c.codCliente AND c.email=:email AND p.id=:idP";
-		Query query = entityManager.createQuery(jpql).setParameter("email", email).setParameter("idP", idPrenotazione);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("email", email).setParameter("idP", idPrenotazione);
 		List <Prenotazione> lista= query.getResultList();
 		if(lista == null || lista.isEmpty())
 			return null;
@@ -63,7 +63,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		
 		String jpql = "INSERT INTO cliente_fedele (cod_cliente, password, punti, data_iscrizione, data_ultimo_biglietto, infedele, indirizzo)"
 				+ " VALUES (?1, ?2, 0, ?3, ?4, ?5, ?6)";
-		Query query = entityManager.createNativeQuery(jpql);
+		Query query = entityManagerGMT.createNativeQuery(jpql);
 		query.setParameter(1, c.getCodCliente());
 		System.out.println(jpql.toString());
 		query.setParameter(2, pwd);
@@ -75,10 +75,10 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		Date infedele = cal.getTime();
 		query.setParameter(5, infedele);
 		
-		entityManager.getTransaction().begin();
+		entityManagerGMT.getTransaction().begin();
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 		
 		System.out.println("Cliente registrato al programma Fedeltà!");
 		return GestioneClienteDatabase.login(c.getEmail(), pwd);
@@ -86,42 +86,42 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 
 	public static void addPunti(int codiceCliente, int punti) {
 
-		ClienteFedele cf = entityManager.find(ClienteFedele.class, codiceCliente);
-		entityManager.getTransaction().begin();
+		ClienteFedele cf = entityManagerGMT.find(ClienteFedele.class, codiceCliente);
+		entityManagerGMT.getTransaction().begin();
 		cf.setPunti(cf.getPunti()+punti);
-		entityManager.getTransaction().commit();
+		entityManagerGMT.getTransaction().commit();
 		
 	}
 
 	public static void deleteCliente(Cliente cliente) {
-		entityManager.getTransaction().begin();
-		entityManager.remove(cliente);
-		entityManager.getTransaction().commit();
+		entityManagerGMT.getTransaction().begin();
+		entityManagerGMT.remove(cliente);
+		entityManagerGMT.getTransaction().commit();
 		System.out.println("Cliente con email " + cliente.getEmail() + " eliminato!");
 	}
 
 	public static List<Cliente> getClienti() {
 		String jpql = "SELECT c FROM Cliente as c ";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		List<Cliente> clienti = query.getResultList();
 		return clienti;
 	}
 
 	public static List<ClienteFedele> getClientiFedeli() {
 		String jpql = "SELECT c FROM ClienteFedele as c ";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		List<ClienteFedele> clientiFedeli = query.getResultList();
 		return clientiFedeli;
 	}
 	
 	public static HashMap<Integer, Integer> getPuntiFedelta(int codiceCliente) {
 		
-		ClienteFedele cf = entityManager.find(ClienteFedele.class, codiceCliente);
+		ClienteFedele cf = entityManagerCET.find(ClienteFedele.class, codiceCliente);
 		HashMap<Integer, Integer> estrattoPunti = new HashMap<Integer, Integer>();
 		int codCliente = cf.getCodCliente();
 		
 		String jpql = "SELECT p FROM Prenotazione as p where p.codCliente=:codCliente and p.pagato=1";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		query.setParameter("codCliente", codCliente);
 		List<Prenotazione> prenotazioni = query.getResultList();
 		
@@ -134,7 +134,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	
 	public static boolean trovaMail (String email) {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
-		Query query =entityManager.createQuery(jpql).setParameter("email", email);
+		Query query =entityManagerCET.createQuery(jpql).setParameter("email", email);
 		List <Cliente> ris = query.getResultList();
 		if(ris == null || ris.isEmpty())
 			return false;
@@ -144,7 +144,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	
 	public static Cliente getCliente(String email) {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
-		Query query = entityManager.createQuery(jpql).setParameter("email", email);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("email", email);
 		List <Cliente> ris = query.getResultList();
 		if(ris == null || ris.isEmpty())
 			return null;
@@ -154,7 +154,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	
 	public static boolean isFedele(Cliente c) {
 		String jpql = "SELECT c FROM ClienteFedele as c WHERE c.codCliente=:codice";
-		Query query = entityManager.createQuery(jpql).setParameter("codice", c.getCodCliente());
+		Query query = entityManagerCET.createQuery(jpql).setParameter("codice", c.getCodCliente());
 		List <Cliente> ris = query.getResultList();
 		if(ris == null || ris.isEmpty())
 			return false;
@@ -164,7 +164,7 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	
 	public static Cliente getCliente(int id) {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.codCliente=:cod";
-		Query query = entityManager.createQuery(jpql).setParameter("cod", id);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("cod", id);
 		List <Cliente> ris = query.getResultList();
 		return ris.get(0);
 	}
@@ -182,12 +182,12 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 	}
 	
 	public static void updateInfedelta(ClienteFedele c, Date newInfedele, Date ultimoBiglietto) {
-		entityManager.getTransaction().begin();
+		entityManagerGMT.getTransaction().begin();
 		String jpql = "UPDATE ClienteFedele SET infedele=:inf, ultimoBiglietto=:ub WHERE codCliente=:cod";
-		Query query = entityManager.createQuery(jpql).setParameter("inf", newInfedele).setParameter("ub", ultimoBiglietto).setParameter("cod", c.getCodCliente());
+		Query query = entityManagerGMT.createQuery(jpql).setParameter("inf", newInfedele).setParameter("ub", ultimoBiglietto).setParameter("cod", c.getCodCliente());
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 	}
 	
 	public static List<ClienteFedele> getClientiDaRimuovere() {
