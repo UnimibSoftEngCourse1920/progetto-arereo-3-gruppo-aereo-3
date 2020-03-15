@@ -47,10 +47,15 @@ punti.
 
 Alcuni dei voli disponibili:
 -Bergamo-->Cagliari, 1/06/20 
+
 -Lamezia-Terme -->Pisa, 2/06/20
+
 -Milano Malpensa-->Bari 6/06/20
+
 -Milano Malpensa-->Brindisi 6/06/20
+
 -Milano Malpensa-->Cagliari 25/10/20
+
 -Milano Malpensa-->Cagliari 06/06/20
 
 
