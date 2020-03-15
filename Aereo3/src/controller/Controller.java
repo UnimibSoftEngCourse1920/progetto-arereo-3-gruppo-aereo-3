@@ -94,6 +94,11 @@ public class Controller {
 		return true;
 
 	}
+	
+	public static ClienteFedele getClienteFedele(String email) {
+		return GestioneClienteDatabase.getClienteFedele(email);
+	}
+	
 	public static ClienteFedele login(String email, String pass) {
 		return GestioneClienteDatabase.login(email, pass);
 	}

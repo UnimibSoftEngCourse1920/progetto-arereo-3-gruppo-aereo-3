@@ -22,19 +22,19 @@ import dominio.Prenotazione;
 public class GestioneClienteDatabase extends GestioneDatabase {
 
 	public static void insertCliente(Cliente cliente) {
-		entityManagerGMT.getTransaction().begin();
-		entityManagerGMT.persist(cliente);
-		entityManagerGMT.getTransaction().commit();
+		entityManagerCET.getTransaction().begin();
+		entityManagerCET.persist(cliente);
+		entityManagerCET.getTransaction().commit();
 
-		entityManagerGMT.clear();
+		entityManagerCET.clear();
 	}
 	
 	public static void insertClienteFedele(ClienteFedele cliente) {
-		entityManagerGMT.getTransaction().begin();
-		entityManagerGMT.persist(cliente);
-		entityManagerGMT.getTransaction().commit();
+		entityManagerCET.getTransaction().begin();
+		entityManagerCET.persist(cliente);
+		entityManagerCET.getTransaction().commit();
 
-		entityManagerGMT.clear();
+		entityManagerCET.clear();
 		System.out.println("Record Successfully Inserted In The Database");
 	}
 
@@ -146,6 +146,16 @@ public class GestioneClienteDatabase extends GestioneDatabase {
 		String jpql = "SELECT c FROM Cliente as c WHERE c.email=:email";
 		Query query = entityManagerCET.createQuery(jpql).setParameter("email", email);
 		List <Cliente> ris = query.getResultList();
+		if(ris == null || ris.isEmpty())
+			return null;
+		
+		return ris.get(0);
+	}
+	
+	public static ClienteFedele getClienteFedele(String email) {
+		String jpql = "SELECT c FROM ClienteFedele as c WHERE c.email=:email";
+		Query query = entityManagerCET.createQuery(jpql).setParameter("email", email);
+		List <ClienteFedele> ris = query.getResultList();
 		if(ris == null || ris.isEmpty())
 			return null;
 		

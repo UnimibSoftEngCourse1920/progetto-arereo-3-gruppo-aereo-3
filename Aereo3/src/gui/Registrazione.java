@@ -236,6 +236,10 @@ public class Registrazione {
 					lblNewLabel3.setText("Errore nella data");
 				}
 				
+				else if (Controller.getClienteFedele(textField3.getText()) != null) {
+					lblNewLabel3.setText("Email già presente");
+				}
+				
 				else if(!(isValid(textField3.getText())) || textField3.getText().equals("")) {
 					lblNewLabel3.setText("Email errate");
 				}

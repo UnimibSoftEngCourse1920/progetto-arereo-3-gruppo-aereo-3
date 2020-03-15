@@ -158,7 +158,7 @@ public class SceltaPosti {
 						costo=Controller.getSovrapprezzo(oldP,costo);
 					}
 					contentPane.removeAll();
-					contentPane.add(Pagamento.esegui(contentPane, costo, costoPunti, posti, c, idVolo, listaPosti, fedele, homePanel, modifica, oldP));
+					contentPane.add(Pagamento.esegui(contentPane, round(costo, 2), costoPunti, posti, c, idVolo, listaPosti, fedele, homePanel, modifica, oldP));
 					contentPane.repaint();
 					contentPane.revalidate();
 				
@@ -169,4 +169,13 @@ public class SceltaPosti {
 		
 	return posti;
 }
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
+	}
 }
