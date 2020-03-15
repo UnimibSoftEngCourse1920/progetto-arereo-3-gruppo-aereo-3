@@ -62,7 +62,7 @@ public class GestioneAeroportoDatabase extends GestioneDatabase {
 	}
 	
 	public static String parserCodiceAeroporto(String denominazione) {
-		String jpql = "SELECT  a.idAereoporto FROM Aeroporto a WHERE a.denominazione=:campoDenominazione";
+		String jpql = "SELECT  a.idAeroporto FROM Aeroporto a WHERE a.denominazione=:campoDenominazione";
 		Query query = entityManager.createQuery(jpql);	
 		query.setParameter("campoDenominazione", denominazione);
 		

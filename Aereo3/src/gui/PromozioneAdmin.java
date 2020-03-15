@@ -99,7 +99,7 @@ public class PromozioneAdmin {
 		gbcVerticalStrut3.gridy = 6;
 		panel1.add(verticalStrut3, gbcVerticalStrut3);
 		
-		JLabel sconto = new JLabel("Sconto");
+		JLabel sconto = new JLabel("Sconto (senza %)");
 		sconto.setForeground(Color.WHITE);
 		sconto.setFont(new Font ("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints bcdSconto = new GridBagConstraints();
@@ -215,7 +215,12 @@ public class PromozioneAdmin {
 					erroreLbl.setForeground(Color.RED);
 					erroreLbl.setText("Errore nella data");
 				}
-				
+				else if(!scontoValid(scontoField.getText())) {
+					if (! erroreLbl.getText().equals(""))
+						erroreLbl.setText("");
+					erroreLbl.setForeground(Color.RED);
+					erroreLbl.setText("Sconto deve essere un numero");
+				}
 				else if(Integer.parseInt(scontoField.getText())<=0 || Integer.parseInt(scontoField.getText())>=100) {
 					if (! erroreLbl.getText().equals(""))
 						erroreLbl.setText("");
@@ -260,6 +265,16 @@ public class PromozioneAdmin {
 		panel1.add(btnCreaPromozione, gbc_btnCreaPromozione);
 		
 		return panel1;
+	}
+	
+	private static boolean scontoValid(String sconto) {
+		boolean valid=true;
+		for(int i=0; i<sconto.length(); i++) {
+			if(sconto.charAt(i)<'0' || sconto.charAt(i)>'9')
+				return false;
+		}
+		
+		return valid;
 	}
 
 }

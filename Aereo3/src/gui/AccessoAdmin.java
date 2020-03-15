@@ -101,7 +101,7 @@ public class AccessoAdmin {
 		gbcHorizontalStrut2.gridy = 5;
 		adminLogIn.add(horizontalStrut2, gbcHorizontalStrut2);
 		
-		JLabel lblEmail = new JLabel("Email:");
+		JLabel lblEmail = new JLabel("Username:");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbcLblEmail = new GridBagConstraints();
