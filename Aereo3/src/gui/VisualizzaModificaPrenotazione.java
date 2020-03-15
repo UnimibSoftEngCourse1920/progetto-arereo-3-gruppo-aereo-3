@@ -175,7 +175,8 @@ public class VisualizzaModificaPrenotazione {
 		
 		for (Volo v : listaVoliTot) {
  		 if (Controller.getListaPostiDisponibili(v.getIdVolo()).size() >= value)
- 			 listaVoli.add(v);
+ 			 if(Controller.getVolo(v.getIdVolo()).getIdVolo() != idVolo)
+ 				 listaVoli.add(v);
 		}
 		
 		@SuppressWarnings("rawtypes")
@@ -250,7 +251,7 @@ public class VisualizzaModificaPrenotazione {
 		panel6.add(lblPrenotazioneEliminata, gbcLblPrenotazioneEliminata);
 		
 		JButton btnModifica = new JButton("Modifica");
-		if(listaVoli.size() == 0) {
+		if(listaVoli.size() == 0 || listaVoli == null) {
 			btnModifica.setEnabled(false);
 			lblPrenotazioneEliminata.setText("Voli non disponibili !");
 		}

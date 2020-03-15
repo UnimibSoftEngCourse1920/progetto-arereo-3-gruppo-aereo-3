@@ -154,7 +154,7 @@ public class SceltaPosti {
 						listaPosti.add(Controller.getPosto(p.getChiaveComposta().getLettera(), p.getChiaveComposta().getFila(), idVolo));
 						}
 					System.out.println(listaPosti);
-					if(modifica) {
+					if(modifica && Controller.getPrenotazionePerId(oldP).isPagato() == true) {
 						costo=Controller.getSovrapprezzo(oldP,costo);
 					}
 					contentPane.removeAll();

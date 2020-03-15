@@ -75,8 +75,6 @@ public class Pagamento {
 		gbcHorizontalStrut.gridy = 0;
 		panel7.add(horizonatlStrut, gbcHorizontalStrut);
 		
-
-		
 		Component verticalStrut6 = Box.createVerticalStrut(20);
 		GridBagConstraints gbcVerticalStrut6 = new GridBagConstraints();
 		gbcVerticalStrut6.insets = new Insets(0, 0, 5, 0);
@@ -112,7 +110,7 @@ public class Pagamento {
 		panel7.add(verticalStrut7, gbcVerticalStrut7);
 		
 		JLabel lblNumeroDiCarta = new JLabel("Numero di carta");
-		if(modifica) {
+		if(modifica && Controller.getPrenotazionePerId(oldP).isPagato()==true) {
 		if(Controller.getSovrapprezzo(oldP, costo)==0){
 			lblNumeroDiCarta.setVisible(false);
 		}

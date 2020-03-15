@@ -18,7 +18,7 @@ public class GestionePostoDatabase extends GestioneDatabase {
 		Posto postoDaInserire =null;
 		
 		int fila = 0;
-		for (int i = 0; i < volo.getNumeroPosti() ; i++) {
+		for (int i = 0; i <= volo.getNumeroPosti() ; i++) {
 			fila++;
 			for (int j = 0; j < 5; j++) {
 				postoDaInserire = new Posto();
@@ -30,7 +30,7 @@ public class GestionePostoDatabase extends GestioneDatabase {
 				postoDaInserire.getChiaveComposta().setIdVolo(volo.getIdVolo());
 				listaPosti.add(postoDaInserire);
 				i++;
-				if (i >= volo.getNumeroPosti()) {
+				if (i > volo.getNumeroPosti()) {
 					break;
 				}
 			}
