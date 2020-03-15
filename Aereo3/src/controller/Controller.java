@@ -326,11 +326,7 @@ public class Controller {
 		return GestioneVoloDatabase.getVoloPartenzaDestinazione(partenza1, arrivo1);
 	}
 	
-	/**Inserisce l'aereoporto nel DB**/
-	public static void insertAeroporto(Aeroporto a) {
-		GestioneAeroportoDatabase.insertAeroporto(a);
-	}
-	
+
 	/****************************************************/
 	//GESTIONE MAIL
 	/***************************************************/

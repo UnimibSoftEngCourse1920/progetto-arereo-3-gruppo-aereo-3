@@ -6,11 +6,17 @@ import javax.persistence.Persistence;
 
 abstract class GestioneDatabase {
 	
-	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDB");
-	static EntityManager entityManager = factory.createEntityManager();			
+	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("GestioneDBGMT");
+	static EntityManager entityManagerGMT = factory.createEntityManager(); 
+	
+	
+	static {factory = Persistence.createEntityManagerFactory("GestioneDBCET");}
+	static EntityManager entityManagerCET = factory.createEntityManager();			
 	
 	static void flushAndClear() {
-	    entityManager.flush();
-	    entityManager.clear();
+	    entityManagerGMT.flush();
+	    entityManagerGMT.clear();
+	    entityManagerCET.flush();
+	    entityManagerCET.clear();
 	}
 }

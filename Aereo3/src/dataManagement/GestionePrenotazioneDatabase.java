@@ -20,7 +20,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	public static List<Prenotazione> getPrenotazioniPerCliente(int codCliente){
 		
 		String jpql = "SELECT p FROM Prenotazione as p WHERE codCliente = " + codCliente;
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni;
@@ -29,7 +29,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	public static List<Prenotazione> getPrenotazioniPerVolo(int idVolo){
 		
 		String jpql = "SELECT p FROM Prenotazione as p WHERE idVolo = " + idVolo;
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni;
@@ -42,10 +42,10 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		p.setIdVolo(v);
 		p.setListaBiglietti(posti);
 		
-		entityManager.getTransaction().begin();
-		entityManager.persist(p);
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.getTransaction().begin();
+		entityManagerGMT.persist(p);
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 	}
 
 	public static List<Prenotazione> getPrenotazioniInScadenza(){
@@ -55,7 +55,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		Date expiryInScadenza = calScadenza.getTime();
 		
 		String jpqlScadenza = "SELECT p FROM Prenotazione as p WHERE p.pagato=0";
-		Query queryScadenza = entityManager.createQuery(jpqlScadenza);
+		Query queryScadenza = entityManagerCET.createQuery(jpqlScadenza);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioniScadenza = queryScadenza.getResultList();
 		List<Prenotazione> resScadenza = new ArrayList<Prenotazione>();
@@ -74,7 +74,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 		Date expiry = cal.getTime();
 		
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.pagato=0";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
 		List<Prenotazione> res = new ArrayList<Prenotazione>();
@@ -88,30 +88,30 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	
 	public static Prenotazione getIdPrenotazione(Cliente c, int v) {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
-		Query query = entityManager.createQuery(jpql).setParameter("codCliente", c.getCodCliente()).setParameter("idVolo", v);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("codCliente", c.getCodCliente()).setParameter("idVolo", v);
 		List<Prenotazione>prenotazione = query.getResultList();
 		return prenotazione.get(0);
 	}
 	
 	public static void deletePrenotazione(Prenotazione p) {
-		entityManager.getTransaction().begin();
-		entityManager.remove(p);
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerCET.getTransaction().begin();
+		entityManagerCET.remove(p);
+		entityManagerCET.getTransaction().commit();
+		entityManagerCET.clear();
 	}
 
 	public static void pagamentoPrenotazione(int idPrenotazione) {
-		entityManager.getTransaction().begin();
+		entityManagerGMT.getTransaction().begin();
 		String jpql ="UPDATE Prenotazione SET pagato=:pagato WHERE id=:id ";
-		Query query= entityManager.createQuery(jpql).setParameter("pagato", true).setParameter("id", idPrenotazione);	
+		Query query= entityManagerGMT.createQuery(jpql).setParameter("pagato", true).setParameter("id", idPrenotazione);	
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 	}
 	
 	public static boolean trovaCliente(int codCliente, int idVolo) {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.codCliente=:codCliente and p.idVolo=:idVolo";
-		Query query = entityManager.createQuery(jpql).setParameter("codCliente", codCliente).setParameter("idVolo", idVolo);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("codCliente", codCliente).setParameter("idVolo", idVolo);
 		List <Prenotazione> ris = query.getResultList();
 		if(ris == null || ris.size() == 0)
 			return false;
@@ -121,7 +121,7 @@ public class GestionePrenotazioneDatabase extends GestioneDatabase {
 	
 	public static Prenotazione getPrenotazionePerId(int id) {
 		String jpql = "SELECT p FROM Prenotazione as p WHERE p.id =: id";
-		Query query = entityManager.createQuery(jpql).setParameter("id", id);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("id", id);
 		@SuppressWarnings("unchecked")
 		List<Prenotazione> prenotazioni = query.getResultList();
 		return prenotazioni.get(0);

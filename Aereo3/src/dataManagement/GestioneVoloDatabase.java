@@ -23,7 +23,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	
 	public static List <Volo> getListaVoliDisponibili(){
 		String jpql = "SELECT v FROM Volo as v ";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Volo> voli = query.getResultList();
 		
@@ -33,7 +33,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 	
 	public static Volo getVolo(int idVolo) {
 		String jpqlVolo = "SELECT v FROM Volo as v WHERE v.idVolo=:idVolo";
-		Query queryVolo = entityManager.createQuery(jpqlVolo);
+		Query queryVolo = entityManagerCET.createQuery(jpqlVolo);
 		queryVolo.setParameter("idVolo", idVolo);
 		@SuppressWarnings("unchecked")
 		List <Volo> v = queryVolo.getResultList();
@@ -44,7 +44,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 				
 	
 		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aeroporto a WHERE v.destinazione=a.idAeroporto ";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 
 		@SuppressWarnings("unchecked")
 		List<String> destinazioni = query.getResultList();
@@ -57,7 +57,7 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		
 		
 		String jpql = "SELECT DISTINCT a.denominazione FROM Volo v, Aeroporto a WHERE v.partenza=a.idAeroporto ";
-		Query query = entityManager.createQuery(jpql);
+		Query query = entityManagerCET.createQuery(jpql);
 		List<String> partenze = query.getResultList();
 		
 		System.out.println(partenze);
@@ -127,18 +127,18 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		volo.setPartenza(denominazione);
 		
 		
-		if(!(entityManager.getTransaction().isActive()))
-			entityManager.getTransaction().begin();
+		if(!(entityManagerGMT.getTransaction().isActive()))
+			entityManagerGMT.getTransaction().begin();
 		
-		entityManager.persist(volo);
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.persist(volo);
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 	}
 	
 	
 	public static Volo getVoloDiPrenotazione(Prenotazione prenotazione) {
 		String jpql="SELECT v FROM Volo as v, Prenotazione as p WHERE v.idVolo=p.idVolo";
-		Query query=entityManager.createQuery(jpql);
+		Query query=entityManagerCET.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Volo> volo=query.getResultList();
 		return volo.get(0);
@@ -172,8 +172,8 @@ public class GestioneVoloDatabase extends GestioneDatabase {
 		public static List<Volo> getVoloPartenzaDestinazione(String partenza, String destinazione) {
 			String jpqlDestinazione = "SELECT v FROM Volo as v, Aeroporto as a WHERE  v.destinazione=a.idAeroporto and a.denominazione=:destinazione";
 			String jpqlPartenza="SELECT v FROM Volo as v, Aeroporto as a WHERE v.partenza=a.idAeroporto and a.denominazione=:partenza";
-			Query queryDestinazione = entityManager.createQuery(jpqlDestinazione);
-			Query queryPartenza= entityManager.createQuery(jpqlPartenza);
+			Query queryDestinazione = entityManagerCET.createQuery(jpqlDestinazione);
+			Query queryPartenza= entityManagerCET.createQuery(jpqlPartenza);
 			queryPartenza.setParameter("partenza", partenza);
 			queryDestinazione.setParameter("destinazione", destinazione);
 			

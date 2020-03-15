@@ -27,7 +27,7 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	
 	public static List<Promozione> getAllPromozioni(Date now){
 		String jpql = "SELECT p FROM Promozione as p WHERE p.dataFine>:now";
-		Query query = entityManager.createQuery(jpql).setParameter("now", now);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("now", now);
 		@SuppressWarnings("unchecked")
 		List<Promozione> promozioni = query.getResultList();
 		return promozioni;
@@ -35,10 +35,10 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	
 	public static void deletePromozioni(){
 		String jpql = "DELETE FROM PROMOZIONE WHERE dataFine<:now";
-		Query query = entityManager.createQuery(jpql).setParameter("now", dataP);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("now", dataP);
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerCET.getTransaction().commit();
+		entityManagerCET.clear();
 	}
 	
 	public static void insertPromozione(Date inizio, Date fine, String partenza, String arrivo, double sconto, boolean perFedele) {
@@ -49,16 +49,16 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 		p.setPartenza(partenza);
 		p.setDestinazione(arrivo);
 		p.setFedele(perFedele);
-		entityManager.getTransaction().begin();
-		entityManager.persist(p);
-		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManagerGMT.getTransaction().begin();
+		entityManagerGMT.persist(p);
+		entityManagerGMT.getTransaction().commit();
+		entityManagerGMT.clear();
 		
 	}
 	
 	public static Promozione getPromozione(int codPromo){
 		String jpql = "SELECT p FROM Promozione as p WHERE idPromozione = :cp";
-		Query query = entityManager.createQuery(jpql).setParameter("cp", codPromo);
+		Query query = entityManagerCET.createQuery(jpql).setParameter("cp", codPromo);
 		Promozione promo = (Promozione) query.getResultList().get(0);
 		return promo;
 	}
@@ -68,7 +68,7 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 	public static double applyPromozione(int codPromo,Volo v, double prezzoTot) {
 		
 		String jpql="SELECT p FROM Promozione as p WHERE p.idPromozione=:id";
-		Query query=entityManager.createQuery(jpql).setParameter("id", codPromo);
+		Query query=entityManagerCET.createQuery(jpql).setParameter("id", codPromo);
 		@SuppressWarnings("unchecked")
 		List <Promozione> listaP=query.getResultList();
 		
@@ -78,7 +78,7 @@ public class GestionePromozioneDatabase extends GestioneDatabase {
 				return 0;	
 
 		String jpql2="SELECT p.sconto FROM Promozione as p WHERE p.idPromozione=:id ";
-		Query query2=entityManager.createQuery(jpql2).setParameter("id", codPromo);
+		Query query2=entityManagerCET.createQuery(jpql2).setParameter("id", codPromo);
 		@SuppressWarnings("unchecked")
 		List<Double> listaSconto= query2.getResultList();
 		double sconto= listaSconto.get(0);
