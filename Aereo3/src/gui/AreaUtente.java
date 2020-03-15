@@ -73,10 +73,10 @@ public class AreaUtente {
 				datiPersonali.setBackground(Color.BLUE);
 				panel.add(datiPersonali, "name_865661938656900");
 				GridBagLayout gblDatiPersonali = new GridBagLayout();
-				gblDatiPersonali.columnWidths = new int[]{0, 0, 0,0,0,0,0};
-				gblDatiPersonali.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-				gblDatiPersonali.columnWeights = new double[]{0.0, 0.0,0.0,0.0,0.0,0.0, Double.MIN_VALUE};
-				gblDatiPersonali.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gblDatiPersonali.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+				gblDatiPersonali.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+				gblDatiPersonali.columnWeights = new double[]{0.0, 0.0, 0.0,0.0,0.0,0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gblDatiPersonali.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				datiPersonali.setLayout(gblDatiPersonali);
 				
 				Component verticalStrut10 = Box.createVerticalStrut(20);
