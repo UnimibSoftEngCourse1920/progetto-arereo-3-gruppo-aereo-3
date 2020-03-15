@@ -9,8 +9,7 @@ public class GestorePagamento {
 		boolean cartaValida = validate(cc);
 		boolean pagato = false;
 		if(cartaValida) {
-			//gateway con un ente di pagamento
-			pagato = true; //parametro restituito da chi processa il pagamento
+			pagato = true; 
 			return (pagato);
 		} else {
 			return cartaValida;
